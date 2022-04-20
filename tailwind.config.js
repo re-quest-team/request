@@ -10,6 +10,10 @@ module.exports = {
       fontFamily: {
         sans: ['Inter', ...defaultTheme.fontFamily.sans],
       },
+      colors: {
+        're-blue': '#4B73FF',
+        're-orange': '#EB5C37',
+      },
     },
   },
 }
