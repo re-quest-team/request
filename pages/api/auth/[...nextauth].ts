@@ -14,4 +14,12 @@ export default NextAuth({
       issuer: process.env.COGNITO_ISSUER,
     }),
   ],
+  session: {
+    strategy: 'jwt',
+  },
+  theme: {
+    logo: require('@/assets/logos/request-logo.svg').default.src,
+    colorScheme: 'dark',
+    brandColor: '#EB5C37',
+  },
 })
