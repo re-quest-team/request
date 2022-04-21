@@ -17,7 +17,7 @@ const Home: NextPage = () => {
   return (
     <div>
       <div className="mx-auto md:max-w-3xl">
-        <h1 className="bg-gradient-to-br from-red-500 to-blue-500 bg-clip-text p-2 text-center text-6xl font-bold text-transparent">
+        <h1 className="bg-gradient-to-br from-flamingo-600 via-purple-500 to-dodger-blue-600 bg-clip-text p-2 text-center text-6xl font-bold text-transparent">
           Digitale Abenteuer für Bildungs&shy;einrich&shy;tungen
         </h1>
         <Spacer />
