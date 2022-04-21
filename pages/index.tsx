@@ -3,8 +3,11 @@ import { Spacer } from '@/components/Elements/Spacer'
 import type { NextPage } from 'next'
 import { ArrowRightIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
+import { useSession } from 'next-auth/react'
 
 const Home: NextPage = () => {
+  const { data: session, status } = useSession()
+
   return (
     <div>
       <div className="mx-auto md:max-w-3xl">
@@ -25,6 +28,21 @@ const Home: NextPage = () => {
             re:quest erstellen
           </Button>
         </Link>
+        <Spacer />
+        <div>
+          <Link
+            href={session ? '/api/auth/signout' : '/api/auth/signin'}
+            passHref
+          >
+            <Button
+              endIcon={<ArrowRightIcon className="h-4" />}
+              className="mx-auto"
+            >
+              {session ? 'Logout' : 'Login'}
+            </Button>
+          </Link>
+          <p>{JSON.stringify(session) || 'Nicht eingeloggt'}</p>
+        </div>
       </div>
     </div>
   )
