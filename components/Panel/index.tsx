@@ -25,14 +25,14 @@ type PanelWithOptionalDragHandleProps = BasePanelProps & {
 
 const types = {
   room: {
-    border: 'border-re-blue',
-    bg: 'bg-re-blue',
-    openText: 'text-re-blue',
+    border: 'border-dodger-blue',
+    bg: 'bg-dodger-blue',
+    openText: 'text-dodger-blue',
   },
   quest: {
-    border: 'border-re-orange',
-    bg: 'bg-re-orange',
-    openText: 'text-re-orange',
+    border: 'border-flamingo',
+    bg: 'bg-flamingo',
+    openText: 'text-flamingo',
   },
 }
 
@@ -44,7 +44,7 @@ const PanelWithOptionalDragHandle = ({
 }: PanelWithOptionalDragHandleProps) => (
   <div
     className={clsx(
-      'my-4 w-full overflow-hidden rounded-lg border bg-black shadow',
+      'my-4 w-full overflow-hidden rounded-lg border bg-zinc-900 shadow',
       types[type].border,
     )}
   >

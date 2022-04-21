@@ -8,7 +8,7 @@ export type LayoutProps = {
 
 export default function Layout({ children }: LayoutProps) {
   return (
-    <div className="h-full bg-black text-white">
+    <div className="h-full bg-zinc-900 text-white">
       <Navbar />
       <Spacer />
       <main className="container mx-auto p-4">{children}</main>

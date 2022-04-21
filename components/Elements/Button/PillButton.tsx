@@ -4,8 +4,9 @@ import * as React from 'react'
 import { Spinner } from '@/components/Elements/Spinner'
 
 const variants = {
-  primary: 'bg-re-blue text-re-blue border-re-blue hover:bg-opacity-30',
-  secondary: 'bg-re-orange text-re-orange border-re-orange hover:bg-opacity-30',
+  primary:
+    'bg-dodger-blue text-dodger-blue border-dodger-blue hover:bg-opacity-30',
+  secondary: 'bg-flamingo text-flamingo border-flamingo hover:bg-opacity-30',
 }
 
 const sizes = {

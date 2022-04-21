@@ -39,7 +39,7 @@ const Home: NextPage = () => {
       <div className="flex flex-wrap">
         <FeatureCard
           title="Spannende Abenteuer"
-          color="bg-red-700"
+          color="bg-red-400"
           icon={SearchIcon}
         >
           <>
@@ -50,7 +50,7 @@ const Home: NextPage = () => {
         </FeatureCard>
         <FeatureCard
           title="Digitale Bildung"
-          color="bg-blue-700"
+          color="bg-blue-400"
           icon={AcademicCapIcon}
         >
           <>
@@ -61,7 +61,7 @@ const Home: NextPage = () => {
         </FeatureCard>
         <FeatureCard
           title="Modulare Rätsel"
-          color="bg-purple-700"
+          color="bg-purple-400"
           icon={CollectionIcon}
         >
           <>
@@ -72,7 +72,7 @@ const Home: NextPage = () => {
         </FeatureCard>
         <FeatureCard
           title="Frei konfigurierbar"
-          color="bg-green-700"
+          color="bg-pink-400"
           icon={AdjustmentsIcon}
         >
           <>
@@ -83,7 +83,7 @@ const Home: NextPage = () => {
         </FeatureCard>
         <FeatureCard
           title="Keine Installation"
-          color="bg-yellow-700"
+          color="bg-orange-400"
           icon={DeviceMobileIcon}
         >
           <>
@@ -94,7 +94,7 @@ const Home: NextPage = () => {
         </FeatureCard>
         <FeatureCard
           title="Physische Elemente"
-          color="bg-red-700"
+          color="bg-green-400"
           icon={PuzzleIcon}
         >
           <>
@@ -104,6 +104,15 @@ const Home: NextPage = () => {
           </>
         </FeatureCard>
       </div>
+      <Spacer />
+      <Link href={'#'} passHref>
+        <Button
+          endIcon={<ArrowRightIcon className="h-4" />}
+          className="mx-auto"
+        >
+          Weitere Informationen
+        </Button>
+      </Link>
     </div>
   )
 }
