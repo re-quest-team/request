@@ -3,7 +3,15 @@ import { Spacer } from '@/components/Elements/Spacer'
 import type { NextPage } from 'next'
 import { ArrowRightIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
-import { signIn } from 'next-auth/react'
+import {
+  AcademicCapIcon,
+  AdjustmentsIcon,
+  CollectionIcon,
+  DeviceMobileIcon,
+  PuzzleIcon,
+  SearchIcon,
+} from '@heroicons/react/outline'
+import FeatureCard from '@/components/Card'
 
 const Home: NextPage = () => {
   return (
@@ -27,6 +35,74 @@ const Home: NextPage = () => {
           </Button>
         </Link>
         <Spacer />
+      </div>
+      <div className="flex flex-wrap">
+        <FeatureCard
+          title="Spannende Abenteuer"
+          color="bg-red-700"
+          icon={SearchIcon}
+        >
+          <>
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+            erat, sed diam voluptua.
+          </>
+        </FeatureCard>
+        <FeatureCard
+          title="Digitale Bildung"
+          color="bg-blue-700"
+          icon={AcademicCapIcon}
+        >
+          <>
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+            erat, sed diam voluptua.
+          </>
+        </FeatureCard>
+        <FeatureCard
+          title="Modulare Rätsel"
+          color="bg-purple-700"
+          icon={CollectionIcon}
+        >
+          <>
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+            erat, sed diam voluptua.
+          </>
+        </FeatureCard>
+        <FeatureCard
+          title="Frei konfigurierbar"
+          color="bg-green-700"
+          icon={AdjustmentsIcon}
+        >
+          <>
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+            erat, sed diam voluptua.
+          </>
+        </FeatureCard>
+        <FeatureCard
+          title="Keine Installation"
+          color="bg-yellow-700"
+          icon={DeviceMobileIcon}
+        >
+          <>
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+            erat, sed diam voluptua.
+          </>
+        </FeatureCard>
+        <FeatureCard
+          title="Physische Elemente"
+          color="bg-red-700"
+          icon={PuzzleIcon}
+        >
+          <>
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+            erat, sed diam voluptua.
+          </>
+        </FeatureCard>
       </div>
     </div>
   )
