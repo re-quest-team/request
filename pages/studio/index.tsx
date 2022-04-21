@@ -1,16 +1,20 @@
 import type { NextPage } from 'next'
 import Panel from '@/components/Panel'
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
+import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import { Button, PillButton } from '@/components/Elements/Button'
 import { PlusCircleIcon } from '@heroicons/react/outline'
 import { Spacer } from '@/components/Elements/Spacer'
-
-const panels = []
+import { InputField, TextArea } from '@/components/Elements/Input'
 
 const Studio: NextPage = () => {
   return (
     <div>
       <h1 className="p-2 text-center text-6xl font-bold">Studio</h1>
+      <div className="mx-auto md:max-w-4xl">
+        <InputField label="Name"></InputField>
+        <TextArea label="Beschreibung" rows={4} />
+      </div>
+
       <Spacer></Spacer>
       <PillButton size="lg" className="mx-auto">
         Räume (2)
