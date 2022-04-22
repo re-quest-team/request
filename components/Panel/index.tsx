@@ -44,7 +44,7 @@ const PanelWithOptionalDragHandle = ({
 }: PanelWithOptionalDragHandleProps) => (
   <div
     className={clsx(
-      'my-4 w-full overflow-hidden rounded-lg border bg-zinc-900 shadow',
+      'my-8 w-full overflow-hidden rounded-lg border bg-zinc-900 shadow',
       types[type].border,
     )}
   >

@@ -28,58 +28,81 @@ const Studio: NextPage = () => {
       <PillButton size="lg" className="mx-auto">
         Räume (2)
       </PillButton>
+
       <DragDropContext onDragEnd={result => console.log(result)}>
         <Droppable droppableId="droppable" direction="vertical">
           {(provided, snapshot) => (
             <div
               {...provided.droppableProps}
               ref={provided.innerRef}
-              className="z-10 my-4"
+              className="relative py-4"
             >
-              <Panel
-                type="room"
-                draggable={{
-                  draggableId: 'abc',
-                  draggableIndex: 1,
-                }}
-                header="Raum 1"
-              >
-                <>
-                  <PillButton size="lg" variant="secondary" className="mx-auto">
-                    Rätsel (1)
-                  </PillButton>
-                  <Panel type="quest" header="Rätsel 1">
-                    <div>Nested Panel</div>
-                  </Panel>
-                  <PillButton
-                    variant="secondary"
-                    startIcon={<PlusCircleIcon className="h-8 w-8" />}
-                    className="mx-auto"
-                  >
-                    Rätsel hinzufügen
-                  </PillButton>
-                </>
-              </Panel>
-              <Panel
-                draggable={{
-                  draggableId: 'def',
-                  draggableIndex: 2,
-                }}
-                header="Raum 2"
-              >
-                <>
-                  <span>Lorem ipsum</span>
-                  <PillButton
-                    variant="secondary"
-                    startIcon={<PlusCircleIcon className="h-8 w-8" />}
-                    className="mx-auto"
-                  >
-                    Rätsel hinzufügen
-                  </PillButton>
-                </>
-              </Panel>
+              <div className="pointer-events-none absolute top-0 left-0 flex h-full w-full justify-center">
+                <div className="h-full w-6 bg-dodger-blue bg-opacity-50"></div>
+              </div>
+              <div className="relative">
+                <Panel
+                  type="room"
+                  draggable={{
+                    draggableId: 'abc',
+                    draggableIndex: 1,
+                  }}
+                  header="Raum 1"
+                >
+                  <>
+                    <PillButton
+                      size="lg"
+                      variant="secondary"
+                      className="mx-auto"
+                    >
+                      Rätsel (3)
+                    </PillButton>
+                    <div className="relative py-4">
+                      <div className="pointer-events-none absolute top-0 left-0 flex h-full w-full justify-center">
+                        <div className="h-full w-6 bg-flamingo bg-opacity-50"></div>
+                      </div>
+                      <div className="relative">
+                        <Panel type="quest" header="Rätsel 1">
+                          <div>Nested Panel</div>
+                        </Panel>
+                        <Panel type="quest" header="Rätsel 2">
+                          <div>Nested Panel</div>
+                        </Panel>
+                        <Panel type="quest" header="Rätsel 3">
+                          <div>Nested Panel</div>
+                        </Panel>
+                      </div>
+                    </div>
+                    <PillButton
+                      variant="secondary"
+                      startIcon={<PlusCircleIcon className="h-8 w-8" />}
+                      className="mx-auto"
+                    >
+                      Rätsel hinzufügen
+                    </PillButton>
+                  </>
+                </Panel>
+                <Panel
+                  draggable={{
+                    draggableId: 'def',
+                    draggableIndex: 2,
+                  }}
+                  header="Raum 2"
+                >
+                  <>
+                    <span>Lorem ipsum</span>
+                    <PillButton
+                      variant="secondary"
+                      startIcon={<PlusCircleIcon className="h-8 w-8" />}
+                      className="mx-auto"
+                    >
+                      Rätsel hinzufügen
+                    </PillButton>
+                  </>
+                </Panel>
 
-              {provided.placeholder}
+                {provided.placeholder}
+              </div>
             </div>
           )}
         </Droppable>
