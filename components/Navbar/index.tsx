@@ -1,4 +1,4 @@
-import { Disclosure } from '@headlessui/react'
+import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import clsx from 'clsx'
 import Image from 'next/image'
@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { signOut, useSession } from 'next-auth/react'
 import { Button } from '../Elements/Button'
+import { Fragment } from 'react'
 
 const navigation = [
   { name: 'Studio', href: '/studio' },
@@ -84,13 +85,69 @@ const Navbar = () => {
                     <Button className="mx-auto">Login</Button>
                   </Link>
                 )}
+
                 {session && (
-                  <Button
-                    className="mx-auto"
-                    onClick={() => signOut({ callbackUrl: '/' })}
-                  >
-                    Logout
-                  </Button>
+                  <Menu as="div" className="relative ml-3">
+                    <div>
+                      <Menu.Button className="flex rounded-full bg-gradient-to-br from-flamingo via-purple-500 to-dodger-blue ring-2 ring-slate-200 ring-offset-2 ring-offset-gray-800">
+                        <span className="sr-only">Open user menu</span>
+                        <div className="flex h-8 w-8 items-center justify-center rounded-full font-semibold uppercase">
+                          <p>{session?.user?.email?.substring(0, 2)}</p>
+                        </div>
+                      </Menu.Button>
+                    </div>
+                    <Transition
+                      as={Fragment}
+                      enter="transition ease-out duration-100"
+                      enterFrom="transform opacity-0 scale-95"
+                      enterTo="transform opacity-100 scale-100"
+                      leave="transition ease-in duration-75"
+                      leaveFrom="transform opacity-100 scale-100"
+                      leaveTo="transform opacity-0 scale-95"
+                    >
+                      <Menu.Items className="absolute right-0 mt-2 w-48 origin-top-right rounded bg-zinc-700 py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        <Menu.Item>
+                          {({ active }) => (
+                            <a
+                              href="#"
+                              className={clsx(
+                                active ? 'bg-zinc-600' : '',
+                                'block px-4 py-2 text-sm',
+                              )}
+                            >
+                              Profile
+                            </a>
+                          )}
+                        </Menu.Item>
+                        <Menu.Item>
+                          {({ active }) => (
+                            <a
+                              href="#"
+                              className={clsx(
+                                active ? 'bg-zinc-600' : '',
+                                'block px-4 py-2 text-sm ',
+                              )}
+                            >
+                              Einstellungen
+                            </a>
+                          )}
+                        </Menu.Item>
+                        <Menu.Item>
+                          {({ active }) => (
+                            <p
+                              className={clsx(
+                                active ? 'bg-zinc-600' : '',
+                                'block cursor-pointer px-4 py-2 text-sm ',
+                              )}
+                              onClick={() => signOut({ callbackUrl: '/' })}
+                            >
+                              Sign out
+                            </p>
+                          )}
+                        </Menu.Item>
+                      </Menu.Items>
+                    </Transition>
+                  </Menu>
                 )}
               </div>
             </div>
