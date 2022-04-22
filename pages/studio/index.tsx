@@ -5,6 +5,7 @@ import { Button, PillButton } from '@/components/Elements/Button'
 import { PlusCircleIcon } from '@heroicons/react/outline'
 import { Spacer } from '@/components/Elements/Spacer'
 import { InputField, TextArea } from '@/components/Elements/Input'
+import { SelectField } from '@/components/Elements/Select/SelectField'
 
 const Studio: NextPage = () => {
   return (
@@ -13,6 +14,14 @@ const Studio: NextPage = () => {
       <div className="mx-auto md:max-w-4xl">
         <InputField label="Name"></InputField>
         <TextArea label="Beschreibung" rows={4} />
+        <SelectField
+          label="Thema"
+          options={[
+            { value: 'Museum' },
+            { value: 'Verlies' },
+            { value: 'Nervenklinik' },
+          ]}
+        ></SelectField>
       </div>
 
       <Spacer></Spacer>
