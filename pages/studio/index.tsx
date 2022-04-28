@@ -3,12 +3,20 @@ import Image from 'next/image'
 import Panel from '@/components/Panel'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import { Button, PillButton } from '@/components/Elements/Button'
-import { PlusCircleIcon } from '@heroicons/react/outline'
+import {
+  ChartSquareBarIcon,
+  CodeIcon,
+  LockClosedIcon,
+  MenuAlt1Icon,
+  PlusIcon,
+  QrcodeIcon,
+} from '@heroicons/react/outline'
 import { Spacer } from '@/components/Elements/Spacer'
 import { InputField, TextArea } from '@/components/Elements/Input'
 import { SelectField } from '@/components/Elements/Select/SelectField'
 import { useState } from 'react'
 import { SelectOption } from '@/components/Elements/Select'
+import Modal from '@/components/Quest/Modal'
 
 const Studio: NextPage = () => {
   const rooms: SelectOption[] = [
@@ -16,6 +24,8 @@ const Studio: NextPage = () => {
     { value: 'Dunkles Musem' },
   ]
   const [room, setRoom] = useState(rooms[0])
+
+  const [modalOpen, setModalOpen] = useState(false)
 
   return (
     <div>
@@ -65,14 +75,18 @@ const Studio: NextPage = () => {
                             alt="classroom"
                           ></Image>
                           <div className="absolute top-0 left-0 h-full w-full">
-                            <div className="absolute bottom-36 right-40 flex h-20 w-20 items-center justify-center rounded-xl border-4  border-white bg-white bg-opacity-50">
-                              <PlusCircleIcon className="h-10 w-10" />
+                            <div
+                              className="absolute bottom-36 right-40 flex h-20 w-20 items-center justify-center rounded-xl border-4  border-white bg-white bg-opacity-50"
+                              onClick={() => setModalOpen(true)}
+                            >
+                              <PlusIcon className="h-10 w-10" />
                             </div>
-                            <div className="absolute top-36 left-40 flex h-20 w-20 items-center justify-center rounded-xl border-4  border-white bg-white bg-opacity-50">
-                              <PlusCircleIcon className="h-10 w-10" />
+                            <div className="absolute top-36 left-40 flex h-20 w-20 flex-col items-center justify-center  rounded-xl border-4 border-white bg-flamingo bg-opacity-90  text-white">
+                              <ChartSquareBarIcon className="h-12 w-12" />
+                              {/* <p className="font-semibold">Statistik</p> */}
                             </div>
                             <div className="absolute bottom-[10%] right-[38%] flex h-20 w-20 items-center justify-center rounded-xl border-4 border-white bg-white bg-opacity-50">
-                              <PlusCircleIcon className="h-10 w-10" />
+                              <PlusIcon className="h-10 w-10" />
                             </div>
                           </div>
                         </>
@@ -86,48 +100,18 @@ const Studio: NextPage = () => {
                           ></Image>
                           <div className="absolute top-0 left-0 h-full w-full">
                             <div className="absolute right-[7%] bottom-[30%] flex h-20 w-20 items-center justify-center rounded-xl border-4  border-white bg-white bg-opacity-50">
-                              <PlusCircleIcon className="h-10 w-10" />
+                              <PlusIcon className="h-10 w-10" />
                             </div>
                             <div className="absolute bottom-36 left-28 flex h-20 w-20 items-center justify-center rounded-xl border-4  border-white bg-white bg-opacity-50">
-                              <PlusCircleIcon className="h-10 w-10" />
+                              <PlusIcon className="h-10 w-10" />
                             </div>
                             <div className="absolute bottom-[40%] right-[47%] flex h-20 w-20 items-center justify-center rounded-xl border-4  border-white bg-white bg-opacity-50">
-                              <PlusCircleIcon className="h-10 w-10" />
+                              <PlusIcon className="h-10 w-10" />
                             </div>
                           </div>
                         </>
                       )}
                     </div>
-                    <PillButton
-                      size="lg"
-                      variant="secondary"
-                      className="mx-auto"
-                    >
-                      Rätsel (3)
-                    </PillButton>
-                    <div className="relative py-4">
-                      <div className="pointer-events-none absolute top-0 left-0 flex h-full w-full justify-center">
-                        <div className="h-full w-6 bg-flamingo bg-opacity-50"></div>
-                      </div>
-                      <div className="relative">
-                        <Panel type="quest" header="Rätsel 1">
-                          <div>Nested Panel</div>
-                        </Panel>
-                        <Panel type="quest" header="Rätsel 2">
-                          <div>Nested Panel</div>
-                        </Panel>
-                        <Panel type="quest" header="Rätsel 3">
-                          <div>Nested Panel</div>
-                        </Panel>
-                      </div>
-                    </div>
-                    <PillButton
-                      variant="secondary"
-                      startIcon={<PlusCircleIcon className="h-8 w-8" />}
-                      className="mx-auto"
-                    >
-                      Rätsel hinzufügen
-                    </PillButton>
                   </>
                 </Panel>
                 <Panel
@@ -141,7 +125,7 @@ const Studio: NextPage = () => {
                     <span>Lorem ipsum</span>
                     <PillButton
                       variant="secondary"
-                      startIcon={<PlusCircleIcon className="h-8 w-8" />}
+                      startIcon={<PlusIcon className="h-8 w-8" />}
                       className="mx-auto"
                     >
                       Rätsel hinzufügen
@@ -156,11 +140,39 @@ const Studio: NextPage = () => {
         </Droppable>
       </DragDropContext>
       <PillButton
-        startIcon={<PlusCircleIcon className="h-8 w-8" />}
+        startIcon={<PlusIcon className="h-8 w-8" />}
         className="mx-auto"
       >
         Raum hinzufügen
       </PillButton>
+      <Modal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        title="Rätsel hinzufügen"
+      >
+        <div className="flex flex-row flex-wrap items-center justify-around">
+          <div className="m-2 flex h-36 w-36 flex-col items-center justify-center  rounded-xl border-2 border-flamingo bg-flamingo bg-opacity-20 text-flamingo">
+            <LockClosedIcon className="h-12 w-12" />
+            <p className="font-semibold">Krypro&shy;graphie</p>
+          </div>
+          <div className="m-2 flex h-36 w-36 flex-col items-center justify-center  rounded-xl border-2 border-flamingo bg-flamingo bg-opacity-20 text-flamingo">
+            <CodeIcon className="h-12 w-12" />
+            <p className="font-semibold">Program&shy;mieren</p>
+          </div>
+          <div className="m-2 flex h-36 w-36 flex-col items-center justify-center  rounded-xl border-2 border-flamingo bg-flamingo bg-opacity-20 text-flamingo">
+            <QrcodeIcon className="h-12 w-12" />
+            <p className="font-semibold">QR-Code Scan</p>
+          </div>
+          <div className="m-2 flex h-36 w-36 flex-col items-center justify-center  rounded-xl border-2 border-flamingo bg-flamingo bg-opacity-20 text-flamingo">
+            <MenuAlt1Icon className="h-12 w-12" />
+            <p className="font-semibold">Text</p>
+          </div>
+          <div className="m-2 flex h-36 w-36 flex-col items-center justify-center  rounded-xl border-2 border-flamingo bg-flamingo bg-opacity-20 text-flamingo">
+            <ChartSquareBarIcon className="h-12 w-12" />
+            <p className="font-semibold">Statistik</p>
+          </div>
+        </div>
+      </Modal>
     </div>
   )
 }
