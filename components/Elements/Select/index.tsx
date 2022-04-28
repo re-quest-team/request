@@ -1,23 +1,28 @@
-import { Fragment, useState } from 'react'
+import { Dispatch, Fragment, SetStateAction, useEffect, useState } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
 
-type SelectOption = {
+export type SelectOption = {
   value: string
   disabled?: boolean
 }
 
 export type SelectProps = {
   options: SelectOption[]
+  onSelect: Dispatch<SetStateAction<SelectOption>>
 }
 
-export default function Select({ options }: SelectProps) {
+export default function Select({ options, onSelect }: SelectProps) {
   const [selected, setSelected] = useState(options[0])
+
+  useEffect(() => {
+    onSelect(selected)
+  }, [onSelect, selected])
 
   return (
     <Listbox value={selected} onChange={setSelected}>
       <div className="relative mt-1">
-        <Listbox.Button className="relative w-full cursor-default rounded border border-zinc-700 bg-zinc-800 py-2 pl-3 pr-10 text-left shadow-md sm:text-sm">
+        <Listbox.Button className="relative w-full cursor-default rounded border border-zinc-700 bg-zinc-800 py-2 pl-3 pr-10 text-left shadow-md focus:border-zinc-500 focus:outline-none sm:text-sm">
           <span className="block truncate">{selected.value}</span>
           <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
             <SelectorIcon
