@@ -22,12 +22,13 @@ import { useState } from 'react'
 import { SelectOption } from '@/components/Elements/Select'
 import Modal from '@/components/Quest/Modal'
 import FileUpload from '@/components/FileUpload'
+import QuestImagePlacer from '@/components/Quest/QuestImagePlacer'
 
 const Studio: NextPage = () => {
   const rooms: SelectOption[] = [
+    { value: 'Eigenes Foto hochladen' },
     { value: 'Magisches Klassenzimmer' },
     { value: 'Dunkles Musem' },
-    { value: 'Eigenes Foto hochladen' },
     { value: 'Ohne Raum' },
   ]
   const [room, setRoom] = useState(rooms[0])
@@ -36,6 +37,8 @@ const Studio: NextPage = () => {
   const [taskModalOpen, setTaskModalOpen] = useState(false)
 
   const [encrypted, setEncrypted] = useState('')
+
+  const [imageUrl, setImageUrl] = useState('')
 
   return (
     <div>
@@ -74,7 +77,7 @@ const Studio: NextPage = () => {
                       options={rooms}
                       onSelect={setRoom}
                     ></SelectField>
-                    <div className="relative my-4 w-full overflow-hidden rounded">
+                    <div className="relative my-4 w-full rounded">
                       {room.value === 'Magisches Klassenzimmer' && (
                         <>
                           <Image
@@ -121,7 +124,8 @@ const Studio: NextPage = () => {
                       )}
                       {room.value === 'Eigenes Foto hochladen' && (
                         <>
-                          <FileUpload />
+                          <FileUpload onChange={url => setImageUrl(url)} />
+                          {imageUrl && <QuestImagePlacer img={imageUrl} />}
                         </>
                       )}
                     </div>
