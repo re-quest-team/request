@@ -4,13 +4,17 @@ import Panel from '@/components/Panel'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import { Button, PillButton } from '@/components/Elements/Button'
 import {
+  CameraIcon,
   ChartSquareBarIcon,
   CodeIcon,
   LockClosedIcon,
   MenuAlt1Icon,
+  PhotographIcon,
   PlusIcon,
   QrcodeIcon,
 } from '@heroicons/react/outline'
+import { Instagram, Youtube } from 'react-feather'
+
 import { Spacer } from '@/components/Elements/Spacer'
 import { InputField, TextArea } from '@/components/Elements/Input'
 import { SelectField } from '@/components/Elements/Select/SelectField'
@@ -22,10 +26,15 @@ const Studio: NextPage = () => {
   const rooms: SelectOption[] = [
     { value: 'Magisches Klassenzimmer' },
     { value: 'Dunkles Musem' },
+    { value: 'Eigenes Foto hochladen' },
+    { value: 'Ohne Raum' },
   ]
   const [room, setRoom] = useState(rooms[0])
 
   const [modalOpen, setModalOpen] = useState(false)
+  const [taskModalOpen, setTaskModalOpen] = useState(false)
+
+  const [encrypted, setEncrypted] = useState('')
 
   return (
     <div>
@@ -34,12 +43,10 @@ const Studio: NextPage = () => {
         <InputField label="Name"></InputField>
         <TextArea label="Beschreibung" rows={4} />
       </div>
-
       <Spacer></Spacer>
       <PillButton size="lg" className="mx-auto">
         Räume (2)
       </PillButton>
-
       <DragDropContext onDragEnd={result => console.log(result)}>
         <Droppable droppableId="droppable" direction="vertical">
           {(provided, snapshot) => (
@@ -148,29 +155,92 @@ const Studio: NextPage = () => {
       <Modal
         open={modalOpen}
         onClose={() => setModalOpen(false)}
-        title="Rätsel hinzufügen"
+        title="Element hinzufügen"
       >
-        <div className="flex flex-row flex-wrap items-center justify-around">
-          <div className="m-2 flex h-36 w-36 flex-col items-center justify-center  rounded-xl border-2 border-flamingo bg-flamingo bg-opacity-20 text-flamingo">
-            <LockClosedIcon className="h-12 w-12" />
-            <p className="font-semibold">Krypro&shy;graphie</p>
+        <>
+          <h2 className="mx-auto w-full">Rätsel hinzufügen</h2>
+          <div className="flex flex-row flex-wrap items-center justify-around">
+            <div
+              className="m-2 flex h-36 w-36 flex-col items-center justify-center  rounded-xl border-2 border-flamingo bg-flamingo bg-opacity-20 text-flamingo"
+              onClick={() => {
+                setModalOpen(false)
+                setTaskModalOpen(true)
+              }}
+            >
+              <LockClosedIcon className="h-12 w-12" />
+              <p className="font-semibold">Krypro&shy;graphie</p>
+            </div>
+            <div className="m-2 flex h-36 w-36 flex-col items-center justify-center  rounded-xl border-2 border-flamingo bg-flamingo bg-opacity-20 text-flamingo">
+              <CodeIcon className="h-12 w-12" />
+              <p className="font-semibold">Program&shy;mieren</p>
+            </div>
+            <div className="m-2 flex h-36 w-36 flex-col items-center justify-center  rounded-xl border-2 border-flamingo bg-flamingo bg-opacity-20 text-flamingo">
+              <QrcodeIcon className="h-12 w-12" />
+              <p className="font-semibold">QR-Code Scan</p>
+            </div>
+
+            <div className="m-2 flex h-36 w-36 flex-col items-center justify-center  rounded-xl border-2 border-flamingo bg-flamingo bg-opacity-20 text-flamingo">
+              <ChartSquareBarIcon className="h-12 w-12" />
+              <p className="font-semibold">Statistik</p>
+            </div>
           </div>
-          <div className="m-2 flex h-36 w-36 flex-col items-center justify-center  rounded-xl border-2 border-flamingo bg-flamingo bg-opacity-20 text-flamingo">
-            <CodeIcon className="h-12 w-12" />
-            <p className="font-semibold">Program&shy;mieren</p>
+          <h2 className="mx-auto w-full">Medien hinzufügen</h2>
+          <div className="flex flex-row flex-wrap items-center justify-around">
+            <div className="m-2 flex h-36 w-36 flex-col items-center justify-center  rounded-xl border-2 border-flamingo bg-flamingo bg-opacity-20 text-flamingo">
+              <MenuAlt1Icon className="h-12 w-12" />
+              <p className="font-semibold">Text</p>
+            </div>
+            <div className="m-2 flex h-36 w-36 flex-col items-center justify-center  rounded-xl border-2 border-flamingo bg-flamingo bg-opacity-20 text-flamingo">
+              <PhotographIcon className="h-12 w-12" />
+              <p className="font-semibold">Bild</p>
+            </div>
+            <div className="m-2 flex h-36 w-36 flex-col items-center justify-center  rounded-xl border-2 border-flamingo bg-flamingo bg-opacity-20 text-flamingo">
+              <Instagram className="h-12 w-12" />
+              <p className="font-semibold">Instagram</p>
+            </div>
+            <div className="m-2 flex h-36 w-36 flex-col items-center justify-center  rounded-xl border-2 border-flamingo bg-flamingo bg-opacity-20 text-flamingo">
+              <Youtube className="h-12 w-12" />
+              <p className="font-semibold">YouTube</p>
+            </div>
+            <div className="m-2 flex h-36 w-36 flex-col items-center justify-center  rounded-xl border-2 border-flamingo bg-flamingo bg-opacity-20 text-flamingo">
+              <CodeIcon className="h-12 w-12" />
+              <p className="font-semibold">iFrame</p>
+            </div>
           </div>
-          <div className="m-2 flex h-36 w-36 flex-col items-center justify-center  rounded-xl border-2 border-flamingo bg-flamingo bg-opacity-20 text-flamingo">
-            <QrcodeIcon className="h-12 w-12" />
-            <p className="font-semibold">QR-Code Scan</p>
-          </div>
-          <div className="m-2 flex h-36 w-36 flex-col items-center justify-center  rounded-xl border-2 border-flamingo bg-flamingo bg-opacity-20 text-flamingo">
-            <MenuAlt1Icon className="h-12 w-12" />
-            <p className="font-semibold">Text</p>
-          </div>
-          <div className="m-2 flex h-36 w-36 flex-col items-center justify-center  rounded-xl border-2 border-flamingo bg-flamingo bg-opacity-20 text-flamingo">
-            <ChartSquareBarIcon className="h-12 w-12" />
-            <p className="font-semibold">Statistik</p>
-          </div>
+        </>
+      </Modal>
+      <Modal
+        open={taskModalOpen}
+        onClose={() => setTaskModalOpen(false)}
+        title="Kryptographie"
+      >
+        <div>
+          <InputField
+            label="Aufgabenstellung"
+            value={
+              'Das folgende Wort wurde mit ROT13 verschlüsselt. Kannst du es entschlüsseln?'
+            }
+          ></InputField>
+          <InputField
+            label="Codewort"
+            onChange={e => setEncrypted(e.target.value)}
+          ></InputField>
+          <InputField
+            label="Verschlüsseltes Wort"
+            disabled
+            value={encrypted.replace(
+              /[A-Z]/gi,
+              c =>
+                'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'[
+                  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.indexOf(
+                    c,
+                  )
+                ],
+            )}
+          ></InputField>
+          <Button variant="primary" onClick={() => setTaskModalOpen(false)}>
+            Speichern
+          </Button>
         </div>
       </Modal>
     </div>
