@@ -21,6 +21,7 @@ import { SelectField } from '@/components/Elements/Select/SelectField'
 import { useState } from 'react'
 import { SelectOption } from '@/components/Elements/Select'
 import Modal from '@/components/Quest/Modal'
+import FileUpload from '@/components/FileUpload'
 
 const Studio: NextPage = () => {
   const rooms: SelectOption[] = [
@@ -116,6 +117,11 @@ const Studio: NextPage = () => {
                               <PlusIcon className="h-10 w-10" />
                             </div>
                           </div>
+                        </>
+                      )}
+                      {room.value === 'Eigenes Foto hochladen' && (
+                        <>
+                          <FileUpload />
                         </>
                       )}
                     </div>
