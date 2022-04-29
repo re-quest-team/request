@@ -1,10 +1,22 @@
 /* eslint-disable @next/next/no-img-element */
-import { PlusCircleIcon, PlusIcon } from '@heroicons/react/outline'
-import useMouse from '@react-hook/mouse-position'
-import { useEffect, useRef, useState } from 'react'
+import {
+  ArrowUpIcon,
+  ChartSquareBarIcon,
+  CodeIcon,
+  LockClosedIcon,
+  MenuAlt1Icon,
+  PhotographIcon,
+  PlusCircleIcon,
+  QrcodeIcon,
+} from '@heroicons/react/outline'
+import { useRef, useState } from 'react'
+import { ArrowUpRight, Instagram, Youtube } from 'react-feather'
 import { Button, PillButton } from '../Elements/Button'
+import { InputField } from '../Elements/Input'
 import { Spacer } from '../Elements/Spacer'
 import Toggle from '../Elements/Toggle'
+import AddQuestButton from './AddQuestButton'
+import Modal from './Modal'
 
 type QuestImagePlacerProps = {
   img: string
@@ -17,73 +29,191 @@ type QuestButton = {
 }
 
 const QuestImagePlacer = ({ img, maxQuests = 3 }: QuestImagePlacerProps) => {
-  const ref = useRef(null)
-  const mouse = useMouse(ref)
-
+  const ref = useRef<HTMLDivElement>(null)
   const [quests, setQuests] = useState<QuestButton[]>([])
 
-  const [editMode, setEditMode] = useState(false)
+  const [editMode, setEditMode] = useState(true)
+
+  const [modalOpen, setModalOpen] = useState(false)
+  const [taskModalOpen, setTaskModalOpen] = useState(false)
+
+  const [encrypted, setEncrypted] = useState('')
+
   return (
     <div>
-      <Toggle
-        label="Rätsel platzieren"
-        onChange={e => setEditMode(!editMode)}
-      />
-      <PillButton variant="secondary" className="mx-auto">
-        {quests.length} von {maxQuests} Rätseln
-      </PillButton>
-      <Spacer />
+      <Button
+        size="xs"
+        className="ml-auto"
+        onMouseDown={() => setEditMode(false)}
+        onMouseUp={() => setEditMode(true)}
+      >
+        Vorschau
+      </Button>
+      <Spacer size="xs" />
       <div
-        className={`relative w-full overflow-visible ${
+        className={`relative mx-auto w-full max-w-6xl overflow-visible ${
           editMode && quests.length < maxQuests && 'cursor-crosshair'
         }`}
+        ref={ref}
       >
         <img
+          className="select-none rounded shadow"
           src={img}
-          onClick={() => {
+          onClick={e => {
             if (editMode && quests.length < maxQuests) {
+              setModalOpen(true)
               setQuests([
                 ...quests,
                 {
                   // @ts-ignore
-                  x: mouse.x / mouse.elementWidth,
+                  x:
+                    (e.clientX - ref.current?.getBoundingClientRect().left!) /
+                    ref.current?.clientWidth!,
                   // @ts-ignore
-                  y: mouse.y / mouse.elementHeight,
+                  y:
+                    (e.clientY - ref.current?.getBoundingClientRect().top!) /
+                    ref.current?.clientHeight!,
                 },
               ])
             }
           }}
           alt="upload"
-          ref={ref}
+          onDrop={e => e.preventDefault()}
+          onDragOver={e => e.preventDefault()}
         />
         <div
           className={`pointer-events-none absolute left-0 top-0 flex h-full w-full items-center justify-center transition-all ${
-            editMode && 'bg-black bg-opacity-30'
+            editMode && 'bg-black bg-opacity-40'
           }`}
         >
           {editMode && quests.length === 0 && (
-            <div className="m-auto flex flex-col items-center">
-              <PlusCircleIcon className="mb-4 h-10 w-10" />
-              <p className="font-semibold">
-                Platziere Rätsel mit einem Klick auf dem Bild
-              </p>
-            </div>
+            <>
+              <div className="relative m-auto flex flex-col items-center">
+                <PlusCircleIcon className="mb-4 h-10 w-10" />
+                <p className="font-semibold">
+                  Klicke auf das Bild um Rätsel hinzuzufügen
+                </p>
+              </div>
+              <div className="absolute top-0 right-0 flex max-w-sm content-end items-end p-4">
+                <p className="mr-2 text-sm">
+                  Halte den Vorschau Button gedrückt um eine Vorschau deines
+                  Raumes zu sehen
+                </p>
+                <ArrowUpRight className="h-10 w-12" />
+              </div>
+            </>
           )}
           {quests?.map((q, i) => (
-            <div
-              className={`pointer-events-auto absolute flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center justify-center rounded-xl border-4 border-white bg-white bg-opacity-50`}
-              style={{ top: `${q.y * 100}%`, left: `${q.x * 100}%` }}
+            <AddQuestButton
+              dragRef={ref}
+              {...q}
+              onMoveEnd={movedQuest =>
+                setQuests([
+                  ...quests.filter((e, index) => index !== i),
+                  movedQuest,
+                ])
+              }
+              onDelete={() =>
+                setQuests([...quests.filter((e, index) => index !== i)])
+              }
               key={i}
-              onClick={() => {
-                if (editMode)
-                  setQuests([...quests.filter((e, index) => index !== i)])
-              }}
-            >
-              <PlusIcon className="h-10 w-10" />
-            </div>
+              showDelete={editMode}
+              onClick={() => setModalOpen(true)}
+            />
           ))}
         </div>
       </div>
+      <Spacer />
+      <PillButton variant="secondary" className="mx-auto">
+        {quests.length} von {maxQuests} Rätseln
+      </PillButton>
+
+      <Modal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        title="Element hinzufügen"
+      >
+        <>
+          <h2 className="mx-auto w-full">Rätsel hinzufügen</h2>
+          <div className="flex flex-row flex-wrap items-center justify-around">
+            <div
+              className="m-2 flex h-36 w-36 flex-col items-center justify-center  rounded-xl border-2 border-flamingo bg-flamingo bg-opacity-20 text-flamingo"
+              onClick={() => {
+                setModalOpen(false)
+                setTaskModalOpen(true)
+              }}
+            >
+              <LockClosedIcon className="h-12 w-12" />
+              <p className="font-semibold">Krypro&shy;graphie</p>
+            </div>
+            <div className="m-2 flex h-36 w-36 flex-col items-center justify-center  rounded-xl border-2 border-flamingo bg-flamingo bg-opacity-20 text-flamingo">
+              <CodeIcon className="h-12 w-12" />
+              <p className="font-semibold">Program&shy;mieren</p>
+            </div>
+            <div className="m-2 flex h-36 w-36 flex-col items-center justify-center  rounded-xl border-2 border-flamingo bg-flamingo bg-opacity-20 text-flamingo">
+              <QrcodeIcon className="h-12 w-12" />
+              <p className="font-semibold">QR-Code Scan</p>
+            </div>
+
+            <div className="m-2 flex h-36 w-36 flex-col items-center justify-center  rounded-xl border-2 border-flamingo bg-flamingo bg-opacity-20 text-flamingo">
+              <ChartSquareBarIcon className="h-12 w-12" />
+              <p className="font-semibold">Statistik</p>
+            </div>
+          </div>
+          <h2 className="mx-auto w-full">Medien hinzufügen</h2>
+          <div className="flex flex-row flex-wrap items-center justify-around">
+            <div className="m-2 flex h-36 w-36 flex-col items-center justify-center  rounded-xl border-2 border-flamingo bg-flamingo bg-opacity-20 text-flamingo">
+              <MenuAlt1Icon className="h-12 w-12" />
+              <p className="font-semibold">Text</p>
+            </div>
+            <div className="m-2 flex h-36 w-36 flex-col items-center justify-center  rounded-xl border-2 border-flamingo bg-flamingo bg-opacity-20 text-flamingo">
+              <PhotographIcon className="h-12 w-12" />
+              <p className="font-semibold">Bild</p>
+            </div>
+            <div className="m-2 flex h-36 w-36 flex-col items-center justify-center  rounded-xl border-2 border-flamingo bg-flamingo bg-opacity-20 text-flamingo">
+              <Instagram className="h-12 w-12" />
+              <p className="font-semibold">Instagram</p>
+            </div>
+            <div className="m-2 flex h-36 w-36 flex-col items-center justify-center  rounded-xl border-2 border-flamingo bg-flamingo bg-opacity-20 text-flamingo">
+              <Youtube className="h-12 w-12" />
+              <p className="font-semibold">YouTube</p>
+            </div>
+            <div className="m-2 flex h-36 w-36 flex-col items-center justify-center  rounded-xl border-2 border-flamingo bg-flamingo bg-opacity-20 text-flamingo">
+              <CodeIcon className="h-12 w-12" />
+              <p className="font-semibold">iFrame</p>
+            </div>
+          </div>
+        </>
+      </Modal>
+      <Modal
+        open={taskModalOpen}
+        onClose={() => setTaskModalOpen(false)}
+        title="Kryptographie"
+      >
+        <div>
+          <InputField label="Aufgabenstellung"></InputField>
+          <InputField
+            label="Codewort"
+            onChange={e => setEncrypted(e.target.value)}
+          ></InputField>
+          <InputField
+            label="Verschlüsseltes Wort"
+            disabled
+            value={encrypted.replace(
+              /[A-Z]/gi,
+              c =>
+                'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'[
+                  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.indexOf(
+                    c,
+                  )
+                ],
+            )}
+          ></InputField>
+          <Button variant="primary" onClick={() => setTaskModalOpen(false)}>
+            Speichern
+          </Button>
+        </div>
+      </Modal>
     </div>
   )
 }

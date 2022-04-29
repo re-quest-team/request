@@ -1,6 +1,7 @@
 import * as React from 'react'
 
 const sizes = {
+  xs: 'my-2',
   sm: 'my-4',
   md: 'my-8',
   lg: 'my-16',
