@@ -22,4 +22,17 @@ export default NextAuth({
     colorScheme: 'dark',
     brandColor: '#EB5C37',
   },
+  callbacks: {
+    async jwt({ token, user }) {
+      // Persist the OAuth access_token to the token right after signin
+      if (user) {
+        token.id = user.id
+      }
+      return token
+    },
+    // async session({ session, user }) {
+    //   session.user.id = user.id
+    //   return Promise.resolve(session)
+    // },
+  },
 })

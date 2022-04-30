@@ -1,137 +1,36 @@
-import type { NextPage } from 'next'
-import Image from 'next/image'
-import Panel from '@/components/Panel'
-import { DragDropContext, Droppable } from 'react-beautiful-dnd'
-import { Button, PillButton } from '@/components/Elements/Button'
-import {
-  CameraIcon,
-  ChartSquareBarIcon,
-  CodeIcon,
-  LockClosedIcon,
-  MenuAlt1Icon,
-  PhotographIcon,
-  PlusIcon,
-  QrcodeIcon,
-} from '@heroicons/react/outline'
-import { Instagram, Youtube } from 'react-feather'
-
+import { Button } from '@/components/Elements/Button'
 import { Spacer } from '@/components/Elements/Spacer'
-import { InputField, TextArea } from '@/components/Elements/Input'
-import { SelectField } from '@/components/Elements/Select/SelectField'
-import { useState } from 'react'
-import { SelectOption } from '@/components/Elements/Select'
-import Modal from '@/components/Quest/Modal'
-import FileUpload from '@/components/FileUpload'
-import QuestImagePlacer from '@/components/Quest/QuestImagePlacer'
+import prisma from '@/lib/prisma'
+import { Quest } from '@prisma/client'
+import { GetServerSideProps } from 'next'
+import { getSession } from 'next-auth/react'
+import Link from 'next/link'
 
-const Studio: NextPage = () => {
-  const rooms: SelectOption[] = [
-    { value: 'Eigenes Foto hochladen' },
-    { value: 'Magisches Klassenzimmer' },
-    { value: 'Dunkles Musem' },
-    { value: 'Ohne Raum' },
-  ]
-  const [room, setRoom] = useState(rooms[0])
+export const getServerSideProps: GetServerSideProps = async context => {
+  const session = await getSession(context)
+  const quests = await prisma.quest.findMany({
+    where: {
+      userId: session?.user.id,
+    },
+  })
+  return { props: { quests } }
+}
 
-  const [imageUrl, setImageUrl] = useState('')
-
+const Studio = ({ quests }: { quests: Quest[] }) => {
   return (
     <div>
-      <h1 className="p-2 text-center text-6xl font-bold">Studio</h1>
-      <div className="mx-auto md:max-w-4xl">
-        <InputField label="Name"></InputField>
-        <TextArea label="Beschreibung" rows={4} />
-      </div>
-      <Spacer></Spacer>
-      <PillButton size="lg" className="mx-auto">
-        Räume (2)
-      </PillButton>
-      <DragDropContext onDragEnd={result => console.log(result)}>
-        <Droppable droppableId="droppable" direction="vertical">
-          {(provided, snapshot) => (
-            <div
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-              className="relative py-4"
-            >
-              <div className="pointer-events-none absolute top-0 left-0 flex h-full w-full justify-center">
-                <div className="h-full w-6 bg-dodger-blue bg-opacity-50"></div>
-              </div>
-              <div className="relative">
-                <Panel
-                  type="room"
-                  draggable={{
-                    draggableId: 'abc',
-                    draggableIndex: 1,
-                  }}
-                  header="Raum 1"
-                >
-                  <>
-                    <SelectField
-                      label="Thema"
-                      options={rooms}
-                      onSelect={setRoom}
-                    ></SelectField>
-                    <div className="relative my-4 w-full rounded">
-                      {room.value === 'Magisches Klassenzimmer' && (
-                        <QuestImagePlacer
-                          img={
-                            require('@/assets/rooms/abandoned-magic-classroom.jpg')
-                              .default.src
-                          }
-                        />
-                      )}
-                      {room.value === 'Dunkles Musem' && (
-                        <QuestImagePlacer
-                          img={
-                            require('@/assets/rooms/dark-museum.jpg').default
-                              .src
-                          }
-                        />
-                      )}
-                      {room.value === 'Eigenes Foto hochladen' && (
-                        <>
-                          <FileUpload onChange={url => setImageUrl(url)} />
-                          {imageUrl && <QuestImagePlacer img={imageUrl} />}
-                        </>
-                      )}
-                    </div>
-                  </>
-                </Panel>
-                <Panel
-                  draggable={{
-                    draggableId: 'def',
-                    draggableIndex: 2,
-                  }}
-                  header="Raum 2"
-                >
-                  <>
-                    <>
-                      <FileUpload onChange={url => setImageUrl(url)} />
-                      {imageUrl && <QuestImagePlacer img={imageUrl} />}
-                    </>
-                    <PillButton
-                      variant="secondary"
-                      startIcon={<PlusIcon className="h-8 w-8" />}
-                      className="mx-auto"
-                    >
-                      Rätsel hinzufügen
-                    </PillButton>
-                  </>
-                </Panel>
+      <Link href={'/studio/new'} passHref>
+        <Button>Neues re:quest erstellen</Button>
+      </Link>
 
-                {provided.placeholder}
-              </div>
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
-      <PillButton
-        startIcon={<PlusIcon className="h-8 w-8" />}
-        className="mx-auto"
-      >
-        Raum hinzufügen
-      </PillButton>
+      <Spacer />
+
+      <h1 className="text-xl">Meine re:quests</h1>
+      {quests.map(q => (
+        <Link href={`/studio/${q.id}`} passHref key={q.id}>
+          <Button>{q.id}</Button>
+        </Link>
+      ))}
     </div>
   )
 }
