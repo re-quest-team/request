@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: false, // https://github.com/tailwindlabs/headlessui/issues/681#issue-942424771
+module.exports = {
+  images: {
+    domains: [
+      `${process.env.S3_UPLOAD_BUCKET}.s3.amazonaws.com`,
+      `${process.env.S3_UPLOAD_BUCKET}.s3.${process.env.S3_UPLOAD_REGION}.amazonaws.com`,
+    ],
+  },
 }
-
-module.exports = nextConfig

@@ -1,7 +1,11 @@
 import { Disclosure, Transition } from '@headlessui/react'
 import { ChevronUpIcon, MenuIcon, TrashIcon } from '@heroicons/react/outline'
 import clsx from 'clsx'
-import { Draggable, DraggableProvided } from 'react-beautiful-dnd'
+import {
+  Draggable,
+  DraggableProvided,
+  DraggableStateSnapshot,
+} from 'react-beautiful-dnd'
 import { resetServerContext } from 'react-beautiful-dnd'
 
 resetServerContext()
@@ -13,10 +17,8 @@ type BasePanelProps = {
 }
 
 type PanelProps = BasePanelProps & {
-  draggable?: {
-    draggableId: string
-    draggableIndex: number
-  }
+  provided: DraggableProvided
+  snapshot: DraggableStateSnapshot
 }
 
 type PanelWithOptionalDragHandleProps = BasePanelProps & {
@@ -44,7 +46,7 @@ const PanelWithOptionalDragHandle = ({
 }: PanelWithOptionalDragHandleProps) => (
   <div
     className={clsx(
-      'my-8 w-full overflow-hidden rounded-lg border bg-zinc-900 shadow',
+      'my-8 w-full rounded-lg border bg-zinc-900 shadow',
       types[type].border,
     )}
   >
@@ -93,8 +95,14 @@ const PanelWithOptionalDragHandle = ({
   </div>
 )
 
-const Panel = ({ children, type = 'room', draggable, header }: PanelProps) => {
-  if (!draggable)
+const Panel = ({
+  children,
+  type = 'room',
+  provided,
+  snapshot,
+  header,
+}: PanelProps) => {
+  if (!provided)
     return (
       <PanelWithOptionalDragHandle type={type} header={header}>
         {children}
@@ -102,22 +110,15 @@ const Panel = ({ children, type = 'room', draggable, header }: PanelProps) => {
     )
 
   return (
-    <Draggable
-      draggableId={draggable.draggableId}
-      index={draggable.draggableIndex}
-    >
-      {(provided, snapshot) => (
-        <div ref={provided.innerRef} {...provided.draggableProps}>
-          <PanelWithOptionalDragHandle
-            type={type}
-            provided={provided}
-            header={header}
-          >
-            {children}
-          </PanelWithOptionalDragHandle>
-        </div>
-      )}
-    </Draggable>
+    <div ref={provided.innerRef} {...provided.draggableProps}>
+      <PanelWithOptionalDragHandle
+        type={type}
+        provided={provided}
+        header={header}
+      >
+        {children}
+      </PanelWithOptionalDragHandle>
+    </div>
   )
 }
 
