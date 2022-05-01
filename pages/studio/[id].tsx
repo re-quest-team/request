@@ -1,40 +1,108 @@
 import type { NextPage } from 'next'
-import Panel from '@/components/Panel'
-import { DragDropContext, Droppable } from 'react-beautiful-dnd'
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import { PillButton } from '@/components/Elements/Button'
 import { PlusIcon } from '@heroicons/react/outline'
-
 import { Spacer } from '@/components/Elements/Spacer'
-import { InputField, TextArea } from '@/components/Elements/Input'
-import { SelectField } from '@/components/Elements/Select/SelectField'
+import { InputField, TextArea } from '@/components/Elements/FormElements'
 import { useState } from 'react'
-import { SelectOption } from '@/components/Elements/Select'
-import FileUpload from '@/components/FileUpload'
-import QuestImagePlacer from '@/components/Quest/QuestImagePlacer'
+import { Quest } from '@prisma/client'
+import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useForm } from 'react-hook-form'
+import useSWR from 'swr'
+import { useRouter } from 'next/router'
+import QuestPanel from '@/components/Quest/QuestPanel'
+
+const schema = yup
+  .object({
+    name: yup.string().required(),
+    description: yup.string().required().min(8),
+  })
+  .required()
+
+// a little function to help us with reordering the result
+const reorder = (list: any[], startIndex: number, endIndex: number) => {
+  const result = Array.from(list)
+  const [removed] = result.splice(startIndex, 1)
+  result.splice(endIndex, 0, removed)
+
+  return result
+}
 
 const Studio: NextPage = () => {
-  const rooms: SelectOption[] = [
-    { value: 'Eigenes Foto hochladen' },
-    { value: 'Magisches Klassenzimmer' },
-    { value: 'Dunkles Musem' },
-    { value: 'Ohne Raum' },
-  ]
-  const [room, setRoom] = useState(rooms[0])
+  const [quests, setQuests] = useState<{ id: string }[]>([])
+  console.log(quests)
 
-  const [imageUrl, setImageUrl] = useState('')
+  const router = useRouter()
+  const { data, mutate } = useSWR<Quest>(`/api/quest/${router.query.id}`)
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<yup.InferType<typeof schema>>({
+    resolver: yupResolver(schema),
+  })
+
+  const onSubmit = handleSubmit(async event => {
+    const updatedQuestRequest = await fetch(`/api/quest/${router.query.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        ...data,
+        ...event,
+      }),
+    })
+
+    const updatedQuest = updatedQuestRequest.body as unknown as Quest
+
+    await mutate(updatedQuest)
+  })
 
   return (
     <div>
       <h1 className="p-2 text-center text-6xl font-bold">Studio</h1>
       <div className="mx-auto md:max-w-4xl">
-        <InputField label="Name"></InputField>
-        <TextArea label="Beschreibung" rows={4} />
+        <form onSubmit={onSubmit}>
+          <InputField
+            label="Name"
+            defaultValue={data?.name ?? ''}
+            registration={register('name')}
+            error={errors['name']}
+          ></InputField>
+          <TextArea
+            label="Beschreibung"
+            rows={4}
+            defaultValue={data?.description ?? ''}
+            registration={register('description')}
+            error={errors['description']}
+          />
+
+          <input type="submit" />
+        </form>
       </div>
       <Spacer></Spacer>
       <PillButton size="lg" className="mx-auto">
-        Räume (2)
+        Räume ({quests.length})
       </PillButton>
-      <DragDropContext onDragEnd={result => console.log(result)}>
+      <DragDropContext
+        onDragEnd={result => {
+          // dropped outside the list
+          if (!result.destination) {
+            return
+          }
+
+          const questItems = reorder(
+            quests,
+            result.source.index,
+            result.destination.index,
+          )
+
+          setQuests(questItems)
+        }}
+      >
         <Droppable droppableId="droppable" direction="vertical">
           {(provided, snapshot) => (
             <div
@@ -46,67 +114,17 @@ const Studio: NextPage = () => {
                 <div className="h-full w-6 bg-dodger-blue bg-opacity-50"></div>
               </div>
               <div className="relative">
-                <Panel
-                  type="room"
-                  draggable={{
-                    draggableId: 'abc',
-                    draggableIndex: 1,
-                  }}
-                  header="Raum 1"
-                >
-                  <>
-                    <SelectField
-                      label="Thema"
-                      options={rooms}
-                      onSelect={setRoom}
-                    ></SelectField>
-                    <div className="relative my-4 w-full rounded">
-                      {room.value === 'Magisches Klassenzimmer' && (
-                        <QuestImagePlacer
-                          img={
-                            require('@/assets/rooms/abandoned-magic-classroom.jpg')
-                              .default.src
-                          }
-                        />
-                      )}
-                      {room.value === 'Dunkles Musem' && (
-                        <QuestImagePlacer
-                          img={
-                            require('@/assets/rooms/dark-museum.jpg').default
-                              .src
-                          }
-                        />
-                      )}
-                      {room.value === 'Eigenes Foto hochladen' && (
-                        <>
-                          <FileUpload onChange={url => setImageUrl(url)} />
-                          {imageUrl && <QuestImagePlacer img={imageUrl} />}
-                        </>
-                      )}
-                    </div>
-                  </>
-                </Panel>
-                <Panel
-                  draggable={{
-                    draggableId: 'def',
-                    draggableIndex: 2,
-                  }}
-                  header="Raum 2"
-                >
-                  <>
-                    <>
-                      <FileUpload onChange={url => setImageUrl(url)} />
-                      {imageUrl && <QuestImagePlacer img={imageUrl} />}
-                    </>
-                    <PillButton
-                      variant="secondary"
-                      startIcon={<PlusIcon className="h-8 w-8" />}
-                      className="mx-auto"
-                    >
-                      Rätsel hinzufügen
-                    </PillButton>
-                  </>
-                </Panel>
+                {quests.map((q, i) => (
+                  <Draggable key={q.id} draggableId={q.id} index={i}>
+                    {(provided, snapshot) => (
+                      <QuestPanel
+                        provided={provided}
+                        snapshot={snapshot}
+                        index={i + 1}
+                      />
+                    )}
+                  </Draggable>
+                ))}
 
                 {provided.placeholder}
               </div>
@@ -117,6 +135,9 @@ const Studio: NextPage = () => {
       <PillButton
         startIcon={<PlusIcon className="h-8 w-8" />}
         className="mx-auto"
+        onClick={() =>
+          setQuests([...quests, { id: new Date().getTime().toString() }])
+        }
       >
         Raum hinzufügen
       </PillButton>

@@ -6,13 +6,20 @@ import { SessionProvider } from 'next-auth/react'
 import '@fontsource/inter'
 import '@fontsource/inter/600.css'
 import '@fontsource/inter/900.css'
+import { SWRConfig } from 'swr'
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
     <SessionProvider session={session}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <SWRConfig
+        value={{
+          fetcher: url => fetch(url).then(r => r.json()),
+        }}
+      >
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </SWRConfig>
     </SessionProvider>
   )
 }

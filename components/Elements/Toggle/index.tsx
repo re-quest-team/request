@@ -2,7 +2,7 @@ import { InputHTMLAttributes } from 'react'
 import {
   FieldWrapper,
   FieldWrapperPassThroughProps,
-} from '../Input/FieldWrapper'
+} from '../FormElements/FieldWrapper'
 
 type ToggleProps = InputHTMLAttributes<HTMLInputElement> &
   FieldWrapperPassThroughProps

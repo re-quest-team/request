@@ -12,11 +12,10 @@ import {
 import { useRef, useState } from 'react'
 import { ArrowUpRight, Instagram, Youtube } from 'react-feather'
 import { Button, PillButton } from '../Elements/Button'
-import { InputField } from '../Elements/Input'
+import { InputField } from '../Elements/FormElements'
 import { Spacer } from '../Elements/Spacer'
-import Toggle from '../Elements/Toggle'
 import AddQuestButton from './AddQuestButton'
-import Modal from './Modal'
+import Modal from '../Modal'
 
 type QuestImagePlacerProps = {
   img: string
@@ -140,7 +139,9 @@ const QuestImagePlacer = ({ img, maxQuests = 3 }: QuestImagePlacerProps) => {
               className="m-2 flex h-36 w-36 flex-col items-center justify-center  rounded-xl border-2 border-flamingo bg-flamingo bg-opacity-20 text-flamingo"
               onClick={() => {
                 setModalOpen(false)
-                setTaskModalOpen(true)
+                setTimeout(() => {
+                  setTaskModalOpen(true)
+                }, 100)
               }}
             >
               <LockClosedIcon className="h-12 w-12" />

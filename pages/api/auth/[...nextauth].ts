@@ -30,9 +30,9 @@ export default NextAuth({
       }
       return token
     },
-    // async session({ session, user }) {
-    //   session.user.id = user.id
-    //   return Promise.resolve(session)
-    // },
+    async session({ session, user, token }) {
+      session.user.id = token.sub ?? ''
+      return Promise.resolve(session)
+    },
   },
 })

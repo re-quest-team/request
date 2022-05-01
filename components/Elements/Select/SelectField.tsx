@@ -3,7 +3,7 @@ import Select, { SelectProps } from '.'
 import {
   FieldWrapper,
   FieldWrapperPassThroughProps,
-} from './../Input/FieldWrapper'
+} from '../FormElements/FieldWrapper'
 
 type SelectFieldProps = FieldWrapperPassThroughProps & SelectProps
 
