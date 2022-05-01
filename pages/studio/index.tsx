@@ -3,14 +3,14 @@ import { Spacer } from '@/components/Elements/Spacer'
 import prisma from '@/lib/prisma'
 import { Quest } from '@prisma/client'
 import { GetServerSideProps } from 'next'
-import { getToken } from 'next-auth/jwt'
+import { getSession } from 'next-auth/react'
 import Link from 'next/link'
 
 export const getServerSideProps: GetServerSideProps = async context => {
-  const token = await getToken(context)
+  const session = await getSession(context)
   const quests = await prisma.quest.findMany({
     where: {
-      userId: token?.sub,
+      userId: session?.user.id,
     },
   })
   return { props: { quests } }
