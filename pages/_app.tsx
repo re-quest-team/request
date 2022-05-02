@@ -7,6 +7,7 @@ import '@fontsource/inter'
 import '@fontsource/inter/600.css'
 import '@fontsource/inter/900.css'
 import { SWRConfig } from 'swr'
+import { Toaster } from 'react-hot-toast'
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
@@ -17,7 +18,18 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
         }}
       >
         <Layout>
-          <Component {...pageProps} />
+          <>
+            <Toaster
+              toastOptions={{
+                className: '',
+                style: {
+                  color: '#fff',
+                  backgroundColor: '#374151',
+                },
+              }}
+            />
+            <Component {...pageProps} />
+          </>
         </Layout>
       </SWRConfig>
     </SessionProvider>
