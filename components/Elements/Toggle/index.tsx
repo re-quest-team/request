@@ -19,7 +19,7 @@ const Toggle = ({ label, ...other }: ToggleProps) => (
       />
       <label
         htmlFor="toggle"
-        className="toggle-label block h-6 cursor-pointer overflow-hidden rounded-full bg-gray-300"
+        className="toggle-label block h-6 cursor-pointer overflow-hidden rounded-full bg-slate-300"
       ></label>
     </div>
   </FieldWrapper>
