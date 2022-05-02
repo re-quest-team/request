@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
-import { PillButton } from '@/components/Elements/Button'
+import { Button, PillButton } from '@/components/Elements/Button'
 import { PlusIcon } from '@heroicons/react/outline'
 import { Spacer } from '@/components/Elements/Spacer'
 import { InputField, TextArea } from '@/components/Elements/FormElements'
@@ -12,6 +12,7 @@ import { useForm } from 'react-hook-form'
 import useSWR from 'swr'
 import { useRouter } from 'next/router'
 import QuestPanel from '@/components/Quest/QuestPanel'
+import toast from 'react-hot-toast'
 
 const schema = yup
   .object({
@@ -34,7 +35,9 @@ const Studio: NextPage = () => {
   console.log(quests)
 
   const router = useRouter()
-  const { data, mutate } = useSWR<Quest>(`/api/quest/${router.query.id}`)
+  const { data, mutate, isValidating } = useSWR<Quest>(
+    `/api/quest/${router.query.id}`,
+  )
 
   const {
     register,
@@ -45,7 +48,7 @@ const Studio: NextPage = () => {
   })
 
   const onSubmit = handleSubmit(async event => {
-    const updatedQuestRequest = await fetch(`/api/quest/${router.query.id}`, {
+    const postRequest = fetch(`/api/quest/${router.query.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -55,6 +58,12 @@ const Studio: NextPage = () => {
         ...event,
       }),
     })
+    toast.promise(postRequest, {
+      loading: 'Speichern',
+      success: 'Erfolgreich gespeichert',
+      error: 'Fehler beim Speichern',
+    })
+    const updatedQuestRequest = await postRequest
 
     const updatedQuest = updatedQuestRequest.body as unknown as Quest
 
@@ -80,7 +89,13 @@ const Studio: NextPage = () => {
             error={errors['description']}
           />
 
-          <input type="submit" />
+          <Button
+            type="submit"
+            disabled={isValidating}
+            isLoading={isValidating}
+          >
+            Speichern
+          </Button>
         </form>
       </div>
       <Spacer></Spacer>
