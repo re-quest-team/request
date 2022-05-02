@@ -16,6 +16,7 @@ import { InputField } from '../Elements/FormElements'
 import { Spacer } from '../Elements/Spacer'
 import AddQuestButton from './AddQuestButton'
 import Modal from '../Modal'
+import QuestElement from './QuestElement'
 
 type QuestImagePlacerProps = {
   img: string
@@ -133,57 +134,89 @@ const QuestImagePlacer = ({ img, maxQuests = 3 }: QuestImagePlacerProps) => {
         title="Element hinzufügen"
       >
         <>
-          <h2 className="mx-auto w-full">Rätsel hinzufügen</h2>
-          <div className="flex flex-row flex-wrap items-center justify-around">
-            <div
-              className="m-2 flex h-36 w-36 flex-col items-center justify-center  rounded-xl border-2 border-flamingo bg-flamingo bg-opacity-20 text-flamingo"
-              onClick={() => {
-                setModalOpen(false)
-                setTimeout(() => {
-                  setTaskModalOpen(true)
-                }, 100)
-              }}
-            >
-              <LockClosedIcon className="h-12 w-12" />
-              <p className="font-semibold">Krypro&shy;graphie</p>
-            </div>
-            <div className="m-2 flex h-36 w-36 flex-col items-center justify-center  rounded-xl border-2 border-flamingo bg-flamingo bg-opacity-20 text-flamingo">
-              <CodeIcon className="h-12 w-12" />
-              <p className="font-semibold">Program&shy;mieren</p>
-            </div>
-            <div className="m-2 flex h-36 w-36 flex-col items-center justify-center  rounded-xl border-2 border-flamingo bg-flamingo bg-opacity-20 text-flamingo">
-              <QrcodeIcon className="h-12 w-12" />
-              <p className="font-semibold">QR-Code Scan</p>
-            </div>
-
-            <div className="m-2 flex h-36 w-36 flex-col items-center justify-center  rounded-xl border-2 border-flamingo bg-flamingo bg-opacity-20 text-flamingo">
-              <ChartSquareBarIcon className="h-12 w-12" />
-              <p className="font-semibold">Statistik</p>
-            </div>
-          </div>
-          <h2 className="mx-auto w-full">Medien hinzufügen</h2>
-          <div className="flex flex-row flex-wrap items-center justify-around">
-            <div className="m-2 flex h-36 w-36 flex-col items-center justify-center  rounded-xl border-2 border-flamingo bg-flamingo bg-opacity-20 text-flamingo">
-              <MenuAlt1Icon className="h-12 w-12" />
-              <p className="font-semibold">Text</p>
-            </div>
-            <div className="m-2 flex h-36 w-36 flex-col items-center justify-center  rounded-xl border-2 border-flamingo bg-flamingo bg-opacity-20 text-flamingo">
-              <PhotographIcon className="h-12 w-12" />
-              <p className="font-semibold">Bild</p>
-            </div>
-            <div className="m-2 flex h-36 w-36 flex-col items-center justify-center  rounded-xl border-2 border-flamingo bg-flamingo bg-opacity-20 text-flamingo">
-              <Instagram className="h-12 w-12" />
-              <p className="font-semibold">Instagram</p>
-            </div>
-            <div className="m-2 flex h-36 w-36 flex-col items-center justify-center  rounded-xl border-2 border-flamingo bg-flamingo bg-opacity-20 text-flamingo">
-              <Youtube className="h-12 w-12" />
-              <p className="font-semibold">YouTube</p>
-            </div>
-            <div className="m-2 flex h-36 w-36 flex-col items-center justify-center  rounded-xl border-2 border-flamingo bg-flamingo bg-opacity-20 text-flamingo">
-              <CodeIcon className="h-12 w-12" />
-              <p className="font-semibold">iFrame</p>
-            </div>
-          </div>
+          <PillButton variant="secondary" className="mx-auto">
+            Rätsel
+          </PillButton>
+          <QuestElement
+            title="Krypro&shy;graphie"
+            description="Hier muss ein Codewort entschlüsselt werden"
+            icon={LockClosedIcon}
+            variant="secondary"
+            onClick={() => {
+              setModalOpen(false)
+              setTimeout(() => {
+                setTaskModalOpen(true)
+              }, 100)
+            }}
+          />
+          <QuestElement
+            title="Program&shy;mieren"
+            description="Hier muss ein kleines Programm geschrieben werden"
+            icon={CodeIcon}
+            variant="secondary"
+            onClick={() => {
+              setModalOpen(false)
+              setTimeout(() => {
+                setTaskModalOpen(true)
+              }, 100)
+            }}
+          />
+          <QuestElement
+            title="QR-Code Scan"
+            description="Hier muss ein QR-Code gescannt werden"
+            icon={QrcodeIcon}
+            variant="secondary"
+            onClick={() => {
+              setModalOpen(false)
+              setTimeout(() => {
+                setTaskModalOpen(true)
+              }, 100)
+            }}
+          />
+          <QuestElement
+            title="Statistik"
+            description="Hier muss eine Tabelle analysiert werden"
+            icon={ChartSquareBarIcon}
+            variant="secondary"
+            onClick={() => {
+              setModalOpen(false)
+              setTimeout(() => {
+                setTaskModalOpen(true)
+              }, 100)
+            }}
+          />
+          <Spacer />
+          <PillButton className="mx-auto">Medien</PillButton>
+          <QuestElement
+            title="Text"
+            description="Ein einfacher Text"
+            icon={MenuAlt1Icon}
+            onClick={() => {}}
+          />
+          <QuestElement
+            title="Bild"
+            description="Zeige ein Bild"
+            icon={PhotographIcon}
+            onClick={() => {}}
+          />
+          <QuestElement
+            title="Instagram"
+            description="Ein Instagram Post"
+            icon={Instagram}
+            onClick={() => {}}
+          />
+          <QuestElement
+            title="YouTube"
+            description="Ein YouTube Video"
+            icon={Youtube}
+            onClick={() => {}}
+          />
+          <QuestElement
+            title="iFrame"
+            description="Eine Website"
+            icon={CodeIcon}
+            onClick={() => {}}
+          />
         </>
       </Modal>
       <Modal
