@@ -4,7 +4,6 @@ import { APIError } from '@/types'
 import { Quest } from '@prisma/client'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getToken } from 'next-auth/jwt'
-import { InferType, object, ObjectSchema, SchemaOf } from 'yup'
 
 const handler = async (
   req: NextApiRequest,
@@ -44,15 +43,13 @@ const handler = async (
 
   if (req.method === 'PUT') {
     try {
-      const { body, query } = req
-
-      console.log(body)
-
-      // await QuestUpdateOneSchema.validate({ data: body })
+      await QuestUpdateOneSchema.validate({
+        data: req.body,
+      })
 
       const quest = await prisma.quest.update({
         where: { id: questId },
-        data: { ...body },
+        data: req.body,
       })
 
       res.status(200).json(quest)

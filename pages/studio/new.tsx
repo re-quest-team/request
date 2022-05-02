@@ -1,5 +1,6 @@
 import { Spinner } from '@/components/Elements/Spinner'
 import { Quest } from '@prisma/client'
+import axios from 'axios'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
@@ -8,10 +9,8 @@ const NewQuest = () => {
 
   useEffect(() => {
     const redirect = async () => {
-      const response = await fetch('/api/quest', {
-        method: 'POST',
-      })
-      const quest: Quest = await response.json()
+      const getIdRequest = await axios.post<Quest>('/api/quest')
+      const quest = await getIdRequest.data
       router.replace(`/studio/${quest.id}`)
     }
 
