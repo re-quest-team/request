@@ -186,35 +186,42 @@ const QuestImagePlacer = ({ img, maxQuests = 3 }: QuestImagePlacerProps) => {
             }}
           />
           <Spacer />
-          <PillButton className="mx-auto">Medien</PillButton>
+          <PillButton className="mx-auto" variant="tertiary">
+            Medien
+          </PillButton>
           <QuestElement
             title="Text"
             description="Ein einfacher Text"
             icon={MenuAlt1Icon}
+            variant="tertiary"
             onClick={() => {}}
           />
           <QuestElement
             title="Bild"
             description="Zeige ein Bild"
             icon={PhotographIcon}
+            variant="tertiary"
             onClick={() => {}}
           />
           <QuestElement
             title="Instagram"
             description="Ein Instagram Post"
             icon={Instagram}
+            variant="tertiary"
             onClick={() => {}}
           />
           <QuestElement
             title="YouTube"
             description="Ein YouTube Video"
             icon={Youtube}
+            variant="tertiary"
             onClick={() => {}}
           />
           <QuestElement
             title="iFrame"
             description="Eine Website"
             icon={CodeIcon}
+            variant="tertiary"
             onClick={() => {}}
           />
         </>

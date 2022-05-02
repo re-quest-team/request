@@ -4,6 +4,7 @@ import { Icon } from 'react-feather'
 const variants = {
   primary: 'border-dodger-blue bg-dodger-blue text-dodger-blue',
   secondary: 'border-flamingo bg-flamingo text-flamingo',
+  tertiary: 'border-emerald-500 bg-emerald-500 text-emerald-500',
 }
 
 type QuestElementProps = {
@@ -29,7 +30,7 @@ const QuestElement = ({
     >
       <div
         className={clsx(
-          'm-2 mr-4 flex h-16 w-16 items-center justify-center rounded-xl border bg-opacity-20',
+          'm-2 mr-4 flex h-16 w-16 items-center justify-center rounded-xl border  bg-opacity-20',
           variants[variant],
         )}
       >
