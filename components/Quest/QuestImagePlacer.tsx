@@ -138,7 +138,7 @@ const QuestImagePlacer = ({ img, maxQuests = 3 }: QuestImagePlacerProps) => {
             Rätsel
           </PillButton>
           <QuestElement
-            title="Krypro&shy;graphie"
+            title="Krypto&shy;graphie"
             description="Hier muss ein Codewort entschlüsselt werden"
             icon={LockClosedIcon}
             variant="secondary"
@@ -150,7 +150,7 @@ const QuestImagePlacer = ({ img, maxQuests = 3 }: QuestImagePlacerProps) => {
             }}
           />
           <QuestElement
-            title="Program&shy;mieren"
+            title="Programmieren"
             description="Hier muss ein kleines Programm geschrieben werden"
             icon={CodeIcon}
             variant="secondary"
