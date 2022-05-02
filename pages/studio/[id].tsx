@@ -13,6 +13,7 @@ import useSWR from 'swr'
 import { useRouter } from 'next/router'
 import QuestPanel from '@/components/Quest/QuestPanel'
 import toast from 'react-hot-toast'
+import axios from 'axios'
 
 const schema = yup
   .object({
@@ -32,8 +33,6 @@ const reorder = (list: any[], startIndex: number, endIndex: number) => {
 
 const Studio: NextPage = () => {
   const [quests, setQuests] = useState<{ id: string }[]>([])
-  console.log(quests)
-
   const router = useRouter()
   const { data, mutate, isValidating } = useSWR<Quest>(
     `/api/quest/${router.query.id}`,
@@ -48,16 +47,16 @@ const Studio: NextPage = () => {
   })
 
   const onSubmit = handleSubmit(async event => {
-    const postRequest = fetch(`/api/quest/${router.query.id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
+    const postRequest = axios.put<Quest>(
+      `/api/quest/${router.query.id}`,
+      event,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
       },
-      body: JSON.stringify({
-        ...data,
-        ...event,
-      }),
-    })
+    )
+
     toast.promise(postRequest, {
       loading: 'Speichern',
       success: 'Erfolgreich gespeichert',
@@ -65,7 +64,7 @@ const Studio: NextPage = () => {
     })
     const updatedQuestRequest = await postRequest
 
-    const updatedQuest = updatedQuestRequest.body as unknown as Quest
+    const updatedQuest = updatedQuestRequest.data
 
     await mutate(updatedQuest)
   })
