@@ -44,54 +44,56 @@ const PanelWithOptionalDragHandle = ({
   provided,
   header,
 }: PanelWithOptionalDragHandleProps) => (
-  <div
-    className={clsx(
-      'my-8 w-full rounded-lg border bg-zinc-900 shadow',
-      types[type].border,
-    )}
-  >
-    <Disclosure defaultOpen={true}>
-      {({ open }) => (
-        <>
-          <div
-            className={clsx(
-              'flex items-center p-4',
-              types[type].bg,
-              open && types[type].openText,
-              open ? 'bg-opacity-30' : 'bg-opacity-90',
-            )}
-          >
-            <Disclosure.Button>
-              <ChevronUpIcon
-                className={`mr-2 h-5 w-5 ${
-                  !open && 'rotate-180'
-                } transition-all`}
-              />
-            </Disclosure.Button>
-            <span className="flex-1 font-semibold">{header}</span>
-            {provided && (
-              <div {...provided.dragHandleProps}>
-                <MenuIcon className="mx-2 h-5 w-5" />
-              </div>
-            )}
-            <TrashIcon className="h-5 w-5" />
-          </div>
-          <Transition
-            show={open}
-            enter="transition duration-100 ease-out"
-            enterFrom="transform scale-95 opacity-0"
-            enterTo="transform scale-100 opacity-100"
-            leave="transition duration-75 ease-out"
-            leaveFrom="transform scale-100 opacity-100"
-            leaveTo="transform scale-95 opacity-0"
-          >
-            <Disclosure.Panel static className="p-4">
-              {children}
-            </Disclosure.Panel>
-          </Transition>
-        </>
+  <div className="py-4">
+    <div
+      className={clsx(
+        'w-full rounded-lg border bg-zinc-900 shadow',
+        types[type].border,
       )}
-    </Disclosure>
+    >
+      <Disclosure defaultOpen={true}>
+        {({ open }) => (
+          <>
+            <div
+              className={clsx(
+                'flex items-center p-4',
+                types[type].bg,
+                open && types[type].openText,
+                open ? 'bg-opacity-30' : 'bg-opacity-90',
+              )}
+            >
+              <Disclosure.Button>
+                <ChevronUpIcon
+                  className={`mr-2 h-5 w-5 ${
+                    !open && 'rotate-180'
+                  } transition-all`}
+                />
+              </Disclosure.Button>
+              <span className="flex-1 font-semibold">{header}</span>
+              {provided && (
+                <div {...provided.dragHandleProps}>
+                  <MenuIcon className="mx-2 h-5 w-5" />
+                </div>
+              )}
+              <TrashIcon className="h-5 w-5" />
+            </div>
+            <Transition
+              show={open}
+              enter="transition duration-100 ease-out"
+              enterFrom="transform scale-95 opacity-0"
+              enterTo="transform scale-100 opacity-100"
+              leave="transition duration-75 ease-out"
+              leaveFrom="transform scale-100 opacity-100"
+              leaveTo="transform scale-95 opacity-0"
+            >
+              <Disclosure.Panel static className="p-4">
+                {children}
+              </Disclosure.Panel>
+            </Transition>
+          </>
+        )}
+      </Disclosure>
+    </div>
   </div>
 )
 
