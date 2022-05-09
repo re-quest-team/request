@@ -1,13 +1,13 @@
 import prisma from '@/lib/prisma'
-import { QuestCreateSchema } from '@/prisma/generated/schemas/createOneQuest.schema'
+import { GameCreateSchema } from '@/prisma/generated/schemas/createOneGame.schema'
 import { APIError } from '@/types'
-import { Quest } from '@prisma/client'
+import { Game } from '@prisma/client'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getToken } from 'next-auth/jwt'
 
 const handler = async (
   req: NextApiRequest,
-  res: NextApiResponse<Quest | APIError>,
+  res: NextApiResponse<Game | APIError>,
 ) => {
   if (req.method === 'POST') {
     try {
@@ -15,11 +15,11 @@ const handler = async (
       const token = await getToken({ req })
       const userId = token?.sub
 
-      await QuestCreateSchema.validate({ ...body, userId })
+      await GameCreateSchema.validate({ ...body, userId })
 
-      const quest = await prisma.quest.create({ data: { ...body, userId } })
+      const game = await prisma.game.create({ data: { ...body, userId } })
 
-      res.status(200).json(quest)
+      res.status(200).json(game)
     } catch (e) {
       console.error(e)
       res.status(400).json({ error: e })

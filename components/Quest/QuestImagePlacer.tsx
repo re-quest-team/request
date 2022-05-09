@@ -26,6 +26,7 @@ type QuestImagePlacerProps = {
 type QuestButton = {
   x: number
   y: number
+  type?: 'default' | 'quest' | 'media'
 }
 
 const QuestImagePlacer = ({ img, maxQuests = 3 }: QuestImagePlacerProps) => {
@@ -73,6 +74,12 @@ const QuestImagePlacer = ({ img, maxQuests = 3 }: QuestImagePlacerProps) => {
                   y:
                     (e.clientY - ref.current?.getBoundingClientRect().top!) /
                     ref.current?.clientHeight!,
+                  type:
+                    quests.length === 0
+                      ? 'media'
+                      : quests.length === 1
+                      ? 'quest'
+                      : 'default',
                 },
               ])
             }

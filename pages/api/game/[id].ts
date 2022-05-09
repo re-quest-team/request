@@ -1,27 +1,27 @@
 import prisma from '@/lib/prisma'
-import { QuestUpdateOneSchema } from '@/prisma/generated/schemas/updateOneQuest.schema'
+import { GameUpdateOneSchema } from '@/prisma/generated/schemas/updateOneGame.schema'
 import { APIError } from '@/types'
-import { Quest } from '@prisma/client'
+import { Game } from '@prisma/client'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getToken } from 'next-auth/jwt'
 
 const handler = async (
   req: NextApiRequest,
-  res: NextApiResponse<Quest | APIError>,
+  res: NextApiResponse<Game | APIError>,
 ) => {
-  const questId = req.query.id as string
+  const gameId = req.query.id as string
   const token = await getToken({ req })
   const userId = token?.sub
 
   if (req.method === 'GET') {
     try {
-      const quest = await prisma.quest.findUnique({
+      const game = await prisma.game.findUnique({
         where: {
-          id: questId,
+          id: gameId,
         },
       })
 
-      if (quest?.userId !== userId) {
+      if (game?.userId !== userId) {
         return {
           redirect: {
             permanent: false,
@@ -30,11 +30,11 @@ const handler = async (
         }
       }
 
-      if (!quest) {
+      if (!game) {
         res.status(404).json({ error: 'Not found' })
+      } else {
+        res.status(200).json(game)
       }
-
-      res.status(200).json(quest!)
     } catch (e) {
       console.error(e)
       res.status(500).json({ error: e })
@@ -43,16 +43,16 @@ const handler = async (
 
   if (req.method === 'PUT') {
     try {
-      await QuestUpdateOneSchema.validate({
+      await GameUpdateOneSchema.validate({
         data: req.body,
       })
 
-      const quest = await prisma.quest.update({
-        where: { id: questId },
+      const game = await prisma.game.update({
+        where: { id: gameId },
         data: req.body,
       })
 
-      res.status(200).json(quest)
+      res.status(200).json(game)
     } catch (e) {
       console.error(e)
       res.status(400).json({ error: e })

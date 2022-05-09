@@ -5,13 +5,13 @@ import { PlusIcon } from '@heroicons/react/outline'
 import { Spacer } from '@/components/Elements/Spacer'
 import { InputField, TextArea } from '@/components/Elements/FormElements'
 import { useState } from 'react'
-import { Quest } from '@prisma/client'
+import { Game } from '@prisma/client'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import useSWR from 'swr'
 import { useRouter } from 'next/router'
-import QuestPanel from '@/components/Quest/QuestPanel'
+import RoomPanel from '@/components/Quest/QuestPanel'
 import toast from 'react-hot-toast'
 import axios from 'axios'
 
@@ -32,10 +32,10 @@ const reorder = (list: any[], startIndex: number, endIndex: number) => {
 }
 
 const Studio: NextPage = () => {
-  const [quests, setQuests] = useState<{ id: string }[]>([])
+  const [rooms, setRooms] = useState<{ id: string }[]>([])
   const router = useRouter()
-  const { data, mutate, isValidating } = useSWR<Quest>(
-    `/api/quest/${router.query.id}`,
+  const { data, mutate, isValidating } = useSWR<Game>(
+    `/api/game/${router.query.id}`,
   )
 
   const {
@@ -47,8 +47,8 @@ const Studio: NextPage = () => {
   })
 
   const onSubmit = handleSubmit(async event => {
-    const postRequest = axios.put<Quest>(
-      `/api/quest/${router.query.id}`,
+    const postGameRequest = axios.put<Game>(
+      `/api/game/${router.query.id}`,
       event,
       {
         headers: {
@@ -57,16 +57,16 @@ const Studio: NextPage = () => {
       },
     )
 
-    toast.promise(postRequest, {
+    toast.promise(postGameRequest, {
       loading: 'Speichern',
       success: 'Erfolgreich gespeichert',
       error: 'Fehler beim Speichern',
     })
-    const updatedQuestRequest = await postRequest
+    const updatedGameRequest = await postGameRequest
 
-    const updatedQuest = updatedQuestRequest.data
+    const updatedGame = updatedGameRequest.data
 
-    await mutate(updatedQuest)
+    await mutate(updatedGame)
   })
 
   return (
@@ -99,7 +99,7 @@ const Studio: NextPage = () => {
       </div>
       <Spacer></Spacer>
       <PillButton size="lg" className="mx-auto">
-        Räume ({quests.length})
+        Räume ({rooms.length})
       </PillButton>
       <DragDropContext
         onDragEnd={result => {
@@ -108,13 +108,13 @@ const Studio: NextPage = () => {
             return
           }
 
-          const questItems = reorder(
-            quests,
+          const roomItems = reorder(
+            rooms,
             result.source.index,
             result.destination.index,
           )
 
-          setQuests(questItems)
+          setRooms(roomItems)
         }}
       >
         <Droppable droppableId="droppable" direction="vertical">
@@ -128,10 +128,10 @@ const Studio: NextPage = () => {
                 <div className="h-full w-6 bg-dodger-blue bg-opacity-50"></div>
               </div>
               <div className="relative">
-                {quests.map((q, i) => (
-                  <Draggable key={q.id} draggableId={q.id} index={i}>
+                {rooms.map((r, i) => (
+                  <Draggable key={r.id} draggableId={r.id} index={i}>
                     {(provided, snapshot) => (
-                      <QuestPanel
+                      <RoomPanel
                         provided={provided}
                         snapshot={snapshot}
                         index={i + 1}
@@ -150,7 +150,7 @@ const Studio: NextPage = () => {
         startIcon={<PlusIcon className="h-8 w-8" />}
         className="mx-auto"
         onClick={() =>
-          setQuests([...quests, { id: new Date().getTime().toString() }])
+          setRooms([...rooms, { id: new Date().getTime().toString() }])
         }
       >
         Raum hinzufügen
