@@ -1,22 +1,22 @@
 import { Button } from '@/components/Elements/Button'
 import { Spacer } from '@/components/Elements/Spacer'
 import prisma from '@/lib/prisma'
-import { Quest } from '@prisma/client'
+import { Game } from '@prisma/client'
 import { GetServerSideProps } from 'next'
 import { getSession } from 'next-auth/react'
 import Link from 'next/link'
 
 export const getServerSideProps: GetServerSideProps = async context => {
   const session = await getSession(context)
-  const quests = await prisma.quest.findMany({
+  const games = await prisma.game.findMany({
     where: {
       userId: session?.user.id,
     },
   })
-  return { props: { quests } }
+  return { props: { games } }
 }
 
-const Studio = ({ quests }: { quests: Quest[] }) => {
+const Studio = ({ games }: { games: Game[] }) => {
   return (
     <div>
       <Link href={'/studio/new'} passHref>
@@ -26,9 +26,9 @@ const Studio = ({ quests }: { quests: Quest[] }) => {
       <Spacer />
 
       <h1 className="text-xl">Meine re:quests</h1>
-      {quests.map(q => (
-        <Link href={`/studio/${q.id}`} passHref key={q.id}>
-          <Button>{q.name}</Button>
+      {games.map(g => (
+        <Link href={`/studio/${g.id}`} passHref key={g.id}>
+          <Button>{g.name}</Button>
         </Link>
       ))}
     </div>

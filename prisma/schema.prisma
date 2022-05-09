@@ -45,7 +45,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  Quests        Quest[]
+  Games         Game[]
 }
 
 model VerificationToken {
@@ -56,7 +56,7 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-model Quest {
+model Game {
   id          String  @id @default(uuid())
   name        String?
   description String?

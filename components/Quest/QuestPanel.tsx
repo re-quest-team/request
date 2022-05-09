@@ -19,7 +19,7 @@ type Props = {
   index: number
 }
 
-const QuestPanel = ({ provided, snapshot, index }: Props) => {
+const RoomPanel = ({ provided, snapshot, index }: Props) => {
   const [room, setRoom] = useState(rooms[0])
   const [imageUrl, setImageUrl] = useState('')
 
@@ -62,4 +62,4 @@ const QuestPanel = ({ provided, snapshot, index }: Props) => {
   )
 }
 
-export default QuestPanel
+export default RoomPanel

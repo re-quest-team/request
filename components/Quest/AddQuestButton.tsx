@@ -1,6 +1,8 @@
 import { Transition } from '@headlessui/react'
-import { PlusIcon, TrashIcon } from '@heroicons/react/outline'
+import { CodeIcon, PlusIcon, TrashIcon } from '@heroicons/react/outline'
+import clsx from 'clsx'
 import { Fragment, RefObject } from 'react'
+import { Instagram } from 'react-feather'
 
 type AddQuestButtonProps = {
   dragRef: RefObject<HTMLElement>
@@ -10,6 +12,13 @@ type AddQuestButtonProps = {
   onDelete: () => any
   showDelete: boolean
   onClick: () => any
+  type?: keyof typeof bgVariant
+}
+
+const bgVariant = {
+  default: 'border-white bg-white text-white',
+  quest: 'border-flamingo-500 bg-flamingo-500 text-flamingo-500',
+  media: 'border-emerald-500 bg-emerald-500 text-emerald-500',
 }
 
 const AddQuestButton = ({
@@ -20,6 +29,7 @@ const AddQuestButton = ({
   onDelete,
   showDelete,
   onClick,
+  type = 'default',
 }: AddQuestButtonProps) => (
   <Transition
     as={Fragment}
@@ -32,7 +42,10 @@ const AddQuestButton = ({
     leaveTo="opacity-0"
   >
     <div
-      className={`pointer-events-auto absolute flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center justify-center rounded-2xl border-4 border-white bg-white bg-opacity-50 shadow`}
+      className={clsx(
+        `pointer-events-auto absolute flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center justify-center rounded-2xl border-4 bg-opacity-50 shadow`,
+        bgVariant[type],
+      )}
       style={{ top: `${y * 100}%`, left: `${x * 100}%` }}
       onDragEnd={e => {
         e.preventDefault()
@@ -59,7 +72,9 @@ const AddQuestButton = ({
       onClick={onClick}
       draggable
     >
-      <PlusIcon className="h-10 w-10" />
+      {type === 'default' && <PlusIcon className="h-10 w-10" />}
+      {type === 'media' && <Instagram className="h-10 w-10" />}
+      {type === 'quest' && <CodeIcon className="h-10 w-10" />}
       {showDelete && (
         <div
           className="absolute -top-4 -right-4 rounded-full border-2 border-rose-700 bg-rose-400 bg-opacity-95 p-1 shadow"
