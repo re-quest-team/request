@@ -1,4 +1,5 @@
 import prisma from '@/lib/prisma'
+import { GameDeleteOneSchema } from '@/prisma/generated/schemas/deleteOneGame.schema'
 import { GameUpdateOneSchema } from '@/prisma/generated/schemas/updateOneGame.schema'
 import { APIError } from '@/types'
 import { Game } from '@prisma/client'
@@ -21,6 +22,10 @@ const handler = async (
         },
       })
 
+      if (!game) {
+        res.status(404).json({ error: 'Not found' })
+      }
+
       if (game?.userId !== userId) {
         return {
           redirect: {
@@ -30,11 +35,7 @@ const handler = async (
         }
       }
 
-      if (!game) {
-        res.status(404).json({ error: 'Not found' })
-      } else {
-        res.status(200).json(game)
-      }
+      res.status(200).json(game!)
     } catch (e) {
       console.error(e)
       res.status(500).json({ error: e })
@@ -50,6 +51,19 @@ const handler = async (
       const game = await prisma.game.update({
         where: { id: gameId },
         data: req.body,
+      })
+
+      res.status(200).json(game)
+    } catch (e) {
+      console.error(e)
+      res.status(400).json({ error: e })
+    }
+  }
+
+  if (req.method === 'DELETE') {
+    try {
+      const game = await prisma.game.delete({
+        where: { id: gameId },
       })
 
       res.status(200).json(game)

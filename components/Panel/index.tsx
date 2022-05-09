@@ -14,11 +14,12 @@ type BasePanelProps = {
   children: React.ReactElement
   type?: keyof typeof types
   header: string
+  onDelete?: () => any
 }
 
 type PanelProps = BasePanelProps & {
-  provided: DraggableProvided
-  snapshot: DraggableStateSnapshot
+  provided?: DraggableProvided
+  snapshot?: DraggableStateSnapshot
 }
 
 type PanelWithOptionalDragHandleProps = BasePanelProps & {
@@ -43,11 +44,12 @@ const PanelWithOptionalDragHandle = ({
   type = 'room',
   provided,
   header,
+  onDelete,
 }: PanelWithOptionalDragHandleProps) => (
   <div className="py-4">
     <div
       className={clsx(
-        'w-full rounded-lg border bg-zinc-900 shadow',
+        'w-full overflow-hidden rounded-lg border bg-zinc-900 shadow',
         types[type].border,
       )}
     >
@@ -75,7 +77,12 @@ const PanelWithOptionalDragHandle = ({
                   <MenuIcon className="mx-2 h-5 w-5" />
                 </div>
               )}
-              <TrashIcon className="h-5 w-5" />
+              {onDelete && (
+                <TrashIcon
+                  className="h-5 w-5 cursor-pointer transition-all hover:scale-110"
+                  onClick={onDelete}
+                />
+              )}
             </div>
             <Transition
               show={open}
@@ -103,10 +110,15 @@ const Panel = ({
   provided,
   snapshot,
   header,
+  onDelete,
 }: PanelProps) => {
   if (!provided)
     return (
-      <PanelWithOptionalDragHandle type={type} header={header}>
+      <PanelWithOptionalDragHandle
+        type={type}
+        header={header}
+        onDelete={onDelete}
+      >
         {children}
       </PanelWithOptionalDragHandle>
     )
@@ -117,6 +129,7 @@ const Panel = ({
         type={type}
         provided={provided}
         header={header}
+        onDelete={onDelete}
       >
         {children}
       </PanelWithOptionalDragHandle>

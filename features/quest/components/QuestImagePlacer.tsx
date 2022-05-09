@@ -1,4 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
+import { Button, PillButton } from '@/components/Elements/Button'
+import { InputField } from '@/components/Elements/FormElements'
+import { Spacer } from '@/components/Elements/Spacer'
+import Modal from '@/components/Modal'
 import {
   ArrowUpIcon,
   ChartSquareBarIcon,
@@ -11,11 +15,7 @@ import {
 } from '@heroicons/react/outline'
 import { useRef, useState } from 'react'
 import { ArrowUpRight, Instagram, Youtube } from 'react-feather'
-import { Button, PillButton } from '../Elements/Button'
-import { InputField } from '../Elements/FormElements'
-import { Spacer } from '../Elements/Spacer'
 import AddQuestButton from './AddQuestButton'
-import Modal from '../Modal'
 import QuestElement from './QuestElement'
 
 type QuestImagePlacerProps = {

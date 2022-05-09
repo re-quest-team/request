@@ -1,10 +1,10 @@
+import { SelectOption } from '@/components/Elements/Select'
+import { SelectField } from '@/components/Elements/Select/SelectField'
+import FileUpload from '@/components/FileUpload'
+import Panel from '@/components/Panel'
+import QuestImagePlacer from '@/features/quest/components/QuestImagePlacer'
 import { useState } from 'react'
 import { DraggableProvided, DraggableStateSnapshot } from 'react-beautiful-dnd'
-import { SelectOption } from '../Elements/Select'
-import { SelectField } from '../Elements/Select/SelectField'
-import FileUpload from '../FileUpload'
-import Panel from '../Panel'
-import QuestImagePlacer from './QuestImagePlacer'
 
 const rooms: SelectOption[] = [
   { value: 'Eigenes Foto hochladen' },

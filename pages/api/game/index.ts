@@ -7,14 +7,29 @@ import { getToken } from 'next-auth/jwt'
 
 const handler = async (
   req: NextApiRequest,
-  res: NextApiResponse<Game | APIError>,
+  res: NextApiResponse<Game | Game[] | APIError>,
 ) => {
+  const { body } = req
+  const token = await getToken({ req })
+  const userId = token?.sub
+
+  if (req.method === 'GET') {
+    try {
+      const games = await prisma.game.findMany({
+        where: {
+          userId,
+        },
+      })
+
+      res.status(200).json(games)
+    } catch (e) {
+      console.error(e)
+      res.status(400).json({ error: e })
+    }
+  }
+
   if (req.method === 'POST') {
     try {
-      const { body } = req
-      const token = await getToken({ req })
-      const userId = token?.sub
-
       await GameCreateSchema.validate({ ...body, userId })
 
       const game = await prisma.game.create({ data: { ...body, userId } })

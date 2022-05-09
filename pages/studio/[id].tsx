@@ -1,101 +1,32 @@
 import type { NextPage } from 'next'
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
-import { Button, PillButton } from '@/components/Elements/Button'
+import { PillButton } from '@/components/Elements/Button'
 import { PlusIcon } from '@heroicons/react/outline'
 import { Spacer } from '@/components/Elements/Spacer'
-import { InputField, TextArea } from '@/components/Elements/FormElements'
-import { useState } from 'react'
-import { Game } from '@prisma/client'
-import * as yup from 'yup'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { useForm } from 'react-hook-form'
-import useSWR from 'swr'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import RoomPanel from '@/components/Quest/QuestPanel'
-import toast from 'react-hot-toast'
-import axios from 'axios'
-
-const schema = yup
-  .object({
-    name: yup.string().required(),
-    description: yup.string().required().min(8),
-  })
-  .required()
-
-// a little function to help us with reordering the result
-const reorder = (list: any[], startIndex: number, endIndex: number) => {
-  const result = Array.from(list)
-  const [removed] = result.splice(startIndex, 1)
-  result.splice(endIndex, 0, removed)
-
-  return result
-}
+import RoomPanel from '@/features/room/components/RoomPanel'
+import GameForm from '@/features/game/components/GameForm'
+import reorder from '@/utils/reorder'
 
 const Studio: NextPage = () => {
   const [rooms, setRooms] = useState<{ id: string }[]>([])
   const router = useRouter()
-  const { data, mutate, isValidating } = useSWR<Game>(
-    `/api/game/${router.query.id}`,
-  )
+  const [gameId, setGameId] = useState('')
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<yup.InferType<typeof schema>>({
-    resolver: yupResolver(schema),
-  })
-
-  const onSubmit = handleSubmit(async event => {
-    const postGameRequest = axios.put<Game>(
-      `/api/game/${router.query.id}`,
-      event,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      },
-    )
-
-    toast.promise(postGameRequest, {
-      loading: 'Speichern',
-      success: 'Erfolgreich gespeichert',
-      error: 'Fehler beim Speichern',
-    })
-    const updatedGameRequest = await postGameRequest
-
-    const updatedGame = updatedGameRequest.data
-
-    await mutate(updatedGame)
-  })
+  useEffect(() => {
+    if (router.query.id && Array.isArray(router.query.id)) {
+      setGameId(router.query.id[0])
+    } else if (router.query.id) {
+      setGameId(router.query.id)
+    }
+  }, [router.query.id])
 
   return (
     <div>
       <h1 className="p-2 text-center text-6xl font-bold">Studio</h1>
       <div className="mx-auto md:max-w-4xl">
-        <form onSubmit={onSubmit}>
-          <InputField
-            label="Name"
-            defaultValue={data?.name ?? ''}
-            registration={register('name')}
-            error={errors['name']}
-          ></InputField>
-          <TextArea
-            label="Beschreibung"
-            rows={4}
-            defaultValue={data?.description ?? ''}
-            registration={register('description')}
-            error={errors['description']}
-          />
-
-          <Button
-            type="submit"
-            disabled={isValidating}
-            isLoading={isValidating}
-          >
-            Speichern
-          </Button>
-        </form>
+        <GameForm id={gameId} />
       </div>
       <Spacer></Spacer>
       <PillButton size="lg" className="mx-auto">
