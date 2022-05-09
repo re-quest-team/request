@@ -43,7 +43,7 @@ const AddQuestButton = ({
   >
     <div
       className={clsx(
-        `pointer-events-auto absolute flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center justify-center rounded-2xl border-4 bg-opacity-50 shadow`,
+        `pointer-events-auto absolute flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center justify-center rounded-2xl border-4 bg-opacity-50 shadow backdrop-blur`,
         bgVariant[type],
       )}
       style={{ top: `${y * 100}%`, left: `${x * 100}%` }}

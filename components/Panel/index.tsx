@@ -49,7 +49,7 @@ const PanelWithOptionalDragHandle = ({
   <div className="py-4">
     <div
       className={clsx(
-        'w-full overflow-hidden rounded-lg border bg-zinc-900 shadow',
+        'w-full rounded-lg border bg-zinc-900 shadow',
         types[type].border,
       )}
     >
@@ -58,7 +58,7 @@ const PanelWithOptionalDragHandle = ({
           <>
             <div
               className={clsx(
-                'flex items-center p-4',
+                'flex items-center rounded-t-lg p-4',
                 types[type].bg,
                 open && types[type].openText,
                 open ? 'bg-opacity-30' : 'bg-opacity-90',

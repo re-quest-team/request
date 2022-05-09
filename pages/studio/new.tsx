@@ -1,6 +1,6 @@
 import { Spinner } from '@/components/Elements/Spinner'
+import axios from '@/lib/axios'
 import { Game } from '@prisma/client'
-import axios from 'axios'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
