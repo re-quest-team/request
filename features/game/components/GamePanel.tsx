@@ -18,7 +18,10 @@ const GamePanel = ({ id, name, description }: Game) => {
       error: 'Fehler beim löschen',
     })
 
-    await mutate(`/api/game`)
+    await mutate(`/api/game`, (await deleteGameRequest).data, {
+      populateCache: false,
+      revalidate: true,
+    })
   }
 
   return (
