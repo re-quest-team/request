@@ -4,11 +4,12 @@ import FileUpload from '@/components/FileUpload'
 import Panel from '@/components/Panel'
 import QuestImagePlacer from '@/features/quest/components/QuestImagePlacer'
 import { Room } from '@prisma/client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { DraggableProvided, DraggableStateSnapshot } from 'react-beautiful-dnd'
 import toast from 'react-hot-toast'
 import { mutate } from 'swr'
 import { deleteRoom } from '../api/deleteRoom'
+import { RoomWithImage } from '../types'
 
 const roomImages: SelectOption[] = [
   { value: 'Eigenes Foto hochladen' },
@@ -21,12 +22,16 @@ type Props = {
   provided: DraggableProvided
   snapshot: DraggableStateSnapshot
   index: number
-  room: Room
+  room: RoomWithImage
 }
 
 const RoomPanel = ({ provided, snapshot, index, room }: Props) => {
   const [roomImage, setRoomImage] = useState(roomImages[0])
   const [imageUrl, setImageUrl] = useState('')
+
+  useEffect(() => {
+    if (room.image?.url) setImageUrl(room.image?.url)
+  }, [room.image?.url])
 
   const onDelete = async () => {
     const deleteRoomRequest = deleteRoom(room.id)
@@ -73,11 +78,12 @@ const RoomPanel = ({ provided, snapshot, index, room }: Props) => {
           )}
           {roomImage.value === 'Eigenes Foto hochladen' && (
             <>
-              <FileUpload
-                onChange={url => setImageUrl(url)}
-                roomId={roomImage.value}
-              />
-              {imageUrl && <QuestImagePlacer img={imageUrl} />}
+              <FileUpload onChange={url => setImageUrl(url)} roomId={room.id} />
+              {imageUrl && (
+                <QuestImagePlacer
+                  img={`${process.env.NEXT_PUBLIC_S3_BASE_URL}/${imageUrl}`}
+                />
+              )}
             </>
           )}
         </div>

@@ -9,8 +9,14 @@ export default APIRoute.configure({
     const userId = token?.sub
 
     if (!userId) throw new ApiError(403, 'Unauthorized')
-
     const roomId: string = req.body.roomId
+
+    // delete old image if exists
+    await prisma.s3Image.delete({
+      where: {
+        roomId,
+      },
+    })
 
     const url = `images/${roomId}/${filename}`
 

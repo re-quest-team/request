@@ -1,13 +1,14 @@
 import { PillButton } from '@/components/Elements/Button'
 import reorder from '@/utils/reorder'
 import { PlusIcon } from '@heroicons/react/outline'
-import { Game, Room } from '@prisma/client'
+import { Game, Room, S3Image } from '@prisma/client'
 import { AxiosError } from 'axios'
 import { useEffect, useState } from 'react'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import toast from 'react-hot-toast'
 import useSWR from 'swr'
 import { createRoom } from '../api/createRoom'
+import { RoomWithImage } from '../types'
 import RoomPanel from './RoomPanel'
 
 type RoomListProps = {
@@ -17,12 +18,12 @@ type RoomListProps = {
 const RoomList = ({ gameId }: RoomListProps) => {
   const { data: game } = useSWR<
     Game & {
-      rooms: Room[]
+      rooms: RoomWithImage[]
     },
     AxiosError
   >(`/api/game/${gameId}`)
 
-  const [rooms, setRooms] = useState<Room[]>([])
+  const [rooms, setRooms] = useState<RoomWithImage[]>([])
 
   useEffect(() => {
     if (game && game.rooms) setRooms(game?.rooms)

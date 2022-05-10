@@ -1,6 +1,4 @@
-import { useState } from 'react'
-import { useS3Upload, getImageData } from 'next-s3-upload'
-import Image from 'next/image'
+import { useS3Upload } from 'next-s3-upload'
 import { Button } from '../Elements/Button'
 
 type FileUploadProps = {
@@ -9,9 +7,6 @@ type FileUploadProps = {
 }
 
 export default function FileUpload({ onChange, roomId }: FileUploadProps) {
-  let [imageUrl, setImageUrl] = useState('')
-  let [height, setHeight] = useState<number | undefined>(0)
-  let [width, setWidth] = useState<number | undefined>(0)
   let { FileInput, openFileDialog, uploadToS3 } = useS3Upload()
 
   let handleFileChange = async (file: File) => {
@@ -25,19 +20,14 @@ export default function FileUpload({ onChange, roomId }: FileUploadProps) {
         },
       },
     })
-    let { height, width } = await getImageData(file)
-    setWidth(width)
-    setHeight(height)
-    setImageUrl(url)
 
-    onChange(url)
+    onChange(url.replace(`${process.env.NEXT_PUBLIC_S3_BASE_URL!}/`, ''))
   }
 
   return (
     <div>
       <FileInput onChange={handleFileChange} />
-
-      <Button onClick={openFileDialog}>Upload file</Button>
+      <Button onClick={openFileDialog}>Bild hochladen</Button>
     </div>
   )
 }

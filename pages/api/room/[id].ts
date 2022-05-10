@@ -1,3 +1,4 @@
+import { RoomWithImage } from '@/features/room/types'
 import prisma from '@/lib/prisma'
 import { GameDeleteOneSchema } from '@/prisma/generated/schemas/deleteOneGame.schema'
 import { GameUpdateOneSchema } from '@/prisma/generated/schemas/updateOneGame.schema'
@@ -9,7 +10,7 @@ import { getToken } from 'next-auth/jwt'
 
 const handler = async (
   req: NextApiRequest,
-  res: NextApiResponse<Room | APIError>,
+  res: NextApiResponse<Room | RoomWithImage | APIError>,
 ) => {
   const roomId = req.query.id as string
   const token = await getToken({ req })
@@ -20,6 +21,9 @@ const handler = async (
       const room = await prisma.room.findUnique({
         where: {
           id: roomId,
+        },
+        include: {
+          image: true,
         },
       })
 

@@ -19,6 +19,13 @@ const handler = async (
         where: {
           userId,
         },
+        include: {
+          rooms: {
+            include: {
+              image: true,
+            },
+          },
+        },
       })
 
       res.status(200).json(games)
