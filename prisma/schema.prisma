@@ -57,21 +57,36 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-model S3Image {
-  id     String @id @default(uuid())
-  user   User   @relation(fields: [userId], references: [id])
-  room   String
-  userId String
-  url    String
-}
-
 model Game {
-  id          String  @id @default(uuid())
+  id          String   @id @default(uuid())
   name        String?
   description String?
-  draft       Boolean @default(true)
-  user        User    @relation(fields: [userId], references: [id])
+  draft       Boolean  @default(true)
+  user        User     @relation(fields: [userId], references: [id])
   userId      String
+  rooms       Room[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+}
+
+model Room {
+  id        String   @id @default(uuid())
+  game      Game     @relation(fields: [gameId], references: [id])
+  gameId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  image     S3Image?
+}
+
+model S3Image {
+  id        String   @id @default(uuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  url       String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  room      Room?    @relation(fields: [roomId], references: [id])
+  roomId    String?  @unique
 }
 
 generator yup {

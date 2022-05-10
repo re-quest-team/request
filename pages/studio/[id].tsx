@@ -8,9 +8,12 @@ import { useRouter } from 'next/router'
 import RoomPanel from '@/features/room/components/RoomPanel'
 import GameForm from '@/features/game/components/GameForm'
 import reorder from '@/utils/reorder'
+import { createRoom } from '@/features/room/api/createRoom'
+import toast from 'react-hot-toast'
+import useSWR from 'swr'
+import RoomList from '@/features/room/components/RoomList'
 
 const Studio: NextPage = () => {
-  const [rooms, setRooms] = useState<{ id: string }[]>([])
   const router = useRouter()
   const [gameId, setGameId] = useState('')
 
@@ -29,63 +32,7 @@ const Studio: NextPage = () => {
         <GameForm id={gameId} />
       </div>
       <Spacer></Spacer>
-      <PillButton size="lg" className="mx-auto">
-        Räume ({rooms.length})
-      </PillButton>
-      <DragDropContext
-        onDragEnd={result => {
-          // dropped outside the list
-          if (!result.destination) {
-            return
-          }
-
-          const roomItems = reorder(
-            rooms,
-            result.source.index,
-            result.destination.index,
-          )
-
-          setRooms(roomItems)
-        }}
-      >
-        <Droppable droppableId="droppable" direction="vertical">
-          {(provided, snapshot) => (
-            <div
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-              className="relative py-4"
-            >
-              <div className="pointer-events-none absolute top-0 left-0 flex h-full w-full justify-center">
-                <div className="h-full w-6 bg-dodger-blue bg-opacity-50"></div>
-              </div>
-              <div className="relative">
-                {rooms.map((r, i) => (
-                  <Draggable key={r.id} draggableId={r.id} index={i}>
-                    {(provided, snapshot) => (
-                      <RoomPanel
-                        provided={provided}
-                        snapshot={snapshot}
-                        index={i + 1}
-                      />
-                    )}
-                  </Draggable>
-                ))}
-
-                {provided.placeholder}
-              </div>
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
-      <PillButton
-        startIcon={<PlusIcon className="h-8 w-8" />}
-        className="mx-auto"
-        onClick={() =>
-          setRooms([...rooms, { id: new Date().getTime().toString() }])
-        }
-      >
-        Raum hinzufügen
-      </PillButton>
+      <RoomList gameId={gameId} />
     </div>
   )
 }

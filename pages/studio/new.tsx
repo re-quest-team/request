@@ -9,6 +9,7 @@ const NewQuest = () => {
 
   useEffect(() => {
     const redirect = async () => {
+      console.log('creating new game')
       const getIdRequest = await axios.post<Game>('/api/game')
       const game = await getIdRequest.data
       router.replace(`/studio/${game.id}`)
