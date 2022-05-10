@@ -62,7 +62,7 @@ model Game {
   name        String?
   description String?
   draft       Boolean  @default(true)
-  user        User     @relation(fields: [userId], references: [id])
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId      String
   rooms       Room[]
   createdAt   DateTime @default(now())
@@ -71,7 +71,7 @@ model Game {
 
 model Room {
   id        String   @id @default(uuid())
-  game      Game     @relation(fields: [gameId], references: [id])
+  game      Game     @relation(fields: [gameId], references: [id], onDelete: Cascade)
   gameId    String
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
@@ -85,8 +85,8 @@ model S3Image {
   url       String
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
-  room      Room?    @relation(fields: [roomId], references: [id])
-  roomId    String?  @unique
+  room      Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  roomId    String   @unique
 }
 
 generator yup {

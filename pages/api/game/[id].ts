@@ -21,9 +21,15 @@ const handler = async (
           id: gameId,
         },
         include: {
-          rooms: true,
+          rooms: {
+            include: {
+              image: true,
+            },
+          },
         },
       })
+
+      console.log(game)
 
       if (!game) {
         res.status(404).json({ error: 'Not found' })
