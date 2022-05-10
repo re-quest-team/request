@@ -4,7 +4,6 @@ import { InputField } from '@/components/Elements/FormElements'
 import { Spacer } from '@/components/Elements/Spacer'
 import Modal from '@/components/Modal'
 import {
-  ArrowUpIcon,
   ChartSquareBarIcon,
   CodeIcon,
   LockClosedIcon,
@@ -16,11 +15,7 @@ import {
 import { Quest } from '@prisma/client'
 import { useRef, useState } from 'react'
 import { ArrowUpRight, Instagram, Youtube } from 'react-feather'
-import toast from 'react-hot-toast'
-import { mutate } from 'swr'
-import { createQuest } from '../api/createQuest'
-import { deleteQuest } from '../api/deleteQuest'
-import { updateQuest } from '../api/updateQuest'
+import useQuests from '../api'
 import AddQuestButton from './AddQuestButton'
 import QuestElement from './QuestElement'
 
@@ -51,6 +46,8 @@ const QuestImagePlacer = ({
 
   const [encrypted, setEncrypted] = useState('')
 
+  const { createQuest, updateQuest, deleteQuest } = useQuests(roomId)
+
   return (
     <div>
       <Button
@@ -74,9 +71,7 @@ const QuestImagePlacer = ({
           onClick={async e => {
             if (editMode && quests.length < maxQuests) {
               setModalOpen(true)
-
-              const createQuestRequest = createQuest({
-                roomId,
+              createQuest({
                 x:
                   (e.clientX - ref.current?.getBoundingClientRect().left!) /
                   ref.current?.clientWidth!,
@@ -85,43 +80,6 @@ const QuestImagePlacer = ({
                   (e.clientY - ref.current?.getBoundingClientRect().top!) /
                   ref.current?.clientHeight!,
               })
-
-              toast.promise(createQuestRequest, {
-                loading: 'Speichern',
-                success: 'Speichern erfolgreich',
-                error: 'Fehler beim speichern',
-              })
-
-              await mutate(
-                `/api/room/${roomId}`,
-                (
-                  await createQuestRequest
-                ).data,
-                {
-                  populateCache: false,
-                  revalidate: true,
-                },
-              )
-
-              // setQuests([
-              //   ...quests,
-              //   {
-              //     // @ts-ignore
-              //     x:
-              //       (e.clientX - ref.current?.getBoundingClientRect().left!) /
-              //       ref.current?.clientWidth!,
-              //     // @ts-ignore
-              //     y:
-              //       (e.clientY - ref.current?.getBoundingClientRect().top!) /
-              //       ref.current?.clientHeight!,
-              //     type:
-              //       quests.length === 0
-              //         ? 'media'
-              //         : quests.length === 1
-              //         ? 'quest'
-              //         : 'default',
-              //   },
-              // ])
             }
           }}
           alt="upload"
@@ -154,51 +112,8 @@ const QuestImagePlacer = ({
             <AddQuestButton
               dragRef={ref}
               {...q}
-              onMoveEnd={async movedQuest => {
-                const updateQuestRequest = updateQuest(q.id, {
-                  ...movedQuest,
-                })
-
-                toast.promise(updateQuestRequest, {
-                  loading: 'Speichern',
-                  success: 'Speichern erfolgreich',
-                  error: 'Fehler beim speichern',
-                })
-
-                await mutate(
-                  `/api/room/${roomId}`,
-                  (
-                    await updateQuestRequest
-                  ).data,
-                  {
-                    populateCache: false,
-                    revalidate: true,
-                  },
-                )
-              }}
-              onDelete={
-                async () => {
-                  const deleteQuestRequest = deleteQuest(q.id)
-
-                  toast.promise(deleteQuestRequest, {
-                    loading: 'Löschen',
-                    success: 'Löschen erfolgreich',
-                    error: 'Fehler beim löschen',
-                  })
-
-                  await mutate(
-                    `/api/room/${roomId}`,
-                    (
-                      await deleteQuestRequest
-                    ).data,
-                    {
-                      populateCache: false,
-                      revalidate: true,
-                    },
-                  )
-                }
-                // setQuests([...quests.filter((e, index) => index !== i)])
-              }
+              onMoveEnd={async movedQuest => updateQuest(q.id, movedQuest)}
+              onDelete={async () => deleteQuest(q.id)}
               key={i}
               showDelete={editMode}
               onClick={() => setModalOpen(true)}
