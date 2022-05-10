@@ -1,0 +1,9 @@
+-- DropForeignKey
+ALTER TABLE "S3Image" DROP CONSTRAINT "S3Image_roomId_fkey";
+
+-- AlterTable
+ALTER TABLE "S3Image" ALTER COLUMN "roomId" DROP NOT NULL,
+ALTER COLUMN "roomId" DROP DEFAULT;
+
+-- AddForeignKey
+ALTER TABLE "S3Image" ADD CONSTRAINT "S3Image_roomId_fkey" FOREIGN KEY ("roomId") REFERENCES "Room"("id") ON DELETE SET NULL ON UPDATE CASCADE;

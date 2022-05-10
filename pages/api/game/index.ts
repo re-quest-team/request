@@ -30,7 +30,10 @@ const handler = async (
 
   if (req.method === 'POST') {
     try {
-      await GameCreateSchema.validate({ ...body, userId })
+      // await GameCreateSchema.validate({
+      //   ...body,
+      //   userId,
+      // })
 
       const game = await prisma.game.create({ data: { ...body, userId } })
 
