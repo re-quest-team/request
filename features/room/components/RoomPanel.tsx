@@ -52,7 +52,10 @@ const RoomPanel = ({ provided, snapshot, index }: Props) => {
           )}
           {room.value === 'Eigenes Foto hochladen' && (
             <>
-              <FileUpload onChange={url => setImageUrl(url)} />
+              <FileUpload
+                onChange={url => setImageUrl(url)}
+                roomId={room.value}
+              />
               {imageUrl && <QuestImagePlacer img={imageUrl} />}
             </>
           )}
