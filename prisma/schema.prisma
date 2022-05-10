@@ -46,6 +46,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   Games         Game[]
+  S3Image       S3Image[]
 }
 
 model VerificationToken {
@@ -54,6 +55,14 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model S3Image {
+  id     String @id @default(uuid())
+  user   User   @relation(fields: [userId], references: [id])
+  room   String
+  userId String
+  url    String
 }
 
 model Game {
