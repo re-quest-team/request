@@ -68,7 +68,7 @@ const RoomList = ({ gameId }: RoomListProps) => {
                         provided={provided}
                         snapshot={snapshot}
                         index={i + 1}
-                        room={r}
+                        roomId={r.id}
                       />
                     )}
                   </Draggable>

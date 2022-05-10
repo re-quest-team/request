@@ -13,13 +13,21 @@ import {
   PlusCircleIcon,
   QrcodeIcon,
 } from '@heroicons/react/outline'
+import { Quest } from '@prisma/client'
 import { useRef, useState } from 'react'
 import { ArrowUpRight, Instagram, Youtube } from 'react-feather'
+import toast from 'react-hot-toast'
+import { mutate } from 'swr'
+import { createQuest } from '../api/createQuest'
+import { deleteQuest } from '../api/deleteQuest'
+import { updateQuest } from '../api/updateQuest'
 import AddQuestButton from './AddQuestButton'
 import QuestElement from './QuestElement'
 
 type QuestImagePlacerProps = {
   img: string
+  quests: Quest[]
+  roomId: string
   maxQuests?: number
 }
 
@@ -29,10 +37,13 @@ type QuestButton = {
   type?: 'default' | 'quest' | 'media'
 }
 
-const QuestImagePlacer = ({ img, maxQuests = 3 }: QuestImagePlacerProps) => {
+const QuestImagePlacer = ({
+  img,
+  quests,
+  roomId,
+  maxQuests = 3,
+}: QuestImagePlacerProps) => {
   const ref = useRef<HTMLDivElement>(null)
-  const [quests, setQuests] = useState<QuestButton[]>([])
-
   const [editMode, setEditMode] = useState(true)
 
   const [modalOpen, setModalOpen] = useState(false)
@@ -60,28 +71,57 @@ const QuestImagePlacer = ({ img, maxQuests = 3 }: QuestImagePlacerProps) => {
         <img
           className="select-none rounded shadow"
           src={img}
-          onClick={e => {
+          onClick={async e => {
             if (editMode && quests.length < maxQuests) {
               setModalOpen(true)
-              setQuests([
-                ...quests,
+
+              const createQuestRequest = createQuest({
+                roomId,
+                x:
+                  (e.clientX - ref.current?.getBoundingClientRect().left!) /
+                  ref.current?.clientWidth!,
+                // @ts-ignore
+                y:
+                  (e.clientY - ref.current?.getBoundingClientRect().top!) /
+                  ref.current?.clientHeight!,
+              })
+
+              toast.promise(createQuestRequest, {
+                loading: 'Speichern',
+                success: 'Speichern erfolgreich',
+                error: 'Fehler beim speichern',
+              })
+
+              await mutate(
+                `/api/room/${roomId}`,
+                (
+                  await createQuestRequest
+                ).data,
                 {
-                  // @ts-ignore
-                  x:
-                    (e.clientX - ref.current?.getBoundingClientRect().left!) /
-                    ref.current?.clientWidth!,
-                  // @ts-ignore
-                  y:
-                    (e.clientY - ref.current?.getBoundingClientRect().top!) /
-                    ref.current?.clientHeight!,
-                  type:
-                    quests.length === 0
-                      ? 'media'
-                      : quests.length === 1
-                      ? 'quest'
-                      : 'default',
+                  populateCache: false,
+                  revalidate: true,
                 },
-              ])
+              )
+
+              // setQuests([
+              //   ...quests,
+              //   {
+              //     // @ts-ignore
+              //     x:
+              //       (e.clientX - ref.current?.getBoundingClientRect().left!) /
+              //       ref.current?.clientWidth!,
+              //     // @ts-ignore
+              //     y:
+              //       (e.clientY - ref.current?.getBoundingClientRect().top!) /
+              //       ref.current?.clientHeight!,
+              //     type:
+              //       quests.length === 0
+              //         ? 'media'
+              //         : quests.length === 1
+              //         ? 'quest'
+              //         : 'default',
+              //   },
+              // ])
             }
           }}
           alt="upload"
@@ -114,14 +154,50 @@ const QuestImagePlacer = ({ img, maxQuests = 3 }: QuestImagePlacerProps) => {
             <AddQuestButton
               dragRef={ref}
               {...q}
-              onMoveEnd={movedQuest =>
-                setQuests([
-                  ...quests.filter((e, index) => index !== i),
-                  movedQuest,
-                ])
-              }
-              onDelete={() =>
-                setQuests([...quests.filter((e, index) => index !== i)])
+              onMoveEnd={async movedQuest => {
+                const updateQuestRequest = updateQuest(q.id, {
+                  ...movedQuest,
+                })
+
+                toast.promise(updateQuestRequest, {
+                  loading: 'Speichern',
+                  success: 'Speichern erfolgreich',
+                  error: 'Fehler beim speichern',
+                })
+
+                await mutate(
+                  `/api/room/${roomId}`,
+                  (
+                    await updateQuestRequest
+                  ).data,
+                  {
+                    populateCache: false,
+                    revalidate: true,
+                  },
+                )
+              }}
+              onDelete={
+                async () => {
+                  const deleteQuestRequest = deleteQuest(q.id)
+
+                  toast.promise(deleteQuestRequest, {
+                    loading: 'Löschen',
+                    success: 'Löschen erfolgreich',
+                    error: 'Fehler beim löschen',
+                  })
+
+                  await mutate(
+                    `/api/room/${roomId}`,
+                    (
+                      await deleteQuestRequest
+                    ).data,
+                    {
+                      populateCache: false,
+                      revalidate: true,
+                    },
+                  )
+                }
+                // setQuests([...quests.filter((e, index) => index !== i)])
               }
               key={i}
               showDelete={editMode}
