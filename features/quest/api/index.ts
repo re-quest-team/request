@@ -1,7 +1,6 @@
 import { createToast, deleteToast, updateToast } from '@/components/Toasts'
 import { Quest } from '@prisma/client'
 import { AxiosResponse } from 'axios'
-import toast from 'react-hot-toast'
 import { mutate } from 'swr'
 import { createQuest } from './createQuest'
 import { deleteQuest } from './deleteQuest'

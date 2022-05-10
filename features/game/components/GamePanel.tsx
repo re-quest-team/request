@@ -32,6 +32,9 @@ const GamePanel = ({ id, name, description }: Game) => {
           <Link href={`/studio/${id}`} passHref>
             <Button>Bearbeiten</Button>
           </Link>
+          <Link href={`/play/${id}`} passHref>
+            <Button>Spielen</Button>
+          </Link>
         </div>
       </>
     </Panel>
