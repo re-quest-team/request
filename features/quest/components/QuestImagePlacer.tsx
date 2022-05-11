@@ -18,6 +18,7 @@ import { ArrowUpRight, Instagram, Youtube } from 'react-feather'
 import useQuests from '../api'
 import AddQuestButton from './AddQuestButton'
 import QuestElement from './QuestElement'
+import QuestTypeModal from './QuestTypeModal'
 
 type QuestImagePlacerProps = {
   img: string
@@ -41,9 +42,8 @@ const QuestImagePlacer = ({
   const ref = useRef<HTMLDivElement>(null)
   const [editMode, setEditMode] = useState(true)
 
-  const [modalOpen, setModalOpen] = useState(false)
-  const [taskModalOpen, setTaskModalOpen] = useState(false)
-
+  const [questModalOpen, setQuestModalOpen] = useState(false)
+  const [currentQuest, setCurrentQuest] = useState<Quest>()
   const [encrypted, setEncrypted] = useState('')
 
   const { createQuest, updateQuest, deleteQuest } = useQuests(roomId)
@@ -70,8 +70,7 @@ const QuestImagePlacer = ({
           src={img}
           onClick={async e => {
             if (editMode && quests.length < maxQuests) {
-              setModalOpen(true)
-              createQuest({
+              const newQuest = await createQuest({
                 x:
                   (e.clientX - ref.current?.getBoundingClientRect().left!) /
                   ref.current?.clientWidth!,
@@ -80,6 +79,8 @@ const QuestImagePlacer = ({
                   (e.clientY - ref.current?.getBoundingClientRect().top!) /
                   ref.current?.clientHeight!,
               })
+              setCurrentQuest(newQuest)
+              setQuestModalOpen(true)
             }
           }}
           alt="upload"
@@ -111,12 +112,17 @@ const QuestImagePlacer = ({
           {quests?.map((q, i) => (
             <AddQuestButton
               dragRef={ref}
-              {...q}
+              x={q.x}
+              y={q.y}
+              type={q.type || undefined}
               onMoveEnd={async movedQuest => updateQuest(q.id, movedQuest)}
               onDelete={async () => deleteQuest(q.id)}
               key={i}
               showDelete={editMode}
-              onClick={() => setModalOpen(true)}
+              onClick={() => {
+                setCurrentQuest(q)
+                setQuestModalOpen(true)
+              }}
             />
           ))}
         </div>
@@ -126,105 +132,19 @@ const QuestImagePlacer = ({
         {quests.length} von {maxQuests} Rätseln
       </PillButton>
 
-      <Modal
-        open={modalOpen}
-        onClose={() => setModalOpen(false)}
-        title="Element hinzufügen"
-      >
-        <>
-          <PillButton variant="secondary" className="mx-auto">
-            Rätsel
-          </PillButton>
-          <QuestElement
-            title="Krypto&shy;graphie"
-            description="Hier muss ein Codewort entschlüsselt werden"
-            icon={LockClosedIcon}
-            variant="secondary"
-            onClick={() => {
-              setModalOpen(false)
-              setTimeout(() => {
-                setTaskModalOpen(true)
-              }, 100)
-            }}
-          />
-          <QuestElement
-            title="Programmieren"
-            description="Hier muss ein kleines Programm geschrieben werden"
-            icon={CodeIcon}
-            variant="secondary"
-            onClick={() => {
-              setModalOpen(false)
-              setTimeout(() => {
-                setTaskModalOpen(true)
-              }, 100)
-            }}
-          />
-          <QuestElement
-            title="QR-Code Scan"
-            description="Hier muss ein QR-Code gescannt werden"
-            icon={QrcodeIcon}
-            variant="secondary"
-            onClick={() => {
-              setModalOpen(false)
-              setTimeout(() => {
-                setTaskModalOpen(true)
-              }, 100)
-            }}
-          />
-          <QuestElement
-            title="Statistik"
-            description="Hier muss eine Tabelle analysiert werden"
-            icon={ChartSquareBarIcon}
-            variant="secondary"
-            onClick={() => {
-              setModalOpen(false)
-              setTimeout(() => {
-                setTaskModalOpen(true)
-              }, 100)
-            }}
-          />
-          <Spacer />
-          <PillButton className="mx-auto" variant="tertiary">
-            Medien
-          </PillButton>
-          <QuestElement
-            title="Text"
-            description="Ein einfacher Text"
-            icon={MenuAlt1Icon}
-            variant="tertiary"
-            onClick={() => {}}
-          />
-          <QuestElement
-            title="Bild"
-            description="Zeige ein Bild"
-            icon={PhotographIcon}
-            variant="tertiary"
-            onClick={() => {}}
-          />
-          <QuestElement
-            title="Instagram"
-            description="Ein Instagram Post"
-            icon={Instagram}
-            variant="tertiary"
-            onClick={() => {}}
-          />
-          <QuestElement
-            title="YouTube"
-            description="Ein YouTube Video"
-            icon={Youtube}
-            variant="tertiary"
-            onClick={() => {}}
-          />
-          <QuestElement
-            title="iFrame"
-            description="Eine Website"
-            icon={CodeIcon}
-            variant="tertiary"
-            onClick={() => {}}
-          />
-        </>
-      </Modal>
-      <Modal
+      {currentQuest && (
+        <QuestTypeModal
+          open={questModalOpen}
+          roomId={roomId}
+          quest={currentQuest}
+          onClose={() => {
+            setCurrentQuest(undefined)
+            setQuestModalOpen(false)
+          }}
+        />
+      )}
+
+      {/* <Modal
         open={taskModalOpen}
         onClose={() => setTaskModalOpen(false)}
         title="Kryptographie"
@@ -252,7 +172,7 @@ const QuestImagePlacer = ({
             Speichern
           </Button>
         </div>
-      </Modal>
+      </Modal> */}
     </div>
   )
 }

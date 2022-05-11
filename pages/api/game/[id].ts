@@ -29,8 +29,6 @@ const handler = async (
         },
       })
 
-      console.log(game)
-
       if (!game) {
         res.status(404).json({ error: 'Not found' })
       }

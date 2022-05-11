@@ -19,6 +19,9 @@ const useQuests = (roomId: string) => {
     const createQuestRequest = createQuest({ ...quest, roomId })
     createToast(createQuestRequest)
     await mutation(createQuestRequest)
+    return await (
+      await createQuestRequest
+    ).data
   }
 
   const APIUpdateQuest = async (id: string, quest: Partial<Quest>) => {

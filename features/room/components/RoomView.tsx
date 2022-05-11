@@ -1,4 +1,5 @@
 import AddQuestButton from '@/features/quest/components/AddQuestButton'
+import PlayQuestButton from '@/features/quest/components/PlayQuestButton'
 import { AxiosError } from 'axios'
 import Image from 'next/image'
 import ScrollContainer from 'react-indiana-drag-scroll'
@@ -24,11 +25,7 @@ const RoomView = ({ id }: RoomViewProps) => {
           alt="room"
         />
         {room?.quests?.map((q, i) => (
-          <div
-            key={i}
-            className={`pointer-events-auto absolute flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center justify-center rounded-2xl border-4 bg-opacity-50 shadow backdrop-blur`}
-            style={{ top: `${q.y * 100}%`, left: `${q.x * 100}%` }}
-          />
+          <PlayQuestButton key={i} quest={q} onClick={() => {}} />
         ))}
       </div>
     </ScrollContainer>

@@ -1,8 +1,18 @@
 import { Transition } from '@headlessui/react'
-import { CodeIcon, PlusIcon, TrashIcon } from '@heroicons/react/outline'
+import {
+  ChartSquareBarIcon,
+  CodeIcon,
+  LockClosedIcon,
+  MenuAlt1Icon,
+  PhotographIcon,
+  PlusIcon,
+  QrcodeIcon,
+  TrashIcon,
+} from '@heroicons/react/outline'
+import { QuestType } from '@prisma/client'
 import clsx from 'clsx'
 import { Fragment, RefObject } from 'react'
-import { Instagram } from 'react-feather'
+import { Instagram, Youtube } from 'react-feather'
 
 type AddQuestButtonProps = {
   dragRef: RefObject<HTMLElement>
@@ -12,13 +22,38 @@ type AddQuestButtonProps = {
   onDelete: () => any
   showDelete: boolean
   onClick: () => any
-  type?: keyof typeof bgVariant
+  type?: QuestType
 }
 
 const bgVariant = {
   default: 'border-white bg-white text-white',
   quest: 'border-flamingo-500 bg-flamingo-500 text-flamingo-500',
   media: 'border-emerald-500 bg-emerald-500 text-emerald-500',
+}
+
+const renderIcon = (type?: QuestType) => {
+  switch (type) {
+    case 'QUEST_CRYPTO':
+      return <LockClosedIcon className="h-10 w-10" />
+    case 'QUEST_CODING':
+      return <CodeIcon className="h-10 w-10" />
+    case 'QUEST_QR_SCAN':
+      return <QrcodeIcon className="h-10 w-10" />
+    case 'QUEST_STATISTICS':
+      return <ChartSquareBarIcon className="h-10 w-10" />
+    case 'MEDIA_TEXT':
+      return <MenuAlt1Icon className="h-10 w-10" />
+    case 'MEDIA_IMAGE':
+      return <PhotographIcon className="h-10 w-10" />
+    case 'MEDIA_INSTAGRAM':
+      return <Instagram className="h-10 w-10" />
+    case 'MEDIA_YOUTUBE':
+      return <Youtube className="h-10 w-10" />
+    case 'MEDIA_IFRAME':
+      return <CodeIcon className="h-10 w-10" />
+    default:
+      return <PlusIcon className="h-10 w-10" />
+  }
 }
 
 const AddQuestButton = ({
@@ -29,7 +64,7 @@ const AddQuestButton = ({
   onDelete,
   showDelete,
   onClick,
-  type = 'default',
+  type,
 }: AddQuestButtonProps) => (
   <Transition
     as={Fragment}
@@ -44,7 +79,11 @@ const AddQuestButton = ({
     <div
       className={clsx(
         `pointer-events-auto absolute flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center justify-center rounded-2xl border-4 bg-opacity-50 shadow backdrop-blur`,
-        bgVariant[type],
+        type?.includes('QUEST')
+          ? bgVariant.quest
+          : type?.includes('MEDIA')
+          ? bgVariant.media
+          : bgVariant.default,
       )}
       style={{ top: `${y * 100}%`, left: `${x * 100}%` }}
       onDragEnd={e => {
@@ -72,9 +111,7 @@ const AddQuestButton = ({
       onClick={onClick}
       draggable
     >
-      {type === 'default' && <PlusIcon className="h-10 w-10" />}
-      {type === 'media' && <Instagram className="h-10 w-10" />}
-      {type === 'quest' && <CodeIcon className="h-10 w-10" />}
+      {renderIcon(type)}
       {showDelete && (
         <div
           className="absolute -top-4 -right-4 rounded-full border-2 border-rose-700 bg-rose-400 bg-opacity-95 p-1 shadow"
