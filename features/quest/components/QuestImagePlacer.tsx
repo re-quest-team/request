@@ -1,23 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import { Button, PillButton } from '@/components/Elements/Button'
-import { InputField } from '@/components/Elements/FormElements'
 import { Spacer } from '@/components/Elements/Spacer'
-import Modal from '@/components/Modal'
-import {
-  ChartSquareBarIcon,
-  CodeIcon,
-  LockClosedIcon,
-  MenuAlt1Icon,
-  PhotographIcon,
-  PlusCircleIcon,
-  QrcodeIcon,
-} from '@heroicons/react/outline'
+import { PlusCircleIcon } from '@heroicons/react/outline'
 import { Quest } from '@prisma/client'
 import { useRef, useState } from 'react'
-import { ArrowUpRight, Instagram, Youtube } from 'react-feather'
+import { ArrowUpRight } from 'react-feather'
 import useQuests from '../api'
 import AddQuestButton from './AddQuestButton'
-import QuestElement from './QuestElement'
 import QuestTypeModal from './QuestTypeModal'
 
 type QuestImagePlacerProps = {
@@ -25,12 +14,6 @@ type QuestImagePlacerProps = {
   quests: Quest[]
   roomId: string
   maxQuests?: number
-}
-
-type QuestButton = {
-  x: number
-  y: number
-  type?: 'default' | 'quest' | 'media'
 }
 
 const QuestImagePlacer = ({
@@ -44,7 +27,6 @@ const QuestImagePlacer = ({
 
   const [questModalOpen, setQuestModalOpen] = useState(false)
   const [currentQuest, setCurrentQuest] = useState<Quest>()
-  const [encrypted, setEncrypted] = useState('')
 
   const { createQuest, updateQuest, deleteQuest } = useQuests(roomId)
 
@@ -143,36 +125,6 @@ const QuestImagePlacer = ({
           }}
         />
       )}
-
-      {/* <Modal
-        open={taskModalOpen}
-        onClose={() => setTaskModalOpen(false)}
-        title="Kryptographie"
-      >
-        <div>
-          <InputField label="Aufgabenstellung"></InputField>
-          <InputField
-            label="Codewort"
-            onChange={e => setEncrypted(e.target.value)}
-          ></InputField>
-          <InputField
-            label="Verschlüsseltes Wort"
-            disabled
-            value={encrypted.replace(
-              /[A-Z]/gi,
-              c =>
-                'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'[
-                  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.indexOf(
-                    c,
-                  )
-                ],
-            )}
-          ></InputField>
-          <Button variant="primary" onClick={() => setTaskModalOpen(false)}>
-            Speichern
-          </Button>
-        </div>
-      </Modal> */}
     </div>
   )
 }
