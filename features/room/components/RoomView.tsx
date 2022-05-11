@@ -1,6 +1,7 @@
 import AddQuestButton from '@/features/quest/components/AddQuestButton'
 import { AxiosError } from 'axios'
 import Image from 'next/image'
+import ScrollContainer from 'react-indiana-drag-scroll'
 import useSWR from 'swr'
 import { RoomWithImageAndQuests } from '../types'
 
@@ -14,7 +15,7 @@ const RoomView = ({ id }: RoomViewProps) => {
   )
 
   return (
-    <div className="h-screen overflow-auto">
+    <ScrollContainer className="h-screen overflow-auto">
       <div className="relative mx-auto h-full w-fit">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -30,7 +31,7 @@ const RoomView = ({ id }: RoomViewProps) => {
           />
         ))}
       </div>
-    </div>
+    </ScrollContainer>
   )
 }
 
