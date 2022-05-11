@@ -12,8 +12,19 @@ import {
   SearchIcon,
 } from '@heroicons/react/outline'
 import FeatureCard from '@/components/Card'
+import { Game } from '@prisma/client'
+import useSWR from 'swr'
+import GameCard from '@/features/game/components/GameCard'
+import { RoomWithImageAndQuests } from '@/features/room/types'
 
 const Home: NextPage = () => {
+  const { data: games } = useSWR<
+    Game &
+      {
+        rooms: RoomWithImageAndQuests[]
+      }[]
+  >('/api/game')
+
   return (
     <div>
       <div className="mx-auto md:max-w-3xl">
@@ -111,6 +122,22 @@ const Home: NextPage = () => {
           className="mx-auto"
         >
           Weitere Informationen
+        </Button>
+      </Link>
+      <Spacer size="lg" />
+      <h2 className="p-2 text-center text-2xl">Beispiele</h2>
+      <div className="flex flex-wrap">
+        {games?.map(g => (
+          // @ts-ignore
+          <GameCard key={g.id} game={g} />
+        ))}
+      </div>
+      <Link href={'/studio'} passHref>
+        <Button
+          endIcon={<ArrowRightIcon className="h-4" />}
+          className="mx-auto"
+        >
+          re:quest erstellen
         </Button>
       </Link>
     </div>
