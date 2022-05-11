@@ -41,7 +41,7 @@ const GameView = () => {
       }
     }
 
-    redirect().catch(console.error)
+    if (game) redirect().catch(console.error)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [game, index])
 
