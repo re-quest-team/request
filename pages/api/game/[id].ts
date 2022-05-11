@@ -29,20 +29,18 @@ const handler = async (
         },
       })
 
-      console.log(game)
-
       if (!game) {
         res.status(404).json({ error: 'Not found' })
       }
 
-      if (game?.userId !== userId) {
-        return {
-          redirect: {
-            permanent: false,
-            destination: '/',
-          },
-        }
-      }
+      // if (game?.userId !== userId) {
+      //   return {
+      //     redirect: {
+      //       permanent: false,
+      //       destination: '/',
+      //     },
+      //   }
+      // }
 
       res.status(200).json(game!)
     } catch (e) {

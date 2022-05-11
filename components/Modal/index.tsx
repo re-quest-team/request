@@ -1,4 +1,5 @@
 import { Dialog, Transition } from '@headlessui/react'
+import { ArrowLeftIcon } from '@heroicons/react/outline'
 import { Fragment, useState } from 'react'
 
 type ModalProps = {
@@ -6,12 +7,21 @@ type ModalProps = {
   onClose: () => void
   title: string
   children: React.ReactElement
+  showBack?: boolean
+  onBack?: () => void
 }
 
-const Modal = ({ open, title, children, onClose }: ModalProps) => {
+const Modal = ({
+  open,
+  title,
+  children,
+  onClose,
+  showBack,
+  onBack,
+}: ModalProps) => {
   return (
     <Transition show={open} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={onClose}>
+      <Dialog className="relative z-10" onClose={onClose}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -36,12 +46,20 @@ const Modal = ({ open, title, children, onClose }: ModalProps) => {
               leaveTo="opacity-0 scale-95"
             >
               <Dialog.Panel className="w-full max-w-xl transform overflow-hidden rounded-2xl bg-zinc-900 p-6 text-left align-middle text-white shadow-xl transition-all">
-                <Dialog.Title
-                  as="h4"
-                  className="mb-6 text-center text-xl font-semibold"
-                >
-                  {title}
-                </Dialog.Title>
+                <div className="flex">
+                  {showBack && (
+                    <ArrowLeftIcon
+                      className="h-6 w-6 cursor-pointer"
+                      onClick={onBack}
+                    />
+                  )}
+                  <Dialog.Title
+                    as="h4"
+                    className="mb-6 flex-1 text-center text-xl font-semibold"
+                  >
+                    {title}
+                  </Dialog.Title>
+                </div>
                 {children}
               </Dialog.Panel>
             </Transition.Child>

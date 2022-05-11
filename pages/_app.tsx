@@ -9,8 +9,10 @@ import '@fontsource/inter/900.css'
 import { SWRConfig } from 'swr'
 import { Toaster } from 'react-hot-toast'
 import axios from '@/lib/axios'
+import { useRouter } from 'next/router'
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+  const router = useRouter()
   return (
     <SessionProvider session={session}>
       <SWRConfig
@@ -18,20 +20,22 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
           fetcher: url => axios.get(url).then(res => res.data),
         }}
       >
-        <Layout>
-          <>
-            <Toaster
-              toastOptions={{
-                className: '',
-                style: {
-                  color: '#fff',
-                  backgroundColor: '#374151',
-                },
-              }}
-            />
+        <Toaster
+          toastOptions={{
+            className: '',
+            style: {
+              color: '#fff',
+              backgroundColor: '#374151',
+            },
+          }}
+        />
+        {router.pathname.includes('play') ? (
+          <Component {...pageProps} />
+        ) : (
+          <Layout>
             <Component {...pageProps} />
-          </>
-        </Layout>
+          </Layout>
+        )}
       </SWRConfig>
     </SessionProvider>
   )
