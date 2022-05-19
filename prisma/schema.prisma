@@ -99,6 +99,7 @@ model Quest {
   x         Float
   y         Float
   type      QuestType?
+  data      Json?      @default(dbgenerated())
 }
 
 enum QuestType {

@@ -1,13 +1,19 @@
-import { Button } from '@/components/Elements/Button'
 import { InputField } from '@/components/Elements/FormElements'
 import { useState } from 'react'
+import { useQuestionStore } from './store'
 
-const CryptoTask = () => {
+const EditView = () => {
   const [encrypted, setEncrypted] = useState('')
+  const question = useQuestionStore(state => state.question)
+  const setQuestion = useQuestionStore(state => state.setQuestion)
 
   return (
     <div>
-      <InputField label="Aufgabenstellung"></InputField>
+      <InputField
+        label="Aufgabenstellung"
+        defaultValue={question}
+        onChange={e => setQuestion(e.target.value)}
+      ></InputField>
       <InputField
         label="Codewort"
         onChange={e => setEncrypted(e.target.value)}
@@ -23,11 +29,8 @@ const CryptoTask = () => {
             ],
         )}
       ></InputField>
-      <Button variant="primary" onClick={() => {}}>
-        Speichern
-      </Button>
     </div>
   )
 }
 
-export default CryptoTask
+export default EditView
