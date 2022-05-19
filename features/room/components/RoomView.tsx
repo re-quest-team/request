@@ -1,7 +1,10 @@
-import AddQuestButton from '@/features/quest/components/AddQuestButton'
+import Modal from '@/components/Modal'
 import PlayQuestButton from '@/features/quest/components/PlayQuestButton'
+import quests from '@/collections'
+import { IQuest } from '@/collections/types'
 import { AxiosError } from 'axios'
 import Image from 'next/image'
+import { useState } from 'react'
 import ScrollContainer from 'react-indiana-drag-scroll'
 import useSWR from 'swr'
 import { RoomWithImageAndQuests } from '../types'
@@ -15,6 +18,8 @@ const RoomView = ({ id }: RoomViewProps) => {
     `/api/room/${id}`,
   )
 
+  const [currentQuest, setCurrentQuest] = useState<IQuest<any>>()
+
   return (
     <ScrollContainer className="h-screen overflow-auto">
       <div className="relative mx-auto h-full w-fit">
@@ -25,9 +30,27 @@ const RoomView = ({ id }: RoomViewProps) => {
           alt="room"
         />
         {room?.quests?.map((q, i) => (
-          <PlayQuestButton key={i} quest={q} onClick={() => {}} />
+          <PlayQuestButton
+            key={i}
+            quest={q}
+            onClick={() => {
+              const qq = quests.filter(e => e.type === q.type)[0]
+              if (qq) {
+                qq.onLoad(q.data as any)
+                setCurrentQuest(qq)
+              }
+            }}
+          />
         ))}
       </div>
+
+      <Modal
+        open={currentQuest !== undefined}
+        onClose={() => setCurrentQuest(undefined)}
+        title={''}
+      >
+        <>{currentQuest && <currentQuest.PlayView />}</>
+      </Modal>
     </ScrollContainer>
   )
 }

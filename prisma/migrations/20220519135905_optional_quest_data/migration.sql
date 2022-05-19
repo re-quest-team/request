@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Quest" ALTER COLUMN "data" DROP NOT NULL;

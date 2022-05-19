@@ -1,22 +1,14 @@
-import { PillButton } from '@/components/Elements/Button'
+import { Button, PillButton } from '@/components/Elements/Button'
 import { SelectOption } from '@/components/Elements/Select'
 import { SelectField } from '@/components/Elements/Select/SelectField'
 import { Spacer } from '@/components/Elements/Spacer'
 import Modal from '@/components/Modal'
-import {
-  LockClosedIcon,
-  CodeIcon,
-  QrcodeIcon,
-  ChartSquareBarIcon,
-  MenuAlt1Icon,
-  PhotographIcon,
-} from '@heroicons/react/outline'
-import { Quest, QuestType } from '@prisma/client'
+import { Prisma, Quest } from '@prisma/client'
 import { useState } from 'react'
-import { Instagram, Youtube } from 'react-feather'
 import useQuests from '../api'
 import QuestElement from './QuestElement'
-import CryptoTask from './QuestTask/CryptoTask'
+import quests from '@/collections'
+import { IQuest } from '@/collections/types'
 
 type QuestTypeModalProps = {
   open: boolean
@@ -39,17 +31,29 @@ const QuestTypeModal = ({
   const { updateQuest } = useQuests(roomId)
 
   const [questModalOpen, setQuestModalOpen] = useState(false)
-  const [currentType, setCurrentType] = useState<QuestType>()
-
+  const [currentQuest, setCurrentQuest] = useState<IQuest<any>>()
   const [taskVisibility, setTaskVisibility] = useState(taskVisibilityOptions[0])
 
-  const handleClick = (type: QuestType) => {
-    console.log('handle click for', type)
+  const handleClick = (q: IQuest<any>) => {
+    // if quest already has data, load data into component
+    if (quest.data) {
+      q.onLoad(quest.data as any)
+    }
+
     updateQuest(quest.id, {
-      type: type,
+      type: q.type,
     })
-    setCurrentType(type)
+    setCurrentQuest(q)
     setQuestModalOpen(true)
+  }
+
+  const onSave = () => {
+    const data = currentQuest?.onSave()
+    updateQuest(quest.id, {
+      data,
+    })
+    setQuestModalOpen(false)
+    onClose()
   }
 
   return (
@@ -79,16 +83,21 @@ const QuestTypeModal = ({
               <PillButton variant="secondary" className="mx-auto">
                 Rätsel
               </PillButton>
-              <QuestElement
-                title="Krypto&shy;graphie"
-                description="Hier muss ein Codewort entschlüsselt werden"
-                icon={LockClosedIcon}
-                variant="secondary"
-                onClick={() => {
-                  handleClick('QUEST_CRYPTO')
-                }}
-              />
-              <QuestElement
+              {quests
+                .filter(q => q.type.includes('QUEST'))
+                .map((q, i) => (
+                  <QuestElement
+                    key={i}
+                    title={q.title}
+                    description={q.description}
+                    icon={q.icon}
+                    variant="secondary"
+                    onClick={() => {
+                      handleClick(q)
+                    }}
+                  />
+                ))}
+              {/* <QuestElement
                 title="Programmieren"
                 description="Hier muss ein kleines Programm geschrieben werden"
                 icon={CodeIcon}
@@ -107,13 +116,27 @@ const QuestTypeModal = ({
                 description="Hier muss eine Tabelle analysiert werden"
                 icon={ChartSquareBarIcon}
                 variant="secondary"
-                onClick={() => handleClick('QUEST_STATISTICS')}
-              />
+                onClick={() => handleClick('QUEST_STATISTICS')} 
+              />*/}
               <Spacer />
               <PillButton className="mx-auto" variant="tertiary">
                 Medien
               </PillButton>
-              <QuestElement
+              {quests
+                .filter(q => q.type.includes('MEDIA'))
+                .map((q, i) => (
+                  <QuestElement
+                    key={i}
+                    title={q.title}
+                    description={q.description}
+                    icon={q.icon}
+                    variant="tertiary"
+                    onClick={() => {
+                      handleClick(q)
+                    }}
+                  />
+                ))}
+              {/* <QuestElement
                 title="Text"
                 description="Ein einfacher Text"
                 icon={MenuAlt1Icon}
@@ -147,10 +170,17 @@ const QuestTypeModal = ({
                 icon={CodeIcon}
                 variant="tertiary"
                 onClick={() => handleClick('MEDIA_IFRAME')}
-              />
+              /> */}
             </>
           )}
-          {questModalOpen && currentType === 'QUEST_CRYPTO' && <CryptoTask />}
+          {questModalOpen && currentQuest && (
+            <>
+              <currentQuest.EditView />
+              <Button variant="primary" onClick={onSave}>
+                Speichern
+              </Button>
+            </>
+          )}
         </>
       </Modal>
     </>
