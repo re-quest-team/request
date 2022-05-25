@@ -1,5 +1,7 @@
 import { Button } from '@/components/Elements/Button'
 import { InputField, TextArea } from '@/components/Elements/FormElements'
+import Toggle from '@/components/Elements/Toggle'
+import { Switch } from '@headlessui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Game } from '@prisma/client'
 import axios, { AxiosError } from 'axios'
@@ -17,6 +19,7 @@ const schema = yup
   .object({
     name: yup.string().required(),
     description: yup.string().required().min(8),
+    draft: yup.boolean().required(),
   })
   .required()
 
@@ -72,6 +75,12 @@ const GameForm = ({ id }: GameFormProps) => {
         defaultValue={data?.description ?? ''}
         registration={register('description')}
         error={errors['description']}
+      />
+      <Toggle
+        label="Entwurf"
+        defaultChecked={data?.draft}
+        registration={register('draft')}
+        error={errors['draft']}
       />
 
       <Button type="submit" disabled={isValidating} isLoading={isValidating}>
