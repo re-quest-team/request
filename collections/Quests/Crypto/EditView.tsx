@@ -1,11 +1,12 @@
 import { InputField } from '@/components/Elements/FormElements'
-import { useState } from 'react'
-import { useQuestionStore } from './store'
+import { useQuestStore } from './store'
 
 const EditView = () => {
-  const [encrypted, setEncrypted] = useState('')
-  const question = useQuestionStore(state => state.question)
-  const setQuestion = useQuestionStore(state => state.setQuestion)
+  const question = useQuestStore(state => state.question)
+  const setQuestion = useQuestStore(state => state.setQuestion)
+
+  const codeword = useQuestStore(state => state.codeword)
+  const setCordeword = useQuestStore(state => state.setCordeword)
 
   return (
     <div>
@@ -16,12 +17,13 @@ const EditView = () => {
       ></InputField>
       <InputField
         label="Codewort"
-        onChange={e => setEncrypted(e.target.value)}
+        defaultValue={codeword}
+        onChange={e => setCordeword(e.target.value)}
       ></InputField>
       <InputField
         label="Verschlüsseltes Wort"
         disabled
-        value={encrypted.replace(
+        value={codeword.replace(
           /[A-Z]/gi,
           c =>
             'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'[

@@ -4,7 +4,7 @@ import quests from '@/collections'
 import { IQuest } from '@/collections/types'
 import { AxiosError } from 'axios'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import ScrollContainer from 'react-indiana-drag-scroll'
 import useSWR from 'swr'
 import { RoomWithImageAndQuests } from '../types'
@@ -19,6 +19,12 @@ const RoomView = ({ id }: RoomViewProps) => {
   )
 
   const [currentQuest, setCurrentQuest] = useState<IQuest<any>>()
+
+  useEffect(() => {
+    if (currentQuest && currentQuest.onSolve) {
+      currentQuest.onSolve(() => setCurrentQuest(undefined))
+    }
+  }, [currentQuest])
 
   return (
     <ScrollContainer className="h-screen overflow-auto">
