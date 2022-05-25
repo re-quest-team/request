@@ -12,5 +12,5 @@ export interface IQuest<T> {
   PlayView: () => React.ReactElement
   onLoad: (data: T) => any
   data?: T
-  onSolve?: (callabck: () => void) => void
+  onSolve?: (callback: () => void) => void
 }

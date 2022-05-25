@@ -12,14 +12,12 @@ interface QuestState {
 export const useQuestStore = create<QuestState>()((set, get) => ({
   question: '',
   codeword: '',
-  setQuestion: question => set(() => ({ question: question })),
-  setCordeword: codeword => set(() => ({ codeword: codeword })),
+  setQuestion: question => set(() => ({ question })),
+  setCordeword: codeword => set(() => ({ codeword })),
   correct: false,
   onSolve: input => {
     const correct = input === get().codeword
-    set(() => ({
-      correct: correct,
-    }))
+    set(() => ({ correct }))
     return correct
   },
 }))
