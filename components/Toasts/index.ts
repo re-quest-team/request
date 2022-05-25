@@ -15,3 +15,6 @@ export const deleteToast = (promise: Promise<any>) =>
     success: 'Löschen erfolgreich',
     error: 'Fehler beim löschen',
   })
+
+export const successToast = () => toast.success('Korrekt')
+export const incorrectToast = () => toast.error('Falsche Antwort')
