@@ -1,6 +1,7 @@
 import { Transition } from '@headlessui/react'
 import {
   ChartSquareBarIcon,
+  CheckCircleIcon,
   CodeIcon,
   LockClosedIcon,
   MenuAlt1Icon,
@@ -18,12 +19,14 @@ import { Instagram, Youtube } from 'react-feather'
 type PlayQuestButtonProps = {
   quest: Quest
   onClick: () => any
+  solved?: boolean
 }
 
 const bgVariant = {
   default: 'border-white bg-white text-white',
   quest: 'border-flamingo-500 bg-flamingo-500 text-flamingo-500',
   media: 'border-emerald-500 bg-emerald-500 text-emerald-500',
+  solved: 'border-white bg-white text-white',
 }
 
 const renderIcon = (type?: QuestType) => {
@@ -51,7 +54,7 @@ const renderIcon = (type?: QuestType) => {
   }
 }
 
-const PlayQuestButton = ({ quest, onClick }: PlayQuestButtonProps) => {
+const PlayQuestButton = ({ quest, onClick, solved }: PlayQuestButtonProps) => {
   return (
     <Transition
       show={true}
@@ -67,7 +70,9 @@ const PlayQuestButton = ({ quest, onClick }: PlayQuestButtonProps) => {
       <div
         className={clsx(
           `pointer-events-auto absolute flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center justify-center rounded-2xl border-4 bg-opacity-50 shadow backdrop-blur`,
-          quest.type?.includes('QUEST')
+          solved
+            ? bgVariant.solved
+            : quest.type?.includes('QUEST')
             ? bgVariant.quest
             : quest.type?.includes('MEDIA')
             ? bgVariant.media
@@ -76,7 +81,8 @@ const PlayQuestButton = ({ quest, onClick }: PlayQuestButtonProps) => {
         style={{ top: `${quest.y * 100}%`, left: `${quest.x * 100}%` }}
         onClick={onClick}
       >
-        {renderIcon(quest.type || undefined)}
+        {solved && <CheckCircleIcon className="h-10 w-10" />}
+        {!solved && renderIcon(quest.type || undefined)}
       </div>
     </Transition>
   )

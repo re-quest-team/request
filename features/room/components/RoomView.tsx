@@ -18,13 +18,8 @@ const RoomView = ({ id }: RoomViewProps) => {
     `/api/room/${id}`,
   )
 
+  const [solvedQuestIDs, setSolvedQuestIDs] = useState<string[]>([])
   const [currentQuest, setCurrentQuest] = useState<IQuest<any>>()
-
-  useEffect(() => {
-    if (currentQuest && currentQuest.onSolve) {
-      currentQuest.onSolve(() => setCurrentQuest(undefined))
-    }
-  }, [currentQuest])
 
   return (
     <ScrollContainer className="h-screen overflow-auto">
@@ -37,12 +32,19 @@ const RoomView = ({ id }: RoomViewProps) => {
         />
         {room?.quests?.map((q, i) => (
           <PlayQuestButton
+            solved={solvedQuestIDs.includes(q.id)}
             key={i}
             quest={q}
             onClick={() => {
               const qq = quests.filter(e => e.type === q.type)[0]
               if (qq) {
                 qq.onLoad(q.data as any)
+                if (qq.onSolve) {
+                  qq.onSolve(() => {
+                    setSolvedQuestIDs([...solvedQuestIDs, q.id])
+                    setCurrentQuest(undefined)
+                  })
+                }
                 setCurrentQuest(qq)
               }
             }}
