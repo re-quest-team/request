@@ -8,6 +8,9 @@ export type GameplayStore = {
   getDuration: () => Duration
 }
 
+/**
+ * Gameplay Store saved the current gameplay state
+ */
 export const useGameplayStore = create<GameplayStore>()(
   persist(
     (set, get) => ({
