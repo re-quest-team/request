@@ -125,7 +125,7 @@ const Home: NextPage = () => {
       </Link>
       <Spacer size="lg" />
       <h2 className="p-2 text-center text-2xl">Beispiele</h2>
-      <div className="flex flex-wrap">
+      <div className="flex flex-col flex-wrap md:flex-row">
         {games?.map(g => (
           <GameCard key={g.id} game={g} />
         ))}
