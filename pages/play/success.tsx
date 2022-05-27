@@ -1,11 +1,17 @@
 import { Button } from '@/components/Elements/Button'
 import Modal from '@/components/Modal'
+import { useGameplayStore } from '@/stores/gameplay'
+import { formatDuration } from 'date-fns'
 import Link from 'next/link'
 import Particles from 'react-tsparticles'
 import { Engine } from 'tsparticles-engine'
 import { loadSeaAnemonePreset } from 'tsparticles-preset-sea-anemone'
 
+import { de } from 'date-fns/locale'
+
 const Success = () => {
+  const { getDuration } = useGameplayStore()
+
   const particlesInit = async (main: Engine) => {
     await loadSeaAnemonePreset(main)
   }
@@ -25,7 +31,12 @@ const Success = () => {
         backdrop="hidden"
       >
         <div className="text-center">
-          <p>Du hast das Rätsel gelöst</p>
+          <div>
+            <b>Dauer</b>:{' '}
+            {formatDuration(getDuration(), {
+              locale: de,
+            })}
+          </div>
           <Link href="/">
             <Button className="mx-auto mt-4">Zur Startseite</Button>
           </Link>
