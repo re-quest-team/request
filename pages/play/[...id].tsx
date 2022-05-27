@@ -35,7 +35,7 @@ const GameView = () => {
   useEffect(() => {
     const redirect = async () => {
       if (!game?.rooms[index]) {
-        router.push('/')
+        router.push(`/play/success`)
       } else {
         router.replace(`/play/${game?.id}/${game?.rooms[index].id}`)
       }

@@ -1,6 +1,12 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { ArrowLeftIcon } from '@heroicons/react/outline'
+import clsx from 'clsx'
 import { Fragment, useState } from 'react'
+
+const backdropVariant = {
+  normal: 'bg-opacity-80',
+  hidden: 'bg-opacity-0',
+}
 
 type ModalProps = {
   open: boolean
@@ -9,6 +15,7 @@ type ModalProps = {
   children: React.ReactElement
   showBack?: boolean
   onBack?: () => void
+  backdrop?: keyof typeof backdropVariant
 }
 
 const Modal = ({
@@ -18,6 +25,7 @@ const Modal = ({
   onClose,
   showBack,
   onBack,
+  backdrop = 'normal',
 }: ModalProps) => {
   return (
     <Transition show={open} as={Fragment}>
@@ -31,7 +39,12 @@ const Modal = ({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-black bg-opacity-80" />
+          <div
+            className={clsx(
+              'fixed inset-0 bg-black',
+              backdropVariant[backdrop],
+            )}
+          />
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-y-auto">
