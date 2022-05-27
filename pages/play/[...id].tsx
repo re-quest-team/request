@@ -1,6 +1,7 @@
 import { Button } from '@/components/Elements/Button'
 import RoomView from '@/features/room/components/RoomView'
 import { RoomWithImageAndQuests } from '@/features/room/types'
+import { useGameplayStore } from '@/stores/gameplay'
 import { Game } from '@prisma/client'
 import { AxiosError } from 'axios'
 import { useRouter } from 'next/router'
@@ -13,6 +14,12 @@ const GameView = () => {
   const [roomId, setRoomId] = useState('')
 
   const [index, setIndex] = useState(0)
+
+  const { startGame } = useGameplayStore()
+
+  useEffect(() => {
+    startGame()
+  }, [startGame])
 
   const { data: game } = useSWR<
     Game & {
@@ -34,8 +41,8 @@ const GameView = () => {
 
   useEffect(() => {
     const redirect = async () => {
-      if (!game?.rooms[index]) {
-        router.push('/')
+      if (game && !game?.rooms[index]) {
+        router.push(`/play/success`)
       } else {
         router.replace(`/play/${game?.id}/${game?.rooms[index].id}`)
       }

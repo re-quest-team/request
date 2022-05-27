@@ -19,10 +19,9 @@ import { RoomWithImageAndQuests } from '@/features/room/types'
 
 const Home: NextPage = () => {
   const { data: games } = useSWR<
-    Game &
-      {
-        rooms: RoomWithImageAndQuests[]
-      }[]
+    (Game & {
+      rooms: RoomWithImageAndQuests[]
+    })[]
   >('/api/game')
 
   return (
@@ -128,7 +127,6 @@ const Home: NextPage = () => {
       <h2 className="p-2 text-center text-2xl">Beispiele</h2>
       <div className="flex flex-wrap">
         {games?.map(g => (
-          // @ts-ignore
           <GameCard key={g.id} game={g} />
         ))}
       </div>

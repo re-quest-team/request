@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react'
 import ScrollContainer from 'react-indiana-drag-scroll'
 import useSWR from 'swr'
 import { RoomWithImageAndQuests } from '../types'
+import { Spinner } from '@/components/Elements/Spinner'
 
 type RoomViewProps = {
   id: string
@@ -18,31 +19,36 @@ const RoomView = ({ id }: RoomViewProps) => {
     `/api/room/${id}`,
   )
 
+  const [solvedQuestIDs, setSolvedQuestIDs] = useState<string[]>([])
   const [currentQuest, setCurrentQuest] = useState<IQuest<any>>()
-
-  useEffect(() => {
-    if (currentQuest && currentQuest.onSolve) {
-      currentQuest.onSolve(() => setCurrentQuest(undefined))
-    }
-  }, [currentQuest])
 
   return (
     <ScrollContainer className="h-screen overflow-auto">
       <div className="relative mx-auto h-full w-fit">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={process.env.NEXT_PUBLIC_S3_BASE_URL + '/' + room?.image?.url}
-          className="h-full max-w-fit"
-          alt="room"
-        />
+        {!room?.image?.url && <Spinner />}
+        {room?.image?.url && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={process.env.NEXT_PUBLIC_S3_BASE_URL + '/' + room?.image?.url}
+            className="h-full max-w-fit"
+            alt="room"
+          />
+        )}
         {room?.quests?.map((q, i) => (
           <PlayQuestButton
+            solved={solvedQuestIDs.includes(q.id)}
             key={i}
             quest={q}
             onClick={() => {
               const qq = quests.filter(e => e.type === q.type)[0]
               if (qq) {
                 qq.onLoad(q.data as any)
+                if (qq.onSolve) {
+                  qq.onSolve(() => {
+                    setSolvedQuestIDs([...solvedQuestIDs, q.id])
+                    setCurrentQuest(undefined)
+                  })
+                }
                 setCurrentQuest(qq)
               }
             }}
