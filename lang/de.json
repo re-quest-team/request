@@ -35,5 +35,6 @@
   "quests.crypto.editView.labelCodeWord": "Codewort",
   "quests.crypto.editView.labelEncryptedWord": "Verschlüsseltes Wort",
   "media.text.title": "Text",
-  "media.text.description": "Hier kann ein einfacher Text angezeigt werden"
+  "media.text.description": "Hier kann ein einfacher Text angezeigt werden",
+  "media.text.editView.title": "Text"
 }
