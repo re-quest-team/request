@@ -18,5 +18,11 @@
   "toasts.delete.success": "Löschen erfolgreich",
   "toasts.delete.error": "Fehler beim löschen",
   "toasts.success": "Korrekt",
-  "toasts.incorrect": "Falsche Antwort"
+  "toasts.incorrect": "Falsche Antwort",
+  "navbar.openMenu": "Open main menu",
+  "navbar.studio": "Studio",
+  "navbar.faq": "FAQ",
+  "navbar.session.profile": "Profil",
+  "navbar.session.settings": "Einstellungen",
+  "navbar.session.signOut": "Sign out"
 }
