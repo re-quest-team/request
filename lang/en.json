@@ -11,6 +11,7 @@
   "page.home.card6": "Physical elements",
   "page.home.moreInformation": "More information",
   "page.home.examples": "Examples",
+  "page.play.id.nextRoom": "Next Room",
   "toasts.create.loading": "Saving",
   "toasts.create.success": "Successfully saved",
   "toasts.create.error": "Error on save",
