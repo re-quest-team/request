@@ -15,6 +15,8 @@
   "page.play.questSolved": "Rätsel gelöst",
   "page.play.duration": "Dauer",
   "page.play.toHome": "Zur Startseite",
+  "page.studio.index.createNewQuest": "Neues re:quest erstellen",
+  "page.studio.index.myQuests": "Meine re:quests",
   "toasts.create.loading": "Speichern",
   "toasts.create.success": "Speichern erfolgreich",
   "toasts.create.error": "Fehler beim speichern",
