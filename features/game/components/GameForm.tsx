@@ -11,6 +11,7 @@ import toast from 'react-hot-toast'
 import useSWR from 'swr'
 import * as yup from 'yup'
 import { FormattedMessage, useIntl } from 'react-intl'
+import { createToast } from '@/components/Toasts'
 
 type GameFormProps = {
   id: string
@@ -54,15 +55,8 @@ const GameForm = ({ id }: GameFormProps) => {
       },
     })
 
-    const msg1 = intl.formatMessage({ id: 'toasts.create.loading' })
-    const msg2 = intl.formatMessage({ id: 'toasts.create.success' })
-    const msg3 = intl.formatMessage({ id: 'toasts.create.error' })
+    createToast(postGameRequest, intl)
 
-    toast.promise(postGameRequest, {
-      loading: msg1,
-      success: msg2,
-      error: msg3,
-    })
     const updatedGameRequest = await postGameRequest
 
     const updatedGame = updatedGameRequest.data
