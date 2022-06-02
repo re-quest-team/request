@@ -43,5 +43,10 @@
   "features.game.gameForm.labelDraft": "Entwurf",
   "features.game.gameForm.submit": "Speichern",
   "features.game.gamePanel.edit": "Bearbeiten",
-  "features.game.gamePanel.play": "Spielen"
+  "features.game.gamePanel.play": "Spielen",
+  "features.quest.questImagePlacer.preview": "Vorschau",
+  "features.quest.questImagePlacer.clickToAdd": "Klicke auf das Bild um Rätsel hinzuzufügen",
+  "features.quest.questImagePlacer.holdToPreview": "Halte den Vorschau Button gedrückt um eine Vorschau deines Raumes zu sehen",
+  "features.quest.questImagePlacer.of": "von",
+  "features.quest.questImagePlacer.quests": "Rätseln"
 }

@@ -8,7 +8,7 @@ import { ArrowUpRight } from 'react-feather'
 import useQuests from '../api'
 import AddQuestButton from './AddQuestButton'
 import QuestTypeModal from './QuestTypeModal'
-import { useIntl } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 type QuestImagePlacerProps = {
   img: string
@@ -41,7 +41,7 @@ const QuestImagePlacer = ({
         onMouseDown={() => setEditMode(false)}
         onMouseUp={() => setEditMode(true)}
       >
-        Vorschau
+        <FormattedMessage id="features.quest.questImagePlacer.preview" />
       </Button>
       <Spacer size="xs" />
       <div
@@ -85,13 +85,12 @@ const QuestImagePlacer = ({
               <div className="relative m-auto flex flex-col items-center">
                 <PlusCircleIcon className="mb-4 h-10 w-10" />
                 <p className="font-semibold">
-                  Klicke auf das Bild um Rätsel hinzuzufügen
+                  <FormattedMessage id="features.quest.questImagePlacer.clickToAdd" />
                 </p>
               </div>
               <div className="absolute top-0 right-0 flex max-w-sm content-end items-end p-4">
                 <p className="mr-2 text-sm">
-                  Halte den Vorschau Button gedrückt um eine Vorschau deines
-                  Raumes zu sehen
+                  <FormattedMessage id="features.quest.questImagePlacer.holdToPreview" />
                 </p>
                 <ArrowUpRight className="h-10 w-12" />
               </div>
@@ -119,7 +118,9 @@ const QuestImagePlacer = ({
       </div>
       <Spacer />
       <PillButton variant="secondary" className="mx-auto">
-        {quests.length} von {maxQuests} Rätseln
+        {quests.length}{' '}
+        <FormattedMessage id="features.quest.questImagePlacer.of" /> {maxQuests}{' '}
+        <FormattedMessage id="features.quest.questImagePlacer.quests" />
       </PillButton>
 
       {currentQuest && (

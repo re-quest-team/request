@@ -43,5 +43,10 @@
   "features.game.gameForm.labelDraft": "Draft",
   "features.game.gameForm.submit": "Save",
   "features.game.gamePanel.edit": "Edit",
-  "features.game.gamePanel.play": "Play"
+  "features.game.gamePanel.play": "Play",
+  "features.quest.questImagePlacer.preview": "Preview",
+  "features.quest.questImagePlacer.clickToAdd": "Click on the image to add a quest",
+  "features.quest.questImagePlacer.holdToPreview": "Hold the preview button to see a preview of your room",
+  "features.quest.questImagePlacer.of": "out of",
+  "features.quest.questImagePlacer.quests": "quests"
 }
