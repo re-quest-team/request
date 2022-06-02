@@ -10,5 +10,13 @@
   "page.home.card5": "Keine Installation",
   "page.home.card6": "Physische Elemente",
   "page.home.moreInformation": "Weitere Informationen",
-  "page.home.examples": "Beispiele"
+  "page.home.examples": "Beispiele",
+  "toasts.create.loading": "Speichern",
+  "toasts.create.success": "Speichern erfolgreich",
+  "toasts.create.error": "Fehler beim speichern",
+  "toasts.delete.loading": "Löschen",
+  "toasts.delete.success": "Löschen erfolgreich",
+  "toasts.delete.error": "Fehler beim löschen",
+  "toasts.success": "Korrekt",
+  "toasts.incorrect": "Falsche Antwort"
 }

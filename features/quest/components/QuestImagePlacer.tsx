@@ -8,6 +8,7 @@ import { ArrowUpRight } from 'react-feather'
 import useQuests from '../api'
 import AddQuestButton from './AddQuestButton'
 import QuestTypeModal from './QuestTypeModal'
+import { useIntl } from 'react-intl'
 
 type QuestImagePlacerProps = {
   img: string
@@ -22,6 +23,8 @@ const QuestImagePlacer = ({
   roomId,
   maxQuests = 3,
 }: QuestImagePlacerProps) => {
+  const intl = useIntl()
+
   const ref = useRef<HTMLDivElement>(null)
   const [editMode, setEditMode] = useState(true)
 
@@ -52,15 +55,18 @@ const QuestImagePlacer = ({
           src={img}
           onClick={async e => {
             if (editMode && quests.length < maxQuests) {
-              const newQuest = await createQuest({
-                x:
-                  (e.clientX - ref.current?.getBoundingClientRect().left!) /
-                  ref.current?.clientWidth!,
-                // @ts-ignore
-                y:
-                  (e.clientY - ref.current?.getBoundingClientRect().top!) /
-                  ref.current?.clientHeight!,
-              })
+              const newQuest = await createQuest(
+                {
+                  x:
+                    (e.clientX - ref.current?.getBoundingClientRect().left!) /
+                    ref.current?.clientWidth!,
+                  // @ts-ignore
+                  y:
+                    (e.clientY - ref.current?.getBoundingClientRect().top!) /
+                    ref.current?.clientHeight!,
+                },
+                intl,
+              )
               setCurrentQuest(newQuest)
               setQuestModalOpen(true)
             }
@@ -97,8 +103,10 @@ const QuestImagePlacer = ({
               x={q.x}
               y={q.y}
               type={q.type || undefined}
-              onMoveEnd={async movedQuest => updateQuest(q.id, movedQuest)}
-              onDelete={async () => deleteQuest(q.id)}
+              onMoveEnd={async movedQuest =>
+                updateQuest(q.id, movedQuest, intl)
+              }
+              onDelete={async () => deleteQuest(q.id, intl)}
               key={i}
               showDelete={editMode}
               onClick={() => {

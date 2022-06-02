@@ -9,6 +9,7 @@ import useQuests from '../api'
 import QuestElement from './QuestElement'
 import quests from '@/collections'
 import { IQuest } from '@/collections/types'
+import { useIntl } from 'react-intl'
 
 type QuestTypeModalProps = {
   open: boolean
@@ -28,6 +29,8 @@ const QuestTypeModal = ({
   roomId,
   onClose,
 }: QuestTypeModalProps) => {
+  const intl = useIntl()
+
   const { updateQuest } = useQuests(roomId)
 
   const [questModalOpen, setQuestModalOpen] = useState(false)
@@ -40,18 +43,26 @@ const QuestTypeModal = ({
       q.onLoad(quest.data as any)
     }
 
-    updateQuest(quest.id, {
-      type: q.type,
-    })
+    updateQuest(
+      quest.id,
+      {
+        type: q.type,
+      },
+      intl,
+    )
     setCurrentQuest(q)
     setQuestModalOpen(true)
   }
 
   const onSave = () => {
     const data = currentQuest?.onSave()
-    updateQuest(quest.id, {
-      data,
-    })
+    updateQuest(
+      quest.id,
+      {
+        data,
+      },
+      intl,
+    )
     setQuestModalOpen(false)
     onClose()
   }
