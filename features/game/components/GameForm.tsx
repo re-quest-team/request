@@ -21,6 +21,7 @@ const schema = yup
   .object({
     name: yup.string().required(),
     description: yup.string().required().min(8),
+    germanLanguage: yup.boolean().required(),
     draft: yup.boolean().required(),
   })
   .required()
@@ -68,7 +69,8 @@ const GameForm = ({ id }: GameFormProps) => {
   const label2 = intl.formatMessage({
     id: 'features.game.gameForm.labelDescription',
   })
-  const label3 = intl.formatMessage({ id: 'features.game.gameForm.labelDraft' })
+  const label3 = intl.formatMessage({ id: 'languages.german' })
+  const label4 = intl.formatMessage({ id: 'features.game.gameForm.labelDraft' })
 
   return (
     <form onSubmit={onSubmit}>
@@ -87,6 +89,12 @@ const GameForm = ({ id }: GameFormProps) => {
       />
       <Toggle
         label={label3}
+        defaultChecked={data?.germanLanguage}
+        registration={register('germanLanguage')}
+        error={errors['germanLanguage']}
+      />
+      <Toggle
+        label={label4}
         defaultChecked={data?.draft}
         registration={register('draft')}
         error={errors['draft']}

@@ -69,5 +69,8 @@
   "features.room.roomPanel.magicalClassroom": "Magisches Klassenzimmer",
   "features.room.roomPanel.darkMuseum": "Dunkles Museum",
   "features.room.roomPanel.noRom": "Ohne Raum",
-  "features.room.roomPanel.labelTheme": "Thema"
+  "features.room.roomPanel.headerRoom": "Raum",
+  "features.room.roomPanel.labelTheme": "Thema",
+  "languages.english": "English",
+  "languages.german": "Deutsch"
 }
