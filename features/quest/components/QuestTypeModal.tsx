@@ -94,7 +94,7 @@ const QuestTypeModal = ({
               <PillButton variant="secondary" className="mx-auto">
                 Rätsel
               </PillButton>
-              {quests
+              {quests(intl)
                 .filter(q => q.type.includes('QUEST'))
                 .map((q, i) => (
                   <QuestElement
@@ -133,7 +133,7 @@ const QuestTypeModal = ({
               <PillButton className="mx-auto" variant="tertiary">
                 Medien
               </PillButton>
-              {quests
+              {quests(intl)
                 .filter(q => q.type.includes('MEDIA'))
                 .map((q, i) => (
                   <QuestElement

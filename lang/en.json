@@ -28,5 +28,7 @@
   "fileUpload.imageUpload": "Upload Image",
   "quests.crypto.playView.encryptedWord": "Encrypted word",
   "quests.crypto.playView.codeWord": "Code word",
-  "quests.crypto.playView.decrypt": "Encrypt"
+  "quests.crypto.playView.decrypt": "Encrypt",
+  "quests.crypto.title": "Cryptography",
+  "quests.crypto.description": "A code word must be decrypted here. The word is encrypted with ROT13 / Caesar cipher."
 }

@@ -28,5 +28,9 @@
   "fileUpload.imageUpload": "Bild hochladen",
   "quests.crypto.playView.encryptedWord": "Verschlüsseltes Wort",
   "quests.crypto.playView.codeWord": "Code Wort",
-  "quests.crypto.playView.decrypt": "Entschlüsseln"
+  "quests.crypto.playView.decrypt": "Entschlüsseln",
+  "quests.crypto.title": "Kryptographie",
+  "quests.crypto.description": "Hier muss ein Codewort entschlüsselt werden. Das Wort wird mit ROT13 / Cäsar-Chiffre verschlüsselt.",
+  "media.text.title": "Text",
+  "media.text.description": "Hier kann ein einfacher Text angezeigt werden"
 }
