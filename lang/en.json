@@ -41,5 +41,7 @@
   "features.game.gameForm.labelName": "Name",
   "features.game.gameForm.labelDescription": "Description",
   "features.game.gameForm.labelDraft": "Draft",
-  "features.game.gameForm.submit": "Save"
+  "features.game.gameForm.submit": "Save",
+  "features.game.gamePanel.edit": "Edit",
+  "features.game.gamePanel.play": "Play"
 }

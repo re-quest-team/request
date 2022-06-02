@@ -7,7 +7,7 @@ import toast from 'react-hot-toast'
 import QRCode from 'react-qr-code'
 import { useSWRConfig } from 'swr'
 import { deleteGame } from '../api/deleteGame'
-import { useIntl } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 import { deleteToast } from '@/components/Toasts'
 
 const GamePanel = ({ id, name, description }: Game) => {
@@ -42,7 +42,9 @@ const GamePanel = ({ id, name, description }: Game) => {
             <div>
               <p>{description}</p>
               <Link href={`/studio/${id}`} passHref>
-                <Button>Bearbeiten</Button>
+                <Button>
+                  <FormattedMessage id="features.game.gamePanel.edit" />
+                </Button>
               </Link>
             </div>
             <div>
@@ -50,7 +52,9 @@ const GamePanel = ({ id, name, description }: Game) => {
                 <QRCode value={`${hostname}/play/${id}`} />
               </div>
               <Link href={`/play/${id}`} passHref>
-                <Button>Spielen</Button>
+                <Button>
+                  <FormattedMessage id="features.game.gamePanel.play" />
+                </Button>
               </Link>
             </div>
           </div>
