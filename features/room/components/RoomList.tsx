@@ -36,7 +36,7 @@ const RoomList = ({ gameId }: RoomListProps) => {
   return (
     <>
       <PillButton size="lg" className="mx-auto">
-        <FormattedMessage id="features.room.rooms" /> ({rooms.length})
+        <FormattedMessage id="features.room.roomList.rooms" /> ({rooms.length})
       </PillButton>
       <DragDropContext
         onDragEnd={result => {
@@ -94,7 +94,7 @@ const RoomList = ({ gameId }: RoomListProps) => {
           setRooms([...rooms, newRoom])
         }}
       >
-        <FormattedMessage id="features.room.addRoom" />
+        <FormattedMessage id="features.room.roomList.addRoom" />
       </PillButton>
     </>
   )

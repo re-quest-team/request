@@ -57,6 +57,6 @@
   "features.quest.questTypeModal.quest": "Rätsel",
   "features.quest.questTypeModal.media": "Medien",
   "features.quest.questTypeModal.save": "Speichern",
-  "features.room.rooms": "Räume",
-  "features.room.addRoom": "Raum hinzufügen"
+  "features.room.roomList.rooms": "Räume",
+  "features.room.roomList.addRoom": "Raum hinzufügen",
 }

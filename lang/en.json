@@ -57,6 +57,6 @@
   "features.quest.questTypeModal.quest": "Quest",
   "features.quest.questTypeModal.media": "Media",
   "features.quest.questTypeModal.save": "Save",
-  "features.room.rooms": "Rooms",
-  "features.room.addRoom": "Add Room"
+  "features.room.roomList.rooms": "Rooms",
+  "features.room.roomList.addRoom": "Add Room"
 }
