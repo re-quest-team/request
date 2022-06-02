@@ -36,5 +36,10 @@
   "quests.crypto.editView.labelEncryptedWord": "Encrypted word",
   "media.text.title": "Text",
   "media.text.description": "A simple text can be shown here",
-  "media.text.editView.title": "Text"
+  "media.text.editView.title": "Text",
+  "features.game.gameForm.toastNotFound": "re:quest not found",
+  "features.game.gameForm.labelName": "Name",
+  "features.game.gameForm.labelDescription": "Description",
+  "features.game.gameForm.labelDraft": "Draft",
+  "features.game.gameForm.submit": "Save"
 }
