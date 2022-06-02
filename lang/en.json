@@ -25,5 +25,8 @@
   "navbar.session.profile": "Profile",
   "navbar.session.settings": "Settings",
   "navbar.session.signOut": "Sign out",
-  "fileUpload.imageUpload": "Upload Image"
+  "fileUpload.imageUpload": "Upload Image",
+  "quests.crypto.playView.encryptedWord": "Encrypted word",
+  "quests.crypto.playView.codeWord": "Code word",
+  "quests.crypto.playView.decrypt": "Encrypt"
 }
