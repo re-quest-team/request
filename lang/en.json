@@ -31,6 +31,9 @@
   "quests.crypto.playView.decrypt": "Encrypt",
   "quests.crypto.title": "Cryptography",
   "quests.crypto.description": "A code word must be decrypted here. The word is encrypted with ROT13 / Caesar cipher.",
+  "quests.crypto.editView.labelTask": "Task",
+  "quests.crypto.editView.labelCodeWord": "Codeword",
+  "quests.crypto.editView.labelEncryptedWord": "Encrypted word",
   "media.text.title": "Text",
   "media.text.description": "A simple text can be shown here"
 }

@@ -31,6 +31,9 @@
   "quests.crypto.playView.decrypt": "Entschlüsseln",
   "quests.crypto.title": "Kryptographie",
   "quests.crypto.description": "Hier muss ein Codewort entschlüsselt werden. Das Wort wird mit ROT13 / Cäsar-Chiffre verschlüsselt.",
+  "quests.crypto.editView.labelTask": "Aufgabenstellung",
+  "quests.crypto.editView.labelCodeWord": "Codewort",
+  "quests.crypto.editView.labelEncryptedWord": "Verschlüsseltes Wort",
   "media.text.title": "Text",
   "media.text.description": "Hier kann ein einfacher Text angezeigt werden"
 }
