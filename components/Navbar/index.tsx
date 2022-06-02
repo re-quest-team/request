@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { signOut, useSession } from 'next-auth/react'
 import { Button } from '../Elements/Button'
 import { Fragment } from 'react'
+import LocaleSwitcher from '../LocaleSwitcher'
 
 const navigation = [
   { name: 'Studio', href: '/studio' },
@@ -76,6 +77,7 @@ const Navbar = () => {
                         </a>
                       </Link>
                     ))}
+                    <LocaleSwitcher />
                   </div>
                 </div>
               </div>
