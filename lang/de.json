@@ -48,5 +48,13 @@
   "features.quest.questImagePlacer.clickToAdd": "Klicke auf das Bild um Rätsel hinzuzufügen",
   "features.quest.questImagePlacer.holdToPreview": "Halte den Vorschau Button gedrückt um eine Vorschau deines Raumes zu sehen",
   "features.quest.questImagePlacer.of": "von",
-  "features.quest.questImagePlacer.quests": "Rätseln"
+  "features.quest.questImagePlacer.quests": "Rätseln",
+  "features.quest.questTypeModal.atStart": "Beim Start",
+  "features.quest.questTypeModal.afterSolving": "Nach dem Lösen eines Quests",
+  "features.quest.questTypeModal.titleAddElement": "Element hinzufügen",
+  "features.quest.questTypeModal.labelVisibility": "Sichbarkeit",
+  "features.quest.questTypeModal.labelVisibleAfterQuest": "Sichbar nach Quest",
+  "features.quest.questTypeModal.quest": "Rätsel",
+  "features.quest.questTypeModal.media": "Medien",
+  "features.quest.questTypeModal.save": "Speichern"
 }
