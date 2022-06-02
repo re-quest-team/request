@@ -59,4 +59,9 @@
   "features.quest.questTypeModal.save": "Speichern",
   "features.room.roomList.rooms": "Räume",
   "features.room.roomList.addRoom": "Raum hinzufügen",
+  "features.room.roomPanel.uploadOwnImage": "Eigenes Foto hochladen",
+  "features.room.roomPanel.magicalClassroom": "Magisches Klassenzimmer",
+  "features.room.roomPanel.darkMuseum": "Dunkles Museum",
+  "features.room.roomPanel.noRom": "Ohne Raum",
+  "features.room.roomPanel.labelTheme": "Thema"
 }

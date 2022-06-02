@@ -58,5 +58,10 @@
   "features.quest.questTypeModal.media": "Media",
   "features.quest.questTypeModal.save": "Save",
   "features.room.roomList.rooms": "Rooms",
-  "features.room.roomList.addRoom": "Add Room"
+  "features.room.roomList.addRoom": "Add Room",
+  "features.room.roomPanel.uploadOwnImage": "Upload own Image",
+  "features.room.roomPanel.magicalClassroom": "Magical classroom",
+  "features.room.roomPanel.darkMuseum": "Dark museum",
+  "features.room.roomPanel.noRom": "No room",
+  "features.room.roomPanel.labelTheme": "Theme"
 }
