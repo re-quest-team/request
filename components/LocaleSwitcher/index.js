@@ -13,7 +13,6 @@ export default function LocaleSwitcher() {
     <Fragment>
       {otherLocales.map(locale => {
         const { pathname, query, asPath } = router
-        console.log({ locale })
         return (
           <Link
             key={locale}
