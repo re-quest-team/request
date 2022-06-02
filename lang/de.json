@@ -24,5 +24,6 @@
   "navbar.faq": "FAQ",
   "navbar.session.profile": "Profil",
   "navbar.session.settings": "Einstellungen",
-  "navbar.session.signOut": "Sign out"
+  "navbar.session.signOut": "Sign out",
+  "fileUpload.imageUpload": "Bild hochladen"
 }
