@@ -30,5 +30,7 @@
   "quests.crypto.playView.codeWord": "Code word",
   "quests.crypto.playView.decrypt": "Encrypt",
   "quests.crypto.title": "Cryptography",
-  "quests.crypto.description": "A code word must be decrypted here. The word is encrypted with ROT13 / Caesar cipher."
+  "quests.crypto.description": "A code word must be decrypted here. The word is encrypted with ROT13 / Caesar cipher.",
+  "media.text.title": "Text",
+  "media.text.description": "A simple text can be shown here"
 }
