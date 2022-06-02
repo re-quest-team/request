@@ -10,12 +10,16 @@ import useSWR from 'swr'
 import { createRoom } from '../api/createRoom'
 import { RoomWithImage } from '../types'
 import RoomPanel from './RoomPanel'
+import { createToast } from '@/components/Toasts'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 type RoomListProps = {
   gameId: string
 }
 
 const RoomList = ({ gameId }: RoomListProps) => {
+  const intl = useIntl()
+
   const { data: game } = useSWR<
     Game & {
       rooms: RoomWithImage[]
@@ -32,7 +36,7 @@ const RoomList = ({ gameId }: RoomListProps) => {
   return (
     <>
       <PillButton size="lg" className="mx-auto">
-        Räume ({rooms.length})
+        <FormattedMessage id="features.room.rooms" /> ({rooms.length})
       </PillButton>
       <DragDropContext
         onDragEnd={result => {
@@ -85,16 +89,12 @@ const RoomList = ({ gameId }: RoomListProps) => {
         className="mx-auto"
         onClick={async () => {
           const createRoomRequest = createRoom({ gameId })
-          toast.promise(createRoomRequest, {
-            loading: 'Speichern',
-            success: 'Erfolgreich gespeichert',
-            error: 'Fehler beim Speichern',
-          })
+          createToast(createRoomRequest, intl)
           const newRoom = await (await createRoomRequest).data
           setRooms([...rooms, newRoom])
         }}
       >
-        Raum hinzufügen
+        <FormattedMessage id="features.room.addRoom" />
       </PillButton>
     </>
   )

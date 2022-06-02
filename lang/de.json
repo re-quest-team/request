@@ -56,5 +56,7 @@
   "features.quest.questTypeModal.labelVisibleAfterQuest": "Sichbar nach Quest",
   "features.quest.questTypeModal.quest": "Rätsel",
   "features.quest.questTypeModal.media": "Medien",
-  "features.quest.questTypeModal.save": "Speichern"
+  "features.quest.questTypeModal.save": "Speichern",
+  "features.room.rooms": "Räume",
+  "features.room.addRoom": "Raum hinzufügen"
 }

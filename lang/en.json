@@ -56,5 +56,7 @@
   "features.quest.questTypeModal.labelVisibleAfterQuest": "Visible after quest",
   "features.quest.questTypeModal.quest": "Quest",
   "features.quest.questTypeModal.media": "Media",
-  "features.quest.questTypeModal.save": "Save"
+  "features.quest.questTypeModal.save": "Save",
+  "features.room.rooms": "Rooms",
+  "features.room.addRoom": "Add Room"
 }
