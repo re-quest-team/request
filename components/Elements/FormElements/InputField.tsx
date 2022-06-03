@@ -6,7 +6,7 @@ import { FieldWrapper, FieldWrapperPassThroughProps } from './FieldWrapper'
 
 type InputFieldProps = InputHTMLAttributes<HTMLInputElement> &
   FieldWrapperPassThroughProps & {
-    type?: 'text' | 'email' | 'password'
+    type?: 'text' | 'email' | 'password' | 'number'
     className?: string
     registration?: Partial<UseFormRegisterReturn>
     error?: any

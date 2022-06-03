@@ -69,13 +69,13 @@ const QuestTypeModal = ({
           {!questModalOpen && (
             <>
               <SelectField
-                label="Sichbarkeit"
+                label="Sichtbarkeit"
                 options={taskVisibilityOptions}
                 onSelect={setTaskVisibility}
               ></SelectField>
               {taskVisibility.value === 'Nach dem Lösen eines Quests' && (
                 <SelectField
-                  label="Sichbar mach Quest"
+                  label="Sichtbar nach Quest"
                   options={[{ value: '1' }, { value: '2' }]}
                   onSelect={() => {}}
                 ></SelectField>
@@ -86,16 +86,28 @@ const QuestTypeModal = ({
               {quests
                 .filter(q => q.type.includes('QUEST'))
                 .map((q, i) => (
-                  <QuestElement
-                    key={i}
-                    title={q.title}
-                    description={q.description}
-                    icon={q.icon}
-                    variant="secondary"
-                    onClick={() => {
-                      handleClick(q)
-                    }}
-                  />
+                  <>
+                    <QuestElement
+                      key={i}
+                      title={q.title}
+                      description={q.description}
+                      icon={q.icon}
+                      variant="secondary"
+                      onClick={() => {
+                        handleClick(q)
+                      }}
+                    />
+                    <QuestElement
+                      key={i}
+                      title={q.title}
+                      description={q.description}
+                      icon={q.icon}
+                      variant="secondary"
+                      onClick={() => {
+                        handleClick(q)
+                      }}
+                    />
+                  </>
                 ))}
               {/* <QuestElement
                 title="Programmieren"
