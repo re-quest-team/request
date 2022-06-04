@@ -8,6 +8,7 @@ import toast from 'react-hot-toast'
 import { useSWRConfig } from 'swr'
 import { deleteGame } from '../api/deleteGame'
 import { DocumentDownloadIcon } from '@heroicons/react/solid'
+import 'node-self'
 import QRCodeStyling, { FileExtension } from 'qr-code-styling'
 import QrCodeConfig from '@/features/game/components/QrCodeConfig'
 

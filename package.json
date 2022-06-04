@@ -23,6 +23,7 @@
     "next": "12.1.6",
     "next-auth": "^4.3.4",
     "next-s3-upload": "^0.2.1",
+    "node-self": "^1.0.0-d",
     "prettier-plugin-tailwindcss": "^0.1.10",
     "qr-code-styling": "^1.6.0-rc.1",
     "react": "18.1.0",
