@@ -45,17 +45,20 @@ const GamePanel = ({ id, name, description }: Game) => {
     })
   }
 
-  const qrCode = new QRCodeStyling(
-    QrCodeConfig(
-      `${hostname}/play/${id}`,
-      'https://raw.githubusercontent.com/re-quest-team/request/e288576a3778a34b817cf01e9ca2398e1c40ebd2/assets/logos/request-logo-single.svg',
-    ),
-  )
+  const qrCode = (size: number) => {
+    return new QRCodeStyling(
+      QrCodeConfig(
+        `${hostname}/play/${id}`,
+        'https://raw.githubusercontent.com/re-quest-team/request/e288576a3778a34b817cf01e9ca2398e1c40ebd2/assets/logos/request-logo-single.svg',
+        size,
+      ),
+    )
+  }
 
   const onDownload = () => {
-    qrCode.download({
+    qrCode(1000).download({
       name: `request-qr-code_${fileExt.value}_${id}`,
-      extension: fileExt.value as FileExtension,
+      extension: fileExt.value.toLowerCase() as FileExtension,
     })
   }
 

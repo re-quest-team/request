@@ -1,9 +1,10 @@
 import { Options } from 'qr-code-styling/lib/types'
 
-const QrConfigConfig = (url: string, imageUrl: string) => {
+const QrConfigConfig = (url: string, imageUrl: string, size: number) => {
+  const scale = size / 100
   const test: Options = {
-    width: 1000,
-    height: 1000,
+    width: size,
+    height: size,
     cornersSquareOptions: {
       type: 'dot',
       gradient: {
@@ -33,7 +34,7 @@ const QrConfigConfig = (url: string, imageUrl: string) => {
     imageOptions: {
       hideBackgroundDots: true,
       imageSize: 0.2,
-      margin: 15,
+      margin: 2 * scale,
     },
     data: url,
     image: imageUrl,
