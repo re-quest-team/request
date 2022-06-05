@@ -5,7 +5,10 @@ import { incorrectToast, successToast } from '@/components/Toasts'
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import { useQuestStore } from './store'
-import { formOptions } from '@/collections/Quests/NumberInput/validation'
+import {
+  formOptions,
+  valNumberInput,
+} from '@/collections/Quests/NumberInput/validation'
 
 const PlayView = () => {
   const question = useQuestStore(state => state.question)

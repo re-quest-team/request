@@ -3,13 +3,15 @@ import { IQuest } from '@/collections/types'
 import EditView from './EditView'
 import PlayView from './PlayView'
 import { useQuestStore } from './store'
+import useSWR from 'swr'
+import { AxiosError } from 'axios'
 
-type QuestData = {
+export type NumberInputQuestData = {
   question: string
   answer: number
 }
 
-const CryptoQuest: IQuest<QuestData> = {
+const NumberInputQuest: IQuest<NumberInputQuestData> = {
   type: 'QUEST_NUMBER_INPUT',
   title: 'Nummern Eingabe',
   description: 'Hier ein Frage mit einer Nummer beantwortet werden.',
@@ -18,7 +20,6 @@ const CryptoQuest: IQuest<QuestData> = {
   PlayView: PlayView,
   onLoad: ({ question, answer }) =>
     useQuestStore.setState(state => ({ ...state, question, answer })),
-
   onSave: () => {
     const question = useQuestStore.getState().question
     const answer = useQuestStore.getState().answer
@@ -27,7 +28,6 @@ const CryptoQuest: IQuest<QuestData> = {
       answer,
     }
   },
-
   onSolve: callback => {
     useQuestStore.subscribe(state => {
       if (state.correct) {
@@ -37,4 +37,4 @@ const CryptoQuest: IQuest<QuestData> = {
   },
 }
 
-export default CryptoQuest
+export default NumberInputQuest

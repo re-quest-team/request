@@ -1,8 +1,8 @@
 import TextMedia from './Media/Text'
 import CryptoQuest from './Quests/Crypto'
-import NumberInput from './Quests/NumberInput'
+import NumberInputQuest from './Quests/NumberInput'
 
 const media = [TextMedia]
-const quests = [CryptoQuest, NumberInput, ...media]
+const quests = [CryptoQuest, NumberInputQuest, ...media]
 
 export default quests

@@ -1,5 +1,3 @@
-import { useForm } from 'react-hook-form'
-import { formOptions } from '@/collections/Quests/NumberInput/validation'
 import create from 'zustand'
 
 interface QuestState {
@@ -13,9 +11,13 @@ interface QuestState {
 
 export const useQuestStore = create<QuestState>()((set, get) => ({
   question: '',
-  answer: NaN,
+  answer: 0,
   setQuestion: question => set(() => ({ question })),
   setAnswer: answer => set(() => ({ answer })),
+  //if(!isNaN(answer)) {
+  //  set(() => ({ answer }))
+  //}
+  //},
   correct: false,
   onSolve: input => {
     const correct = input === get().answer
