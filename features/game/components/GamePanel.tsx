@@ -55,6 +55,11 @@ const GamePanel = ({ id, name, description }: Game) => {
     )
   }
 
+  const onPreview = (e: HTMLDivElement | null) => {
+    if (e != null && hostname != '' && e.children.length == 0)
+      e.appendChild(qrCode(287)._canvas as HTMLCanvasElement)
+  }
+
   const onDownload = () => {
     qrCode(1000).download({
       name: `request-qr-code_${fileExt.value}_${id}`,
@@ -67,8 +72,9 @@ const GamePanel = ({ id, name, description }: Game) => {
       <>
         <div className="relative my-4 w-full rounded">
           <div className="flex w-full flex-col">
-            <div>
+            <div className="flex w-full flex-row justify-between">
               <p>{description}</p>
+              <div ref={onPreview} className="rounded bg-white p-1" />
             </div>
             <div className="mt-4 flex flex-row">
               <Link href={`/studio/${id}`} passHref>
