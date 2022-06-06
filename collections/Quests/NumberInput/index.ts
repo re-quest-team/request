@@ -3,7 +3,6 @@ import { IQuest } from '@/collections/types'
 import EditView from './EditView'
 import PlayView from './PlayView'
 import { useQuestStore } from './store'
-import { Units } from '@/collections/Quests/NumberInput/units'
 
 export type NumberInputQuestData = {
   question: string

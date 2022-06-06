@@ -1,5 +1,3 @@
-import { SelectOption } from '@/components/Elements/Select'
-
 export enum Units {
   None = '',
   Meter = 'm',

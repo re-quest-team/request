@@ -7,7 +7,6 @@ import { useState } from 'react'
 import { useQuestStore } from './store'
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup'
 import { valNumberInput } from '@/collections/Quests/NumberInput/validation'
-import { Units } from '@/collections/Quests/NumberInput/units'
 
 const PlayView = () => {
   const question = useQuestStore(state => state.question)
