@@ -11,6 +11,9 @@ import { DocumentDownloadIcon } from '@heroicons/react/solid'
 import 'node-self'
 import QRCodeStyling, { FileExtension } from 'qr-code-styling'
 import QrCodeConfig from '@/features/game/components/QrCode/QrCodeConfig'
+import PdfTemplate, {
+  containerStyle,
+} from '@/features/game/components/QrCode/PdfTemplate'
 import html2canvas from 'html2canvas'
 import JsPdf from 'jspdf'
 
@@ -114,29 +117,12 @@ const GamePanel = ({ id, name, description }: Game) => {
             </div>
           </div>
 
-          <div
-            ref={pdfDoc}
-            className="fixed top-0 bg-white"
-            style={{
-              minWidth: '210mm',
-              minHeight: '297mm',
-              backgroundColor: 'white',
-              left: '100vw',
-            }}
-          >
-            <div className="w-full py-20" />
-            <div className="mx-auto w-96 rounded bg-gradient-to-br from-flamingo-400 to-purple-400 pb-3">
-              <h1 className="px-3 py-4 text-center align-middle text-2xl">
-                {name}
-              </h1>
-              <div
-                ref={onQrLoad}
-                className="mx-8 mt-3 flex flex-row justify-center rounded bg-white p-4"
-              />
-              <p className="px-3 py-4 text-center align-middle">
-                {description}
-              </p>
-            </div>
+          <div ref={pdfDoc} style={containerStyle}>
+            <PdfTemplate
+              name={name}
+              description={description}
+              onQrLoad={onQrLoad}
+            />
           </div>
         </div>
       </>
