@@ -3,7 +3,7 @@ import Select, { SelectOption } from '@/components/Elements/Select'
 import Panel from '@/components/Panel'
 import { Game } from '@prisma/client'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useSWRConfig } from 'swr'
 import { deleteGame } from '../api/deleteGame'
@@ -11,6 +11,8 @@ import { DocumentDownloadIcon } from '@heroicons/react/solid'
 import 'node-self'
 import QRCodeStyling, { FileExtension } from 'qr-code-styling'
 import QrCodeConfig from '@/features/game/components/QrCode/QrCodeConfig'
+import html2canvas from 'html2canvas'
+import JsPdf from 'jspdf'
 
 const qrOptions: SelectOption[] = [
   { value: 'PNG' },
@@ -45,6 +47,8 @@ const GamePanel = ({ id, name, description }: Game) => {
     })
   }
 
+  const pdfDoc = useRef<HTMLDivElement>(null)
+
   const qrCode = (size: number) => {
     return new QRCodeStyling(
       QrCodeConfig({
@@ -62,10 +66,21 @@ const GamePanel = ({ id, name, description }: Game) => {
   }
 
   const onDownload = () => {
-    qrCode(1000).download({
-      name: `request-qr-code_${fileExt.value}_${id}`,
-      extension: fileExt.value.toLowerCase() as FileExtension,
-    })
+    const fileName = `request-qr-code_${fileExt.value}_${id}`
+
+    if (fileExt.value != 'PDF') {
+      qrCode(1000).download({
+        name: fileName,
+        extension: fileExt.value.toLowerCase() as FileExtension,
+      })
+    } else {
+      const pdf = new JsPdf()
+      html2canvas(pdfDoc.current as HTMLElement).then(canvas => {
+        const imgData = canvas.toDataURL('image/png')
+        pdf.addImage(imgData, 'PNG', 0, 0, 210, 297, 'pdf', 'NONE', 0)
+        pdf.save(`${fileName}.pdf`)
+      })
+    }
   }
 
   return (
@@ -96,6 +111,31 @@ const GamePanel = ({ id, name, description }: Game) => {
                   <Button className="ml-4">Spielen</Button>
                 </Link>
               </div>
+            </div>
+          </div>
+
+          <div
+            ref={pdfDoc}
+            className="fixed top-0 bg-white"
+            style={{
+              minWidth: '210mm',
+              minHeight: '297mm',
+              backgroundColor: 'white',
+              left: '100vw',
+            }}
+          >
+            <div className="w-full py-20" />
+            <div className="mx-auto w-96 rounded bg-gradient-to-br from-flamingo-400 to-purple-400 pb-3">
+              <h1 className="px-3 py-4 text-center align-middle text-2xl">
+                {name}
+              </h1>
+              <div
+                ref={onQrLoad}
+                className="mx-8 mt-3 flex flex-row justify-center rounded bg-white p-4"
+              />
+              <p className="px-3 py-4 text-center align-middle">
+                {description}
+              </p>
             </div>
           </div>
         </div>
