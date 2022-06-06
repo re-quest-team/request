@@ -23,6 +23,10 @@ const qrOptions: SelectOption[] = [
   { value: 'PDF' },
 ]
 
+const getStaticProp = async () => {
+  return await require('assets/logos/request-logo-single.svg')
+}
+
 const GamePanel = ({ id, name, description }: Game) => {
   const { mutate } = useSWRConfig()
 
@@ -51,13 +55,17 @@ const GamePanel = ({ id, name, description }: Game) => {
   }
 
   const pdfDoc = useRef<HTMLDivElement>(null)
+  const [imgUrl, setImgUrl] = useState('')
+
+  getStaticProp().then(props => {
+    setImgUrl(props.default.src)
+  })
 
   const qrCode = (size: number) => {
     return new QRCodeStyling(
       QrCodeConfig({
         url: `${hostname}/play/${id}`,
-        imageUrl:
-          'https://raw.githubusercontent.com/re-quest-team/request/e288576a3778a34b817cf01e9ca2398e1c40ebd2/assets/logos/request-logo-single.svg',
+        imageUrl: imgUrl,
         size: size,
       }),
     )

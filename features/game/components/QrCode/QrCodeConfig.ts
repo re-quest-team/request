@@ -8,7 +8,8 @@ type QrCodeConfig = {
 
 const QrCodeConfig = ({ url, imageUrl, size }: QrCodeConfig) => {
   const scale = size / 100
-  const test: Options = {
+
+  const opt: Options = {
     width: size,
     height: size,
     cornersSquareOptions: {
@@ -45,7 +46,7 @@ const QrCodeConfig = ({ url, imageUrl, size }: QrCodeConfig) => {
     data: url,
     image: imageUrl,
   }
-  return test
+  return opt
 }
 
 export default QrCodeConfig
