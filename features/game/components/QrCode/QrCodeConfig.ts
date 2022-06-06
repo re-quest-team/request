@@ -1,6 +1,12 @@
 import { Options } from 'qr-code-styling/lib/types'
 
-const QrConfigConfig = (url: string, imageUrl: string, size: number) => {
+type QrCodeConfig = {
+  url: string
+  imageUrl: string
+  size: number
+}
+
+const QrCodeConfig = ({ url, imageUrl, size }: QrCodeConfig) => {
   const scale = size / 100
   const test: Options = {
     width: size,
@@ -42,4 +48,4 @@ const QrConfigConfig = (url: string, imageUrl: string, size: number) => {
   return test
 }
 
-export default QrConfigConfig
+export default QrCodeConfig

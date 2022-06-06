@@ -10,7 +10,7 @@ import { deleteGame } from '../api/deleteGame'
 import { DocumentDownloadIcon } from '@heroicons/react/solid'
 import 'node-self'
 import QRCodeStyling, { FileExtension } from 'qr-code-styling'
-import QrCodeConfig from '@/features/game/components/QrCodeConfig'
+import QrCodeConfig from '@/features/game/components/QrCode/QrCodeConfig'
 
 const qrOptions: SelectOption[] = [
   { value: 'PNG' },
@@ -47,15 +47,16 @@ const GamePanel = ({ id, name, description }: Game) => {
 
   const qrCode = (size: number) => {
     return new QRCodeStyling(
-      QrCodeConfig(
-        `${hostname}/play/${id}`,
-        'https://raw.githubusercontent.com/re-quest-team/request/e288576a3778a34b817cf01e9ca2398e1c40ebd2/assets/logos/request-logo-single.svg',
-        size,
-      ),
+      QrCodeConfig({
+        url: `${hostname}/play/${id}`,
+        imageUrl:
+          'https://raw.githubusercontent.com/re-quest-team/request/e288576a3778a34b817cf01e9ca2398e1c40ebd2/assets/logos/request-logo-single.svg',
+        size: size,
+      }),
     )
   }
 
-  const onPreview = (e: HTMLDivElement | null) => {
+  const onQrLoad = (e: HTMLDivElement | null) => {
     if (e != null && hostname != '' && e.children.length == 0)
       e.appendChild(qrCode(287)._canvas as HTMLCanvasElement)
   }
@@ -74,7 +75,7 @@ const GamePanel = ({ id, name, description }: Game) => {
           <div className="flex w-full flex-col">
             <div className="flex w-full flex-row justify-between">
               <p>{description}</p>
-              <div ref={onPreview} className="rounded bg-white p-1" />
+              <div ref={onQrLoad} className="rounded bg-white p-1" />
             </div>
             <div className="mt-4 flex flex-row">
               <Link href={`/studio/${id}`} passHref>
