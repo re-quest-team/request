@@ -4,10 +4,10 @@ import { Units } from '@/collections/Quests/NumberInput/units'
 interface QuestState {
   question: string
   answer: number
-  unit: Units
+  unit: string
   setQuestion: (question: string) => void
   setAnswer: (answer: number) => void
-  setUnit: (unit: Units) => void
+  setUnit: (unit: string) => void
   correct: boolean
   onSolve: (input: number) => boolean
 }

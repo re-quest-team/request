@@ -63,12 +63,10 @@ const QuestTypeModal = ({
       data,
     })
     if (await validate(data)) {
-      console.log('\ndata valid \n')
       setQuestModalOpen(false)
       onClose()
       return
     }
-    console.log('\ndate invalid\n')
   }
   return (
     <>

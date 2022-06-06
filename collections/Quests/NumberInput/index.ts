@@ -8,7 +8,7 @@ import { Units } from '@/collections/Quests/NumberInput/units'
 export type NumberInputQuestData = {
   question: string
   answer: number
-  unit: Units
+  unit: string
 }
 
 const NumberInputQuest: IQuest<NumberInputQuestData> = {

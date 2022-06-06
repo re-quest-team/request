@@ -11,7 +11,7 @@ type InputFieldProps = InputHTMLAttributes<HTMLInputElement> &
     className?: string
     registration?: Partial<UseFormRegisterReturn>
     error?: any
-    unit?: Units
+    unit?: string
   }
 
 export const InputField = (props: InputFieldProps) => {
@@ -35,8 +35,12 @@ export const InputField = (props: InputFieldProps) => {
         {...registration}
         {...other}
       />
-      {unit?.valueOf() && unit.valueOf() != Units.None && (
-        <span style={'margin-left:5px'}></span>
+      {unit?.valueOf() != Units.None && (
+        <div className="input-group-append">
+          <span className="input-group-text" style={{ marginLeft: '10px' }}>
+            {unit}
+          </span>
+        </div>
       )}
       {error?.message && (
         <small className="text-red-500">{error.message}</small>

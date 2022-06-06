@@ -27,32 +27,3 @@ export enum Units {
   Day = 'd',
   Percent = '%',
 }
-
-/*
-export const unitOptions: SelectOption[] [
-  { value: ''},
-  { value: 'm'},
-  { value: 'mm'},
-  { value: 'cm'},
-  { value: 'dm'},
-  { value: 'km'},
-  { value: 'qm'},
-  { value: 'qkm'},
-  { value: 'm³'},
-  { value: 'l'},
-  { value:'ml'},
-  { value: 'cl'},
-  { value: 'dl'},
-  { value: 'hl'},
-  { value: 'kg'},
-  { value: 'mg'},
-  { value: 'g'},
-  { value: 'lb'},
-  { value: 'rad'},
-  { value: '°'},
-  { value: 's'},
-  { value: 'min'},
-  { value: 'h'},
-  { value: 'd'},
-  { value: '%'},
-]*/

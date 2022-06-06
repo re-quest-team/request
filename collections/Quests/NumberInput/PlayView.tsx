@@ -7,6 +7,7 @@ import { useState } from 'react'
 import { useQuestStore } from './store'
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup'
 import { valNumberInput } from '@/collections/Quests/NumberInput/validation'
+import { Units } from '@/collections/Quests/NumberInput/units'
 
 const PlayView = () => {
   const question = useQuestStore(state => state.question)
@@ -25,36 +26,33 @@ const PlayView = () => {
   const { register, handleSubmit, formState } = useForm(formOptions)
   const { errors } = formState
 
-  let check = false
-
-  const answerSend = (data: any) => {
-    console.log('in answer send')
-    if (errors.answer === {}) {
-      check = true
+  const answerCheck = async (data: any) => {
+    if (await valNumberInput.validate(data)) {
       checkCorrect()
-    } else {
-      check = false
     }
   }
 
-  const checkCorrect = () => {
-    if (onSolve(Number(answer))) {
-      console.log('valid')
-      successToast()
-      successConfetti()
-    } else if (check) {
-      incorrectToast()
+  const checkCorrect = async () => {
+    if (!errors.answer) {
+      if (onSolve(Number(answer))) {
+        successToast()
+        successConfetti()
+      } else {
+        incorrectToast()
+      }
     }
   }
 
   return (
-    <form onSubmit={handleSubmit(answerSend)}>
+    <form onSubmit={handleSubmit(answerCheck)}>
       <p>{question}</p>
       <InputField
         label="Antwort"
         name={'answer'}
+        className={'form-control'}
         registration={register('answer')}
         error={errors.answer}
+        unit={unit}
         onChange={e => setAnswer(e.target.value)}
       ></InputField>
       <Button type="submit" onClick={checkCorrect}>
