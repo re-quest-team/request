@@ -3,6 +3,7 @@ import { InputHTMLAttributes } from 'react'
 import { UseFormRegisterReturn } from 'react-hook-form'
 
 import { FieldWrapper, FieldWrapperPassThroughProps } from './FieldWrapper'
+import { Units } from '@/collections/Quests/NumberInput/units'
 
 type InputFieldProps = InputHTMLAttributes<HTMLInputElement> &
   FieldWrapperPassThroughProps & {
@@ -10,6 +11,7 @@ type InputFieldProps = InputHTMLAttributes<HTMLInputElement> &
     className?: string
     registration?: Partial<UseFormRegisterReturn>
     error?: any
+    unit?: Units
   }
 
 export const InputField = (props: InputFieldProps) => {
@@ -19,6 +21,7 @@ export const InputField = (props: InputFieldProps) => {
     className,
     registration,
     error,
+    unit,
     ...other
   } = props
   return (
@@ -32,6 +35,9 @@ export const InputField = (props: InputFieldProps) => {
         {...registration}
         {...other}
       />
+      {unit?.valueOf() && unit.valueOf() != Units.None && (
+        <span style={'margin-left:5px'}></span>
+      )}
       {error?.message && (
         <small className="text-red-500">{error.message}</small>
       )}

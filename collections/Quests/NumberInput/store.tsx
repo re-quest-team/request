@@ -1,10 +1,13 @@
 import create from 'zustand'
+import { Units } from '@/collections/Quests/NumberInput/units'
 
 interface QuestState {
   question: string
   answer: number
+  unit: Units
   setQuestion: (question: string) => void
   setAnswer: (answer: number) => void
+  setUnit: (unit: Units) => void
   correct: boolean
   onSolve: (input: number) => boolean
 }
@@ -12,12 +15,10 @@ interface QuestState {
 export const useQuestStore = create<QuestState>()((set, get) => ({
   question: '',
   answer: 0,
+  unit: Units.None,
   setQuestion: question => set(() => ({ question })),
   setAnswer: answer => set(() => ({ answer })),
-  //if(!isNaN(answer)) {
-  //  set(() => ({ answer }))
-  //}
-  //},
+  setUnit: unit => set(() => ({ unit })),
   correct: false,
   onSolve: input => {
     const correct = input === get().answer
