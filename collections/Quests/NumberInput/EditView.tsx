@@ -42,18 +42,15 @@ const EditView = () => {
   const setAnswer = useQuestStore(state => state.setAnswer)
   const unit = useQuestStore(state => state.unit)
   const setUnit = useQuestStore(state => state.setUnit)
-  const formOptions = {
-    resolver: yupResolver(valNumberInput),
-    mode: 'all',
-    criteriaMode: 'all',
-  }
-  // @ts-ignore
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm(formOptions)
-
+  } = useForm({
+    resolver: yupResolver(valNumberInput),
+    mode: 'all',
+    criteriaMode: 'all',
+  })
   const changedData = async (data: any) => {}
 
   const selectedField = (data: any) => {

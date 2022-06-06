@@ -16,13 +16,11 @@ const PlayView = () => {
   const correct = useQuestStore(state => state.correct)
 
   const [answer, setAnswer] = useState('')
-  const formOptions = {
+  const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(valNumberInput),
     mode: 'all',
     criteriaMode: 'all',
-  }
-  // @ts-ignore
-  const { register, handleSubmit, formState } = useForm(formOptions)
+  })
   const { errors } = formState
 
   const answerCheck = async (data: any) => {
