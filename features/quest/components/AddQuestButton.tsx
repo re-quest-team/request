@@ -1,5 +1,6 @@
 import { Transition } from '@headlessui/react'
 import {
+  CalculatorIcon,
   ChartSquareBarIcon,
   CodeIcon,
   LockClosedIcon,
@@ -41,6 +42,8 @@ const renderIcon = (type?: QuestType) => {
       return <QrcodeIcon className="h-10 w-10" />
     case 'QUEST_STATISTICS':
       return <ChartSquareBarIcon className="h-10 w-10" />
+    case 'QUEST_NUMBER_INPUT':
+      return <CalculatorIcon className="h-10 w-10" />
     case 'MEDIA_TEXT':
       return <MenuAlt1Icon className="h-10 w-10" />
     case 'MEDIA_IMAGE':

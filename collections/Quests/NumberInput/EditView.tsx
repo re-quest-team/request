@@ -7,7 +7,9 @@ import { SelectField } from '@/components/Elements/Select/SelectField'
 import { Units } from '@/collections/Quests/NumberInput/units'
 import { SelectOption } from '@/components/Elements/Select'
 
-const unitOptions: SelectOption[] = Object.values(Units).map(unit => ({value: unit}))
+const unitOptions: SelectOption[] = Object.values(Units).map(unit => ({
+  value: unit,
+}))
 
 const EditView = () => {
   const question = useQuestStore(state => state.question)
@@ -47,7 +49,6 @@ const EditView = () => {
         defaultValue={answer}
         registration={register('answer')}
         error={errors['answer']}
-        unit={unit}
         onChange={e => {
           setAnswer(Number(e.target.value))
         }}

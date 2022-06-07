@@ -4,6 +4,7 @@ import {
   CheckCircleIcon,
   CodeIcon,
   LockClosedIcon,
+  CalculatorIcon,
   MenuAlt1Icon,
   PhotographIcon,
   PlusIcon,
@@ -30,6 +31,7 @@ const bgVariant = {
 }
 
 const renderIcon = (type?: QuestType) => {
+  console.log(type)
   switch (type) {
     case 'QUEST_CRYPTO':
       return <LockClosedIcon className="h-10 w-10" />
@@ -39,6 +41,8 @@ const renderIcon = (type?: QuestType) => {
       return <QrcodeIcon className="h-10 w-10" />
     case 'QUEST_STATISTICS':
       return <ChartSquareBarIcon className="h-10 w-10" />
+    case 'QUEST_NUMBER_INPUT':
+      return <CalculatorIcon className="h-10 w-10" />
     case 'MEDIA_TEXT':
       return <MenuAlt1Icon className="h-10 w-10" />
     case 'MEDIA_IMAGE':
