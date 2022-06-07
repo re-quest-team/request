@@ -3,6 +3,8 @@ import { IQuest } from '@/collections/types'
 import EditView from './EditView'
 import PlayView from './PlayView'
 import { useInstagramStore } from './store'
+ import {Instagram} from "react-feather";
+ import {CameraIcon} from "@heroicons/react/solid";
 
 type Data = {
   link: string
@@ -10,9 +12,9 @@ type Data = {
 
 const InstagramMedia: IQuest<Data> = {
   type: 'MEDIA_INSTAGRAM',
-  title: 'Text',
+  title: 'Instagram',
   description: 'Hier kann ein einfacher Instagram Post angezeigt werden',
-  icon: MenuAlt1Icon,
+  icon: Instagram,
   EditView,
   PlayView,
   onLoad: ({ link }) => useInstagramStore.setState(state => ({ ...state, link })),
