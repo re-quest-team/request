@@ -1,7 +1,6 @@
 import { QuestType } from '@prisma/client'
 import React from 'react'
 import { Icon } from 'react-feather'
-import { KeyedMutator } from 'swr'
 
 export interface IQuest<T> {
   type: QuestType

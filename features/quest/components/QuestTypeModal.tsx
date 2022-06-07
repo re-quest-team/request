@@ -98,18 +98,16 @@ const QuestTypeModal = ({
               {quests
                 .filter(q => q.type.includes('QUEST'))
                 .map((q, i) => (
-                  <>
-                    <QuestElement
-                      key={i}
-                      title={q.title}
-                      description={q.description}
-                      icon={q.icon}
-                      variant="secondary"
-                      onClick={() => {
-                        handleClick(q)
-                      }}
-                    />
-                  </>
+                  <QuestElement
+                    key={i}
+                    title={q.title}
+                    description={q.description}
+                    icon={q.icon}
+                    variant="secondary"
+                    onClick={() => {
+                      handleClick(q)
+                    }}
+                  />
                 ))}
               {/* <QuestElement
                 title="Programmieren"
