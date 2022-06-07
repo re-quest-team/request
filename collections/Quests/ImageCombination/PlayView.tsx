@@ -23,14 +23,17 @@ const PlayView = () => {
   const [answer, setAnswer] = useState('')
 
   const intl = useIntl()
-  const encryptWord = intl.formatMessage({
-    id: 'quests.crypto.playView.encryptedWord',
+  const toBeCombined = intl.formatMessage({
+    id: 'quests.imageCombination.playView.imageToBeCombined',
   })
-  const codeWord = intl.formatMessage({ id: 'quests.crypto.playView.codeWord' })
+  const chose = intl.formatMessage({
+    id: 'quests.imageCombination.playView.chose',
+  })
 
   return (
     <div>
       <p>{task}</p>
+      <p>{toBeCombined}</p>
       <div className="relative hidden h-8 w-28 lg:block">
         <Image
           src={imageToBeCombined}
@@ -39,7 +42,7 @@ const PlayView = () => {
           width={300}
         />
       </div>
-      <p>{'Wähle die Richtigen Bilder aus'}</p>
+      <p>{chose}</p>
       <div className="relative hidden h-8 w-28 lg:block">
         <Image
           src={imagesToCombineRight[0]}
