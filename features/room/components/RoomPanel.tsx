@@ -39,7 +39,9 @@ const RoomPanel = ({ provided, snapshot, index, roomId }: Props) => {
   const [imageUrl, setImageUrl] = useState('')
   const { data: room } = useSWR<RoomWithImageAndQuests>(`/api/room/${roomId}`)
 
-  console.log(room)
+  if (roomImages.map(option => option.value).indexOf(roomImage.value) < 0) {
+    setRoomImage(roomImages[0])
+  }
 
   useEffect(() => {
     if (room?.image?.url)
@@ -60,7 +62,7 @@ const RoomPanel = ({ provided, snapshot, index, roomId }: Props) => {
     ) {
       setImageUrl(require('@/assets/rooms/dark-museum.jpg').default.src)
     }
-  }, [roomImage.value])
+  }, [roomImage.value, intl])
 
   const onDelete = async () => {
     const deleteRoomRequest = deleteRoom(room!.id)
