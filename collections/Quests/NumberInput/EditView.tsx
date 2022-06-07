@@ -7,33 +7,7 @@ import { SelectField } from '@/components/Elements/Select/SelectField'
 import { Units } from '@/collections/Quests/NumberInput/units'
 import { SelectOption } from '@/components/Elements/Select'
 
-const unitOptions: SelectOption[] = [
-  { value: Units.None },
-  { value: Units.Meter },
-  { value: Units.Millimeter },
-  { value: Units.Centimeter },
-  { value: Units.Decimeter },
-  { value: Units.Kilometer },
-  { value: Units.Squaremeter },
-  { value: Units.Squarekilometer },
-  { value: Units.Cubicmeter },
-  { value: Units.Litre },
-  { value: Units.Millilitre },
-  { value: Units.Centilitre },
-  { value: Units.Decilitre },
-  { value: Units.Hectolitre },
-  { value: Units.Kilogram },
-  { value: Units.Milligram },
-  { value: Units.Gram },
-  { value: Units.Pound },
-  { value: Units.Radian },
-  { value: Units.Degree },
-  { value: Units.Second },
-  { value: Units.Minute },
-  { value: Units.Hour },
-  { value: Units.Day },
-  { value: Units.Percent },
-]
+const unitOptions: SelectOption[] = Object.values(Units).map(unit => ({value: unit}))
 
 const EditView = () => {
   const question = useQuestStore(state => state.question)
