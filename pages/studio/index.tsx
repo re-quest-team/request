@@ -4,6 +4,7 @@ import GamePanel from '@/features/game/components/GamePanel'
 import { Game } from '@prisma/client'
 import Link from 'next/link'
 import useSWR from 'swr'
+import { FormattedMessage } from 'react-intl'
 
 const Studio = () => {
   const { data } = useSWR<Game[]>('/api/game')
@@ -13,12 +14,16 @@ const Studio = () => {
   return (
     <div>
       <Link href={'/studio/new'} passHref>
-        <Button>Neues re:quest erstellen</Button>
+        <Button>
+          <FormattedMessage id="page.studio.index.createNewQuest" />
+        </Button>
       </Link>
 
       <Spacer />
 
-      <h1 className="text-xl">Meine re:quests</h1>
+      <h1 className="text-xl">
+        <FormattedMessage id="page.studio.index.myQuests" />
+      </h1>
       {data && data?.map(g => <GamePanel key={g.id} {...g} />)}
     </div>
   )

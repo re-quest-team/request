@@ -7,9 +7,12 @@ import Particles from 'react-tsparticles'
 import { Engine } from 'tsparticles-engine'
 import { loadSeaAnemonePreset } from 'tsparticles-preset-sea-anemone'
 
-import { de } from 'date-fns/locale'
+import { FormattedMessage, useIntl } from 'react-intl'
+import formatLocale from 'lib/formatLocale'
 
 const Success = () => {
+  const intl = useIntl()
+
   const { getDuration } = useGameplayStore()
 
   const particlesInit = async (main: Engine) => {
@@ -27,18 +30,23 @@ const Success = () => {
       <Modal
         open={true}
         onClose={() => {}}
-        title={'Rätsel gelöst'}
+        title={intl.formatMessage({ id: 'page.play.questSolved' })}
         backdrop="hidden"
       >
         <div className="text-center">
           <div>
-            <b>Dauer</b>:{' '}
+            <b>
+              <FormattedMessage id="page.play.duration" />
+            </b>
+            :{' '}
             {formatDuration(getDuration(), {
-              locale: de,
+              locale: formatLocale(),
             })}
           </div>
           <Link href="/">
-            <Button className="mx-auto mt-4">Zur Startseite</Button>
+            <Button className="mx-auto mt-4">
+              <FormattedMessage id="page.play.toHome" />
+            </Button>
           </Link>
         </div>
       </Modal>
