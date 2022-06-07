@@ -1,34 +1,25 @@
 import create from 'zustand'
 
-interface YoutubeState {
-  store: string
-  setStore: (text: string) => void
-}
-
 export type Timestamp = {
   hrs: string
   min: string
   sec: string
 }
 
-interface YoutubeTimeState {
-  store: Timestamp
-  setStore: (value: Timestamp) => void
+interface YoutubeState {
+  link: string
+  start: Timestamp
+  end: Timestamp
+  setLink: (text: string) => void
+  setStart: (text: Timestamp) => void
+  setEnd: (text: Timestamp) => void
 }
 
-export const useYoutubeStoreEmbedLink = create<YoutubeState>()(set => ({
-  store: '',
-  setStore: link => set(() => ({ store: link })),
-}))
-
-export const useYoutubeStoreStartTimestamp = create<YoutubeTimeState>()(
-  set => ({
-    store: { hrs: '', min: '', sec: '' },
-    setStore: start => set(() => ({ store: start })),
-  }),
-)
-
-export const useYoutubeStoreEndTimestamp = create<YoutubeTimeState>()(set => ({
-  store: { hrs: '', min: '', sec: '' },
-  setStore: end => set(() => ({ store: end })),
+export const useYoutubeStore = create<YoutubeState>()(set => ({
+  link: '',
+  start: { hrs: '', min: '', sec: '' },
+  end: { hrs: '', min: '', sec: '' },
+  setLink: link => set(() => ({ link: link })),
+  setStart: start => set(() => ({ start: start })),
+  setEnd: end => set(() => ({ end: end })),
 }))

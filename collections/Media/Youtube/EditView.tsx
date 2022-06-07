@@ -1,24 +1,20 @@
 import { InputField, TextArea } from '@/components/Elements/FormElements'
-import {
-  useYoutubeStoreEmbedLink,
-  useYoutubeStoreStartTimestamp,
-  useYoutubeStoreEndTimestamp,
-} from './store'
+import { useYoutubeStore } from './store'
 
 const EditView = () => {
-  const link = useYoutubeStoreEmbedLink(link => link.store)
-  const setLink = useYoutubeStoreEmbedLink(link => link.setStore)
+  const link = useYoutubeStore(state => state.link)
+  const setLink = useYoutubeStore(state => state.setLink)
 
-  const start = useYoutubeStoreStartTimestamp(start => start.store)
-  const setStart = useYoutubeStoreStartTimestamp(start => start.setStore)
+  const start = useYoutubeStore(state => state.start)
+  const setStart = useYoutubeStore(state => state.setStart)
 
-  const end = useYoutubeStoreEndTimestamp(end => end.store)
-  const setEnd = useYoutubeStoreEndTimestamp(end => end.setStore)
+  const end = useYoutubeStore(state => state.end)
+  const setEnd = useYoutubeStore(state => state.setEnd)
 
   return (
     <div>
       <TextArea
-        label="Add Youtube Embed-link"
+        label="Youtube Einbettung"
         defaultValue={link}
         onChange={e => setLink(e.target.value)}
         rows={4}
@@ -78,7 +74,7 @@ const EditView = () => {
             <InputField
               type={'text'}
               placeholder={'h'}
-              defaultValue={''}
+              defaultValue={end.hrs}
               onChange={e =>
                 setEnd({ hrs: e.target.value, min: end.min, sec: end.sec })
               }
@@ -107,6 +103,3 @@ const EditView = () => {
 }
 
 export default EditView
-/*
-
- */
