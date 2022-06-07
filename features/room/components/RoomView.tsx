@@ -9,12 +9,14 @@ import ScrollContainer from 'react-indiana-drag-scroll'
 import useSWR from 'swr'
 import { RoomWithImageAndQuests } from '../types'
 import { Spinner } from '@/components/Elements/Spinner'
+import { useIntl } from 'react-intl'
 
 type RoomViewProps = {
   id: string
 }
 
 const RoomView = ({ id }: RoomViewProps) => {
+  const intl = useIntl()
   const { data: room } = useSWR<RoomWithImageAndQuests, AxiosError>(
     `/api/room/${id}`,
   )
@@ -40,7 +42,7 @@ const RoomView = ({ id }: RoomViewProps) => {
             key={i}
             quest={q}
             onClick={() => {
-              const qq = quests.filter(e => e.type === q.type)[0]
+              const qq = quests(intl).filter(e => e.type === q.type)[0]
               if (qq) {
                 qq.onLoad(q.data as any)
                 if (qq.onSolve) {

@@ -9,13 +9,8 @@ import toast from 'react-hot-toast'
 import useSWR, { mutate } from 'swr'
 import { deleteRoom } from '../api/deleteRoom'
 import { RoomWithImage, RoomWithImageAndQuests } from '../types'
-
-const roomImages: SelectOption[] = [
-  { value: 'Eigenes Foto hochladen' },
-  { value: 'Magisches Klassenzimmer' },
-  { value: 'Dunkles Musem' },
-  { value: 'Ohne Raum' },
-]
+import { useIntl } from 'react-intl'
+import { deleteToast } from '@/components/Toasts'
 
 type Props = {
   provided: DraggableProvided
@@ -25,11 +20,28 @@ type Props = {
 }
 
 const RoomPanel = ({ provided, snapshot, index, roomId }: Props) => {
+  const intl = useIntl()
+  const roomImages: SelectOption[] = [
+    {
+      value: intl.formatMessage({
+        id: 'features.room.roomPanel.uploadOwnImage',
+      }),
+    },
+    {
+      value: intl.formatMessage({
+        id: 'features.room.roomPanel.magicalClassroom',
+      }),
+    },
+    { value: intl.formatMessage({ id: 'features.room.roomPanel.darkMuseum' }) },
+    { value: intl.formatMessage({ id: 'features.room.roomPanel.noRom' }) },
+  ]
   const [roomImage, setRoomImage] = useState(roomImages[0])
   const [imageUrl, setImageUrl] = useState('')
   const { data: room } = useSWR<RoomWithImageAndQuests>(`/api/room/${roomId}`)
 
-  console.log(room)
+  if (roomImages.map(option => option.value).indexOf(roomImage.value) < 0) {
+    setRoomImage(roomImages[0])
+  }
 
   useEffect(() => {
     if (room?.image?.url)
@@ -37,23 +49,25 @@ const RoomPanel = ({ provided, snapshot, index, roomId }: Props) => {
   }, [room?.image?.url])
 
   useEffect(() => {
-    if (roomImage.value === 'Magisches Klassenzimmer') {
+    if (
+      roomImage.value ===
+      intl.formatMessage({ id: 'features.room.roomPanel.magicalClassroom' })
+    ) {
       setImageUrl(
         require('@/assets/rooms/abandoned-magic-classroom.jpg').default.src,
       )
-    } else if (roomImage.value === 'Dunkles Musem') {
+    } else if (
+      roomImage.value ===
+      intl.formatMessage({ id: 'features.room.roomPanel.darkMuseum' })
+    ) {
       setImageUrl(require('@/assets/rooms/dark-museum.jpg').default.src)
     }
-  }, [roomImage.value])
+  }, [roomImage.value, intl])
 
   const onDelete = async () => {
     const deleteRoomRequest = deleteRoom(room!.id)
 
-    toast.promise(deleteRoomRequest, {
-      loading: 'Löschen',
-      success: 'Erfolgreich gelöscht',
-      error: 'Fehler beim löschen',
-    })
+    deleteToast(deleteRoomRequest, intl)
 
     await mutate(`/api/game/${room!.gameId}`, (await deleteRoomRequest).data, {
       populateCache: false,
@@ -66,17 +80,26 @@ const RoomPanel = ({ provided, snapshot, index, roomId }: Props) => {
       type="room"
       provided={provided}
       snapshot={snapshot}
-      header={`Raum ${index}`}
+      header={
+        intl.formatMessage({ id: 'features.room.roomPanel.headerRoom' }) +
+        ' ' +
+        index
+      }
       onDelete={onDelete}
     >
       <>
         <SelectField
-          label="Thema"
+          label={intl.formatMessage({
+            id: 'features.room.roomPanel.labelTheme',
+          })}
           options={roomImages}
           onSelect={setRoomImage}
         ></SelectField>
         <div className="relative my-4 w-full rounded">
-          {roomImage.value === 'Eigenes Foto hochladen' && (
+          {roomImage.value ===
+            intl.formatMessage({
+              id: 'features.room.roomPanel.uploadOwnImage',
+            }) && (
             <FileUpload
               onChange={url =>
                 setImageUrl(`${process.env.NEXT_PUBLIC_S3_BASE_URL}/${url}`)
