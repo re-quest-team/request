@@ -81,7 +81,7 @@ const QuestTypeModal = ({
           {!questModalOpen && (
             <>
               <SelectField
-                label="Sichtbarkeit"
+                label="Sichbarkeit"
                 options={taskVisibilityOptions}
                 onSelect={setTaskVisibility}
               ></SelectField>
