@@ -20,10 +20,12 @@ const PlayView = () => {
   var radioButtons = ''
 
   for (var i = 0; i < allAnswersShuffled.length; i++) {
-    radioButtons +=
-      '<input type="radio"value={' +
-      allAnswersShuffled[i] +
-      '}name={"Answer"}onChange={radioHandler}/>'
+    if (allAnswersShuffled[i] != '') {
+      radioButtons +=
+        '<input type="radio"value={' +
+        allAnswersShuffled[i] +
+        '}name={"Answer"}onChange={radioHandler}/>'
+    }
   }
 
   const intl = useIntl()
