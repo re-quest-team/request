@@ -81,13 +81,13 @@ const QuestTypeModal = ({
           {!questModalOpen && (
             <>
               <SelectField
-                label="Sichtbarkeit"
+                label="Sichbarkeit"
                 options={taskVisibilityOptions}
                 onSelect={setTaskVisibility}
               ></SelectField>
               {taskVisibility.value === 'Nach dem Lösen eines Quests' && (
                 <SelectField
-                  label="Sichtbar nach Quest"
+                  label="Sichbar mach Quest"
                   options={[{ value: '1' }, { value: '2' }]}
                   onSelect={() => {}}
                 ></SelectField>
