@@ -7,6 +7,7 @@ import { useState } from 'react'
 import { useQuestStore } from './store'
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup'
 import { valNumberInput } from '@/collections/Quests/NumberInput/validation'
+import { useIntl } from 'react-intl'
 
 const PlayView = () => {
   const question = useQuestStore(state => state.question)
@@ -14,6 +15,8 @@ const PlayView = () => {
   const unit = useQuestStore(state => state.unit)
   const onSolve = useQuestStore(state => state.onSolve)
   const correct = useQuestStore(state => state.correct)
+
+  const intl = useIntl()
 
   const [answer, setAnswer] = useState('')
   const { register, handleSubmit, formState } = useForm({
@@ -32,10 +35,10 @@ const PlayView = () => {
   const checkCorrect = async () => {
     if (!errors.answer) {
       if (onSolve(Number(answer))) {
-        successToast()
+        successToast(intl)
         successConfetti()
       } else {
-        incorrectToast()
+        incorrectToast(intl)
       }
     }
   }
