@@ -10,6 +10,7 @@ import QuestElement from './QuestElement'
 import quests from '@/collections'
 import { IQuest } from '@/collections/types'
 import { valNumberInput } from '@/collections/Quests/NumberInput/validation'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 type QuestTypeModalProps = {
   open: boolean
@@ -18,17 +19,27 @@ type QuestTypeModalProps = {
   onClose: () => any
 }
 
-const taskVisibilityOptions: SelectOption[] = [
-  { value: 'Beim Start' },
-  { value: 'Nach dem Lösen eines Quests' },
-]
-
 const QuestTypeModal = ({
   open,
   quest,
   roomId,
   onClose,
 }: QuestTypeModalProps) => {
+  const intl = useIntl()
+
+  const taskVisibilityOptions: SelectOption[] = [
+    {
+      value: intl.formatMessage({
+        id: 'features.quest.questTypeModal.atStart',
+      }),
+    },
+    {
+      value: intl.formatMessage({
+        id: 'features.quest.questTypeModal.afterSolving',
+      }),
+    },
+  ]
+
   const { updateQuest } = useQuests(roomId)
 
   const [questModalOpen, setQuestModalOpen] = useState(false)
@@ -41,9 +52,13 @@ const QuestTypeModal = ({
       q.onLoad(quest.data as any)
     }
 
-    updateQuest(quest.id, {
-      type: q.type,
-    })
+    updateQuest(
+      quest.id,
+      {
+        type: q.type,
+      },
+      intl,
+    )
     setCurrentQuest(q)
     setQuestModalOpen(true)
   }
@@ -59,9 +74,13 @@ const QuestTypeModal = ({
 
   const onSave = async () => {
     const data = currentQuest?.onSave()
-    updateQuest(quest.id, {
-      data,
-    })
+    updateQuest(
+      quest.id,
+      {
+        data,
+      },
+      intl,
+    )
     if (await validate(data)) {
       setQuestModalOpen(false)
       onClose()
@@ -73,7 +92,9 @@ const QuestTypeModal = ({
       <Modal
         open={open}
         onClose={onClose}
-        title="Element hinzufügen"
+        title={intl.formatMessage({
+          id: 'features.quest.questTypeModal.titleAddElement',
+        })}
         showBack={questModalOpen}
         onBack={() => setQuestModalOpen(false)}
       >
@@ -81,21 +102,28 @@ const QuestTypeModal = ({
           {!questModalOpen && (
             <>
               <SelectField
-                label="Sichbarkeit"
+                label={intl.formatMessage({
+                  id: 'features.quest.questTypeModal.labelVisibility',
+                })}
                 options={taskVisibilityOptions}
                 onSelect={setTaskVisibility}
               ></SelectField>
-              {taskVisibility.value === 'Nach dem Lösen eines Quests' && (
+              {taskVisibility.value ===
+                intl.formatMessage({
+                  id: 'features.quest.questTypeModal.afterSolving',
+                }) && (
                 <SelectField
-                  label="Sichbar mach Quest"
+                  label={intl.formatMessage({
+                    id: 'features.quest.questTypeModal.labelVisibleAfterQuest',
+                  })}
                   options={[{ value: '1' }, { value: '2' }]}
                   onSelect={() => {}}
                 ></SelectField>
               )}
               <PillButton variant="secondary" className="mx-auto">
-                Rätsel
+                <FormattedMessage id="features.quest.questTypeModal.quest" />
               </PillButton>
-              {quests
+              {quests(intl)
                 .filter(q => q.type.includes('QUEST'))
                 .map((q, i) => (
                   <QuestElement
@@ -132,9 +160,9 @@ const QuestTypeModal = ({
               />*/}
               <Spacer />
               <PillButton className="mx-auto" variant="tertiary">
-                Medien
+                <FormattedMessage id="features.quest.questTypeModal.media" />
               </PillButton>
-              {quests
+              {quests(intl)
                 .filter(q => q.type.includes('MEDIA'))
                 .map((q, i) => (
                   <QuestElement
@@ -189,7 +217,7 @@ const QuestTypeModal = ({
             <>
               <currentQuest.EditView />
               <Button variant="primary" onClick={onSave}>
-                Speichern
+                <FormattedMessage id="features.quest.questTypeModal.save" />
               </Button>
             </>
           )}
