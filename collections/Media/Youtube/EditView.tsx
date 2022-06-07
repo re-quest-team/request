@@ -4,6 +4,10 @@ import { useYoutubeStore } from './store'
 const EditView = () => {
   const link = useYoutubeStore(state => state.link)
   const setLink = useYoutubeStore(state => state.setLink)
+  const setWatchLink = (link: string) => {
+    const embedLink = link.replace('watch?v=', 'embed/')
+    setLink(embedLink)
+  }
 
   const start = useYoutubeStore(state => state.start)
   const setStart = useYoutubeStore(state => state.setStart)
@@ -14,9 +18,9 @@ const EditView = () => {
   return (
     <div>
       <TextArea
-        label="Youtube Einbettung"
+        label="Youtube link"
         defaultValue={link}
-        onChange={e => setLink(e.target.value)}
+        onChange={e => setWatchLink(e.target.value)}
         rows={4}
       />
       <div className="flex flex-row justify-between">

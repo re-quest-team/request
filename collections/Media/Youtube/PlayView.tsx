@@ -1,15 +1,43 @@
 import React from 'react'
-import YoutubeEmbed from '@/collections/Media/Youtube/YoutubeEmbed'
 import { useYoutubeStore } from './store'
+import { Timestamp } from '@/collections/Media/Youtube/store'
+
+const sumToSec = (time: Timestamp) => {
+  console.log('Timestamp: ' + time.hrs + ':' + time.min + ':' + time.sec)
+
+  return (
+    (time.hrs != '' ? parseInt(time.hrs) * 3600 : 0) +
+    (time.min != '' ? parseInt(time.min) * 60 : 0) +
+    (time.sec != '' ? parseInt(time.sec) : 0) +
+    ''
+  )
+}
 
 const PlayView = () => {
-  const link = useYoutubeStore(state => state.link)
-  const start = useYoutubeStore(start => start.start)
-  const end = useYoutubeStore(end => end.end)
+  const baseLink = useYoutubeStore(state => state.link)
+  const start = sumToSec(useYoutubeStore(start => start.start))
+  const end = sumToSec(useYoutubeStore(end => end.end))
+
+  const startInSec = `?start=${start}`
+  const endInSec = end != '0' ? `&end=${end}` : ''
+
+  const link = baseLink + startInSec + endInSec
 
   return (
     <div>
-      <YoutubeEmbed embedLink={link} startTime={start} endTime={end} />
+      <iframe
+        style={{
+          position: 'relative',
+          overflow: 'hidden',
+          paddingRight: '50px',
+        }}
+        width="583"
+        height="480"
+        src={link}
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+        title="Embeded Youtube"
+      />
     </div>
   )
 }
