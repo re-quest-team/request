@@ -1,7 +1,6 @@
 import { Button } from '@/components/Elements/Button'
 import { InputField, TextArea } from '@/components/Elements/FormElements'
 import Toggle from '@/components/Elements/Toggle'
-import { Switch } from '@headlessui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Game } from '@prisma/client'
 import axios, { AxiosError } from 'axios'

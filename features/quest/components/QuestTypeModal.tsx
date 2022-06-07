@@ -3,12 +3,13 @@ import { SelectOption } from '@/components/Elements/Select'
 import { SelectField } from '@/components/Elements/Select/SelectField'
 import { Spacer } from '@/components/Elements/Spacer'
 import Modal from '@/components/Modal'
-import { Prisma, Quest } from '@prisma/client'
+import { Game, Prisma, Quest } from '@prisma/client'
 import { useState } from 'react'
 import useQuests from '../api'
 import QuestElement from './QuestElement'
 import quests from '@/collections'
 import { IQuest } from '@/collections/types'
+import { valNumberInput } from '@/collections/Quests/NumberInput/validation'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 type QuestTypeModalProps = {
@@ -45,7 +46,7 @@ const QuestTypeModal = ({
   const [currentQuest, setCurrentQuest] = useState<IQuest<any>>()
   const [taskVisibility, setTaskVisibility] = useState(taskVisibilityOptions[0])
 
-  const handleClick = (q: IQuest<any>) => {
+  const handleClick = async (q: IQuest<any>) => {
     // if quest already has data, load data into component
     if (quest.data) {
       q.onLoad(quest.data as any)
@@ -62,7 +63,16 @@ const QuestTypeModal = ({
     setQuestModalOpen(true)
   }
 
-  const onSave = () => {
+  const validate = async (data: any): Promise<boolean> => {
+    switch (currentQuest?.type) {
+      case 'QUEST_NUMBER_INPUT':
+        return await valNumberInput.isValid(data)
+      default:
+        return true
+    }
+  }
+
+  const onSave = async () => {
     const data = currentQuest?.onSave()
     updateQuest(
       quest.id,
@@ -71,10 +81,12 @@ const QuestTypeModal = ({
       },
       intl,
     )
-    setQuestModalOpen(false)
-    onClose()
+    if (await validate(data)) {
+      setQuestModalOpen(false)
+      onClose()
+      return
+    }
   }
-
   return (
     <>
       <Modal
