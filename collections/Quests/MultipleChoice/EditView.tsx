@@ -21,6 +21,26 @@ const EditView = () => {
     setWrongAnswers(Answers)
   }
 
+  var wrongAnswerInputs = ''
+  var answerAmount = wrongAnswers.length
+
+  for (answerAmount = wrongAnswers.length; (answerAmount = 0); answerAmount--) {
+    if (
+      (wrongAnswers[answerAmount] = '' && wrongAnswers[answerAmount - 1] != '')
+    ) {
+      break
+    }
+  }
+
+  for (var i = 0; i < answerAmount; i++) {
+    wrongAnswerInputs +=
+      '<InputField label="falsche Antwort" defaultValue={' +
+      wrongAnswers[i] +
+      '}onChange={e => replaceAnswer(e, ' +
+      i +
+      ')} ></InputField>'
+  }
+
   return (
     <div>
       <InputField
@@ -33,41 +53,7 @@ const EditView = () => {
         defaultValue={correctAnswer}
         onChange={e => setCorrectAnswer(e.target.value)}
       ></InputField>
-      <InputField
-        label="richtige Antwort"
-        defaultValue={wrongAnswers[1]}
-        onChange={e => replaceAnswer(e, 1)}
-      ></InputField>
-      <InputField
-        label="richtige Antwort"
-        defaultValue={wrongAnswers[2]}
-        onChange={e => replaceAnswer(e, 2)}
-      ></InputField>
-      <InputField
-        label="richtige Antwort"
-        defaultValue={wrongAnswers[3]}
-        onChange={e => replaceAnswer(e, 3)}
-      ></InputField>
-      <InputField
-        label="richtige Antwort"
-        defaultValue={wrongAnswers[4]}
-        onChange={e => replaceAnswer(e, 4)}
-      ></InputField>
-      <InputField
-        label="richtige Antwort"
-        defaultValue={wrongAnswers[5]}
-        onChange={e => replaceAnswer(e, 5)}
-      ></InputField>
-      <InputField
-        label="richtige Antwort"
-        defaultValue={wrongAnswers[6]}
-        onChange={e => replaceAnswer(e, 6)}
-      ></InputField>
-      <InputField
-        label="richtige Antwort"
-        defaultValue={wrongAnswers[7]}
-        onChange={e => replaceAnswer(e, 7)}
-      ></InputField>
+      {wrongAnswerInputs}
     </div>
   )
 }
