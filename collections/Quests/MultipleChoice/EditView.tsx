@@ -1,7 +1,7 @@
-import { PillButton } from '@/components/Elements/Button'
+import { Button, PillButton } from '@/components/Elements/Button'
 import { InputField } from '@/components/Elements/FormElements'
-import React from 'react'
-import { useIntl } from 'react-intl'
+import React, { useCallback, useRef } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 import { useQuestStore } from './store'
 import { MinusCircleIcon, PlusCircleIcon } from '@heroicons/react/outline'
 
@@ -15,6 +15,7 @@ const EditView = () => {
   const wrongAnswers = useQuestStore(state => state.wrongAnswers)
   const setWrongAnswers = useQuestStore(state => state.setWrongAnswers)
 
+  const shuffledAnswers = useQuestStore(state => state.shuffledAnswers)
   const setShuffledAnswers = useQuestStore(state => state.setShuffledAnswers)
 
   const intl = useIntl()
