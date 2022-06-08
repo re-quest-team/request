@@ -1,4 +1,5 @@
 import TextMedia from './Media/Text'
+import YoutubeMedia from './Media/Youtube'
 import CryptoQuest from './Quests/Crypto'
 import MultipleChoiceQuest from './Quests/MultipleChoice'
 import InstagramMedia from '@/collections/Media/Instagram'
@@ -9,6 +10,7 @@ import { IQuest } from '@/collections/types'
 const media = (intl: IntlShape): IQuest<any>[] => [
   TextMedia(intl),
   InstagramMedia,
+  YoutubeMedia(intl),
 ]
 const quests = (intl: IntlShape): IQuest<any>[] => [
   CryptoQuest(intl),
