@@ -50,6 +50,7 @@
   "features.game.gameForm.submit": "Save",
   "features.game.gamePanel.edit": "Edit",
   "features.game.gamePanel.play": "Play",
+  "features.game.gamePanel.download": "Download",
   "features.quest.questImagePlacer.preview": "Preview",
   "features.quest.questImagePlacer.clickToAdd": "Click on the image to add a quest",
   "features.quest.questImagePlacer.holdToPreview": "Hold the preview button to see a preview of your room",
