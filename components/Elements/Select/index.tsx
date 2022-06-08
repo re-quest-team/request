@@ -14,7 +14,6 @@ export type SelectProps = {
 
 export default function Select({ options, onSelect }: SelectProps) {
   const [selected, setSelected] = useState(options[0])
-
   useEffect(() => {
     onSelect(selected)
   }, [onSelect, selected])

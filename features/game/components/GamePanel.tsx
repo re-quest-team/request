@@ -7,13 +7,13 @@ import { useEffect, useRef, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useSWRConfig } from 'swr'
 import { deleteGame } from '../api/deleteGame'
+import { FormattedMessage, useIntl } from 'react-intl'
+import { deleteToast } from '@/components/Toasts'
 import { DocumentDownloadIcon } from '@heroicons/react/solid'
 import 'node-self'
 import QRCodeStyling, { FileExtension } from 'qr-code-styling'
 import QrCodeConfig from '@/features/game/components/QrCode/QrCodeConfig'
-import PdfTemplate, {
-  containerStyle,
-} from '@/features/game/components/QrCode/PdfTemplate'
+import PdfTemplate, { containerStyle } from '@/features/game/components/QrCode/PdfTemplate'
 import html2canvas from 'html2canvas'
 import JsPdf from 'jspdf'
 
@@ -27,7 +27,9 @@ const getStaticProp = async () => {
   return await require('assets/logos/request-logo-single.svg')
 }
 
-const GamePanel = ({ id, name, description }: Game) => {
+const GamePanel = ({ id, name, description, germanLanguage }: Game) => {
+  const intl = useIntl()
+
   const { mutate } = useSWRConfig()
 
   const [hostname, setHostname] = useState('')
@@ -42,11 +44,7 @@ const GamePanel = ({ id, name, description }: Game) => {
   const onDelete = async () => {
     const deleteGameRequest = deleteGame(id)
 
-    toast.promise(deleteGameRequest, {
-      loading: 'Löschen',
-      success: 'Erfolgreich gelöscht',
-      error: 'Fehler beim löschen',
-    })
+    deleteToast(deleteGameRequest, intl)
 
     await mutate(`/api/game`, (await deleteGameRequest).data, {
       populateCache: false,
@@ -54,6 +52,9 @@ const GamePanel = ({ id, name, description }: Game) => {
     })
   }
 
+  const english = intl.formatMessage({ id: 'languages.english' })
+  const german = intl.formatMessage({ id: 'languages.german' })
+  
   const pdfDoc = useRef<HTMLDivElement>(null)
   const [imgUrl, setImgUrl] = useState('')
 
@@ -95,7 +96,11 @@ const GamePanel = ({ id, name, description }: Game) => {
   }
 
   return (
-    <Panel type="quest" header={name || ''} onDelete={onDelete}>
+    <Panel
+      type="quest"
+      header={(name || '') + ' (' + (germanLanguage ? german : english) + ')'}
+      onDelete={onDelete}
+    >
       <>
         <div className="relative my-4 w-full rounded">
           <div className="flex w-full flex-col">
@@ -105,7 +110,9 @@ const GamePanel = ({ id, name, description }: Game) => {
             </div>
             <div className="mt-4 flex flex-row">
               <Link href={`/studio/${id}`} passHref>
-                <Button>Bearbeiten</Button>
+                <Button>
+                  <FormattedMessage id="features.game.gamePanel.edit" />
+                </Button>
               </Link>
               <div className="flex w-full flex-row justify-end">
                 <div className="mb-1">
@@ -115,11 +122,13 @@ const GamePanel = ({ id, name, description }: Game) => {
                   onClick={onDownload}
                   endIcon={<DocumentDownloadIcon className="h-4" />}
                 >
-                  Download
+                  <FormattedMessage id="features.game.gamePanel.download" />
                 </Button>
 
                 <Link href={`/play/${id}`} passHref>
-                  <Button className="ml-4">Spielen</Button>
+                  <Button className="ml-4">
+                    <FormattedMessage id="features.game.gamePanel.play" />
+                  </Button>
                 </Link>
               </div>
             </div>
