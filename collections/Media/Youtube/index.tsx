@@ -4,6 +4,7 @@ import PlayView from './PlayView'
 import { useYoutubeStore } from './store'
 import { Youtube } from 'react-feather'
 import { Timestamp } from './store'
+import { IntlShape } from 'react-intl'
 
 type Data = {
   link: string
@@ -11,21 +12,23 @@ type Data = {
   end: Timestamp
 }
 
-const YoutubeMedia: IQuest<Data> = {
-  type: 'MEDIA_YOUTUBE',
-  title: 'Youtube',
-  description: 'Hier kann ein Youtube Video eingebunden werden',
-  icon: Youtube,
-  EditView,
-  PlayView,
-  onLoad: ({ link, start, end }) => {
-    useYoutubeStore.setState(state => ({ ...state, link, start, end }))
-  },
-  onSave: () => ({
-    link: useYoutubeStore.getState().link,
-    start: useYoutubeStore.getState().start,
-    end: useYoutubeStore.getState().end,
-  }),
+const YoutubeMedia = (intl: IntlShape): IQuest<Data> => {
+  return {
+    type: 'MEDIA_YOUTUBE',
+    title: 'Youtube',
+    description: intl.formatMessage({ id: 'media.youtube.description' }),
+    icon: Youtube,
+    EditView,
+    PlayView,
+    onLoad: ({ link, start, end }) => {
+      useYoutubeStore.setState(state => ({ ...state, link, start, end }))
+    },
+    onSave: () => ({
+      link: useYoutubeStore.getState().link,
+      start: useYoutubeStore.getState().start,
+      end: useYoutubeStore.getState().end,
+    }),
+  }
 }
 
 export default YoutubeMedia

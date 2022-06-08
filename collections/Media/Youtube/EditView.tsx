@@ -1,7 +1,9 @@
 import { InputField, TextArea } from '@/components/Elements/FormElements'
 import { useYoutubeStore } from './store'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 const EditView = () => {
+  const intl = useIntl()
   const link = useYoutubeStore(state => state.link)
   const setLink = useYoutubeStore(state => state.setLink)
   const setWatchLink = (link: string) => {
@@ -18,7 +20,7 @@ const EditView = () => {
   return (
     <div>
       <TextArea
-        label="Youtube link"
+        label={intl.formatMessage({ id: 'media.youtube.editView.title' })}
         defaultValue={link}
         onChange={e => setWatchLink(e.target.value)}
         rows={4}
@@ -26,7 +28,7 @@ const EditView = () => {
       <div className="flex flex-row justify-between">
         <div>
           <p className="text-sm" style={{ marginBottom: '-8px' }}>
-            Startzeit
+            <FormattedMessage id="media.youtube.editView.labelStart" />
           </p>
           <div className="flex flex-row justify-between">
             <InputField
@@ -72,7 +74,7 @@ const EditView = () => {
 
         <div>
           <p className="text-sm" style={{ marginBottom: '-8px' }}>
-            Endzeit
+            <FormattedMessage id="media.youtube.editView.labelEnd" />
           </p>
           <div className="flex w-1/2 flex-row justify-between">
             <InputField
