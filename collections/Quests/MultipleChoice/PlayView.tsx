@@ -1,11 +1,9 @@
 import { successConfetti } from '@/components/Confetti'
 import { Button } from '@/components/Elements/Button'
-import { InputField } from '@/components/Elements/FormElements'
 import { incorrectToast, successToast } from '@/components/Toasts'
 import { useState } from 'react'
 import { useQuestStore } from './store'
 import { FormattedMessage, useIntl } from 'react-intl'
-import { boolean } from 'yup'
 
 const PlayView = () => {
   const question = useQuestStore(state => state.question)
@@ -13,69 +11,55 @@ const PlayView = () => {
   const wrongAnswers = useQuestStore(state => state.wrongAnswers)
   const onSolve = useQuestStore(state => state.onSolve)
   const correct = useQuestStore(state => state.correct)
-
-  const allAnswers = wrongAnswers.concat(correctAnswer)
-  const allAnswersShuffled = shuffle(allAnswers)
-  const allAnswersLength = allAnswers.length
-  var radioButtons = ''
-
-  for (var i = 0; i < allAnswersShuffled.length; i++) {
-    if (allAnswersShuffled[i] != '') {
-      radioButtons +=
-        '<input type="radio"value={' +
-        allAnswersShuffled[i] +
-        '}name={"Answer"}onChange={radioHandler}/>'
-    }
-  }
+  const shuffledAnswers = useQuestStore(state => state.shuffledAnswers)
 
   const intl = useIntl()
 
-  const [selectedAnswer, setSelectedAnswer] = useState('')
+  const [answer, setAnswer] = useState('')
+
+  const [selectedAnswer, setSelectedAnswer] = useState<String>()
 
   const radioHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedAnswer(event.target.value)
-  }
-
-  function shuffle(array: string[]) {
-    let currentIndex = array.length,
-      randomIndex
-
-    // While there remain elements to shuffle.
-    while (currentIndex != 0) {
-      // Pick a remaining element.
-      randomIndex = Math.floor(Math.random() * currentIndex)
-      currentIndex--
-
-      // And swap it with the current element.
-      ;[array[currentIndex], array[randomIndex]] = [
-        array[randomIndex],
-        array[currentIndex],
-      ]
-    }
-
-    return array
+    setAnswer(event.target.value)
   }
 
   return (
-    <div>
-      <p>{question}</p>
+    <>
+      <div className="flex-row justify-center">
+        <p className="my-2 text-center text-3xl">{question}</p>
+        <div></div>
 
-      <h3 className="mt-8 text-lg">Antwort</h3>
-      {radioButtons}
-
-      <Button
-        onClick={() => {
-          if (onSolve(selectedAnswer)) {
-            successToast(intl)
-            successConfetti()
-          } else {
-            incorrectToast(intl)
-          }
-        }}
-      >
-        <FormattedMessage id="quests.crypto.playView.decrypt" />
-      </Button>
-    </div>
+        <h3 className="m-3 text-xl">Antwortmöglichkeiten:</h3>
+        {shuffledAnswers.map(val => (
+          <>
+            <div className="m-2 text-base">
+              <input
+                type="radio"
+                id={val.name}
+                name="answer"
+                value={val.name}
+                onChange={radioHandler}
+              ></input>
+              <label htmlFor={val.name}>{val.name}</label>
+            </div>
+          </>
+        ))}
+        <Button
+          className="m-15 mx-auto"
+          onClick={() => {
+            if (onSolve(answer)) {
+              successToast(intl)
+              successConfetti()
+            } else {
+              incorrectToast(intl)
+            }
+          }}
+        >
+          <FormattedMessage id="Abgeben" />
+        </Button>
+      </div>
+    </>
   )
 }
 
