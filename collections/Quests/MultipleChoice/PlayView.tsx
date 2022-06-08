@@ -7,7 +7,10 @@ import { FormattedMessage, useIntl } from 'react-intl'
 
 const PlayView = () => {
   const question = useQuestStore(state => state.question)
+  const correctAnswer = useQuestStore(state => state.correctAnswer)
+  const wrongAnswers = useQuestStore(state => state.wrongAnswers)
   const onSolve = useQuestStore(state => state.onSolve)
+  const correct = useQuestStore(state => state.correct)
   const shuffledAnswers = useQuestStore(state => state.shuffledAnswers)
 
   const intl = useIntl()
@@ -18,7 +21,7 @@ const PlayView = () => {
 
   const [answer, setAnswer] = useState('')
 
-  const [setSelectedAnswer] = useState<String>()
+  const [selectedAnswer, setSelectedAnswer] = useState<String>()
 
   const radioHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedAnswer(event.target.value)
