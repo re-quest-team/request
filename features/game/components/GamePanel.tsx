@@ -7,8 +7,12 @@ import toast from 'react-hot-toast'
 import QRCode from 'react-qr-code'
 import { useSWRConfig } from 'swr'
 import { deleteGame } from '../api/deleteGame'
+import { FormattedMessage, useIntl } from 'react-intl'
+import { deleteToast } from '@/components/Toasts'
 
-const GamePanel = ({ id, name, description }: Game) => {
+const GamePanel = ({ id, name, description, germanLanguage }: Game) => {
+  const intl = useIntl()
+
   const { mutate } = useSWRConfig()
 
   const [hostname, setHostname] = useState('')
@@ -22,11 +26,7 @@ const GamePanel = ({ id, name, description }: Game) => {
   const onDelete = async () => {
     const deleteGameRequest = deleteGame(id)
 
-    toast.promise(deleteGameRequest, {
-      loading: 'Löschen',
-      success: 'Erfolgreich gelöscht',
-      error: 'Fehler beim löschen',
-    })
+    deleteToast(deleteGameRequest, intl)
 
     await mutate(`/api/game`, (await deleteGameRequest).data, {
       populateCache: false,
@@ -34,15 +34,24 @@ const GamePanel = ({ id, name, description }: Game) => {
     })
   }
 
+  const english = intl.formatMessage({ id: 'languages.english' })
+  const german = intl.formatMessage({ id: 'languages.german' })
+
   return (
-    <Panel type="quest" header={name || ''} onDelete={onDelete}>
+    <Panel
+      type="quest"
+      header={(name || '') + ' (' + (germanLanguage ? german : english) + ')'}
+      onDelete={onDelete}
+    >
       <>
         <div className="relative my-4 w-full rounded">
           <div className="flex w-full flex-row justify-between">
             <div>
               <p>{description}</p>
               <Link href={`/studio/${id}`} passHref>
-                <Button>Bearbeiten</Button>
+                <Button>
+                  <FormattedMessage id="features.game.gamePanel.edit" />
+                </Button>
               </Link>
             </div>
             <div>
@@ -50,7 +59,9 @@ const GamePanel = ({ id, name, description }: Game) => {
                 <QRCode value={`${hostname}/play/${id}`} />
               </div>
               <Link href={`/play/${id}`} passHref>
-                <Button>Spielen</Button>
+                <Button>
+                  <FormattedMessage id="features.game.gamePanel.play" />
+                </Button>
               </Link>
             </div>
           </div>

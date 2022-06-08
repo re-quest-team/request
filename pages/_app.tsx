@@ -10,35 +10,49 @@ import { SWRConfig } from 'swr'
 import { Toaster } from 'react-hot-toast'
 import axios from '@/lib/axios'
 import { useRouter } from 'next/router'
+import { IntlProvider } from 'react-intl'
 
-function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
-  const router = useRouter()
-  return (
-    <SessionProvider session={session}>
-      <SWRConfig
-        value={{
-          fetcher: url => axios.get(url).then(res => res.data),
-        }}
-      >
-        <Toaster
-          toastOptions={{
-            className: '',
-            style: {
-              color: '#fff',
-              backgroundColor: '#374151',
-            },
-          }}
-        />
-        {router.pathname.includes('play') ? (
-          <Component {...pageProps} />
-        ) : (
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        )}
-      </SWRConfig>
-    </SessionProvider>
-  )
+import de from '../lang/de.json'
+import en from '../lang/en.json'
+
+const messages = {
+  en,
+  de,
 }
 
-export default MyApp
+export default function MyApp({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps) {
+  const router = useRouter()
+  const { locale } = useRouter()
+  return (
+    // @ts-ignore
+    <IntlProvider locale={locale} messages={messages[locale]}>
+      <SessionProvider session={session}>
+        <SWRConfig
+          value={{
+            fetcher: url => axios.get(url).then(res => res.data),
+          }}
+        >
+          <Toaster
+            toastOptions={{
+              className: '',
+              style: {
+                color: '#fff',
+                backgroundColor: '#374151',
+              },
+            }}
+          />
+          {router.pathname.includes('play') ? (
+            <Component {...pageProps} />
+          ) : (
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          )}
+        </SWRConfig>
+      </SessionProvider>
+    </IntlProvider>
+  )
+}

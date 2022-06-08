@@ -7,10 +7,12 @@ import Link from 'next/link'
 import { signOut, useSession } from 'next-auth/react'
 import { Button } from '../Elements/Button'
 import { Fragment } from 'react'
+import LocaleSwitcher from '../LocaleSwitcher'
+import { FormattedMessage } from 'react-intl'
 
 const navigation = [
-  { name: 'Studio', href: '/studio' },
-  { name: 'FAQ', href: '/faq' },
+  { key: 'studio', href: '/studio' },
+  { key: 'faq', href: '/faq' },
 ]
 
 const Navbar = () => {
@@ -26,7 +28,9 @@ const Navbar = () => {
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
                 <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-slate-400 hover:bg-slate-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-                  <span className="sr-only">Open main menu</span>
+                  <span className="sr-only">
+                    <FormattedMessage id="navbar.openMenu" />
+                  </span>
                   {open ? (
                     <XIcon className="block h-6 w-6" aria-hidden="true" />
                   ) : (
@@ -58,7 +62,7 @@ const Navbar = () => {
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     {navigation.map(item => (
-                      <Link key={item.name} href={item.href}>
+                      <Link key={item.key} href={item.href}>
                         <a
                           className={clsx(
                             router.pathname.includes(item.href)
@@ -72,10 +76,11 @@ const Navbar = () => {
                               : undefined
                           }
                         >
-                          {item.name}
+                          <FormattedMessage id={'navbar.' + item.key} />
                         </a>
                       </Link>
                     ))}
+                    <LocaleSwitcher />
                   </div>
                 </div>
               </div>
@@ -115,7 +120,7 @@ const Navbar = () => {
                                 'block px-4 py-2 text-sm',
                               )}
                             >
-                              Profile
+                              <FormattedMessage id="navbar.session.profile" />
                             </a>
                           )}
                         </Menu.Item>
@@ -128,7 +133,7 @@ const Navbar = () => {
                                 'block px-4 py-2 text-sm ',
                               )}
                             >
-                              Einstellungen
+                              <FormattedMessage id="navbar.session.settings" />
                             </a>
                           )}
                         </Menu.Item>
@@ -141,7 +146,7 @@ const Navbar = () => {
                               )}
                               onClick={() => signOut({ callbackUrl: '/' })}
                             >
-                              Sign out
+                              <FormattedMessage id="navbar.session.signOut" />
                             </p>
                           )}
                         </Menu.Item>
@@ -157,7 +162,7 @@ const Navbar = () => {
             <div className="space-y-1 px-2 pt-2 pb-3">
               {navigation.map(item => (
                 <Disclosure.Button
-                  key={item.name}
+                  key={item.key}
                   as="a"
                   href={item.href}
                   className={clsx(
@@ -170,7 +175,7 @@ const Navbar = () => {
                     router.pathname.includes(item.href) ? 'page' : undefined
                   }
                 >
-                  {item.name}
+                  <FormattedMessage id={'navbar.' + item.key} />
                 </Disclosure.Button>
               ))}
             </div>
