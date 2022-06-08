@@ -9,6 +9,7 @@ import {
   PhotographIcon,
   PlusIcon,
   QrcodeIcon,
+  ViewListIcon,
   TrashIcon,
 } from '@heroicons/react/outline'
 import { Quest, QuestType } from '@prisma/client'
@@ -35,6 +36,8 @@ const renderIcon = (type?: QuestType) => {
   switch (type) {
     case 'QUEST_CRYPTO':
       return <LockClosedIcon className="h-10 w-10" />
+    case 'QUEST_MULTIPLE_CHOICE':
+      return <ViewListIcon className="h-10 w-10" />
     case 'QUEST_CODING':
       return <CodeIcon className="h-10 w-10" />
     case 'QUEST_QR_SCAN':
