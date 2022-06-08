@@ -50,6 +50,7 @@
   "features.game.gameForm.submit": "Speichern",
   "features.game.gamePanel.edit": "Bearbeiten",
   "features.game.gamePanel.play": "Spielen",
+  "features.game.gamePanel.download": "Herunterladen",
   "features.quest.questImagePlacer.preview": "Vorschau",
   "features.quest.questImagePlacer.clickToAdd": "Klicke auf das Bild um Rätsel hinzuzufügen",
   "features.quest.questImagePlacer.holdToPreview": "Halte den Vorschau Button gedrückt um eine Vorschau deines Raumes zu sehen",
