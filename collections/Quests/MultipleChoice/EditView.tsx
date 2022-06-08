@@ -1,7 +1,7 @@
 import { Button, PillButton } from '@/components/Elements/Button'
 import { InputField } from '@/components/Elements/FormElements'
 import React, { useCallback, useRef } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 import { useQuestStore } from './store'
 import { MinusCircleIcon, PlusCircleIcon } from '@heroicons/react/outline'
 
@@ -17,6 +17,18 @@ const EditView = () => {
 
   const shuffledAnswers = useQuestStore(state => state.shuffledAnswers)
   const setShuffledAnswers = useQuestStore(state => state.setShuffledAnswers)
+
+  const intl = useIntl()
+
+  const label1 = intl.formatMessage({
+    id: 'quests.multiplechoice.editView.labelTask',
+  })
+  const label2 = intl.formatMessage({
+    id: 'quests.multiplechoice.editView.labelCorrectAnswer',
+  })
+  const label3 = intl.formatMessage({
+    id: 'quests.multiplechoice.editView.labelWrongAnswer',
+  })
 
   const replaceAnswer = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -60,12 +72,12 @@ const EditView = () => {
   return (
     <div>
       <InputField
-        label="Aufgabenstellung"
+        label={label1}
         defaultValue={question}
         onChange={e => setQuestion(e.target.value)}
       />
       <InputField
-        label="richtige Antwort"
+        label={label2}
         defaultValue={correctAnswer}
         onChange={e => setCorrectAnswer(e.target.value)}
       />
@@ -74,7 +86,7 @@ const EditView = () => {
       {wrongAnswers.map(val => (
         <InputField
           key={val.key}
-          label="falsche Antwort"
+          label={label3}
           defaultValue={val.name}
           onChange={e => replaceAnswer(e, val.key)}
         />
