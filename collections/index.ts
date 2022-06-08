@@ -13,7 +13,7 @@ const media = (intl: IntlShape): IQuest<any>[] => [
 const quests = (intl: IntlShape): IQuest<any>[] => [
   CryptoQuest(intl),
   NumberInputQuest,
-  MultipleChoiceQuest,
+  MultipleChoiceQuest(intl),
   ...media(intl),
 ]
 

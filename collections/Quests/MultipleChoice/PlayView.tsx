@@ -15,11 +15,8 @@ const PlayView = () => {
 
   const intl = useIntl()
 
-  const label1 = intl.formatMessage({
+  const label = intl.formatMessage({
     id: 'quests.multiplechoice.playView.choices',
-  })
-  const label2 = intl.formatMessage({
-    id: 'quests.multiplechoice.playView.submit',
   })
 
   const [answer, setAnswer] = useState('')
@@ -37,7 +34,7 @@ const PlayView = () => {
         <p className="my-2 text-center text-3xl">{question}</p>
         <div></div>
 
-        <h3 className="m-3 text-xl">{label1}</h3>
+        <h3 className="m-3 text-xl">{label}</h3>
         {shuffledAnswers.map(val => (
           <>
             <div className="m-2 text-base">
@@ -63,7 +60,7 @@ const PlayView = () => {
             }
           }}
         >
-          <FormattedMessage id={label2} />
+          <FormattedMessage id="quests.multiplechoice.playView.submit" />
         </Button>
       </div>
     </>

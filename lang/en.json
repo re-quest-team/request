@@ -42,7 +42,7 @@
   "quests.crypto.editView.labelEncryptedWord": "Encrypted word",
   "quests.multiplechoice.editView.labelTask": "Question",
   "quests.multiplechoice.editView.labelCorrectAnswer": "Correct Answer",
-  "quests.multiplechoice.editView.labelWrongAnswer": "Wrong Antwort",
+  "quests.multiplechoice.editView.labelWrongAnswer": "Wrong Answer",
   "quests.multiplechoice.title": "Multiple Choice Question",
   "quests.multiplechoice.description": "A Multiple Choice Question must be answered here. You can define one correct Answer and an arbitrary amount of wrong answers.",
   "quests.multiplechoice.playView.choices": "Possible answers:",

@@ -67,8 +67,6 @@ const EditView = () => {
     return array
   }
 
-  console.log(wrongAnswers)
-
   return (
     <div>
       <InputField
