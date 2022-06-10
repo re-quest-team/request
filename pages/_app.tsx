@@ -11,6 +11,7 @@ import { Toaster } from 'react-hot-toast'
 import axios from '@/lib/axios'
 import { useRouter } from 'next/router'
 import { IntlProvider } from 'react-intl'
+import flatten from 'flat'
 
 import de from '../lang/de.json'
 import en from '../lang/en.json'
@@ -28,7 +29,7 @@ export default function MyApp({
   const { locale } = useRouter()
   return (
     // @ts-ignore
-    <IntlProvider locale={locale} messages={messages[locale]}>
+    <IntlProvider locale={locale} messages={flatten(messages[locale])}>
       <SessionProvider session={session}>
         <SWRConfig
           value={{

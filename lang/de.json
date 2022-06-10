@@ -1,88 +1,158 @@
 {
-  "page.home.title": "Digitale Abenteuer für Bildungs\u00ADeinrich\u00ADtungen",
-  "page.home.description": "ist eine Plattform zum Erstellen von digitalen Escape Games für Bildungs\u00ADeinrichtungen",
-  "page.home.createQuest": "re:quest erstellen",
-  "page.home.loremIpsum": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
-  "page.home.card1": "Spannende Abenteuer",
-  "page.home.card2": "Digitale Bildung",
-  "page.home.card3": "Modulare Rätsel",
-  "page.home.card4": "Frei konfigurierbar",
-  "page.home.card5": "Keine Installation",
-  "page.home.card6": "Physische Elemente",
-  "page.home.moreInformation": "Weitere Informationen",
-  "page.home.examples": "Beispiele",
-  "page.play.id.nextRoom": "Nächster Raum",
-  "page.play.questSolved": "Rätsel gelöst",
-  "page.play.duration": "Dauer",
-  "page.play.toHome": "Zur Startseite",
-  "page.studio.index.createNewQuest": "Neues re:quest erstellen",
-  "page.studio.index.myQuests": "Meine re:quests",
-  "toasts.create.loading": "Speichern",
-  "toasts.create.success": "Speichern erfolgreich",
-  "toasts.create.error": "Fehler beim Speichern",
-  "toasts.delete.loading": "Löschen",
-  "toasts.delete.success": "Löschen erfolgreich",
-  "toasts.delete.error": "Fehler beim Löschen",
-  "toasts.success": "Korrekt",
-  "toasts.incorrect": "Falsche Antwort",
-  "navbar.openMenu": "Hauptmenu öffnen",
-  "navbar.studio": "Studio",
-  "navbar.faq": "FAQ",
-  "navbar.session.profile": "Profil",
-  "navbar.session.settings": "Einstellungen",
-  "navbar.session.signOut": "Ausloggen",
-  "fileUpload.imageUpload": "Bild hochladen",
-  "quests.crypto.playView.encryptedWord": "Verschlüsseltes Wort",
-  "quests.crypto.playView.codeWord": "Code Wort",
-  "quests.crypto.playView.decrypt": "Entschlüsseln",
-  "quests.crypto.title": "Kryptographie",
-  "quests.crypto.description": "Hier muss ein Codewort entschlüsselt werden. Das Wort wird mit ROT13 / Cäsar-Chiffre verschlüsselt.",
-  "quests.crypto.editView.labelTask": "Aufgabenstellung",
-  "quests.crypto.editView.labelCodeWord": "Codewort",
-  "quests.crypto.editView.labelEncryptedWord": "Verschlüsseltes Wort",
-  "quests.multiplechoice.editView.labelTask": "Frage",
-  "quests.multiplechoice.editView.labelCorrectAnswer": "Richtige Antwort",
-  "quests.multiplechoice.editView.labelWrongAnswer": "Falsche Antwort",
-  "quests.multiplechoice.title": "Multiple-Choice-Frage",
-  "quests.multiplechoice.description": "Hier muss eine Multiple-Choice-Frage beantwortet werden. Es gibt eine Correcte Antwort und beliebig viele Flaschen Antworten.",
-  "quests.multiplechoice.playView.choices": "Antwortmöglichkeiten:",
-  "quests.multiplechoice.playView.submit": "Abgabe",
-  "media.text.title": "Text",
-  "media.text.description": "Hier kann ein einfacher Text angezeigt werden",
-  "media.text.editView.title": "Text",
-  "media.youtube.description": "Hier kann ein Youtube Video eingebunden werden",
-  "media.youtube.editView.title": "Youtube Link",
-  "media.youtube.editView.labelStart": "Startzeit",
-  "media.youtube.editView.labelEnd": "Endzeit",
-  "features.game.gameForm.toastNotFound": "re:quest nicht gefunden",
-  "features.game.gameForm.labelName": "Name",
-  "features.game.gameForm.labelDescription": "Beschreibung",
-  "features.game.gameForm.labelDraft": "Entwurf",
-  "features.game.gameForm.submit": "Speichern",
-  "features.game.gamePanel.edit": "Bearbeiten",
-  "features.game.gamePanel.play": "Spielen",
-  "features.game.gamePanel.download": "Herunterladen",
-  "features.quest.questImagePlacer.preview": "Vorschau",
-  "features.quest.questImagePlacer.clickToAdd": "Klicke auf das Bild um Rätsel hinzuzufügen",
-  "features.quest.questImagePlacer.holdToPreview": "Halte den Vorschau Button gedrückt um eine Vorschau deines Raumes zu sehen",
-  "features.quest.questImagePlacer.of": "von",
-  "features.quest.questImagePlacer.quests": "Rätseln",
-  "features.quest.questTypeModal.atStart": "Beim Start",
-  "features.quest.questTypeModal.afterSolving": "Nach dem Lösen eines Quests",
-  "features.quest.questTypeModal.titleAddElement": "Element hinzufügen",
-  "features.quest.questTypeModal.labelVisibility": "Sichtbarkeit",
-  "features.quest.questTypeModal.labelVisibleAfterQuest": "Sichtbar nach Quest",
-  "features.quest.questTypeModal.quest": "Rätsel",
-  "features.quest.questTypeModal.media": "Medien",
-  "features.quest.questTypeModal.save": "Speichern",
-  "features.room.roomList.rooms": "Räume",
-  "features.room.roomList.addRoom": "Raum hinzufügen",
-  "features.room.roomPanel.uploadOwnImage": "Eigenes Foto hochladen",
-  "features.room.roomPanel.magicalClassroom": "Magisches Klassenzimmer",
-  "features.room.roomPanel.darkMuseum": "Dunkles Museum",
-  "features.room.roomPanel.noRom": "Ohne Raum",
-  "features.room.roomPanel.headerRoom": "Raum",
-  "features.room.roomPanel.labelTheme": "Thema",
-  "languages.english": "English",
-  "languages.german": "Deutsch"
+  "page": {
+    "home": {
+      "title": "Digitale Abenteuer für Bildungs\u00ADeinrich\u00ADtungen",
+      "description": "ist eine Plattform zum Erstellen von digitalen Escape Games für Bildungs\u00ADeinrichtungen",
+      "createQuest": "re:quest erstellen",
+      "loremIpsum": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
+      "card1": "Spannende Abenteuer",
+      "card2": "Digitale Bildung",
+      "card3": "Modulare Rätsel",
+      "card4": "Frei konfigurierbar",
+      "card5": "Keine Installation",
+      "card6": "Physische Elemente",
+      "moreInformation": "Weitere Informationen",
+      "examples": "Beispiele"
+    },
+    "play": {
+      "id": {
+        "nextRoom": "Nächster Raum"
+      },
+      "questSolved": "Rätsel gelöst",
+      "duration": "Dauer",
+      "toHome": "Zur Startseite"
+    },
+    "studio": {
+      "index": {
+        "createNewQuest": "Neues re:quest erstellen",
+        "myQuests": "Meine re:quests"
+      }
+    }
+  },
+  "toasts": {
+    "create": {
+      "loading": "Speichern",
+      "success": "Speichern erfolgreich",
+      "error": "Fehler beim Speichern"
+    },
+    "delete": {
+      "loading": "Löschen",
+      "success": "Löschen erfolgreich",
+      "error": "Fehler beim Löschen"
+    },
+    "success": "Korrekt",
+    "incorrect": "Falsche Antwort"
+  },
+  "navbar": {
+    "session": {
+      "profile": "Profil",
+      "settings": "Einstellungen",
+      "signOut": "Ausloggen"
+    },
+    "openMenu": "Hauptmenu öffnen",
+    "studio": "Studio",
+    "faq": "FAQ"
+  },
+  "fileUpload": {
+    "imageUpload": "Bild hochladen"
+  },
+  "quests": {
+    "crypto": {
+      "playView": {
+        "encryptedWord": "Verschlüsseltes Wort",
+        "codeWord": "Code Wort",
+        "decrypt": "Entschlüsseln"
+      },
+      "editView": {
+        "labelTask": "Aufgabenstellung",
+        "labelCodeWord": "Codewort",
+        "labelEncryptedWord": "Verschlüsseltes Wort"
+      },
+      "title": "Kryptographie",
+      "description": "Hier muss ein Codewort entschlüsselt werden. Das Wort wird mit ROT13 / Cäsar-Chiffre verschlüsselt."
+    },
+    "multiplechoice": {
+      "playView": {
+        "choices": "Antwortmöglichkeiten:",
+        "submit": "Abgabe"
+      },
+      "editView": {
+        "labelTask": "Frage",
+        "labelCorrectAnswer": "Richtige Antwort",
+        "labelWrongAnswer": "Falsche Antwort"
+      },
+      "title": "Multiple-Choice-Frage",
+      "description": "Hier muss eine Multiple-Choice-Frage beantwortet werden. Es gibt eine Correcte Antwort und beliebig viele Flaschen Antworten."
+    }
+  },
+  "media": {
+    "text": {
+      "editView": {
+        "title": "Text"
+      },
+      "title": "Text",
+      "description": "Hier kann ein einfacher Text angezeigt werden"
+    },
+    "youtube": {
+      "editView": {
+        "title": "Youtube Link",
+        "labelStart": "Startzeit",
+        "labelEnd": "Endzeit"
+      },
+      "description": "Hier kann ein Youtube Video eingebunden werden"
+    }
+  },
+  "features": {
+    "game": {
+      "gameForm": {
+        "toastNotFound": "re:quest nicht gefunden",
+        "labelName": "Name",
+        "labelDescription": "Beschreibung",
+        "labelDraft": "Entwurf",
+        "submit": "Speichern"
+      },
+      "gamePanel": {
+        "edit": "Bearbeiten",
+        "play": "Spielen",
+        "download": "Herunterladen"
+      }
+    },
+    "quest": {
+      "questImagePlacer": {
+        "preview": "Vorschau",
+        "clickToAdd": "Klicke auf das Bild um Rätsel hinzuzufügen",
+        "holdToPreview": "Halte den Vorschau Button gedrückt um eine Vorschau deines Raumes zu sehen",
+        "of": "von",
+        "quests": "Rätseln"
+      },
+      "questTypeModal": {
+        "atStart": "Beim Start",
+        "afterSolving": "Nach dem Lösen eines Quests",
+        "titleAddElement": "Element hinzufügen",
+        "labelVisibility": "Sichtbarkeit",
+        "labelVisibleAfterQuest": "Sichtbar nach Quest",
+        "quest": "Rätsel",
+        "media": "Medien",
+        "save": "Speichern"
+      }
+    },
+    "room": {
+      "roomList": {
+        "rooms": "Räume",
+        "addRoom": "Raum hinzufügen"
+      },
+      "roomPanel": {
+        "uploadOwnImage": "Eigenes Foto hochladen",
+        "magicalClassroom": "Magisches Klassenzimmer",
+        "darkMuseum": "Dunkles Museum",
+        "noRom": "Ohne Raum",
+        "headerRoom": "Raum",
+        "labelTheme": "Thema"
+      }
+    }
+  },
+  "languages": {
+    "english": "Englisch",
+    "german": "Deutsch"
+  }
 }

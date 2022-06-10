@@ -1,88 +1,158 @@
 {
-  "page.home.title": "Digital adventures for educational institutions",
-  "page.home.description": "is a platform to create digital escape games für educational institutions",
-  "page.home.createQuest": "create re:quest",
-  "page.home.loremIpsum": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
-  "page.home.card1": "Exciting adventures",
-  "page.home.card2": "Digital education",
-  "page.home.card3": "Modular puzzles",
-  "page.home.card4": "Freely configurable",
-  "page.home.card5": "No installation",
-  "page.home.card6": "Physical elements",
-  "page.home.moreInformation": "More information",
-  "page.home.examples": "Examples",
-  "page.play.id.nextRoom": "Next room",
-  "page.play.questSolved": "Quest solved",
-  "page.play.duration": "Duration",
-  "page.play.toHome": "To main page",
-  "page.studio.index.createNewQuest": "Create new re:quest",
-  "page.studio.index.myQuests": "My re:quests",
-  "toasts.create.loading": "Saving",
-  "toasts.create.success": "Successfully saved",
-  "toasts.create.error": "Error on save",
-  "toasts.delete.loading": "Deleting",
-  "toasts.delete.success": "Successfully deleted",
-  "toasts.delete.error": "Error on delete",
-  "toasts.success": "Correct",
-  "toasts.incorrect": "Wrong answer",
-  "navbar.openMenu": "Open main menu",
-  "navbar.studio": "Studio",
-  "navbar.faq": "FAQ",
-  "navbar.session.profile": "Profile",
-  "navbar.session.settings": "Settings",
-  "navbar.session.signOut": "Sign out",
-  "fileUpload.imageUpload": "Upload Image",
-  "quests.crypto.playView.encryptedWord": "Encrypted word",
-  "quests.crypto.playView.codeWord": "Code word",
-  "quests.crypto.playView.decrypt": "Encrypt",
-  "quests.crypto.title": "Cryptography",
-  "quests.crypto.description": "A code word must be decrypted here. The word is encrypted with ROT13 / Caesar cipher.",
-  "quests.crypto.editView.labelTask": "Task",
-  "quests.crypto.editView.labelCodeWord": "Codeword",
-  "quests.crypto.editView.labelEncryptedWord": "Encrypted word",
-  "quests.multiplechoice.editView.labelTask": "Question",
-  "quests.multiplechoice.editView.labelCorrectAnswer": "Correct Answer",
-  "quests.multiplechoice.editView.labelWrongAnswer": "Wrong Answer",
-  "quests.multiplechoice.title": "Multiple Choice Question",
-  "quests.multiplechoice.description": "A Multiple Choice Question must be answered here. You can define one correct Answer and an arbitrary amount of wrong answers.",
-  "quests.multiplechoice.playView.choices": "Possible answers:",
-  "quests.multiplechoice.playView.submit": "Submit",
-  "media.text.title": "Text",
-  "media.text.description": "A simple text can be shown here",
-  "media.text.editView.title": "Text",
-  "media.youtube.description": "You can add a Youtube video here",
-  "media.youtube.editView.title": "Youtube link",
-  "media.youtube.editView.labelStart": "Start time",
-  "media.youtube.editView.labelEnd": "End time",
-  "features.game.gameForm.toastNotFound": "re:quest not found",
-  "features.game.gameForm.labelName": "Name",
-  "features.game.gameForm.labelDescription": "Description",
-  "features.game.gameForm.labelDraft": "Draft",
-  "features.game.gameForm.submit": "Save",
-  "features.game.gamePanel.edit": "Edit",
-  "features.game.gamePanel.play": "Play",
-  "features.game.gamePanel.download": "Download",
-  "features.quest.questImagePlacer.preview": "Preview",
-  "features.quest.questImagePlacer.clickToAdd": "Click on the image to add a quest",
-  "features.quest.questImagePlacer.holdToPreview": "Hold the preview button to see a preview of your room",
-  "features.quest.questImagePlacer.of": "out of",
-  "features.quest.questImagePlacer.quests": "quests",
-  "features.quest.questTypeModal.atStart": "At start",
-  "features.quest.questTypeModal.afterSolving": "After solving a quest",
-  "features.quest.questTypeModal.titleAddElement": "Add Element",
-  "features.quest.questTypeModal.labelVisibility": "Visibility",
-  "features.quest.questTypeModal.labelVisibleAfterQuest": "Visible after quest",
-  "features.quest.questTypeModal.quest": "Quest",
-  "features.quest.questTypeModal.media": "Media",
-  "features.quest.questTypeModal.save": "Save",
-  "features.room.roomList.rooms": "Rooms",
-  "features.room.roomList.addRoom": "Add Room",
-  "features.room.roomPanel.uploadOwnImage": "Upload own Image",
-  "features.room.roomPanel.magicalClassroom": "Magical classroom",
-  "features.room.roomPanel.darkMuseum": "Dark museum",
-  "features.room.roomPanel.noRom": "No room",
-  "features.room.roomPanel.headerRoom": "Room",
-  "features.room.roomPanel.labelTheme": "Theme",
-  "languages.english": "English",
-  "languages.german": "German"
+  "page": {
+    "home": {
+      "title": "Digital adventures for educational institutions",
+      "description": "is a platform to create digital escape games für educational institutions",
+      "createQuest": "create re:quest",
+      "loremIpsum": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
+      "card1": "Exciting adventures",
+      "card2": "Digital education",
+      "card3": "Modular puzzles",
+      "card4": "Freely configurable",
+      "card5": "No installation",
+      "card6": "Physical elements",
+      "moreInformation": "More information",
+      "examples": "Examples"
+    },
+    "play": {
+      "id": {
+        "nextRoom": "Next room"
+      },
+      "questSolved": "Quest solved",
+      "duration": "Duration",
+      "toHome": "To main page"
+    },
+    "studio": {
+      "index": {
+        "createNewQuest": "Create new re:quest",
+        "myQuests": "My re:quests"
+      }
+    }
+  },
+  "toasts": {
+    "create": {
+      "loading": "Saving",
+      "success": "Successfully saved",
+      "error": "Error on save"
+    },
+    "delete": {
+      "loading": "Deleting",
+      "success": "Successfully deleted",
+      "error": "Error on delete"
+    },
+    "success": "Correct",
+    "incorrect": "Wrong answer"
+  },
+  "navbar": {
+    "session": {
+      "profile": "Profile",
+      "settings": "Settings",
+      "signOut": "Sign out"
+    },
+    "openMenu": "Open main menu",
+    "studio": "Studio",
+    "faq": "FAQ"
+  },
+  "fileUpload": {
+    "imageUpload": "Upload Image"
+  },
+  "quests": {
+    "crypto": {
+      "playView": {
+        "encryptedWord": "Encrypted word",
+        "codeWord": "Code word",
+        "decrypt": "Encrypt"
+      },
+      "editView": {
+        "labelTask": "Task",
+        "labelCodeWord": "Codeword",
+        "labelEncryptedWord": "Encrypted word"
+      },
+      "title": "Cryptography",
+      "description": "A code word must be decrypted here. The word is encrypted with ROT13 / Caesar cipher."
+    },
+    "multiplechoice": {
+      "playView": {
+        "choices": "Possible answers:",
+        "submit": "Submit"
+      },
+      "editView": {
+        "labelTask": "Question",
+        "labelCorrectAnswer": "Correct Answer",
+        "labelWrongAnswer": "Wrong Answer"
+      },
+      "title": "Multiple Choice Question",
+      "description": "A Multiple Choice Question must be answered here. You can define one correct Answer and an arbitrary amount of wrong answers."
+    }
+  },
+  "media": {
+    "text": {
+      "editView": {
+        "title": "Text"
+      },
+      "title": "Text",
+      "description": "A simple text can be shown here"
+    },
+    "youtube": {
+      "editView": {
+        "title": "Youtube link",
+        "labelStart": "Start time",
+        "labelEnd": "End time"
+      },
+      "description": "You can add a Youtube video here"
+    }
+  },
+  "features": {
+    "game": {
+      "gameForm": {
+        "toastNotFound": "re:quest not found",
+        "labelName": "Name",
+        "labelDescription": "Description",
+        "labelDraft": "Draft",
+        "submit": "Save"
+      },
+      "gamePanel": {
+        "edit": "Edit",
+        "play": "Play",
+        "download": "Download"
+      }
+    },
+    "quest": {
+      "questImagePlacer": {
+        "preview": "Preview",
+        "clickToAdd": "Click on the image to add a quest",
+        "holdToPreview": "Hold the preview button to see a preview of your room",
+        "of": "out of",
+        "quests": "quests"
+      },
+      "questTypeModal": {
+        "atStart": "At start",
+        "afterSolving": "After solving a quest",
+        "titleAddElement": "Add Element",
+        "labelVisibility": "Visibility",
+        "labelVisibleAfterQuest": "Visible after quest",
+        "quest": "Quest",
+        "media": "Media",
+        "save": "Save"
+      }
+    },
+    "room": {
+      "roomList": {
+        "rooms": "Rooms",
+        "addRoom": "Add Room"
+      },
+      "roomPanel": {
+        "uploadOwnImage": "Upload own Image",
+        "magicalClassroom": "Magical classroom",
+        "darkMuseum": "Dark museum",
+        "noRom": "No room",
+        "headerRoom": "Room",
+        "labelTheme": "Theme"
+      }
+    }
+  },
+  "languages": {
+    "english": "English",
+    "german": "German"
+  }
 }
