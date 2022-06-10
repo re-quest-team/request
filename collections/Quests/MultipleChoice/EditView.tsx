@@ -34,7 +34,7 @@ const EditView = () => {
     event: React.ChangeEvent<HTMLInputElement>,
     i: number,
   ) => {
-    var answers = wrongAnswers
+    let answers = wrongAnswers
 
     answers[i - 1] = { key: i, name: event.target.value }
 

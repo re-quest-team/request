@@ -27,7 +27,7 @@ const EditView = () => {
       />
       <div className="flex flex-row justify-between">
         <div>
-          <p className="text-sm" style={{ marginBottom: '-8px' }}>
+          <p className="-mb-2 text-sm">
             <FormattedMessage id="media.youtube.editView.labelStart" />
           </p>
           <div className="flex flex-row justify-between">
@@ -73,7 +73,7 @@ const EditView = () => {
         <div className="px-8" />
 
         <div>
-          <p className="text-sm" style={{ marginBottom: '-8px' }}>
+          <p className="-mb-2 text-sm">
             <FormattedMessage id="media.youtube.editView.labelEnd" />
           </p>
           <div className="flex w-1/2 flex-row justify-between">

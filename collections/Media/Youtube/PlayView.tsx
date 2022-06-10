@@ -26,11 +26,7 @@ const PlayView = () => {
   return (
     <div>
       <iframe
-        style={{
-          position: 'relative',
-          overflow: 'hidden',
-          paddingRight: '50px',
-        }}
+        className="relative overflow-hidden pr-12"
         width="583"
         height="480"
         src={link}
