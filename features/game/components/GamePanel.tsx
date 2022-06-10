@@ -13,7 +13,9 @@ import { DocumentDownloadIcon } from '@heroicons/react/solid'
 import 'node-self'
 import QRCodeStyling, { FileExtension } from 'qr-code-styling'
 import QrCodeConfig from '@/features/game/components/QrCode/QrCodeConfig'
-import PdfTemplate, { containerStyle } from '@/features/game/components/QrCode/PdfTemplate'
+import PdfTemplate, {
+  containerStyle,
+} from '@/features/game/components/QrCode/PdfTemplate'
 import html2canvas from 'html2canvas'
 import JsPdf from 'jspdf'
 
@@ -22,10 +24,6 @@ const qrOptions: SelectOption[] = [
   { value: 'SVG' },
   { value: 'PDF' },
 ]
-
-const getStaticProp = async () => {
-  return await require('assets/logos/request-logo-single.svg')
-}
 
 const GamePanel = ({ id, name, description, germanLanguage }: Game) => {
   const intl = useIntl()
@@ -54,11 +52,15 @@ const GamePanel = ({ id, name, description, germanLanguage }: Game) => {
 
   const english = intl.formatMessage({ id: 'languages.english' })
   const german = intl.formatMessage({ id: 'languages.german' })
-  
+
   const pdfDoc = useRef<HTMLDivElement>(null)
   const [imgUrl, setImgUrl] = useState('')
 
-  getStaticProp().then(props => {
+  const getImageUrl = async () => {
+    return await require('assets/logos/request-logo-single.svg')
+  }
+
+  getImageUrl().then(props => {
     setImgUrl(props.default.src)
   })
 
