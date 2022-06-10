@@ -4,6 +4,7 @@ import { InputField } from '@/components/Elements/FormElements'
 import { incorrectToast, successToast } from '@/components/Toasts'
 import { useState } from 'react'
 import { useQuestStore } from './store'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 const PlayView = () => {
   const question = useQuestStore(state => state.question)
@@ -13,11 +14,17 @@ const PlayView = () => {
 
   const [answer, setAnswer] = useState('')
 
+  const intl = useIntl()
+  const encryptWord = intl.formatMessage({
+    id: 'quests.crypto.playView.encryptedWord',
+  })
+  const codeWord = intl.formatMessage({ id: 'quests.crypto.playView.codeWord' })
+
   return (
     <div>
       <p>{question}</p>
       <InputField
-        label="Verschlüsseltes Wort"
+        label={encryptWord}
         disabled
         value={codeword.replace(
           /[A-Z]/gi,
@@ -29,20 +36,20 @@ const PlayView = () => {
       ></InputField>
       <h3 className="mt-8 text-lg">Antwort</h3>
       <InputField
-        label="Codewort"
+        label={codeWord}
         onChange={e => setAnswer(e.target.value)}
       ></InputField>
       <Button
         onClick={() => {
           if (onSolve(answer)) {
-            successToast()
+            successToast(intl)
             successConfetti()
           } else {
-            incorrectToast()
+            incorrectToast(intl)
           }
         }}
       >
-        Entschlüsseln
+        <FormattedMessage id="quests.crypto.playView.decrypt" />
       </Button>
     </div>
   )

@@ -1,0 +1,158 @@
+{
+  "page": {
+    "home": {
+      "title": "Digitale Abenteuer für Bildungs\u00ADeinrich\u00ADtungen",
+      "description": "ist eine Plattform zum Erstellen von digitalen Escape Games für Bildungs\u00ADeinrichtungen",
+      "createQuest": "re:quest erstellen",
+      "loremIpsum": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
+      "card1": "Spannende Abenteuer",
+      "card2": "Digitale Bildung",
+      "card3": "Modulare Rätsel",
+      "card4": "Frei konfigurierbar",
+      "card5": "Keine Installation",
+      "card6": "Physische Elemente",
+      "moreInformation": "Weitere Informationen",
+      "examples": "Beispiele"
+    },
+    "play": {
+      "id": {
+        "nextRoom": "Nächster Raum"
+      },
+      "questSolved": "Rätsel gelöst",
+      "duration": "Dauer",
+      "toHome": "Zur Startseite"
+    },
+    "studio": {
+      "index": {
+        "createNewQuest": "Neues re:quest erstellen",
+        "myQuests": "Meine re:quests"
+      }
+    }
+  },
+  "toasts": {
+    "create": {
+      "loading": "Speichern",
+      "success": "Speichern erfolgreich",
+      "error": "Fehler beim Speichern"
+    },
+    "delete": {
+      "loading": "Löschen",
+      "success": "Löschen erfolgreich",
+      "error": "Fehler beim Löschen"
+    },
+    "success": "Korrekt",
+    "incorrect": "Falsche Antwort"
+  },
+  "navbar": {
+    "session": {
+      "profile": "Profil",
+      "settings": "Einstellungen",
+      "signOut": "Ausloggen"
+    },
+    "openMenu": "Hauptmenu öffnen",
+    "studio": "Studio",
+    "faq": "FAQ"
+  },
+  "fileUpload": {
+    "imageUpload": "Bild hochladen"
+  },
+  "quests": {
+    "crypto": {
+      "playView": {
+        "encryptedWord": "Verschlüsseltes Wort",
+        "codeWord": "Code Wort",
+        "decrypt": "Entschlüsseln"
+      },
+      "editView": {
+        "labelTask": "Aufgabenstellung",
+        "labelCodeWord": "Codewort",
+        "labelEncryptedWord": "Verschlüsseltes Wort"
+      },
+      "title": "Kryptographie",
+      "description": "Hier muss ein Codewort entschlüsselt werden. Das Wort wird mit ROT13 / Cäsar-Chiffre verschlüsselt."
+    },
+    "multiplechoice": {
+      "playView": {
+        "choices": "Antwortmöglichkeiten:",
+        "submit": "Abgabe"
+      },
+      "editView": {
+        "labelTask": "Frage",
+        "labelCorrectAnswer": "Richtige Antwort",
+        "labelWrongAnswer": "Falsche Antwort"
+      },
+      "title": "Multiple-Choice-Frage",
+      "description": "Hier muss eine Multiple-Choice-Frage beantwortet werden. Es gibt eine Correcte Antwort und beliebig viele Flaschen Antworten."
+    }
+  },
+  "media": {
+    "text": {
+      "editView": {
+        "title": "Text"
+      },
+      "title": "Text",
+      "description": "Hier kann ein einfacher Text angezeigt werden"
+    },
+    "youtube": {
+      "editView": {
+        "title": "Youtube Link",
+        "labelStart": "Startzeit",
+        "labelEnd": "Endzeit"
+      },
+      "description": "Hier kann ein Youtube Video eingebunden werden"
+    }
+  },
+  "features": {
+    "game": {
+      "gameForm": {
+        "toastNotFound": "re:quest nicht gefunden",
+        "labelName": "Name",
+        "labelDescription": "Beschreibung",
+        "labelDraft": "Entwurf",
+        "submit": "Speichern"
+      },
+      "gamePanel": {
+        "edit": "Bearbeiten",
+        "play": "Spielen",
+        "download": "Herunterladen"
+      }
+    },
+    "quest": {
+      "questImagePlacer": {
+        "preview": "Vorschau",
+        "clickToAdd": "Klicke auf das Bild um Rätsel hinzuzufügen",
+        "holdToPreview": "Halte den Vorschau Button gedrückt um eine Vorschau deines Raumes zu sehen",
+        "of": "von",
+        "quests": "Rätseln"
+      },
+      "questTypeModal": {
+        "atStart": "Beim Start",
+        "afterSolving": "Nach dem Lösen eines Quests",
+        "titleAddElement": "Element hinzufügen",
+        "labelVisibility": "Sichtbarkeit",
+        "labelVisibleAfterQuest": "Sichtbar nach Quest",
+        "quest": "Rätsel",
+        "media": "Medien",
+        "save": "Speichern"
+      }
+    },
+    "room": {
+      "roomList": {
+        "rooms": "Räume",
+        "addRoom": "Raum hinzufügen"
+      },
+      "roomPanel": {
+        "uploadOwnImage": "Eigenes Foto hochladen",
+        "magicalClassroom": "Magisches Klassenzimmer",
+        "darkMuseum": "Dunkles Museum",
+        "noRom": "Ohne Raum",
+        "headerRoom": "Raum",
+        "labelTheme": "Thema"
+      }
+    }
+  },
+  "languages": {
+    "english": "Englisch",
+    "german": "Deutsch"
+  }
+}

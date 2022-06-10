@@ -58,15 +58,16 @@ model VerificationToken {
 }
 
 model Game {
-  id          String   @id @default(uuid())
-  name        String?
-  description String?
-  draft       Boolean  @default(true)
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId      String
-  rooms       Room[]
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @default(now())
+  id             String   @id @default(uuid())
+  name           String?
+  description    String?
+  germanLanguage Boolean  @default(true)
+  draft          Boolean  @default(true)
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId         String
+  rooms          Room[]
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @default(now())
 }
 
 model Room {
@@ -104,9 +105,12 @@ model Quest {
 
 enum QuestType {
   QUEST_CRYPTO
+  QUEST_MULTIPLE_CHOICE
   QUEST_CODING
   QUEST_QR_SCAN
   QUEST_STATISTICS
+  QUEST_NUMBER_INPUT
+  QUEST_IMAGE_COMBINATION
   MEDIA_TEXT
   MEDIA_IMAGE
   MEDIA_INSTAGRAM

@@ -4,10 +4,12 @@ import {
   CheckCircleIcon,
   CodeIcon,
   LockClosedIcon,
+  CalculatorIcon,
   MenuAlt1Icon,
   PhotographIcon,
   PlusIcon,
   QrcodeIcon,
+  ViewListIcon,
   TrashIcon,
 } from '@heroicons/react/outline'
 import { Quest, QuestType } from '@prisma/client'
@@ -30,15 +32,20 @@ const bgVariant = {
 }
 
 const renderIcon = (type?: QuestType) => {
+  console.log(type)
   switch (type) {
     case 'QUEST_CRYPTO':
       return <LockClosedIcon className="h-10 w-10" />
+    case 'QUEST_MULTIPLE_CHOICE':
+      return <ViewListIcon className="h-10 w-10" />
     case 'QUEST_CODING':
       return <CodeIcon className="h-10 w-10" />
     case 'QUEST_QR_SCAN':
       return <QrcodeIcon className="h-10 w-10" />
     case 'QUEST_STATISTICS':
       return <ChartSquareBarIcon className="h-10 w-10" />
+    case 'QUEST_NUMBER_INPUT':
+      return <CalculatorIcon className="h-10 w-10" />
     case 'MEDIA_TEXT':
       return <MenuAlt1Icon className="h-10 w-10" />
     case 'MEDIA_IMAGE':

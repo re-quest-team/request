@@ -1,6 +1,7 @@
 import { useS3Upload } from 'next-s3-upload'
 import { useState } from 'react'
 import { Button } from '../Elements/Button'
+import { FormattedMessage } from 'react-intl'
 
 type FileUploadProps = {
   onChange: (url: string) => any
@@ -33,7 +34,7 @@ export default function FileUpload({ onChange, roomId }: FileUploadProps) {
     <div>
       <FileInput onChange={handleFileChange} />
       <Button onClick={openFileDialog} isLoading={loading} disabled={loading}>
-        Bild hochladen
+        <FormattedMessage id="fileUpload.imageUpload" />
       </Button>
     </div>
   )

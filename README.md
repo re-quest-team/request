@@ -30,6 +30,7 @@ yarn dev
 - `collections`: contains all quests / media modules and the corresponding types
 - `components`: UI Components used in the app
 - `features`: components and api communication functions for different features in the app
+- `lang`: files for i18n, location of all translations
 - `lib`: libraries used troughout the app
 - `pages`: next.js pages folder, containing UI pages as well as the api
 - `prisma`: prisma schema, migrations (see https://www.prisma.io/) and validators (see https://github.com/omar-dulaimi/prisma-yup-generator)
