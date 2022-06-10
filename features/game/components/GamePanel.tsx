@@ -4,7 +4,6 @@ import Panel from '@/components/Panel'
 import { Game } from '@prisma/client'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
-import toast from 'react-hot-toast'
 import { useSWRConfig } from 'swr'
 import { deleteGame } from '../api/deleteGame'
 import { FormattedMessage, useIntl } from 'react-intl'
@@ -13,9 +12,7 @@ import { DocumentDownloadIcon } from '@heroicons/react/solid'
 import 'node-self'
 import QRCodeStyling, { FileExtension } from 'qr-code-styling'
 import QrCodeConfig from '@/features/game/components/QrCode/QrCodeConfig'
-import PdfTemplate, {
-  containerStyle,
-} from '@/features/game/components/QrCode/PdfTemplate'
+import PdfTemplate from '@/features/game/components/QrCode/PdfTemplate'
 import html2canvas from 'html2canvas'
 import JsPdf from 'jspdf'
 
@@ -136,7 +133,10 @@ const GamePanel = ({ id, name, description, germanLanguage }: Game) => {
             </div>
           </div>
 
-          <div ref={pdfDoc} style={containerStyle}>
+          <div
+            ref={pdfDoc}
+            className="fixed top-0 -left-full min-h-[297mm] min-w-[210mm] bg-white"
+          >
             <PdfTemplate
               name={name}
               description={description}

@@ -1,14 +1,3 @@
-import { CSSProperties } from 'react'
-
-export const containerStyle: CSSProperties = {
-  minWidth: '210mm',
-  minHeight: '297mm',
-  backgroundColor: 'white',
-  position: 'fixed',
-  top: '0',
-  left: '100vw',
-}
-
 type QrPdfTemplateProps = {
   name: string | null
   description: string | null
