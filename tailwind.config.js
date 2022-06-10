@@ -53,11 +53,5 @@ module.exports = {
         },
       },
     },
-    minHeight: {
-      A4: '297mm',
-    },
-    minWidth: {
-      A4: '210mm',
-    },
   },
 }
