@@ -3,8 +3,6 @@ import { useYoutubeStore } from './store'
 import { Timestamp } from '@/collections/Media/Youtube/store'
 
 const sumToSec = (time: Timestamp) => {
-  console.log('Timestamp: ' + time.hrs + ':' + time.min + ':' + time.sec)
-
   return (
     (time.hrs != '' ? parseInt(time.hrs) * 3600 : 0) +
     (time.min != '' ? parseInt(time.min) * 60 : 0) +
@@ -26,8 +24,7 @@ const PlayView = () => {
   return (
     <div>
       <iframe
-        className="relative overflow-hidden pr-12"
-        width="583"
+        className="relative w-full overflow-hidden pr-12"
         height="480"
         src={link}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

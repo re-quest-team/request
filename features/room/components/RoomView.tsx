@@ -62,6 +62,7 @@ const RoomView = ({ id }: RoomViewProps) => {
         open={currentQuest !== undefined}
         onClose={() => setCurrentQuest(undefined)}
         title={''}
+        size={currentQuest ? currentQuest.modalSize : 'medium'}
       >
         <>{currentQuest && <currentQuest.PlayView />}</>
       </Modal>

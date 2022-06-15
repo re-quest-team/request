@@ -1,3 +1,4 @@
+import { sizes } from '@/components/Modal'
 import { QuestType } from '@prisma/client'
 import React from 'react'
 import { Icon } from 'react-feather'
@@ -13,4 +14,5 @@ export interface IQuest<T> {
   onLoad: (data: T) => any
   data?: T
   onSolve?: (callback: () => void) => void
+  modalSize?: keyof typeof sizes
 }

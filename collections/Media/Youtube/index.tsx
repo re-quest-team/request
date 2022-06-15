@@ -18,6 +18,7 @@ const YoutubeMedia = (intl: IntlShape): IQuest<Data> => {
     title: 'Youtube',
     description: intl.formatMessage({ id: 'media.youtube.description' }),
     icon: Youtube,
+    modalSize: 'large',
     EditView,
     PlayView,
     onLoad: ({ link, start, end }) => {

@@ -8,6 +8,11 @@ const backdropVariant = {
   hidden: 'bg-opacity-0',
 }
 
+export const sizes = {
+  medium: 'max-w-xl',
+  large: ' max-w-4xl',
+}
+
 type ModalProps = {
   open: boolean
   onClose: () => void
@@ -16,6 +21,7 @@ type ModalProps = {
   showBack?: boolean
   onBack?: () => void
   backdrop?: keyof typeof backdropVariant
+  size?: keyof typeof sizes
 }
 
 const Modal = ({
@@ -26,6 +32,7 @@ const Modal = ({
   showBack,
   onBack,
   backdrop = 'normal',
+  size = 'medium',
 }: ModalProps) => {
   return (
     <Transition show={open} as={Fragment}>
@@ -58,7 +65,12 @@ const Modal = ({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-xl transform overflow-hidden rounded-2xl bg-zinc-900 p-6 text-left align-middle text-white shadow-xl transition-all">
+              <Dialog.Panel
+                className={clsx(
+                  'w-full transform overflow-hidden rounded-2xl bg-zinc-900 p-6 text-left align-middle text-white shadow-xl transition-all',
+                  sizes[size],
+                )}
+              >
                 <div className="flex">
                   {showBack && (
                     <ArrowLeftIcon
