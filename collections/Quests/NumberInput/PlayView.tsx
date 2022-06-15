@@ -5,7 +5,7 @@ import { incorrectToast, successToast } from '@/components/Toasts'
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import { useQuestStore } from './store'
-import { yupResolver } from '@hookform/resolvers/yup/dist/yup'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { valNumberInput } from '@/collections/Quests/NumberInput/validation'
 import { useIntl } from 'react-intl'
 
