@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { signOut, useSession } from 'next-auth/react'
-import { Button } from '../Elements/Button'
+import { PillButton } from '../Elements/Button'
 import { Fragment } from 'react'
 import LocaleSwitcher from '../LocaleSwitcher'
 import { FormattedMessage } from 'react-intl'
@@ -80,14 +80,15 @@ const Navbar = () => {
                         </a>
                       </Link>
                     ))}
-                    <LocaleSwitcher />
                   </div>
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 {!session && (
                   <Link href={'/api/auth/signin'} passHref>
-                    <Button className="mx-auto">Login</Button>
+                    <PillButton className="mx-auto" variant="tertiary">
+                      Login
+                    </PillButton>
                   </Link>
                 )}
 
@@ -154,6 +155,9 @@ const Navbar = () => {
                     </Transition>
                   </Menu>
                 )}
+                <div className="ml-4 hidden sm:block">
+                  <LocaleSwitcher />
+                </div>
               </div>
             </div>
           </div>
@@ -178,6 +182,9 @@ const Navbar = () => {
                   <FormattedMessage id={'navbar.' + item.key} />
                 </Disclosure.Button>
               ))}
+              <Disclosure.Button className="block rounded-md px-3 py-2 text-base font-medium text-slate-300 hover:bg-slate-700 hover:text-white">
+                <LocaleSwitcher />
+              </Disclosure.Button>
             </div>
           </Disclosure.Panel>
         </>
