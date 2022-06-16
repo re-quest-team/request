@@ -2,11 +2,10 @@ import { successConfetti } from '@/components/Confetti'
 import { Button } from '@/components/Elements/Button'
 import { InputField } from '@/components/Elements/FormElements'
 import { incorrectToast, successToast } from '@/components/Toasts'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { useQuestStore } from './store'
 import { FormattedMessage, useIntl } from 'react-intl'
 import Image from 'next/image'
-import { iterator } from 'rxjs/dist/types/internal/symbol/iterator'
 
 const PlayView = () => {
   const task = useQuestStore(state => state.task)
@@ -36,11 +35,28 @@ const PlayView = () => {
       i++
     }
   }
+  function onSolve() {
+    let result = false
+    if (answers.length != imagesToCombineRight.length) result = false
+    else {
+      for (let i = 0; i < answers.length; i++) {
+        result = result && imagesToCombineMap.get(answers[i])
+      }
+    }
+    return result
+  }
 
-  const onSolve = useQuestStore(state => state.onSolve)
-  const correct = useQuestStore(state => state.correct)
+  //const onSolve = useQuestStore(state => state.onSolve)
+  //const correct = useQuestStore(state => state.correct)
 
-  const [answer, setAnswer] = useState('')
+  //const [answer, setAnswer] = useState('')
+  //const [selectedAnswer, setSelectedAnswer] = useState<String>()
+
+  let answers = new Array()
+
+  function setTest(test: string) {
+    answers = answers.concat([test])
+  }
 
   const intl = useIntl()
   const toBeCombined = intl.formatMessage({
@@ -49,6 +65,12 @@ const PlayView = () => {
   const chose = intl.formatMessage({
     id: 'quests.imageCombination.playView.chose',
   })
+
+  const radioHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTest(event.target.value)
+    //setSelectedAnswer(event.target.value)
+    //setAnswer(event.target.value)
+  }
 
   return (
     <div>
@@ -62,18 +84,36 @@ const PlayView = () => {
       />
       <p>{chose}</p>
       {imagesToCombineRandomOrder.map(test => {
-        var image = (
+        return (
           <>
             <Image
               src={test}
-              alt="Hier sollte das Bild, das kombiniert werden soll, sein"
+              alt="Hier ein Bild zum kombinieren sein"
               height={300}
               width={300}
             />
+            <input
+              type="radio"
+              id={test}
+              name={test}
+              value={test}
+              onChange={radioHandler}
+            ></input>
           </>
         )
-        return image
       })}
+      <Button
+        onClick={() => {
+          if (onSolve()) {
+            successToast(intl)
+            successConfetti()
+          } else {
+            incorrectToast(intl)
+          }
+        }}
+      >
+        <FormattedMessage id="quests.crypto.playView.decrypt" />
+      </Button>
     </div>
   )
 }
