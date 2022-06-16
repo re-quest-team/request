@@ -113,7 +113,9 @@ const EditView = () => {
       setImageUrlToBeCombined(
         require('/assets/imageCombinationQuest/abstract.svg'),
       ) //.default.src,)
-      setImageToBeCombined('/assets/imageCombinationQuest/abstract.svg')
+      setImageToBeCombined(
+        require('/assets/imageCombinationQuest/abstract.svg'),
+      )
     }
   }, [imageToBeCombinedSelection.value])
 
@@ -124,10 +126,10 @@ const EditView = () => {
     ) {
       setImageUrlToCombineRight(require('/assets/imageCombinationQuest/1.svg')) //.default.src,)
       setImagesToCombineRight([
-        '/assets/imageCombinationQuest/1.svg',
-        '/assets/imageCombinationQuest/2.svg',
-        '/assets/imageCombinationQuest/3.svg',
-        '/assets/imageCombinationQuest/4.svg',
+        require('/assets/imageCombinationQuest/1.svg'),
+        require('/assets/imageCombinationQuest/2.svg'),
+        require('/assets/imageCombinationQuest/3.svg'),
+        require('/assets/imageCombinationQuest/4.svg'),
       ])
     }
   }, [imageToCombineSelectionRight.value, intl])
@@ -138,7 +140,7 @@ const EditView = () => {
       intl.formatMessage({ id: 'quests.imageCombination.useExampleImage' })
     ) {
       setImageUrlToCombineWrong(require('/assets/imageCombinationQuest/5.svg')) //.default.src,)
-      setImagesToCombineWrong(['/assets/imageCombinationQuest/5.svg'])
+      setImagesToCombineWrong([require('/assets/imageCombinationQuest/5.svg')])
     }
   }, [imageToCombineSelectionWrong.value, intl])
 

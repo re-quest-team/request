@@ -34,31 +34,25 @@ const PlayView = () => {
     <div>
       <p>{task}</p>
       <p>{toBeCombined}</p>
-      <div className="relative hidden h-8 w-28 lg:block">
-        <Image
-          src={imageToBeCombined}
-          alt="Hier sollte das Bild, das kombiniert werden soll, sein"
-          height={300}
-          width={300}
-        />
-      </div>
+      <Image
+        src={imageToBeCombined}
+        alt="Hier sollte das Bild, das kombiniert werden soll, sein"
+        height={300}
+        width={300}
+      />
       <p>{chose}</p>
-      <div className="relative hidden h-8 w-28 lg:block">
-        <Image
-          src={imagesToCombineRight[0]}
-          alt="Hier sollte ein Bild sein"
-          height={300}
-          width={300}
-        />
-      </div>
-      <div className="relative hidden h-8 w-28 lg:block">
-        <Image
-          src={imagesToCombineWrong[0]}
-          alt="Hier sollte ein Bild sein"
-          height={300}
-          width={300}
-        />
-      </div>
+      <Image
+        src={imagesToCombineRight[0]}
+        alt="Hier sollte ein Bild sein"
+        height={300}
+        width={300}
+      />
+      <Image
+        src={imagesToCombineWrong[0]}
+        alt="Hier sollte ein Bild sein"
+        height={300}
+        width={300}
+      />
     </div>
   )
 }
