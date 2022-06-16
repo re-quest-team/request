@@ -73,10 +73,6 @@ const EditView = () => {
   const [imageToCombineSelectionWrong, setImagesToCombineSelectionWrong] =
     useState(imagesToCombineSelectionRight[0])
 
-  const [imageUrlToBeCombined, setImageUrlToBeCombined] = useState('')
-  const [imageUrlToCombineRight, setImageUrlToCombineRight] = useState('')
-  const [imageUrlToCombineWrong, setImageUrlToCombineWrong] = useState('')
-
   // { data: quest } = useSWR<QuestWithImage>(`/api/quest/${questId}`)
 
   const task = useQuestStore(state => state.task)
@@ -110,21 +106,23 @@ const EditView = () => {
       imageToBeCombinedSelection.value ===
       intl.formatMessage({ id: 'quests.imageCombination.useExampleImage' })
     ) {
-      setImageUrlToBeCombined(
-        require('/assets/imageCombinationQuest/abstract.svg'),
-      ) //.default.src,)
       setImageToBeCombined(
         require('/assets/imageCombinationQuest/abstract.svg'),
       )
+      //setImagesToCombineSelectionRight(imagesToCombineSelectionRight[1])
+      //setImagesToCombineSelectionWrong(imagesToCombineSelectionWrong[1])
     }
-  }, [imageToBeCombinedSelection.value])
+  }, [
+    imageToBeCombinedSelection.value,
+    imageToCombineSelectionRight.value,
+    intl,
+  ])
 
   useEffect(() => {
     if (
       imageToCombineSelectionRight.value ===
       intl.formatMessage({ id: 'quests.imageCombination.useExampleImage' })
     ) {
-      setImageUrlToCombineRight(require('/assets/imageCombinationQuest/1.svg')) //.default.src,)
       setImagesToCombineRight([
         require('/assets/imageCombinationQuest/1.svg'),
         require('/assets/imageCombinationQuest/2.svg'),
@@ -139,7 +137,6 @@ const EditView = () => {
       imageToCombineSelectionWrong.value ===
       intl.formatMessage({ id: 'quests.imageCombination.useExampleImage' })
     ) {
-      setImageUrlToCombineWrong(require('/assets/imageCombinationQuest/5.svg')) //.default.src,)
       setImagesToCombineWrong([require('/assets/imageCombinationQuest/5.svg')])
     }
   }, [imageToCombineSelectionWrong.value, intl])
@@ -164,7 +161,7 @@ const EditView = () => {
           }) && (
           <FileUpload
             onChange={url =>
-              setImageUrlToBeCombined(
+              setImageToBeCombined(
                 `${process.env.NEXT_PUBLIC_S3_BASE_URL}/${url}`,
               )
             }
@@ -185,7 +182,7 @@ const EditView = () => {
           }) && (
           <FileUpload
             onChange={url =>
-              setImageUrlToCombineRight(
+              setImageToBeCombined(
                 `${process.env.NEXT_PUBLIC_S3_BASE_URL}/${url}`,
               )
             }
@@ -206,7 +203,7 @@ const EditView = () => {
           }) && (
           <FileUpload
             onChange={url =>
-              setImageUrlToCombineWrong(
+              setImageToBeCombined(
                 `${process.env.NEXT_PUBLIC_S3_BASE_URL}/${url}`,
               )
             }
