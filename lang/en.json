@@ -83,6 +83,24 @@
       },
       "title": "Multiple Choice Question",
       "description": "A Multiple Choice Question must be answered here. You can define one correct Answer and an arbitrary amount of wrong answers."
+    },
+    "numberInput": {
+      "playView": {
+        "labelAnswer": "Answer",
+        "check": "Check"
+      },
+      "editView": {
+        "labelTask": "Question",
+        "labelAnswer": "Answer",
+        "labelUnit": "Unit"
+      },
+      "validation": {
+        "questionRequired": "Question must be entered!",
+        "nanInvalid": "NaN invalid",
+        "answerRequired": "Answer must be entered!"
+      },
+      "title": "Number Input",
+      "description": "Here a question is answered with a number."
     }
   },
   "media": {
