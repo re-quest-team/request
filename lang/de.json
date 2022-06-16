@@ -118,6 +118,12 @@
         "labelEnd": "Endzeit"
       },
       "description": "Hier kann ein Youtube Video eingebunden werden"
+    },
+    "instagram": {
+      "editView": {
+        "label": "Instagram Embed Link"
+      },
+      "description": "Hier kann ein einfacher Instagram Post angezeigt werden"
     }
   },
   "features": {
