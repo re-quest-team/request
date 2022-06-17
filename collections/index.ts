@@ -9,12 +9,12 @@ import { IQuest } from '@/collections/types'
 
 const media = (intl: IntlShape): IQuest<any>[] => [
   TextMedia(intl),
-  InstagramMedia,
+  InstagramMedia(intl),
   YoutubeMedia(intl),
 ]
 const quests = (intl: IntlShape): IQuest<any>[] => [
   CryptoQuest(intl),
-  NumberInputQuest,
+  NumberInputQuest(intl),
   MultipleChoiceQuest(intl),
   ...media(intl),
 ]
