@@ -23,8 +23,7 @@ model Account {
   scope             String?
   id_token          String? @db.Text
   session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
@@ -92,15 +91,18 @@ model S3Image {
 }
 
 model Quest {
-  id        String     @id @default(uuid())
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @default(now())
-  room      Room       @relation(fields: [roomId], references: [id], onDelete: Cascade)
-  roomId    String
-  x         Float
-  y         Float
-  type      QuestType?
-  data      Json?      @default(dbgenerated())
+  id         String     @id @default(uuid())
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @default(now())
+  room       Room       @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  roomId     String
+  x          Float
+  y          Float
+  showAfter  Quest?     @relation("orderRel", fields: [questId], references: [id])
+  showBefore Quest?     @relation("orderRel")
+  type       QuestType?
+  data       Json?      @default(dbgenerated())
+  questId    String?
 }
 
 enum QuestType {
@@ -116,6 +118,7 @@ enum QuestType {
   MEDIA_INSTAGRAM
   MEDIA_YOUTUBE
   MEDIA_IFRAME
+  QUEST_GAP_TEXT
 }
 
 generator yup {
