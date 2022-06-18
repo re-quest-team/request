@@ -131,6 +131,7 @@
         "titleAddElement": "Add Element",
         "labelVisibility": "Visibility",
         "labelVisibleAfterQuest": "Visible after quest",
+        "indexOf": "Index of quest",
         "quest": "Quest",
         "media": "Media",
         "save": "Save"

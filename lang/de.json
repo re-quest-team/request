@@ -131,6 +131,7 @@
         "titleAddElement": "Element hinzufügen",
         "labelVisibility": "Sichtbarkeit",
         "labelVisibleAfterQuest": "Sichtbar nach Quest",
+        "indexOf": "Index des Quests",
         "quest": "Rätsel",
         "media": "Medien",
         "save": "Speichern"
