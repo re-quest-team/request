@@ -23,8 +23,7 @@ model Account {
   scope             String?
   id_token          String? @db.Text
   session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
@@ -116,6 +115,7 @@ enum QuestType {
   MEDIA_INSTAGRAM
   MEDIA_YOUTUBE
   MEDIA_IFRAME
+  QUEST_GAP_TEXT
 }
 
 generator yup {
