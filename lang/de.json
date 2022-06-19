@@ -83,6 +83,18 @@
       },
       "title": "Multiple-Choice-Frage",
       "description": "Hier muss eine Multiple-Choice-Frage beantwortet werden. Es gibt eine Correcte Antwort und beliebig viele Flaschen Antworten."
+    },
+    "gaptext": {
+      "playView": {
+        "taskPrompt": "Ziehe Wörter von unten zum geeigneten Platz"
+      },
+      "editView": {
+        "answer": "Lücken Antwort",
+        "falseAnswers": "Falsche Antworten",
+        "placeholder": "Bsp.: Falsch, Katze, Hund"
+      },
+      "title": "Lückentext",
+      "description": "Hier muss ein Lückentext gelöst werden. Zu jeder Lücke gibt es eine richtige und beliebig viele falsche Antworten."
     }
   },
   "media": {

@@ -83,6 +83,18 @@
       },
       "title": "Multiple Choice Question",
       "description": "A Multiple Choice Question must be answered here. You can define one correct Answer and an arbitrary amount of wrong answers."
+    },
+    "gaptext": {
+      "playView": {
+        "taskPrompt": "Drag words from below to the appropriate place"
+      },
+      "editView": {
+        "answer": "Gap solution",
+        "falseAnswers": "False answers",
+        "placeholder": "E.g.: wrong, cat, dog"
+      },
+      "title": "Gap Text",
+      "description": "Solve a gap text. Each gap has one correct and an arbitrary amount of incorrect answers."
     }
   },
   "media": {
