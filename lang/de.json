@@ -42,6 +42,7 @@
   "quests.crypto.editView.labelEncryptedWord": "Verschlüsseltes Wort",
   "quests.imageCombination.playView.imageToBeCombined": "Bild, das erzeugt werden soll.",
   "quests.imageCombination.playView.chose": "Wähle die Richtigen Bilder aus.",
+  "quests.imageCombination.playView.CheckResult": "Überprüfen",
   "quests.imageCombination.title": "Bild Kombination",
   "quests.imageCombination.description": "Hier wird ein Bild vorgegeben, welches durch Kombination von mehreren Teil-Bilden zusammengestellt werden muss.",
   "quests.imageCombination.editView.labelTask": "Aufgabenstellung:",
