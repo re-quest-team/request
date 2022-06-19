@@ -40,18 +40,24 @@ const PlayView = () => {
   }
 
   const handleCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
-    let test = event.target.value
+    let image = event.target.value
     if (event.target.checked) {
-      answersGiven.set(test, true)
+      answersGiven.set(image, true)
     } else {
-      answersGiven.set(test, false)
+      answersGiven.set(image, false)
     }
   }
 
   function checkAnswers() {
-    let result = true
+    let result
+    if (answersGiven.get(imagesToCombineRandomOrder[0]) == false) {
+      result = false
+    } else {
+      result = true
+    }
+    /*
     for (let i = 0; i < imagesToCombineRandomOrder.length; i++) {
-      if (answersGiven.get(imagesToCombineRandomOrder[i]) == false) {
+      if (answersGiven.get(imagesToCombineRandomOrder[i]) === false) {
         if (imagesToCombineRight.includes(imagesToCombineRandomOrder[i])) {
           result = false
         } else {
@@ -65,10 +71,12 @@ const PlayView = () => {
         }
       }
     }
+
+     */
     return result
   }
 
-  const checkCorrect = async () => {
+  function checkCorrect() {
     if (checkAnswers()) {
       successToast(intl)
       successConfetti()
@@ -96,8 +104,7 @@ const PlayView = () => {
           </>
         )
       })}
-      <p>{imagesToCombineRandomOrder.length}</p>
-      <p>{answersGiven.size}</p>
+
       <Button type="submit" onClick={checkCorrect}>
         <FormattedMessage id="quests.imageCombination.playView.CheckResult" />
       </Button>
