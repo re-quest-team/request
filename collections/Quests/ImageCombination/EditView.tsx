@@ -64,6 +64,9 @@ const EditView = () => {
   const imagePoolWrong_label = intl.formatMessage({
     id: 'quests.imageCombination.editView.labelImagePoolWrong',
   })
+  const task = intl.formatMessage({
+    id: 'quests.imageCombination.description',
+  })
 
   const [imageToBeCombinedSelection, setImageToBeCombinedSelection] = useState(
     imagesToBeCombinedSelection[0],
@@ -75,7 +78,6 @@ const EditView = () => {
 
   // { data: quest } = useSWR<QuestWithImage>(`/api/quest/${questId}`)
 
-  const task = useQuestStore(state => state.task)
   const setTask = useQuestStore(state => state.setTask)
   const imageToBeCombined = useQuestStore(state => state.imageToBeCombined)
   const setImageToBeCombined = useQuestStore(
@@ -109,8 +111,6 @@ const EditView = () => {
       setImageToBeCombined(
         require('/assets/imageCombinationQuest/abstract.svg'),
       )
-      //setImagesToCombineSelectionRight(imagesToCombineSelectionRight[1])
-      //setImagesToCombineSelectionWrong(imagesToCombineSelectionWrong[1])
     }
   }, [
     imageToBeCombinedSelection.value,

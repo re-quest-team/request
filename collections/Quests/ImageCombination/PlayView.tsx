@@ -23,6 +23,7 @@ const PlayView = () => {
   const imagesToCombineRandomOrder = new Array(imagesToCombineMap.size)
   let i = 0
 
+  // Evtl zeug davon in store speichern?
   while (imagesToCombine.length != imagesToCombineMap.size) {
     const randomInt = Math.floor(Math.random() * imagesToCombine.length)
     if (!alreadyUsed.has(randomInt)) {
@@ -78,7 +79,7 @@ const PlayView = () => {
       <p>{toBeCombined}</p>
       <Image
         src={imageToBeCombined}
-        alt="Hier sollte das Bild, das kombiniert werden soll, sein"
+        alt="Image to be combined"
         height={300}
         width={300}
       />
@@ -86,12 +87,7 @@ const PlayView = () => {
       {imagesToCombineRandomOrder.map(test => {
         return (
           <>
-            <Image
-              src={test}
-              alt="Hier ein Bild zum kombinieren sein"
-              height={300}
-              width={300}
-            />
+            <Image src={test} alt="Image to combine" height={300} width={300} />
             <input
               type="radio"
               id={test}

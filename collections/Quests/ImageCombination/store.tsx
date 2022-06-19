@@ -21,7 +21,7 @@ interface QuestState {
 }
 
 export const useQuestStore = create<QuestState>()((set, get) => ({
-  task: 'Hier wird ein Bild vorgegeben, welches durch Kombination von mehreren Teil-Bilden zusammengestellt werden muss.',
+  task: '',
   setTask: task => set(() => ({ task })),
 
   imageToBeCombined: '',
