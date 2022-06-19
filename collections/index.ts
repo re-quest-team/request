@@ -10,9 +10,9 @@ import IframeMedia from '@/collections/Media/IFrame'
 
 const media = (intl: IntlShape): IQuest<any>[] => [
   TextMedia(intl),
-  InstagramMedia,
+  InstagramMedia(intl),
   YoutubeMedia(intl),
-  IframeMedia,
+  IframeMedia(intl),
 ]
 const quests = (intl: IntlShape): IQuest<any>[] => [
   CryptoQuest(intl),
