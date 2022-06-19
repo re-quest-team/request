@@ -2,10 +2,20 @@ import create from 'zustand'
 
 interface IframeState {
   link: string
-  setLink: (text: string) => void
+  height: string
+  width: string
+  setLink: (link: string) => void
+  setHeight: (height: string) => void
+  setWidth: (height: string) => void
 }
 
 export const useIframeStore = create<IframeState>()(set => ({
   link: '',
-  setLink: text => set(() => ({ link: text })),
+  height: "800",
+  width: "400",
+
+  setLink: link => set(() => ({ link: link })),
+  setHeight: height => set(() => ({ height: height})),
+  setWidth: width => set(() => ({width: width}))
+
 }))
