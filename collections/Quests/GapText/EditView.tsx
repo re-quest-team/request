@@ -1,7 +1,7 @@
 import { InputField, TextArea } from '@/components/Elements/FormElements'
 import { mapItem, useQuestStore } from './store'
 import { useIntl } from 'react-intl'
-import React from 'react'
+import React, { ChangeEvent } from 'react'
 import { PillButton } from '@/components/Elements/Button'
 import { MinusCircleIcon, PlusCircleIcon } from '@heroicons/react/outline'
 import { Units } from '@/collections/Quests/NumberInput/units'
@@ -34,8 +34,8 @@ const EditView = () => {
     }
   }
 
-  function shuffle(arrWrong: string[]) {
-    let shuffled = arrWrong
+  function shuffle() {
+    let shuffled = wrong
     shuffled = shuffled.concat(correct.flatMap(item => item.value))
 
     // >>>>>>> Algorithm src: https://stackoverflow.com/a/2450976
@@ -63,7 +63,19 @@ const EditView = () => {
           value: str.trim(),
         })),
     )
-    return obfuscated
+    setShuffled(obfuscated)
+  }
+
+  const handleWrongAnswerInput = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const list = e.target.value.split(',')
+    setWrong(list)
+    shuffle()
+  }
+
+  const handleCorrectAnswerInput = (key: number, value: string) => {
+    correct[key].value = value
+    setCorrect(correct)
+    shuffle()
   }
 
   return (
@@ -84,7 +96,9 @@ const EditView = () => {
                   id: 'quests.gaptext.editView.answer',
                 })}
                 defaultValue={correct[txt.key].value}
-                onChange={e => (correct[txt.key].value = e.target.value)}
+                onChange={e =>
+                  handleCorrectAnswerInput(txt.key, e.target.value.trim())
+                }
               />
             </div>
           ))}
@@ -115,11 +129,7 @@ const EditView = () => {
             id: 'quests.gaptext.editView.placeholder',
           })}
           defaultValue={wrong}
-          onChange={e => {
-            const list = e.target.value.split(',')
-            setWrong(list)
-            setShuffled(shuffle(list))
-          }}
+          onChange={e => handleWrongAnswerInput(e)}
         />
       </div>
     </div>
