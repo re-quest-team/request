@@ -70,6 +70,7 @@ const QuestTypeModal = ({
         .filter(q => q.id !== quest.id && q.questId !== quest.id)
         .map(q => allQuest.indexOf(q))
       let questShowAfter = allQuest.filter(q => quest.questId === q.id)
+      // @ts-ignore
       let indexShowAfter = allQuest.indexOf(questShowAfter.at(0))
       return showAfterOptions[questsIndexToPick.indexOf(indexShowAfter)]
     } else {
