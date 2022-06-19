@@ -17,7 +17,8 @@ const IframeMedia = (intl: IntlShape): IQuest<Data> => {
     icon: CodeIcon,
     EditView,
     PlayView,
-    onLoad: ({ link }) => useIframeStore.setState(state => ({ ...state, link })),
+    onLoad: ({ link }) =>
+      useIframeStore.setState(state => ({ ...state, link })),
     onSave: () => ({
       link: useIframeStore.getState().link,
     }),
