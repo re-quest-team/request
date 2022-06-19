@@ -2,20 +2,22 @@ import { useIframeStore } from '@/collections/Media/IFrame/store'
 import { TextArea } from '@/components/Elements/FormElements/TextArea'
 import { InputField } from '@/components/Elements/FormElements'
 import { isArgumentElement } from '@formatjs/icu-messageformat-parser'
+import { useIntl } from 'react-intl'
 
 const EditView = () => {
-  const link = useIframeStore(state => state.link)
-  const width = useIframeStore(state => state.width)
-  const height = useIframeStore(state => state.height)
-  const setLink = useIframeStore(state => state.setLink)
-  const setHeight = useIframeStore(state => state.setLink)
-  const setWidth = useIframeStore(state => state.setLink)
-  const frame = document.getElementById('iframeID')
+  const intl = useIntl();
+  const link = useIframeStore(state => state.link);
+  const width = useIframeStore(state => state.width);
+  const height = useIframeStore(state => state.height);
+  const setLink = useIframeStore(state => state.setLink);
+  const setHeight = useIframeStore(state => state.setLink);
+  const setWidth = useIframeStore(state => state.setLink);
+  const frame = document.getElementById('iframeID');
 
   return (
     <div>
       <TextArea
-        label="Website URL"
+        label={intl.formatMessage({ id: 'media.iframe.editView.label' })}
         id="URL"
         defaultValue={link}
         onChange={e => {
@@ -27,7 +29,7 @@ const EditView = () => {
 
       <div>
         <InputField
-          label={'Width'}
+          label={intl.formatMessage({ id: 'media.iframe.editView.width' })}
           type={'text'}
           placeholder={'100'}
           defaultValue={width}
@@ -38,7 +40,7 @@ const EditView = () => {
         />
 
         <InputField
-          label={'Height'}
+          label={intl.formatMessage({ id: 'media.iframe.editView.height' })}
           type={'text'}
           placeholder={'500'}
           defaultValue={height}

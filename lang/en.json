@@ -99,7 +99,24 @@
         "labelStart": "Start time",
         "labelEnd": "End time"
       },
+      "playView": {
+        "title": "Embedded Youtube"
+      },
       "description": "You can add a Youtube video here"
+    },
+    "instagram": {
+      "editView": {
+        "label": "Instagram embed-link"
+      },
+      "description": "You can show a simple Instagram post"
+    },
+    "iframe": {
+      "editView": {
+        "label": "iframe embed-link",
+        "width": "width",
+        "height": "height"
+      },
+      "description": "You can show a simple iframe"
     }
   },
   "features": {

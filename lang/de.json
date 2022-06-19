@@ -83,6 +83,24 @@
       },
       "title": "Multiple-Choice-Frage",
       "description": "Hier muss eine Multiple-Choice-Frage beantwortet werden. Es gibt eine Correcte Antwort und beliebig viele Flaschen Antworten."
+    },
+    "numberInput": {
+      "playView": {
+        "labelAnswer": "Antwort",
+        "check": "Überprüfen"
+      },
+      "editView": {
+        "labelTask": "Aufgabenstellung",
+        "labelAnswer": "Antwort",
+        "labelUnit": "Einheit"
+      },
+      "validation": {
+        "questionRequired": "Frage muss gestellt werden!",
+        "nanInvalid": "NaN ungültig",
+        "answerRequired": "Antwort muss angegeben werden!"
+      },
+      "title": "Nummern Eingabe",
+      "description": "Hier wird eine Frage mit einer Nummer beantwortet."
     }
   },
   "media": {
@@ -99,7 +117,24 @@
         "labelStart": "Startzeit",
         "labelEnd": "Endzeit"
       },
+      "playView": {
+        "title": "Youtube Embed"
+      },
       "description": "Hier kann ein Youtube Video eingebunden werden"
+    },
+    "instagram": {
+      "editView": {
+        "label": "Instagram Embed Link"
+      },
+      "description": "Hier kann ein einfacher Instagram Post angezeigt werden"
+    },
+    "iframe": {
+      "editView": {
+        "label": "Iframe Embed Link",
+        "width": "Breite",
+        "height": "Höhe",
+      },
+      "description": "Hier kann ein einfacher iframe angezeigt werden"
     }
   },
   "features": {
