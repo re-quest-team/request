@@ -11,11 +11,10 @@ interface IframeState {
 
 export const useIframeStore = create<IframeState>()(set => ({
   link: '',
-  height: "800",
-  width: "400",
+  height: '800',
+  width: '400',
 
   setLink: link => set(() => ({ link: link })),
-  setHeight: height => set(() => ({ height: height})),
-  setWidth: width => set(() => ({width: width}))
-
+  setHeight: height => set(() => ({ height: height })),
+  setWidth: width => set(() => ({ width: width })),
 }))

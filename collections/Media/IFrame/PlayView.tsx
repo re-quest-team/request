@@ -1,9 +1,9 @@
 import { useIframeStore } from '@/collections/Media/IFrame/store'
 
 const PlayView = () => {
-  const link = useIframeStore(state => state.link);
-  const width = useIframeStore(state => state.width);
-  const height = useIframeStore(state => state.height);
+  const link = useIframeStore(state => state.link)
+  const width = useIframeStore(state => state.width)
+  const height = useIframeStore(state => state.height)
   return (
     <div className="text-center">
       <iframe
