@@ -32,8 +32,7 @@ const EditView = () => {
           placeholder={'100'}
           defaultValue={width}
           onChange={e => {
-            frame &&
-              frame.setAttribute('width', e.currentTarget.value)
+            frame && frame.setAttribute('width', e.currentTarget.value)
             setWidth(e.currentTarget.value)
           }}
         />
@@ -44,8 +43,7 @@ const EditView = () => {
           placeholder={'500'}
           defaultValue={height}
           onChange={e => {
-            frame &&
-              frame.setAttribute('height', e.currentTarget.value)
+            frame && frame.setAttribute('height', e.currentTarget.value)
             setHeight(e.currentTarget.value)
           }}
         />
