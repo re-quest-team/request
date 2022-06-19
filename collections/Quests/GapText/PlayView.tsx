@@ -80,15 +80,15 @@ const PlayView = () => {
         <FormattedMessage id={'quests.gaptext.playView.taskPrompt'} />
       </p>
       <DragDropContext onDragEnd={result => onDragEnd(result)}>
-        <div className="mb-4 flex flex-row flex-wrap">
+        <div className="mb-4 flex w-full flex-row flex-wrap">
           {slots.map(item => (
-            <div key={`txt-${item.key}`} className="flex flex-row flex-wrap">
-              <p className="mr-2">{`${item.text}`}</p>
-              <Droppable droppableId={`${item.key}`}>
-                {provided => (
+            <Droppable key={item.key} droppableId={`${item.key}`}>
+              {provided => (
+                <div className="mt-2 flex flex-row">
+                  <p className="mr-2">{`${item.text}`}</p>
                   <div
                     ref={provided.innerRef}
-                    className="mr-2 w-20 rounded-lg border bg-zinc-900"
+                    className="my-auto mr-2 h-8 w-fit rounded-lg border px-4"
                     {...provided.droppableProps}
                   >
                     {item.slot.map((card, index) => (
@@ -97,13 +97,14 @@ const PlayView = () => {
                         index={index}
                         item={card}
                         key={card.key}
+                        className={'min-w-fix mx-auto rounded-lg text-center'}
                       />
                     ))}
                     {provided.placeholder}
                   </div>
-                )}
-              </Droppable>
-            </div>
+                </div>
+              )}
+            </Droppable>
           ))}
         </div>
         <div>
@@ -111,7 +112,7 @@ const PlayView = () => {
             {provided => (
               <div
                 ref={provided.innerRef}
-                className="flex flex-row"
+                className="flex flex-row flex-wrap"
                 {...provided.droppableProps}
               >
                 {cards.map((card, index) => (
@@ -120,6 +121,7 @@ const PlayView = () => {
                     index={index}
                     item={card}
                     key={card.key}
+                    className={'min-w-fit rounded-lg border px-4 text-center'}
                   />
                 ))}
                 {provided.placeholder}
@@ -136,9 +138,16 @@ type GapItemProps = {
   provided: DroppableProvided
   index: number
   item: mapItem
+  className: string
 }
 
-const CardItem = ({ provided, index, item, ...props }: GapItemProps) => {
+const CardItem = ({
+  provided,
+  index,
+  item,
+  className,
+  ...props
+}: GapItemProps) => {
   return (
     <Draggable
       key={item.key}
@@ -149,7 +158,7 @@ const CardItem = ({ provided, index, item, ...props }: GapItemProps) => {
       {provided => (
         <div
           ref={provided.innerRef}
-          className="mx-auto min-w-fit max-w-full rounded-lg border px-4 text-center shadow"
+          className={className}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           {...props}
