@@ -127,7 +127,7 @@ const PlayView = () => {
         </div>
       </DragDropContext>
       <Button
-        className="mt-4"
+        className="mx-auto mt-4"
         onClick={() => {
           if (cards.length == correctLen) {
             const answers = slots.flatMap(item => item.slot[0].value)
