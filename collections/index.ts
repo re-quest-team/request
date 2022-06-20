@@ -2,6 +2,7 @@ import TextMedia from './Media/Text'
 import YoutubeMedia from './Media/Youtube'
 import CryptoQuest from './Quests/Crypto'
 import MultipleChoiceQuest from './Quests/MultipleChoice'
+import SingleChoiceQuest from './Quests/SingleChoice'
 import InstagramMedia from '@/collections/Media/Instagram'
 import NumberInputQuest from './Quests/NumberInput'
 import { IntlShape } from 'react-intl'
@@ -16,6 +17,7 @@ const quests = (intl: IntlShape): IQuest<any>[] => [
   CryptoQuest(intl),
   NumberInputQuest,
   MultipleChoiceQuest(intl),
+  SingleChoiceQuest(intl),
   ...media(intl),
 ]
 
