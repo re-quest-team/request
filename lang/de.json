@@ -89,9 +89,11 @@
         "taskPrompt": "Ziehe Wörter von unten zum geeigneten Platz"
       },
       "editView": {
-        "answer": "Lücken Antwort",
-        "falseAnswers": "Falsche Antworten",
-        "placeholder": "Bsp.: Falsch, Katze, Hund"
+        "correctTitle": "Lückentext",
+        "correctPlaceholder": "Bsp.: Tom hat ein [rotes] Auto mit [Rallystreifen].",
+        "correctTip": "TIPP: Hinzufügen einer Lücke mit der entsprechenden Antwort : [DeineAntwort]",
+        "falseTitle": "Falsche Antworten",
+        "falsePlaceholder": "Bsp.: Falsch, Katze, Hund"
       },
       "title": "Lückentext",
       "description": "Hier muss ein Lückentext gelöst werden. Zu jeder Lücke gibt es eine richtige und beliebig viele falsche Antworten."

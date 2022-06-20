@@ -89,9 +89,11 @@
         "taskPrompt": "Drag words from below to the appropriate place"
       },
       "editView": {
-        "answer": "Gap solution",
-        "falseAnswers": "False answers",
-        "placeholder": "E.g.: wrong, cat, dog"
+        "correctTitle": "Gap text",
+        "correctPlaceholder": "E.g.: Tom has a [red] car with [racing] [stripes].",
+        "correctTip": "TIP: You add a gap with corresponding answer by wring: [YourAnswer]",
+        "falseTitle": "False answers",
+        "falsePlaceholder": "E.g.: wrong, cat, dog, yogurt"
       },
       "title": "Gap Text",
       "description": "Solve a gap text. Each gap has one correct and an arbitrary amount of incorrect answers."
