@@ -4,7 +4,7 @@ import { SelectField } from '@/components/Elements/Select/SelectField'
 import { Spacer } from '@/components/Elements/Spacer'
 import Modal from '@/components/Modal'
 import { Game, Prisma, Quest } from '@prisma/client'
-import { useState } from 'react'
+import { SetStateAction, useState } from 'react'
 import useQuests from '../api'
 import QuestElement from './QuestElement'
 import quests from '@/collections'
@@ -15,6 +15,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 type QuestTypeModalProps = {
   open: boolean
   quest: Quest
+  allQuest: Quest[]
   roomId: string
   onClose: () => any
 }
@@ -22,6 +23,7 @@ type QuestTypeModalProps = {
 const QuestTypeModal = ({
   open,
   quest,
+  allQuest,
   roomId,
   onClose,
 }: QuestTypeModalProps) => {
@@ -40,11 +42,43 @@ const QuestTypeModal = ({
     },
   ]
 
+  const showAfterOptions: SelectOption[] = allQuest
+    .filter(q => q.id !== quest.id && q.questId !== quest.id)
+    .map(q => ({
+      value:
+        intl.formatMessage({ id: 'features.quest.questTypeModal.indexOf' }) +
+        ': ' +
+        allQuest.indexOf(q).toString(),
+    }))
+
   const { updateQuest } = useQuests(roomId)
 
   const [questModalOpen, setQuestModalOpen] = useState(false)
   const [currentQuest, setCurrentQuest] = useState<IQuest<any>>()
-  const [taskVisibility, setTaskVisibility] = useState(taskVisibilityOptions[0])
+
+  const getTaskVisOption = () => {
+    if (quest.questId !== null) {
+      return taskVisibilityOptions[1]
+    } else {
+      return taskVisibilityOptions[0]
+    }
+  }
+  const [taskVisibility, setTaskVisibility] = useState(getTaskVisOption)
+  const getShowAfterOption = () => {
+    if (quest.questId !== null) {
+      let questsIndexToPick = allQuest
+        .filter(q => q.id !== quest.id && q.questId !== quest.id)
+        .map(q => allQuest.indexOf(q))
+      let questShowAfter = allQuest.filter(q => quest.questId === q.id)
+      // @ts-ignore
+      let indexShowAfter = allQuest.indexOf(questShowAfter.at(0))
+      return showAfterOptions[questsIndexToPick.indexOf(indexShowAfter)]
+    } else {
+      return showAfterOptions[0]
+    }
+  }
+  const [showAfterSelect, setShowAfterSelect] = useState(getShowAfterOption)
+  console.log(showAfterSelect)
 
   const handleClick = async (q: IQuest<any>) => {
     // if quest already has data, load data into component
@@ -66,7 +100,7 @@ const QuestTypeModal = ({
   const validate = async (data: any): Promise<boolean> => {
     switch (currentQuest?.type) {
       case 'QUEST_NUMBER_INPUT':
-        return await valNumberInput.isValid(data)
+        return await valNumberInput(intl).isValid(data)
       default:
         return true
     }
@@ -74,6 +108,7 @@ const QuestTypeModal = ({
 
   const onSave = async () => {
     const data = currentQuest?.onSave()
+
     updateQuest(
       quest.id,
       {
@@ -81,12 +116,40 @@ const QuestTypeModal = ({
       },
       intl,
     )
+    if (
+      taskVisibility.value ===
+      intl.formatMessage({
+        id: 'features.quest.questTypeModal.afterSolving',
+      })
+    ) {
+      let indexString = showAfterSelect.value.substring(
+        showAfterSelect.value.indexOf(':') + 1,
+      )
+      let index = parseInt(indexString)
+      const showAfter = allQuest.at(index)
+      updateQuest(
+        quest.id,
+        {
+          questId: showAfter?.id,
+        },
+        intl,
+      )
+    } else {
+      updateQuest(
+        quest.id,
+        {
+          questId: null,
+        },
+        intl,
+      )
+    }
     if (await validate(data)) {
       setQuestModalOpen(false)
       onClose()
       return
     }
   }
+
   return (
     <>
       <Modal
@@ -116,8 +179,8 @@ const QuestTypeModal = ({
                   label={intl.formatMessage({
                     id: 'features.quest.questTypeModal.labelVisibleAfterQuest',
                   })}
-                  options={[{ value: '1' }, { value: '2' }]}
-                  onSelect={() => {}}
+                  options={showAfterOptions}
+                  onSelect={setShowAfterSelect}
                 ></SelectField>
               )}
               <PillButton variant="secondary" className="mx-auto">

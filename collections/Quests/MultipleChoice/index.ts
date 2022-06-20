@@ -15,9 +15,9 @@ type QuestData = {
 const MultipleChoiceQuest = (intl: IntlShape): IQuest<QuestData> => {
   return {
     type: 'QUEST_MULTIPLE_CHOICE',
-    title: intl.formatMessage({ id: 'quests.multiplechoice.title' }),
+    title: intl.formatMessage({ id: 'quests.multipleChoice.title' }),
     description: intl.formatMessage({
-      id: 'quests.multiplechoice.description',
+      id: 'quests.multipleChoice.description',
     }),
     icon: ViewListIcon,
     EditView,

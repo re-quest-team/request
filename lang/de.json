@@ -84,7 +84,7 @@
       "title": "Single-Choice-Frage",
       "description": "Hier muss eine Single-Choice-Frage beantwortet werden. Es gibt eine korrekte Antwort und beliebig viele falsche Antworten."
     },
-    "multiplechoice": {
+    "multipleChoice": {
       "playView": {
         "choices": "Antwortmöglichkeiten:",
         "submit": "Abgabe"
@@ -96,6 +96,24 @@
       },
       "title": "Multiple-Choice-Frage",
       "description": "Hier muss eine Multiple-Choice-Frage beantwortet werden. Es gibt beliebig viele korrekte und falsche Antworten."
+    },
+    "numberInput": {
+      "playView": {
+        "labelAnswer": "Antwort",
+        "check": "Überprüfen"
+      },
+      "editView": {
+        "labelTask": "Aufgabenstellung",
+        "labelAnswer": "Antwort",
+        "labelUnit": "Einheit"
+      },
+      "validation": {
+        "questionRequired": "Frage muss gestellt werden!",
+        "nanInvalid": "NaN ungültig",
+        "answerRequired": "Antwort muss angegeben werden!"
+      },
+      "title": "Nummern Eingabe",
+      "description": "Hier wird eine Frage mit einer Nummer beantwortet."
     }
   },
   "media": {
@@ -112,7 +130,16 @@
         "labelStart": "Startzeit",
         "labelEnd": "Endzeit"
       },
+      "playView": {
+        "title": "Youtube Embed"
+      },
       "description": "Hier kann ein Youtube Video eingebunden werden"
+    },
+    "instagram": {
+      "editView": {
+        "label": "Instagram Embed Link"
+      },
+      "description": "Hier kann ein einfacher Instagram Post angezeigt werden"
     }
   },
   "features": {
@@ -144,6 +171,7 @@
         "titleAddElement": "Element hinzufügen",
         "labelVisibility": "Sichtbarkeit",
         "labelVisibleAfterQuest": "Sichtbar nach Quest",
+        "indexOf": "Index des Quests",
         "quest": "Rätsel",
         "media": "Medien",
         "save": "Speichern"

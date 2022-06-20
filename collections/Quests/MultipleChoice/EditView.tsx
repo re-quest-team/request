@@ -22,13 +22,13 @@ const EditView = () => {
   const intl = useIntl()
 
   const label1 = intl.formatMessage({
-    id: 'quests.multiplechoice.editView.labelTask',
+    id: 'quests.multipleChoice.editView.labelTask',
   })
   const label2 = intl.formatMessage({
-    id: 'quests.multiplechoice.editView.labelCorrectAnswer',
+    id: 'quests.multipleChoice.editView.labelCorrectAnswer',
   })
   const label3 = intl.formatMessage({
-    id: 'quests.multiplechoice.editView.labelWrongAnswer',
+    id: 'quests.multipleChoice.editView.labelWrongAnswer',
   })
 
   const replaceWrongAnswer = (
@@ -98,7 +98,9 @@ const EditView = () => {
   return (
     <div>
       <InputField
-        label={label1}
+        label={intl.formatMessage({
+          id: 'quests.multipleChoice.editView.labelTask',
+        })}
         defaultValue={question}
         onChange={e => setQuestion(e.target.value)}
       />
@@ -142,7 +144,9 @@ const EditView = () => {
       {wrongAnswers.map(val => (
         <InputField
           key={val.key}
-          label={label3}
+          label={intl.formatMessage({
+            id: 'quests.multipleChoice.editView.labelWrongAnswer',
+          })}
           defaultValue={val.name}
           onChange={e => replaceWrongAnswer(e, val.key)}
         />

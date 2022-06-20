@@ -27,13 +27,6 @@ const Home: NextPage = () => {
 
   const intl = useIntl()
 
-  const card1 = intl.formatMessage({ id: 'page.home.card1' })
-  const card2 = intl.formatMessage({ id: 'page.home.card2' })
-  const card3 = intl.formatMessage({ id: 'page.home.card3' })
-  const card4 = intl.formatMessage({ id: 'page.home.card4' })
-  const card5 = intl.formatMessage({ id: 'page.home.card5' })
-  const card6 = intl.formatMessage({ id: 'page.home.card6' })
-
   return (
     <div>
       <div className="mx-auto md:max-w-3xl">
@@ -57,26 +50,46 @@ const Home: NextPage = () => {
         <Spacer />
       </div>
       <div className="flex flex-wrap">
-        <FeatureCard title={card1} color="bg-red-400" icon={SearchIcon}>
-          <FormattedMessage id="page.home.loremIpsum" />
-        </FeatureCard>
-        <FeatureCard title={card2} color="bg-blue-400" icon={AcademicCapIcon}>
-          <FormattedMessage id="page.home.loremIpsum" />
-        </FeatureCard>
-        <FeatureCard title={card3} color="bg-purple-400" icon={CollectionIcon}>
-          <FormattedMessage id="page.home.loremIpsum" />
-        </FeatureCard>
-        <FeatureCard title={card4} color="bg-pink-400" icon={AdjustmentsIcon}>
+        <FeatureCard
+          title={intl.formatMessage({ id: 'page.home.card1' })}
+          color="bg-red-400"
+          icon={SearchIcon}
+        >
           <FormattedMessage id="page.home.loremIpsum" />
         </FeatureCard>
         <FeatureCard
-          title={card5}
+          title={intl.formatMessage({ id: 'page.home.card2' })}
+          color="bg-blue-400"
+          icon={AcademicCapIcon}
+        >
+          <FormattedMessage id="page.home.loremIpsum" />
+        </FeatureCard>
+        <FeatureCard
+          title={intl.formatMessage({ id: 'page.home.card3' })}
+          color="bg-purple-400"
+          icon={CollectionIcon}
+        >
+          <FormattedMessage id="page.home.loremIpsum" />
+        </FeatureCard>
+        <FeatureCard
+          title={intl.formatMessage({ id: 'page.home.card4' })}
+          color="bg-pink-400"
+          icon={AdjustmentsIcon}
+        >
+          <FormattedMessage id="page.home.loremIpsum" />
+        </FeatureCard>
+        <FeatureCard
+          title={intl.formatMessage({ id: 'page.home.card5' })}
           color="bg-orange-400"
           icon={DeviceMobileIcon}
         >
           <FormattedMessage id="page.home.loremIpsum" />
         </FeatureCard>
-        <FeatureCard title={card6} color="bg-green-400" icon={PuzzleIcon}>
+        <FeatureCard
+          title={intl.formatMessage({ id: 'page.home.card6' })}
+          color="bg-green-400"
+          icon={PuzzleIcon}
+        >
           <FormattedMessage id="page.home.loremIpsum" />
         </FeatureCard>
       </div>
