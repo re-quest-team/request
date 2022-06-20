@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import Modal from '@/components/Modal'
 import PlayQuestButton from '@/features/quest/components/PlayQuestButton'
 import quests from '@/collections'
@@ -14,7 +16,7 @@ import { useIntl } from 'react-intl'
 type RoomViewProps = {
   id: string
 }
-
+// @ts-nocheck
 const RoomView = ({ id }: RoomViewProps) => {
   const intl = useIntl()
   const { data: room } = useSWR<RoomWithImageAndQuests, AxiosError>(
@@ -23,6 +25,8 @@ const RoomView = ({ id }: RoomViewProps) => {
 
   const [solvedQuestIDs, setSolvedQuestIDs] = useState<string[]>([])
   const [currentQuest, setCurrentQuest] = useState<IQuest<any>>()
+  const showAfterQuests = room?.quests?.filter(q => q.questId !== null)
+  console.log(showAfterQuests)
 
   return (
     <ScrollContainer className="h-screen overflow-auto">
@@ -36,32 +40,37 @@ const RoomView = ({ id }: RoomViewProps) => {
             alt="room"
           />
         )}
-        {room?.quests?.map((q, i) => (
-          <PlayQuestButton
-            solved={solvedQuestIDs.includes(q.id)}
-            key={i}
-            quest={q}
-            onClick={() => {
-              const qq = quests(intl).filter(e => e.type === q.type)[0]
-              if (qq) {
-                qq.onLoad(q.data as any)
-                if (qq.onSolve) {
-                  qq.onSolve(() => {
-                    setSolvedQuestIDs([...solvedQuestIDs, q.id])
-                    setCurrentQuest(undefined)
-                  })
-                }
-                setCurrentQuest(qq)
-              }
-            }}
-          />
-        ))}
+        {room?.quests?.map(
+          (q, i) =>
+            (!showAfterQuests?.includes(q) ||
+              solvedQuestIDs.includes(q.questId)) && (
+              <PlayQuestButton
+                solved={solvedQuestIDs.includes(q.id)}
+                key={i}
+                quest={q}
+                onClick={() => {
+                  const qq = quests(intl).filter(e => e.type === q.type)[0]
+                  if (qq) {
+                    qq.onLoad(q.data as any)
+                    if (qq.onSolve) {
+                      qq.onSolve(() => {
+                        setSolvedQuestIDs([...solvedQuestIDs, q.id])
+                        setCurrentQuest(undefined)
+                      })
+                    }
+                    setCurrentQuest(qq)
+                  }
+                }}
+              />
+            ),
+        )}
       </div>
 
       <Modal
         open={currentQuest !== undefined}
         onClose={() => setCurrentQuest(undefined)}
         title={''}
+        size={currentQuest ? currentQuest.modalSize : 'medium'}
       >
         <>{currentQuest && <currentQuest.PlayView />}</>
       </Modal>

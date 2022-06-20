@@ -10,4 +10,7 @@ module.exports = {
     locales: ['de', 'en'],
     defaultLocale: 'de',
   },
+  experimental: {
+    outputStandalone: true,
+  },
 }

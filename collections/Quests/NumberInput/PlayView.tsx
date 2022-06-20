@@ -5,8 +5,9 @@ import { incorrectToast, successToast } from '@/components/Toasts'
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import { useQuestStore } from './store'
-import { yupResolver } from '@hookform/resolvers/yup/dist/yup'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { valNumberInput } from '@/collections/Quests/NumberInput/validation'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 const PlayView = () => {
   const question = useQuestStore(state => state.question)
@@ -15,16 +16,18 @@ const PlayView = () => {
   const onSolve = useQuestStore(state => state.onSolve)
   const correct = useQuestStore(state => state.correct)
 
+  const intl = useIntl()
+
   const [answer, setAnswer] = useState('')
   const { register, handleSubmit, formState } = useForm({
-    resolver: yupResolver(valNumberInput),
+    resolver: yupResolver(valNumberInput(intl)),
     mode: 'all',
     criteriaMode: 'all',
   })
   const { errors } = formState
 
   const answerCheck = async (data: any) => {
-    if (await valNumberInput.validate(data)) {
+    if (await valNumberInput(intl).validate(data)) {
       checkCorrect()
     }
   }
@@ -32,10 +35,10 @@ const PlayView = () => {
   const checkCorrect = async () => {
     if (!errors.answer) {
       if (onSolve(Number(answer))) {
-        successToast()
+        successToast(intl)
         successConfetti()
       } else {
-        incorrectToast()
+        incorrectToast(intl)
       }
     }
   }
@@ -44,7 +47,9 @@ const PlayView = () => {
     <form onSubmit={handleSubmit(answerCheck)}>
       <p>{question}</p>
       <InputField
-        label="Antwort"
+        label={intl.formatMessage({
+          id: 'quests.numberInput.playView.labelAnswer',
+        })}
         name={'answer'}
         className={'form-control'}
         registration={register('answer')}
@@ -53,7 +58,7 @@ const PlayView = () => {
         onChange={e => setAnswer(e.target.value)}
       ></InputField>
       <Button type="submit" onClick={checkCorrect}>
-        Überprüfen
+        <FormattedMessage id="quests.numberInput.playView.check" />
       </Button>
     </form>
   )
