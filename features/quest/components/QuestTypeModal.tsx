@@ -66,7 +66,7 @@ const QuestTypeModal = ({
   const validate = async (data: any): Promise<boolean> => {
     switch (currentQuest?.type) {
       case 'QUEST_NUMBER_INPUT':
-        return await valNumberInput.isValid(data)
+        return await valNumberInput(intl).isValid(data)
       default:
         return true
     }

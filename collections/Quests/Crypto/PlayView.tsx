@@ -15,16 +15,14 @@ const PlayView = () => {
   const [answer, setAnswer] = useState('')
 
   const intl = useIntl()
-  const encryptWord = intl.formatMessage({
-    id: 'quests.crypto.playView.encryptedWord',
-  })
-  const codeWord = intl.formatMessage({ id: 'quests.crypto.playView.codeWord' })
 
   return (
     <div>
       <p>{question}</p>
       <InputField
-        label={encryptWord}
+        label={intl.formatMessage({
+          id: 'quests.crypto.playView.encryptedWord',
+        })}
         disabled
         value={codeword.replace(
           /[A-Z]/gi,
@@ -36,7 +34,7 @@ const PlayView = () => {
       ></InputField>
       <h3 className="mt-8 text-lg">Antwort</h3>
       <InputField
-        label={codeWord}
+        label={intl.formatMessage({ id: 'quests.crypto.playView.codeWord' })}
         onChange={e => setAnswer(e.target.value)}
       ></InputField>
       <Button

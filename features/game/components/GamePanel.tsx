@@ -47,9 +47,6 @@ const GamePanel = ({ id, name, description, germanLanguage }: Game) => {
     })
   }
 
-  const english = intl.formatMessage({ id: 'languages.english' })
-  const german = intl.formatMessage({ id: 'languages.german' })
-
   const pdfDoc = useRef<HTMLDivElement>(null)
   const [imgUrl, setImgUrl] = useState('')
 
@@ -97,7 +94,14 @@ const GamePanel = ({ id, name, description, germanLanguage }: Game) => {
   return (
     <Panel
       type="quest"
-      header={(name || '') + ' (' + (germanLanguage ? german : english) + ')'}
+      header={
+        (name || '') +
+        ' (' +
+        (germanLanguage
+          ? intl.formatMessage({ id: 'languages.german' })
+          : intl.formatMessage({ id: 'languages.english' })) +
+        ')'
+      }
       onDelete={onDelete}
     >
       <>
