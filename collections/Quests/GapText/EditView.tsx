@@ -1,10 +1,7 @@
 import { InputField, TextArea } from '@/components/Elements/FormElements'
 import { mapItem, useQuestStore } from './store'
 import { useIntl } from 'react-intl'
-import React, { ChangeEvent } from 'react'
-import { PillButton } from '@/components/Elements/Button'
-import { MinusCircleIcon, PlusCircleIcon } from '@heroicons/react/outline'
-import { Units } from '@/collections/Quests/NumberInput/units'
+import React from 'react'
 
 const EditView = () => {
   const intl = useIntl()
@@ -21,20 +18,6 @@ const EditView = () => {
   const setWrong = useQuestStore(state => state.setWrongAnswers)
 
   const setShuffled = useQuestStore(state => state.setShuffledAnswers)
-
-  const appendGap = () => {
-    const len = text.length
-    setText(text.concat({ key: len, value: '' }))
-    setCorrect(correct.concat({ key: len, value: '' }))
-  }
-
-  const popGap = () => {
-    const len = text.length - 1
-    if (len > 0) {
-      setText(text.slice(0, len))
-      setCorrect(correct.slice(0, len))
-    }
-  }
 
   function shuffle() {
     let shuffled = wrong.concat(correct)
@@ -67,9 +50,14 @@ const EditView = () => {
     setShuffled(obfuscated)
   }
 
-  const handleWrongAnswerInput = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    const list = e.target.value.split(',')
-    setWrong(list)
+  const handleTextInput = (value: string) => {
+    // split with '[...]' as delimiter
+    const text = value.split(/\s*\[.*?\]\s*/gm)
+    // extract everything within any '[]'
+    const answers = value.replaceAll('][', '] [').split(/(?=\]|^).*?(?:\[|$)/gm)
+    setText(value)
+    setTextList(text)
+    setCorrect(answers.slice(1, answers.length - 1))
     shuffle()
   }
 
@@ -80,53 +68,33 @@ const EditView = () => {
 
   return (
     <div>
-      <div className="flex flex-col border-b-2 border-zinc-400">
-        {correct &&
-          text.map(txt => (
-            <div key={txt.key}>
-              <TextArea
-                placeholder="Text"
-                defaultValue={txt.value}
-                onChange={e => (text[txt.key].value = e.target.value)}
-              />
-              <InputField
-                type={'text'}
-                unit={Units.None}
-                placeholder={intl.formatMessage({
-                  id: 'quests.gaptext.editView.answer',
-                })}
-                defaultValue={correct[txt.key].value}
-                onChange={e =>
-                  handleCorrectAnswerInput(txt.key, e.target.value.trim())
-                }
-              />
-            </div>
-          ))}
-        <div className="mb-4 flex">
-          <PillButton
-            className="mx-auto h-10 w-10"
-            variant="tertiary"
-            onClick={() => appendGap()}
-          >
-            <PlusCircleIcon className="m-auto h-5 w-5 " />
-          </PillButton>
-          <PillButton
-            className="mx-auto h-10 w-10"
-            variant="secondary"
-            onClick={() => popGap()}
-          >
-            <MinusCircleIcon className="m-auto h-5 w-5 " />
-          </PillButton>
-        </div>
+      <div className="mt-4">
+        <TextArea
+          label={intl.formatMessage({
+            id: 'quests.gaptext.editView.correctTitle',
+          })}
+          placeholder={intl.formatMessage({
+            id: 'quests.gaptext.editView.correctPlaceholder',
+          })}
+          defaultValue={text}
+          onChange={e => handleTextInput(e.target.value)}
+        />
+        <InputField
+          disabled
+          placeholder={intl.formatMessage({
+            id: 'quests.gaptext.editView.correctTip',
+          })}
+        />
+        <p></p>
       </div>
 
       <div className="mt-4">
         <TextArea
           label={intl.formatMessage({
-            id: 'quests.gaptext.editView.falseAnswers',
+            id: 'quests.gaptext.editView.falseTitle',
           })}
           placeholder={intl.formatMessage({
-            id: 'quests.gaptext.editView.placeholder',
+            id: 'quests.gaptext.editView.falsePlaceholder',
           })}
           defaultValue={wrong}
           onChange={e => handleWrongInput(e.target.value)}
