@@ -1,10 +1,12 @@
 import './customBlocks/customBlocks'
+import './Test'
 import React, { useState } from 'react'
-import { BlocklyWorkspace } from 'react-blockly'
 import Blockly from 'blockly'
-import { toolbox } from 'core/utils'
-import { SPRITE } from 'core/sprites'
-import height = module
+import { BlocklyWorkspace } from 'react-blockly'
+import { Simulate } from 'react-dom/test-utils'
+import error = Simulate.error
+import { Button } from '@/components/Elements/Button'
+import { Test } from '@/collections/Quests/Blockly/Test'
 
 const PlayView = () => {
   const [xml, setXml] = useState('')
@@ -12,86 +14,74 @@ const PlayView = () => {
 
   const initialXml =
     '<xml xmlns="http://www.w3.org/1999/xhtml"><block type="text" x="70" y="30"><field name="TEXT"></field></block></xml>'
-
-  var toolboxCategories = {
+  const toolboxCategories = {
     kind: 'categoryToolbox',
     contents: [
       {
         kind: 'category',
-        name: 'Control',
+        name: 'Logic',
+        colour: '#5C81A6',
         contents: [
           {
             kind: 'block',
             type: 'controls_if',
           },
-        ],
-      },
-      {
-        kind: 'category',
-        name: 'Logic',
-        contents: [
           {
             kind: 'block',
             type: 'logic_compare',
           },
-          {
-            kind: 'block',
-            type: 'logic_operation',
-          },
-          {
-            kind: 'block',
-            type: 'logic_boolean',
-          },
         ],
       },
       {
         kind: 'category',
-        name: 'Custom',
-        colour: '#5CA699',
+        name: 'Math',
+        colour: '#5CA65C',
         contents: [
           {
             kind: 'block',
-            type: 'turn_angle',
+            type: 'math_round',
           },
           {
             kind: 'block',
-            type: 'direction',
+            type: 'math_number',
           },
         ],
       },
     ],
   }
+  function workspaceDidChange(workspace) {
+    const code = Blockly.JavaScript.workspaceToCode(workspace)
+    setJavascriptCode(code)
+  }
 
-  //test
-  Blockly.inject('blocklyDiv', {
-    toolbox: toolboxCategories,
-    grid: {
-      spacing: 20,
-      length: 5,
-      colour: '#ccc',
-      snap: true,
-    },
-    move: {
-      scrollbars: {
-        horizontal: true,
-        vertical: true,
-      },
-      drag: true,
-      wheel: false,
-    },
-    zoom: {
-      controls: true,
-      wheel: true,
-      startScale: 1.0,
-      maxScale: 3,
-      minScale: 0.3,
-      scaleSpeed: 1.2,
-      pinch: true,
-    },
-    trashcan: true,
-  })
-
-  return <div id={'blocklyDiv'}></div>
+  return (
+    <div>
+      <div>test</div>
+      <BlocklyWorkspace
+        toolboxConfiguration={toolboxCategories}
+        initialXml={initialXml}
+        className="fill-height"
+        workspaceConfiguration={{
+          grid: {
+            spacing: 20,
+            length: 3,
+            colour: '#ccc',
+            snap: true,
+          },
+        }}
+        onWorkspaceChange={workspaceDidChange}
+        onXmlChange={setXml}
+      />
+      <div>test</div>
+      <pre id="generated-xml">{xml}</pre>
+      <textarea
+        id="code"
+        style={{ height: '600px', width: '400px' }}
+        value={javascriptCode}
+        readOnly
+      ></textarea>
+    </div>
+  )
 }
 
 export default PlayView
