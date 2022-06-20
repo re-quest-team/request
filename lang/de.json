@@ -83,6 +83,16 @@
       },
       "title": "Multiple-Choice-Frage",
       "description": "Hier muss eine Multiple-Choice-Frage beantwortet werden. Es gibt eine Correcte Antwort und beliebig viele Flaschen Antworten."
+    },
+    "blockly": {
+      "playView": {
+        "submit": "Abgabe"
+      },
+      "editView": {
+        "chooseQuest": "Wähle deine Coding Aufgabe"
+      },
+      "title": "Blockly Coding Aufgabe",
+      "description": "Hier muss ein simples Programm mithilfe von Codebausteinen geschrieben werden."
     }
   },
   "media": {

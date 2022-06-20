@@ -83,6 +83,16 @@
       },
       "title": "Multiple Choice Question",
       "description": "A Multiple Choice Question must be answered here. You can define one correct Answer and an arbitrary amount of wrong answers."
+    },
+    "blockly": {
+      "playView": {
+        "submit": "Submit"
+      },
+      "editView": {
+        "chooseQuest": "Choose your Coding Task"
+      },
+      "title": "Blockly Coding Task",
+      "description": "A simple coding task, which will be written with the help of coding blocks."
     }
   },
   "media": {

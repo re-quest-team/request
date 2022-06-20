@@ -6,6 +6,7 @@ import InstagramMedia from '@/collections/Media/Instagram'
 import NumberInputQuest from './Quests/NumberInput'
 import { IntlShape } from 'react-intl'
 import { IQuest } from '@/collections/types'
+import BlocklyQuest from '@/collections/Quests/Blockly'
 
 const media = (intl: IntlShape): IQuest<any>[] => [
   TextMedia(intl),
@@ -16,6 +17,7 @@ const quests = (intl: IntlShape): IQuest<any>[] => [
   CryptoQuest(intl),
   NumberInputQuest,
   MultipleChoiceQuest(intl),
+  BlocklyQuest(intl),
   ...media(intl),
 ]
 

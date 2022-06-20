@@ -11,6 +11,8 @@ import quests from '@/collections'
 import { IQuest } from '@/collections/types'
 import { valNumberInput } from '@/collections/Quests/NumberInput/validation'
 import { FormattedMessage, useIntl } from 'react-intl'
+import { CodeIcon } from '@heroicons/react/solid'
+import BlocklyQuest from '@/collections/Quests/Blockly'
 
 type QuestTypeModalProps = {
   open: boolean
@@ -137,7 +139,7 @@ const QuestTypeModal = ({
                     }}
                   />
                 ))}
-              {/* <QuestElement
+              {/*<QuestElement
                 title="Programmieren"
                 description="Hier muss ein kleines Programm geschrieben werden"
                 icon={CodeIcon}
