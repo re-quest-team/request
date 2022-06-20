@@ -22,6 +22,9 @@ interface QuestState {
   imagesSelected: string[]
   setImagesSelected: (imagesSelected: string[]) => void
 
+  correctAnswers: boolean[]
+  setCorrectAnswers: (correctAnswers: boolean[]) => void
+
   correct: boolean
   onSolve: (
     answers: Map<string, boolean>,
@@ -57,6 +60,10 @@ export const useQuestStore = create<QuestState>()((set, get) => ({
   imagesSelected: [],
   setImagesSelected: (imagesSelected: string[]) =>
     set(() => ({ imagesSelected })),
+
+  correctAnswers: [],
+  setCorrectAnswers: (correctAnswers: boolean[]) =>
+    set(() => ({ correctAnswers })),
 
   correct: false,
   onSolve: (answers, all, right) => {

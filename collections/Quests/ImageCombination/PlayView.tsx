@@ -26,6 +26,8 @@ const PlayView = () => {
     state => state.imagesToCombineWrong,
   )
 
+  const correctAnswers = useQuestStore(state => state.correctAnswers)
+
   const imagesToCombineRandomOrder = useQuestStore(
     state => state.imagesToCombineRandomOrder,
   )
@@ -36,43 +38,38 @@ const PlayView = () => {
   const answersGiven = new Map()
 
   for (let i = 0; i < imagesToCombineRandomOrder.length; i++) {
-    answersGiven.set(imagesToCombineRandomOrder[i], false)
+    answersGiven.set(i, false)
   }
 
+  //https://www.freecodecamp.org/news/how-to-work-with-multiple-checkboxes-in-react/
+
   const handleCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
-    let image = event.target.value
+    let i = Number(event.target.id)
     if (event.target.checked) {
-      answersGiven.set(image, true)
+      answersGiven.set(i, true)
     } else {
-      answersGiven.set(image, false)
+      answersGiven.set(i, false)
     }
   }
 
   function checkAnswers() {
-    let result
-    if (answersGiven.get(imagesToCombineRandomOrder[0]) == false) {
-      result = false
-    } else {
-      result = true
-    }
-    /*
+    let result = true
+    debugger
     for (let i = 0; i < imagesToCombineRandomOrder.length; i++) {
-      if (answersGiven.get(imagesToCombineRandomOrder[i]) === false) {
-        if (imagesToCombineRight.includes(imagesToCombineRandomOrder[i])) {
+      if (answersGiven.get(i) == false) {
+        if (correctAnswers[i] == true) {
           result = false
         } else {
           result = result && true
         }
       } else {
-        if (imagesToCombineRight.includes(imagesToCombineRandomOrder[i])) {
+        if (correctAnswers[i] == true) {
           result = result && true
         } else {
           result = false
         }
       }
     }
-
-     */
     return result
   }
 
@@ -96,34 +93,30 @@ const PlayView = () => {
         width={300}
       />
       <p>{chose}</p>
-      {imagesToCombineRandomOrder.map(test => {
-        return (
-          <>
-            <Image src={test} alt="Image to combine" height={300} width={300} />
-            <input value={test} type="checkbox" onChange={handleCheck} />
-          </>
-        )
-      })}
-
+      <ul>
+        {imagesToCombineRandomOrder.map((test, index) => {
+          return (
+            <li key={index}>
+              <Image
+                src={test}
+                alt="Image to combine"
+                height={300}
+                width={300}
+              />
+              <input
+                value={test}
+                type="checkbox"
+                id={index.toString()}
+                onChange={handleCheck}
+              />
+            </li>
+          )
+        })}
+      </ul>
       <Button type="submit" onClick={checkCorrect}>
         <FormattedMessage id="quests.imageCombination.playView.CheckResult" />
       </Button>
     </div>
   )
 }
-
-/*
-      <Button
-        onClick={() => {
-          //if (onSolve(answersGiven, imagesToCombineRandomOrder, imagesToCombineRight)) {
-          if (checkAnswers()){
-            successToast(intl)
-            successConfetti()
-          } else {
-            incorrectToast(intl)
-          }
-        }}
-      >
- */
-
 export default PlayView

@@ -12,6 +12,7 @@ type QuestData = {
   imagesToCombineWrong: string[]
   imagesToCombine: string[]
   imagesToCombineRandomOrder: string[]
+  correctAnswers: boolean[]
 }
 
 const ImageCombinationQuest = (intl: IntlShape): IQuest<QuestData> => {
@@ -31,6 +32,7 @@ const ImageCombinationQuest = (intl: IntlShape): IQuest<QuestData> => {
       imagesToCombineWrong,
       imagesToCombine,
       imagesToCombineRandomOrder,
+      correctAnswers,
     }) =>
       useQuestStore.setState(state => ({
         ...state,
@@ -40,6 +42,7 @@ const ImageCombinationQuest = (intl: IntlShape): IQuest<QuestData> => {
         imagesToCombineWrong,
         imagesToCombine,
         imagesToCombineRandomOrder,
+        correctAnswers,
       })),
 
     onSave: () => {
@@ -49,6 +52,7 @@ const ImageCombinationQuest = (intl: IntlShape): IQuest<QuestData> => {
       const imagesToCombineWrong = useQuestStore.getState().imagesToCombineWrong
       const imagesToCombine = imagesToCombineRight.concat(imagesToCombineWrong)
       const alreadyUsed = new Set()
+      const correctAnswers = []
       const imagesToCombineRandomOrder = []
 
       let i = 0
@@ -60,6 +64,11 @@ const ImageCombinationQuest = (intl: IntlShape): IQuest<QuestData> => {
           i++
         }
       }
+      for (let i = 0; i < imagesToCombine.length; i++) {
+        correctAnswers.push(
+          imagesToCombineRight.includes(imagesToCombineRandomOrder[i]),
+        )
+      }
 
       return {
         task,
@@ -68,6 +77,7 @@ const ImageCombinationQuest = (intl: IntlShape): IQuest<QuestData> => {
         imagesToCombineWrong,
         imagesToCombine,
         imagesToCombineRandomOrder,
+        correctAnswers,
       }
     },
 

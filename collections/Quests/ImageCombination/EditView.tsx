@@ -109,7 +109,7 @@ const EditView = () => {
       intl.formatMessage({ id: 'quests.imageCombination.useExampleImage' })
     ) {
       setImageToBeCombined(
-        require('/assets/imageCombinationQuest/abstract.svg'),
+        require('/assets/imageCombinationQuest/abstract.svg') as string,
       )
     }
   }, [
@@ -124,10 +124,10 @@ const EditView = () => {
       intl.formatMessage({ id: 'quests.imageCombination.useExampleImage' })
     ) {
       setImagesToCombineRight([
-        require('/assets/imageCombinationQuest/1.svg'),
-        require('/assets/imageCombinationQuest/2.svg'),
-        require('/assets/imageCombinationQuest/3.svg'),
-        require('/assets/imageCombinationQuest/4.svg'),
+        require('/assets/imageCombinationQuest/1.svg') as string,
+        require('/assets/imageCombinationQuest/2.svg') as string,
+        require('/assets/imageCombinationQuest/3.svg') as string,
+        require('/assets/imageCombinationQuest/4.svg') as string,
       ])
     }
   }, [imageToCombineSelectionRight.value, intl])
@@ -137,7 +137,9 @@ const EditView = () => {
       imageToCombineSelectionWrong.value ===
       intl.formatMessage({ id: 'quests.imageCombination.useExampleImage' })
     ) {
-      setImagesToCombineWrong([require('/assets/imageCombinationQuest/5.svg')])
+      setImagesToCombineWrong([
+        require('/assets/imageCombinationQuest/5.svg') as string,
+      ])
     }
   }, [imageToCombineSelectionWrong.value, intl])
 
