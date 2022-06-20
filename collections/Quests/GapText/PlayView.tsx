@@ -10,6 +10,7 @@ import {
 import { useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { incorrectToast, successToast } from '@/components/Toasts'
+import { Button } from '@/components/Elements/Button'
 
 export type gapElement = {
   key: number
@@ -63,17 +64,6 @@ const PlayView = () => {
       }
       setSlots(tmpSlots)
       setCards(tmpCards)
-
-      if (tmpCards.length == correctLen) {
-        // Check if won
-        const answers = slots.flatMap(item => item.slot[0].value)
-        if (onSolve(answers)) {
-          successToast(intl)
-          successConfetti()
-        } else {
-          incorrectToast(intl)
-        }
-      }
     }
   }
 
@@ -136,6 +126,24 @@ const PlayView = () => {
           </Droppable>
         </div>
       </DragDropContext>
+      <Button
+        className="mt-4"
+        onClick={() => {
+          if (cards.length == correctLen) {
+            const answers = slots.flatMap(item => item.slot[0].value)
+            if (onSolve(answers)) {
+              successToast(intl)
+              successConfetti()
+            } else {
+              incorrectToast(intl)
+            }
+          } else {
+            incorrectToast(intl)
+          }
+        }}
+      >
+        <FormattedMessage id="quests.gaptext.playView.submit" />
+      </Button>
     </div>
   )
 }

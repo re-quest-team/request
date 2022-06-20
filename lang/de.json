@@ -86,7 +86,8 @@
     },
     "gaptext": {
       "playView": {
-        "taskPrompt": "Ziehe Wörter von unten zum geeigneten Platz"
+        "taskPrompt": "Ziehe Wörter von unten zum geeigneten Platz",
+        "submit": "Abgabe"
       },
       "editView": {
         "correctTitle": "Lückentext",
