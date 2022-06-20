@@ -7,7 +7,7 @@ import { IntlShape } from 'react-intl'
 
 type QuestData = {
   question: string
-  correctAnswer: string
+  correctAnswers: { key: number; name: string }[]
   wrongAnswers: { key: number; name: string }[]
   shuffledAnswers: { key: number; name: string }[]
 }
@@ -22,23 +22,23 @@ const MultipleChoiceQuest = (intl: IntlShape): IQuest<QuestData> => {
     icon: ViewListIcon,
     EditView,
     PlayView: PlayView,
-    onLoad: ({ question, correctAnswer, wrongAnswers, shuffledAnswers }) =>
+    onLoad: ({ question, correctAnswers, wrongAnswers, shuffledAnswers }) =>
       useQuestStore.setState(state => ({
         ...state,
         question,
-        correctAnswer,
+        correctAnswers,
         wrongAnswers,
         shuffledAnswers,
       })),
 
     onSave: () => {
       const question = useQuestStore.getState().question
-      const correctAnswer = useQuestStore.getState().correctAnswer
+      const correctAnswers = useQuestStore.getState().correctAnswers
       const wrongAnswers = useQuestStore.getState().wrongAnswers
       const shuffledAnswers = useQuestStore.getState().shuffledAnswers
       return {
         question,
-        correctAnswer,
+        correctAnswers,
         wrongAnswers,
         shuffledAnswers,
       }

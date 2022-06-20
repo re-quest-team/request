@@ -7,10 +7,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 
 const PlayView = () => {
   const question = useQuestStore(state => state.question)
-  const correctAnswer = useQuestStore(state => state.correctAnswer)
-  const wrongAnswers = useQuestStore(state => state.wrongAnswers)
   const onSolve = useQuestStore(state => state.onSolve)
-  const correct = useQuestStore(state => state.correct)
   const shuffledAnswers = useQuestStore(state => state.shuffledAnswers)
 
   const intl = useIntl()
@@ -19,13 +16,20 @@ const PlayView = () => {
     id: 'quests.multiplechoice.playView.choices',
   })
 
-  const [answer, setAnswer] = useState('')
-
-  const [selectedAnswer, setSelectedAnswer] = useState<String>()
+  const [answer, setAnswer] = useState<string[]>([])
 
   const radioHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedAnswer(event.target.value)
-    setAnswer(event.target.value)
+    if (event.target.checked) {
+      setAnswer(answer.concat(event.target.value).sort())
+    } else {
+      setAnswer(
+        answer
+          .slice(0, answer.indexOf(event.target.value))
+          .concat(
+            answer.slice(answer.indexOf(event.target.value), answer.length - 1),
+          ),
+      )
+    }
   }
 
   return (
@@ -39,7 +43,7 @@ const PlayView = () => {
           <>
             <div className="m-2 text-base">
               <input
-                type="radio"
+                type="checkbox"
                 id={val.name}
                 name="answer"
                 value={val.name}
