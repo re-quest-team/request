@@ -29,17 +29,6 @@ const EditView = () => {
 
       <div>
         <InputField
-          label={intl.formatMessage({ id: 'media.iframe.editView.width' })}
-          type={'text'}
-          placeholder={'100'}
-          defaultValue={width}
-          onChange={e => {
-            frame && frame.setAttribute('width', e.currentTarget.value)
-            setWidth(e.currentTarget.value)
-          }}
-        />
-
-        <InputField
           label={intl.formatMessage({ id: 'media.iframe.editView.height' })}
           type={'text'}
           placeholder={'500'}

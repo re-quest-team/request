@@ -8,7 +8,6 @@ const PlayView = () => {
     <div className="text-center">
       <iframe
         className="relative w-full overflow-hidden pr-12"
-        width={width}
         height={height}
         src={link}
       >
