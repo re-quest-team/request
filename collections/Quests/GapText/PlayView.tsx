@@ -70,7 +70,7 @@ const PlayView = () => {
   return (
     <div className="mt-4">
       <p className="absolute top-0 mt-4">
-        <FormattedMessage id={'quests.gaptext.playView.taskPrompt'} />
+        <FormattedMessage id={'quests.gapText.playView.taskPrompt'} />
       </p>
       <DragDropContext onDragEnd={result => onDragEnd(result)}>
         <div className="mb-4 flex w-full flex-row flex-wrap">
@@ -142,7 +142,7 @@ const PlayView = () => {
           }
         }}
       >
-        <FormattedMessage id="quests.gaptext.playView.submit" />
+        <FormattedMessage id="quests.gapText.playView.submit" />
       </Button>
     </div>
   )

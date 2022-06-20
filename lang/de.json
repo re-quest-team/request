@@ -84,7 +84,7 @@
       "title": "Multiple-Choice-Frage",
       "description": "Hier muss eine Multiple-Choice-Frage beantwortet werden. Es gibt eine korrekte Antwort und beliebig viele Flaschen Antworten."
     },
-    "gaptext": {
+    "gapText": {
       "playView": {
         "taskPrompt": "Ziehe Wörter von unten zum geeigneten Platz",
         "submit": "Abgabe"

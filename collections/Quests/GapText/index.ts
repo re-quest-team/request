@@ -16,8 +16,8 @@ type QuestData = {
 const GapTextQuest = (intl: IntlShape): IQuest<QuestData> => {
   return {
     type: 'QUEST_GAP_TEXT',
-    title: intl.formatMessage({ id: 'quests.gaptext.title' }),
-    description: intl.formatMessage({ id: 'quests.gaptext.description' }),
+    title: intl.formatMessage({ id: 'quests.gapText.title' }),
+    description: intl.formatMessage({ id: 'quests.gapText.description' }),
     icon: PuzzleIcon,
     EditView,
     PlayView: PlayView,
