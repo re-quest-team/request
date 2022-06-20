@@ -9,8 +9,10 @@ import { Units } from '@/collections/Quests/NumberInput/units'
 const EditView = () => {
   const intl = useIntl()
 
-  const text = useQuestStore(state => state.textList)
-  const setText = useQuestStore(state => state.setTextList)
+  const text = useQuestStore(state => state.text)
+  const setText = useQuestStore(state => state.setText)
+
+  const setTextList = useQuestStore(state => state.setTextList)
 
   const correct = useQuestStore(state => state.correctAnswers)
   const setCorrect = useQuestStore(state => state.setCorrectAnswers)
@@ -35,8 +37,7 @@ const EditView = () => {
   }
 
   function shuffle() {
-    let shuffled = wrong
-    shuffled = shuffled.concat(correct.flatMap(item => item.value))
+    let shuffled = wrong.concat(correct)
 
     // >>>>>>> Algorithm src: https://stackoverflow.com/a/2450976
     let currentIndex = shuffled.length,
@@ -72,9 +73,8 @@ const EditView = () => {
     shuffle()
   }
 
-  const handleCorrectAnswerInput = (key: number, value: string) => {
-    correct[key].value = value
-    setCorrect(correct)
+  const handleWrongInput = (value: string) => {
+    setWrong(value.split(','))
     shuffle()
   }
 
@@ -129,7 +129,7 @@ const EditView = () => {
             id: 'quests.gaptext.editView.placeholder',
           })}
           defaultValue={wrong}
-          onChange={e => handleWrongAnswerInput(e)}
+          onChange={e => handleWrongInput(e.target.value)}
         />
       </div>
     </div>

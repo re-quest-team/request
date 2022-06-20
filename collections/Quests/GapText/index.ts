@@ -6,8 +6,9 @@ import { mapItem, useQuestStore } from './store'
 import { IntlShape } from 'react-intl'
 
 type QuestData = {
-  textList: mapItem[]
-  correctAnswers: mapItem[]
+  text: string
+  textList: string[]
+  correctAnswers: string[]
   wrongAnswers: string[]
   shuffledAnswers: mapItem[]
 }
@@ -20,9 +21,16 @@ const GapTextQuest = (intl: IntlShape): IQuest<QuestData> => {
     icon: PuzzleIcon,
     EditView,
     PlayView: PlayView,
-    onLoad: ({ textList, correctAnswers, wrongAnswers, shuffledAnswers }) =>
+    onLoad: ({
+      text,
+      textList,
+      correctAnswers,
+      wrongAnswers,
+      shuffledAnswers,
+    }) =>
       useQuestStore.setState(state => ({
         ...state,
+        text,
         textList,
         correctAnswers,
         wrongAnswers,
@@ -30,6 +38,7 @@ const GapTextQuest = (intl: IntlShape): IQuest<QuestData> => {
       })),
 
     onSave: () => ({
+      text: useQuestStore.getState().text,
       textList: useQuestStore.getState().textList,
       correctAnswers: useQuestStore.getState().correctAnswers,
       wrongAnswers: useQuestStore.getState().wrongAnswers,

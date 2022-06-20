@@ -6,12 +6,14 @@ export type mapItem = {
 }
 
 interface QuestState {
-  textList: mapItem[]
-  correctAnswers: mapItem[]
+  text: string
+  textList: string[]
+  correctAnswers: string[]
   wrongAnswers: string[]
   shuffledAnswers: mapItem[]
-  setTextList: (textList: mapItem[]) => void
-  setCorrectAnswers: (correctAnswers: mapItem[]) => void
+  setText: (text: string) => void
+  setTextList: (textList: string[]) => void
+  setCorrectAnswers: (correctAnswers: string[]) => void
   setWrongAnswers: (wrongAnswers: string[]) => void
   setShuffledAnswers: (wrongAnswers: mapItem[]) => void
   correct: boolean
@@ -19,10 +21,12 @@ interface QuestState {
 }
 
 export const useQuestStore = create<QuestState>()((set, get) => ({
-  textList: [{ key: 0, value: '' }],
-  correctAnswers: [{ key: 0, value: '' }],
+  text: '',
+  textList: [],
+  correctAnswers: [],
   wrongAnswers: [],
   shuffledAnswers: [],
+  setText: text => set(() => ({ text })),
   setTextList: textList => set(() => ({ textList })),
   setCorrectAnswers: correctAnswers => set(() => ({ correctAnswers })),
   setWrongAnswers: wrongAnswers => set(() => ({ wrongAnswers })),
@@ -31,7 +35,7 @@ export const useQuestStore = create<QuestState>()((set, get) => ({
   onSolve: input => {
     const solution = get().correctAnswers
     const correct = input
-      .map((answer, index) => answer === solution[index].value)
+      .map((answer, index) => answer === solution[index])
       .reduce((a, b) => a && b)
     set(() => ({ correct }))
     return correct
