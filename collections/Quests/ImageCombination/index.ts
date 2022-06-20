@@ -86,5 +86,4 @@ const ImageCombinationQuest = (intl: IntlShape): IQuest<QuestData> => {
     },
   }
 }
-
 export default ImageCombinationQuest

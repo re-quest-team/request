@@ -200,5 +200,4 @@ const EditView = () => {
     </div>
   )
 }
-
 export default EditView
