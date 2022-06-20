@@ -6,12 +6,6 @@ import { useEffect, useState } from 'react'
 import { SelectField } from '@/components/Elements/Select/SelectField'
 import FileUpload from '@/components/FileUpload'
 
-import useSWR from 'swr'
-
-type Props = {
-  questId: string
-}
-
 const EditView = () => {
   const intl = useIntl()
 
@@ -76,27 +70,21 @@ const EditView = () => {
   const [imageToCombineSelectionWrong, setImagesToCombineSelectionWrong] =
     useState(imagesToCombineSelectionRight[0])
 
-  // { data: quest } = useSWR<QuestWithImage>(`/api/quest/${questId}`)
-
   const setTask = useQuestStore(state => state.setTask)
-  const imageToBeCombined = useQuestStore(state => state.imageToBeCombined)
   const setImageToBeCombined = useQuestStore(
     state => state.setImageToBeCombined,
   )
-  const imagesToCombineRight = useQuestStore(
-    state => state.imagesToCombineRight,
-  )
   const setImagesToCombineRight = useQuestStore(
     state => state.setImagesToCombineRight,
-  )
-  const imagesToCombineWrong = useQuestStore(
-    state => state.imagesToCombineWrong,
   )
   const setImagesToCombineWrong = useQuestStore(
     state => state.setImagesToCombineWrong,
   )
 
+  // FileUpload is not implemented jet!!!!!!
+
   /*
+  { data: quest } = useSWR<QuestWithImage>(`/api/quest/${questId}`)
   useEffect(() => {
     if (quest?.image?.url)
       setImageUrlToBeCombined(`${process.env.NEXT_PUBLIC_S3_BASE_URL}/${quest?.image?.url}`)
@@ -112,11 +100,7 @@ const EditView = () => {
         require('/assets/imageCombinationQuest/abstract.svg') as string,
       )
     }
-  }, [
-    imageToBeCombinedSelection.value,
-    imageToCombineSelectionRight.value,
-    intl,
-  ])
+  }, [imageToBeCombinedSelection.value, setImageToBeCombined, intl])
 
   useEffect(() => {
     if (
@@ -130,7 +114,7 @@ const EditView = () => {
         require('/assets/imageCombinationQuest/4.svg') as string,
       ])
     }
-  }, [imageToCombineSelectionRight.value, intl])
+  }, [imageToCombineSelectionRight.value, setImagesToCombineRight, intl])
 
   useEffect(() => {
     if (
@@ -141,7 +125,7 @@ const EditView = () => {
         require('/assets/imageCombinationQuest/5.svg') as string,
       ])
     }
-  }, [imageToCombineSelectionWrong.value, intl])
+  }, [imageToCombineSelectionWrong.value, setImagesToCombineWrong, intl])
 
   return (
     <div>

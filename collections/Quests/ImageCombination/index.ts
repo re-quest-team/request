@@ -10,7 +10,6 @@ type QuestData = {
   imageToBeCombined: string
   imagesToCombineRight: string[]
   imagesToCombineWrong: string[]
-  imagesToCombine: string[]
   imagesToCombineRandomOrder: string[]
   correctAnswers: boolean[]
 }
@@ -30,7 +29,6 @@ const ImageCombinationQuest = (intl: IntlShape): IQuest<QuestData> => {
       imageToBeCombined,
       imagesToCombineRight,
       imagesToCombineWrong,
-      imagesToCombine,
       imagesToCombineRandomOrder,
       correctAnswers,
     }) =>
@@ -40,7 +38,6 @@ const ImageCombinationQuest = (intl: IntlShape): IQuest<QuestData> => {
         imageToBeCombined,
         imagesToCombineRight,
         imagesToCombineWrong,
-        imagesToCombine,
         imagesToCombineRandomOrder,
         correctAnswers,
       })),
@@ -75,7 +72,6 @@ const ImageCombinationQuest = (intl: IntlShape): IQuest<QuestData> => {
         imageToBeCombined,
         imagesToCombineRight,
         imagesToCombineWrong,
-        imagesToCombine,
         imagesToCombineRandomOrder,
         correctAnswers,
       }
