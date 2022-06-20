@@ -128,6 +128,7 @@ const QuestImagePlacer = ({
           open={questModalOpen}
           roomId={roomId}
           quest={currentQuest}
+          allQuest={quests}
           onClose={() => {
             setCurrentQuest(undefined)
             setQuestModalOpen(false)

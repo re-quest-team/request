@@ -10,12 +10,12 @@ import GapTextQuest from '@/collections/Quests/GapText'
 
 const media = (intl: IntlShape): IQuest<any>[] => [
   TextMedia(intl),
-  InstagramMedia,
+  InstagramMedia(intl),
   YoutubeMedia(intl),
 ]
 const quests = (intl: IntlShape): IQuest<any>[] => [
   CryptoQuest(intl),
-  NumberInputQuest,
+  NumberInputQuest(intl),
   MultipleChoiceQuest(intl),
   GapTextQuest(intl),
   ...media(intl),
