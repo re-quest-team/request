@@ -11,6 +11,7 @@ import {
   QrcodeIcon,
   ViewListIcon,
   TrashIcon,
+  PuzzleIcon,
 } from '@heroicons/react/outline'
 import { Quest, QuestType } from '@prisma/client'
 import clsx from 'clsx'
@@ -48,6 +49,8 @@ const renderIcon = (type?: QuestType) => {
       return <ChartSquareBarIcon className="h-10 w-10" />
     case 'QUEST_NUMBER_INPUT':
       return <CalculatorIcon className="h-10 w-10" />
+    case 'QUEST_GAP_TEXT':
+      return <PuzzleIcon className="h-10 w-10" />
     case 'MEDIA_TEXT':
       return <MenuAlt1Icon className="h-10 w-10" />
     case 'MEDIA_IMAGE':
