@@ -92,7 +92,7 @@
       "editView": {
         "correctTitle": "Lückentext",
         "correctPlaceholder": "Bsp.: Tom hat ein [rotes] Auto mit [Rallystreifen].",
-        "correctTip": "TIPP: Hinzufügen einer Lücke mit der entsprechenden Antwort : [DeineAntwort]",
+        "correctTip": "TIPP: Einfügen einer Lücke mit der entsprechenden Antwort: [DieAntwort]",
         "falseTitle": "Falsche Antworten",
         "falsePlaceholder": "Bsp.: Falsch, Katze, Hund"
       },

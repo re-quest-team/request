@@ -92,7 +92,7 @@
       "editView": {
         "correctTitle": "Gap text",
         "correctPlaceholder": "E.g.: Tom has a [red] car with [racing] [stripes].",
-        "correctTip": "TIP: You add a gap with corresponding answer by wring: [YourAnswer]",
+        "correctTip": "TIP: You add a gap with the corresponding answer by writing: [YourAnswer]",
         "falseTitle": "False answers",
         "falsePlaceholder": "E.g.: wrong, cat, dog, yogurt"
       },
