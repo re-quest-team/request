@@ -12,10 +12,6 @@ const PlayView = () => {
 
   const intl = useIntl()
 
-  const label = intl.formatMessage({
-    id: 'quests.multipleChoice.playView.choices',
-  })
-
   const [answer, setAnswer] = useState<string[]>([])
 
   const radioHandler = (event: React.ChangeEvent<HTMLInputElement>) => {

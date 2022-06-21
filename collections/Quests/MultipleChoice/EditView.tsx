@@ -21,16 +21,6 @@ const EditView = () => {
 
   const intl = useIntl()
 
-  const label1 = intl.formatMessage({
-    id: 'quests.multipleChoice.editView.labelTask',
-  })
-  const label2 = intl.formatMessage({
-    id: 'quests.multipleChoice.editView.labelCorrectAnswer',
-  })
-  const label3 = intl.formatMessage({
-    id: 'quests.multipleChoice.editView.labelWrongAnswer',
-  })
-
   const replaceWrongAnswer = (
     event: React.ChangeEvent<HTMLInputElement>,
     i: number,
@@ -107,7 +97,9 @@ const EditView = () => {
       {correctAnswers.map(val => (
         <InputField
           key={val.key}
-          label={label2}
+          label={intl.formatMessage({
+            id: 'quests.multipleChoice.editView.labelCorrectAnswer',
+          })}
           defaultValue={val.name}
           onChange={e => replaceCorrectAnswer(e, val.key)}
         />
