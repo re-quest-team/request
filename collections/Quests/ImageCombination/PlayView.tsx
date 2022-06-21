@@ -8,8 +8,6 @@ import Image from 'next/image'
 
 const PlayView = () => {
   const intl = useIntl()
-  const toBeCombined = intl.formatMessage({id: 'quests.imageCombination.playView.imageToBeCombined'})
-  const chose = intl.formatMessage({id: 'quests.imageCombination.playView.chose'})
 
   const task = useQuestStore(state => state.task)
   const imageToBeCombined = useQuestStore(state => state.imageToBeCombined)
@@ -43,9 +41,9 @@ const PlayView = () => {
   return (
     <div>
       <p>{task}</p>
-      <p>{toBeCombined}</p>
+      <p>{intl.formatMessage({id: 'quests.imageCombination.playView.imageToBeCombined'})}</p>
       <Image src={imageToBeCombined} alt="Image to be combined" />
-      <p>{chose}</p>
+      <p>{intl.formatMessage({id: 'quests.imageCombination.playView.chose'})}</p>
       <ul>
         {imagesToCombineRandomOrder.map((test, index) => {
           return (

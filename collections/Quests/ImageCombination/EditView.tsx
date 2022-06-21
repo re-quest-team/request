@@ -22,12 +22,6 @@ const EditView = () => {
     {value: intl.formatMessage({id: 'quests.imageCombination.useExampleImage'}),},
   ]
 
-  const task_label = intl.formatMessage({id: 'quests.imageCombination.editView.labelTask'})
-  const imageAim_label = intl.formatMessage({id: 'quests.imageCombination.editView.labelImageAim'})
-  const imagePoolRight_label = intl.formatMessage({id: 'quests.imageCombination.editView.labelImagePoolRight'})
-  const imagePoolWrong_label = intl.formatMessage({id: 'quests.imageCombination.editView.labelImagePoolWrong'})
-  const task = intl.formatMessage({id: 'quests.imageCombination.description'})
-
   const [imageToBeCombinedSelection, setImageToBeCombinedSelection] = useState(imagesToBeCombinedSelection[0])
   const [imageToCombineSelectionRight, setImagesToCombineSelectionRight] = useState(imagesToCombineSelectionRight[0])
   const [imageToCombineSelectionWrong, setImagesToCombineSelectionWrong] = useState(imagesToCombineSelectionRight[0])
@@ -84,13 +78,13 @@ const EditView = () => {
   return (
     <div>
       <InputField
-        label={task_label}
-        defaultValue={task}
+        label={intl.formatMessage({id: 'quests.imageCombination.editView.labelTask'})}
+        defaultValue={intl.formatMessage({id: 'quests.imageCombination.description'})}
         onChange={e => setTask(e.target.value)}
       ></InputField>
 
       <SelectField
-        label={imageAim_label}
+        label={intl.formatMessage({id: 'quests.imageCombination.editView.labelImageAim'})}
         options={imagesToBeCombinedSelection}
         onSelect={setImageToBeCombinedSelection}
       ></SelectField>
@@ -111,7 +105,7 @@ const EditView = () => {
       </div>
 
       <SelectField
-        label={imagePoolRight_label}
+        label={intl.formatMessage({id: 'quests.imageCombination.editView.labelImagePoolRight'})}
         options={imagesToCombineSelectionRight}
         onSelect={setImagesToCombineSelectionRight}
       ></SelectField>
@@ -132,7 +126,7 @@ const EditView = () => {
       </div>
 
       <SelectField
-        label={imagePoolWrong_label}
+        label={intl.formatMessage({id: 'quests.imageCombination.editView.labelImagePoolWrong'})}
         options={imagesToCombineSelectionWrong}
         onSelect={setImagesToCombineSelectionWrong}
       ></SelectField>
