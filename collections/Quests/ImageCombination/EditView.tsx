@@ -58,9 +58,7 @@ const EditView = () => {
   const imagePoolWrong_label = intl.formatMessage({
     id: 'quests.imageCombination.editView.labelImagePoolWrong',
   })
-  const task = intl.formatMessage({
-    id: 'quests.imageCombination.description',
-  })
+  const task = intl.formatMessage({ id: 'quests.imageCombination.description' })
 
   const [imageToBeCombinedSelection, setImageToBeCombinedSelection] = useState(
     imagesToBeCombinedSelection[0],
