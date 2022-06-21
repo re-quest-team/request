@@ -137,6 +137,14 @@
       },
       "title": "Image link",
       "description": "You can add an Image here."
+      },
+    "iframe": {
+      "editView": {
+        "label": "iframe embed-link",
+        "width": "width",
+        "height": "height"
+      },
+      "description": "You can show a simple iframe"
     }
   },
   "features": {
