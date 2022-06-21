@@ -1,13 +1,13 @@
-import { useInstagramStore } from './store'
+import { useIframeStore } from '@/collections/Media/IFrame/store'
 
 const PlayView = () => {
-  const link = useInstagramStore(state => state.link) + '/embed'
+  const link = useIframeStore(state => state.link)
+  const height = useIframeStore(state => state.height)
   return (
     <div className="text-center">
       <iframe
         className="relative w-full overflow-hidden pr-12"
-        width={'400px'}
-        height={'720px'}
+        height={height}
         src={link}
       >
         <div className="text-center">error 404</div>
