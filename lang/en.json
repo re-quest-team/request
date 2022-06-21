@@ -141,12 +141,6 @@
       },
       "description": "You can show a simple Instagram post"
     },
-    "instagram": {
-      "editView": {
-        "label": "Instagram embed-link"
-      },
-      "description": "You can show a simple Instagram post"
-    },
     "iframe": {
       "editView": {
         "label": "iframe embed-link",
