@@ -10,74 +10,32 @@ const EditView = () => {
   const intl = useIntl()
 
   const imagesToBeCombinedSelection: SelectOption[] = [
-    {
-      value: intl.formatMessage({
-        id: 'quests.imageCombination.uploadOwnImage',
-      }),
-    },
-    {
-      value: intl.formatMessage({
-        id: 'quests.imageCombination.useExampleImage',
-      }),
-    },
+    {value: intl.formatMessage({id: 'quests.imageCombination.uploadOwnImage'}),},
+    {value: intl.formatMessage({id: 'quests.imageCombination.useExampleImage'}),},
   ]
   const imagesToCombineSelectionRight: SelectOption[] = [
-    {
-      value: intl.formatMessage({
-        id: 'quests.imageCombination.uploadOwnImage',
-      }),
-    },
-    {
-      value: intl.formatMessage({
-        id: 'quests.imageCombination.useExampleImage',
-      }),
-    },
+    {value: intl.formatMessage({id: 'quests.imageCombination.uploadOwnImage'}),},
+    {value: intl.formatMessage({id: 'quests.imageCombination.useExampleImage'}),},
   ]
   const imagesToCombineSelectionWrong: SelectOption[] = [
-    {
-      value: intl.formatMessage({
-        id: 'quests.imageCombination.uploadOwnImage',
-      }),
-    },
-    {
-      value: intl.formatMessage({
-        id: 'quests.imageCombination.useExampleImage',
-      }),
-    },
+    {value: intl.formatMessage({id: 'quests.imageCombination.uploadOwnImage'}),},
+    {value: intl.formatMessage({id: 'quests.imageCombination.useExampleImage'}),},
   ]
 
-  const task_label = intl.formatMessage({
-    id: 'quests.imageCombination.editView.labelTask',
-  })
-  const imageAim_label = intl.formatMessage({
-    id: 'quests.imageCombination.editView.labelImageAim',
-  })
-  const imagePoolRight_label = intl.formatMessage({
-    id: 'quests.imageCombination.editView.labelImagePoolRight',
-  })
-  const imagePoolWrong_label = intl.formatMessage({
-    id: 'quests.imageCombination.editView.labelImagePoolWrong',
-  })
-  const task = intl.formatMessage({ id: 'quests.imageCombination.description' })
+  const task_label = intl.formatMessage({id: 'quests.imageCombination.editView.labelTask'})
+  const imageAim_label = intl.formatMessage({id: 'quests.imageCombination.editView.labelImageAim'})
+  const imagePoolRight_label = intl.formatMessage({id: 'quests.imageCombination.editView.labelImagePoolRight'})
+  const imagePoolWrong_label = intl.formatMessage({id: 'quests.imageCombination.editView.labelImagePoolWrong'})
+  const task = intl.formatMessage({id: 'quests.imageCombination.description'})
 
-  const [imageToBeCombinedSelection, setImageToBeCombinedSelection] = useState(
-    imagesToBeCombinedSelection[0],
-  )
-  const [imageToCombineSelectionRight, setImagesToCombineSelectionRight] =
-    useState(imagesToCombineSelectionRight[0])
-  const [imageToCombineSelectionWrong, setImagesToCombineSelectionWrong] =
-    useState(imagesToCombineSelectionRight[0])
+  const [imageToBeCombinedSelection, setImageToBeCombinedSelection] = useState(imagesToBeCombinedSelection[0])
+  const [imageToCombineSelectionRight, setImagesToCombineSelectionRight] = useState(imagesToCombineSelectionRight[0])
+  const [imageToCombineSelectionWrong, setImagesToCombineSelectionWrong] = useState(imagesToCombineSelectionRight[0])
 
   const setTask = useQuestStore(state => state.setTask)
-  const setImageToBeCombined = useQuestStore(
-    state => state.setImageToBeCombined,
-  )
-  const setImagesToCombineRight = useQuestStore(
-    state => state.setImagesToCombineRight,
-  )
-  const setImagesToCombineWrong = useQuestStore(
-    state => state.setImagesToCombineWrong,
-  )
+  const setImageToBeCombined = useQuestStore(state => state.setImageToBeCombined)
+  const setImagesToCombineRight = useQuestStore(state => state.setImagesToCombineRight)
+  const setImagesToCombineWrong = useQuestStore(state => state.setImagesToCombineWrong)
 
   // FileUpload is not implemented jet!!!!!!
 
@@ -94,9 +52,7 @@ const EditView = () => {
       imageToBeCombinedSelection.value ===
       intl.formatMessage({ id: 'quests.imageCombination.useExampleImage' })
     ) {
-      setImageToBeCombined(
-        require('/assets/imageCombinationQuest/abstract.svg') as string,
-      )
+      setImageToBeCombined(require('/assets/imageCombinationQuest/abstract.svg') as string)
     }
   }, [imageToBeCombinedSelection.value, setImageToBeCombined, intl])
 

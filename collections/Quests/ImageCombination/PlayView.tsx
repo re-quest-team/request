@@ -8,19 +8,13 @@ import Image from 'next/image'
 
 const PlayView = () => {
   const intl = useIntl()
-  const toBeCombined = intl.formatMessage({
-    id: 'quests.imageCombination.playView.imageToBeCombined',
-  })
-  const chose = intl.formatMessage({
-    id: 'quests.imageCombination.playView.chose',
-  })
+  const toBeCombined = intl.formatMessage({id: 'quests.imageCombination.playView.imageToBeCombined'})
+  const chose = intl.formatMessage({id: 'quests.imageCombination.playView.chose'})
 
   const task = useQuestStore(state => state.task)
   const imageToBeCombined = useQuestStore(state => state.imageToBeCombined)
   const correctAnswers = useQuestStore(state => state.correctAnswers)
-  const imagesToCombineRandomOrder = useQuestStore(
-    state => state.imagesToCombineRandomOrder,
-  )
+  const imagesToCombineRandomOrder = useQuestStore(state => state.imagesToCombineRandomOrder)
   const onSolve = useQuestStore(state => state.onSolve)
 
   const answersGiven = new Map()
