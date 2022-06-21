@@ -100,6 +100,16 @@
         "labelEnd": "Endzeit"
       },
       "description": "Hier kann ein Youtube Video eingebunden werden"
+    },
+    "image": {
+      "playView": {
+        "alt": "Bild wurde nicht gefunden."
+      },
+      "editView": {
+        "title": "Bild URL"
+      },
+      "title": "Bild",
+      "description": "Hier kann ein Bild eingebunden werden"
     }
   },
   "features": {

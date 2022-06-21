@@ -100,6 +100,16 @@
         "labelEnd": "End time"
       },
       "description": "You can add a Youtube video here"
+    },
+    "image": {
+      "playView": {
+        "alt": "Image not found."
+      },
+      "editView": {
+        "title": "Image"
+      },
+      "title": "Image link",
+      "description": "You can add an Image here."
     }
   },
   "features": {
