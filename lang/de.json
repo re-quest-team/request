@@ -127,6 +127,14 @@
         "label": "Instagram Embed Link"
       },
       "description": "Hier kann ein einfacher Instagram Post angezeigt werden"
+    },
+    "iframe": {
+      "editView": {
+        "label": "Iframe Embed Link",
+        "width": "Breite",
+        "height": "Höhe"
+      },
+      "description": "Hier kann ein einfacher iframe angezeigt werden"
     }
   },
   "features": {
