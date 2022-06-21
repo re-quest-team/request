@@ -103,6 +103,7 @@ const PlayView = () => {
             {text.slice(correctLen, correctLen + 1)[0]}
           </p>
         </div>
+
         <div>
           <Droppable droppableId="-1">
             {provided => (
