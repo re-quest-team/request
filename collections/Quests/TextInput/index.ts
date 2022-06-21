@@ -3,9 +3,7 @@ import { IQuest } from '@/collections/types'
 import EditView from './EditView'
 import PlayView from './PlayView'
 import { useQuestStore } from './store'
-import { useQuestStore } from './store'
-import { chat-alt } from '@heroicons/react/outline'
-import { IQuest } from '@/collections/types'
+import { IntlShape } from 'react-intl'
 
 type QuestData = {
     question: string
@@ -15,8 +13,12 @@ type QuestData = {
 const TextInputQuest = (intl:IntlShape): IQuest<QuestData> => {
     return {
         type: 'QUEST_TEXT_INPUT',
-        title: 'Text Eingabe',
-        description: 'Hier eine Frage die mit Text beantwortet werden muss.'
+        title: intl.formatMessage({
+            id: 'quest.textInput.title'
+        }),
+        description: intl.formatMessage({
+            id: 'quest.textInput.description',
+        }),
         icon: chat-alt,
         EditView,
         PlayView: PlayView,

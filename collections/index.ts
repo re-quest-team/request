@@ -16,7 +16,7 @@ const quests = (intl: IntlShape): IQuest<any>[] => [
   CryptoQuest(intl),
   NumberInputQuest,
   MultipleChoiceQuest(intl),
-  TextInputQuest,
+  TextInputQuest(intl),
   ...media(intl),
 ]
 
