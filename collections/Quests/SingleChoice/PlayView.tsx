@@ -12,12 +12,9 @@ const PlayView = () => {
 
   const intl = useIntl()
 
-  const [answer, setAnswer] = useState('')
-
-  const [selectedAnswer, setSelectedAnswer] = useState<String>()
+  const [answer, setAnswer] = useState<string>('')
 
   const radioHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedAnswer(event.target.value)
     setAnswer(event.target.value)
   }
 
@@ -30,17 +27,17 @@ const PlayView = () => {
         <h3 className="m-3 text-xl">
           <FormattedMessage id={'quests.singleChoice.playView.choices'} />
         </h3>
-        {shuffledAnswers.map(val => (
+        {shuffledAnswers.map((val, index) => (
           <>
             <div className="m-2 text-base">
               <input
                 type="radio"
-                id={val.name}
+                key={index}
                 name="answer"
-                value={val.name}
+                value={val}
                 onChange={radioHandler}
               ></input>
-              <label htmlFor={val.name}>{val.name}</label>
+              <label htmlFor={val}>{val}</label>
             </div>
           </>
         ))}

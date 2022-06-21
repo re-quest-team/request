@@ -1,43 +1,31 @@
 import create from 'zustand'
-import { compareStringArray } from './Comparor'
+import { compareStringArray } from 'utils/compareStringArray'
 
 interface QuestState {
   question: string
-  rightAnswers: string[]
-  correctAnswers: { key: number; name: string }[]
-  wrongAnswers: { key: number; name: string }[]
-  shuffledAnswers: { key: number; name: string }[]
+  correctAnswers: string[]
+  wrongAnswers: string[]
+  shuffledAnswers: string[]
   setQuestion: (question: string) => void
-  setRightAnswers: (rightAnswers: string[]) => void
-  setCorrectAnswers: (correctAnswer: { key: number; name: string }[]) => void
-  setWrongAnswers: (wrongAnswers: { key: number; name: string }[]) => void
-  setShuffledAnswers: (shuffledAnswers: { key: number; name: string }[]) => void
+  setCorrectAnswers: (correctAnswer: string[]) => void
+  setWrongAnswers: (wrongAnswers: string[]) => void
+  setShuffledAnswers: (shuffledAnswers: string[]) => void
   correct: boolean
   onSolve: (input: string[]) => boolean
 }
 
 export const useQuestStore = create<QuestState>()((set, get) => ({
   question: '',
-  rightAnswers: [''],
-  correctAnswers: [
-    { key: -1, name: '' },
-    { key: -2, name: '' },
-    { key: -3, name: '' },
-  ],
-  wrongAnswers: [
-    { key: 1, name: '' },
-    { key: 2, name: '' },
-    { key: 3, name: '' },
-  ],
-  shuffledAnswers: [{ key: 1, name: '' }],
-  setRightAnswers: rightAnswers => set(() => ({ rightAnswers })),
+  correctAnswers: ['', '', ''],
+  wrongAnswers: ['', '', ''],
+  shuffledAnswers: [],
   setQuestion: question => set(() => ({ question })),
   setCorrectAnswers: correctAnswers => set(() => ({ correctAnswers })),
   setWrongAnswers: wrongAnswers => set(() => ({ wrongAnswers })),
   setShuffledAnswers: shuffledAnswers => set(() => ({ shuffledAnswers })),
   correct: false,
   onSolve: input => {
-    const correct = compareStringArray(input, get().rightAnswers)
+    const correct = compareStringArray(input, get().correctAnswers)
     set(() => ({ correct }))
     return correct
   },

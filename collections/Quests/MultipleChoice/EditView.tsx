@@ -9,8 +9,6 @@ const EditView = () => {
   const question = useQuestStore(state => state.question)
   const setQuestion = useQuestStore(state => state.setQuestion)
 
-  const setRightAnswers = useQuestStore(state => state.setRightAnswers)
-
   const correctAnswers = useQuestStore(state => state.correctAnswers)
   const setCorrectAnswers = useQuestStore(state => state.setCorrectAnswers)
 
@@ -27,16 +25,9 @@ const EditView = () => {
   ) => {
     let answers = wrongAnswers
 
-    answers[i - 1] = { key: i, name: event.target.value }
-
+    answers[i] = event.target.value
     setWrongAnswers(answers)
-
-    const pureAnswers = wrongAnswers.filter(
-      (item: { key: number; name: string }) => item.name !== '',
-    )
-
-    const allAnswers = pureAnswers.concat(correctAnswers)
-    setShuffledAnswers(randomize(allAnswers))
+    shuffle()
   }
 
   const replaceCorrectAnswer = (
@@ -45,24 +36,14 @@ const EditView = () => {
   ) => {
     let answers = correctAnswers
 
-    answers[i * -1 - 1] = { key: i, name: event.target.value }
+    answers[i] = event.target.value
+    setCorrectAnswers(answers.sort())
+    shuffle()
+  }
 
-    let rightAnswersCreator = ['']
-    rightAnswersCreator.pop()
-
-    answers.forEach(e => rightAnswersCreator.push(e.name))
-    rightAnswersCreator.sort()
-
-    setRightAnswers(rightAnswersCreator)
-
-    setCorrectAnswers(answers)
-
-    const pureAnswers = correctAnswers.filter(
-      (item: { key: number; name: string }) => item.name !== '',
-    )
-
-    const allAnswers = pureAnswers.concat(wrongAnswers)
-    setShuffledAnswers(randomize(allAnswers))
+  const shuffle = () => {
+    const allAnswers = randomize(correctAnswers.concat(wrongAnswers))
+    setShuffledAnswers(allAnswers.filter(item => item !== ''))
   }
 
   return (
@@ -74,14 +55,14 @@ const EditView = () => {
         defaultValue={question}
         onChange={e => setQuestion(e.target.value)}
       />
-      {correctAnswers.map(val => (
+      {correctAnswers.map((val, index) => (
         <InputField
-          key={val.key}
+          key={index}
           label={intl.formatMessage({
             id: 'quests.multipleChoice.editView.labelCorrectAnswer',
           })}
-          defaultValue={val.name}
-          onChange={e => replaceCorrectAnswer(e, val.key)}
+          defaultValue={val}
+          onChange={e => replaceCorrectAnswer(e, index)}
         />
       ))}
       <div id="refWrong" />
@@ -89,14 +70,7 @@ const EditView = () => {
         <PillButton
           className=" my-3 mx-auto  h-10 w-10 content-center"
           variant="tertiary"
-          onClick={() =>
-            setCorrectAnswers(
-              correctAnswers.concat({
-                key: (correctAnswers.length + 1) * -1,
-                name: '',
-              }),
-            )
-          }
+          onClick={() => setCorrectAnswers(correctAnswers.concat(''))}
         >
           <PlusCircleIcon className="m-2 h-5 w-5 " />
         </PillButton>
@@ -113,25 +87,21 @@ const EditView = () => {
         </PillButton>
       </div>
 
-      {wrongAnswers.map(val => (
+      {wrongAnswers.map((val, index) => (
         <InputField
-          key={val.key}
+          key={index}
           label={intl.formatMessage({
             id: 'quests.multipleChoice.editView.labelWrongAnswer',
           })}
-          defaultValue={val.name}
-          onChange={e => replaceWrongAnswer(e, val.key)}
+          defaultValue={val}
+          onChange={e => replaceWrongAnswer(e, index)}
         />
       ))}
       <div className="my-4 flex">
         <PillButton
           className=" my-3 mx-auto  h-10 w-10 content-center"
           variant="tertiary"
-          onClick={() =>
-            setWrongAnswers(
-              wrongAnswers.concat({ key: wrongAnswers.length + 1, name: '' }),
-            )
-          }
+          onClick={() => setWrongAnswers(wrongAnswers.concat(''))}
         >
           <PlusCircleIcon className="m-2 h-5 w-5 " />
         </PillButton>

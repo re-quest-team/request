@@ -32,17 +32,17 @@ const PlayView = () => {
         <h3 className="m-3 text-xl">
           <FormattedMessage id="quests.multipleChoice.playView.choices" />
         </h3>
-        {shuffledAnswers.map(val => (
+        {shuffledAnswers.map((val, index) => (
           <>
             <div className="m-2 text-base">
               <input
                 type="checkbox"
-                key={val.key}
+                key={index}
                 name="answer"
-                value={val.name}
+                value={val}
                 onChange={radioHandler}
               ></input>
-              <label htmlFor={val.name}>{val.name}</label>
+              <label htmlFor={val}>{val}</label>
             </div>
           </>
         ))}

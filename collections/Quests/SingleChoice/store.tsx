@@ -3,12 +3,12 @@ import create from 'zustand'
 interface QuestState {
   question: string
   correctAnswer: string
-  wrongAnswers: { key: number; name: string }[]
-  shuffledAnswers: { key: number; name: string }[]
+  wrongAnswers: string[]
+  shuffledAnswers: string[]
   setQuestion: (question: string) => void
   setCorrectAnswer: (correctAnswer: string) => void
-  setWrongAnswers: (wrongAnswers: { key: number; name: string }[]) => void
-  setShuffledAnswers: (shuffledAnswers: { key: number; name: string }[]) => void
+  setWrongAnswers: (wrongAnswers: string[]) => void
+  setShuffledAnswers: (shuffledAnswers: string[]) => void
   correct: boolean
   onSolve: (input: string) => boolean
 }
@@ -16,12 +16,8 @@ interface QuestState {
 export const useQuestStore = create<QuestState>()((set, get) => ({
   question: '',
   correctAnswer: '',
-  wrongAnswers: [
-    { key: 1, name: '' },
-    { key: 2, name: '' },
-    { key: 3, name: '' },
-  ],
-  shuffledAnswers: [{ key: 1, name: '' }],
+  wrongAnswers: ['', '', ''],
+  shuffledAnswers: [],
   setQuestion: question => set(() => ({ question })),
   setCorrectAnswer: correctAnswer => set(() => ({ correctAnswer })),
   setWrongAnswers: wrongAnswers => set(() => ({ wrongAnswers })),
