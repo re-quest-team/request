@@ -10,13 +10,13 @@ import ImageMedia from '@/collections/Media/Image'
 
 const media = (intl: IntlShape): IQuest<any>[] => [
   TextMedia(intl),
-  InstagramMedia,
+  InstagramMedia(intl),
   YoutubeMedia(intl),
   ImageMedia(intl),
 ]
 const quests = (intl: IntlShape): IQuest<any>[] => [
   CryptoQuest(intl),
-  NumberInputQuest,
+  NumberInputQuest(intl),
   MultipleChoiceQuest(intl),
   ...media(intl),
 ]

@@ -71,7 +71,7 @@
       "title": "Kryptographie",
       "description": "Hier muss ein Codewort entschlüsselt werden. Das Wort wird mit ROT13 / Cäsar-Chiffre verschlüsselt."
     },
-    "multiplechoice": {
+    "multipleChoice": {
       "playView": {
         "choices": "Antwortmöglichkeiten:",
         "submit": "Abgabe"
@@ -82,7 +82,25 @@
         "labelWrongAnswer": "Falsche Antwort"
       },
       "title": "Multiple-Choice-Frage",
-      "description": "Hier muss eine Multiple-Choice-Frage beantwortet werden. Es gibt eine Correcte Antwort und beliebig viele Flaschen Antworten."
+      "description": "Hier muss eine Multiple-Choice-Frage beantwortet werden. Es gibt eine korrecte Antwort und beliebig viele falschen Antworten."
+    },
+    "numberInput": {
+      "playView": {
+        "labelAnswer": "Antwort",
+        "check": "Überprüfen"
+      },
+      "editView": {
+        "labelTask": "Aufgabenstellung",
+        "labelAnswer": "Antwort",
+        "labelUnit": "Einheit"
+      },
+      "validation": {
+        "questionRequired": "Frage muss gestellt werden!",
+        "nanInvalid": "NaN ungültig",
+        "answerRequired": "Antwort muss angegeben werden!"
+      },
+      "title": "Nummern Eingabe",
+      "description": "Hier wird eine Frage mit einer Nummer beantwortet."
     }
   },
   "media": {
@@ -99,7 +117,16 @@
         "labelStart": "Startzeit",
         "labelEnd": "Endzeit"
       },
+      "playView": {
+        "title": "Youtube Embed"
+      },
       "description": "Hier kann ein Youtube Video eingebunden werden"
+    },
+    "instagram": {
+      "editView": {
+        "label": "Instagram Embed Link"
+      },
+      "description": "Hier kann ein einfacher Instagram Post angezeigt werden"
     },
     "image": {
       "playView": {
