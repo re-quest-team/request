@@ -71,7 +71,7 @@
       "title": "Kryptographie",
       "description": "Hier muss ein Codewort entschlüsselt werden. Das Wort wird mit ROT13 / Cäsar-Chiffre verschlüsselt."
     },
-    "multiplechoice": {
+    "multipleChoice": {
       "playView": {
         "choices": "Antwortmöglichkeiten:",
         "submit": "Abgabe"
@@ -82,7 +82,7 @@
         "labelWrongAnswer": "Falsche Antwort"
       },
       "title": "Multiple-Choice-Frage",
-      "description": "Hier muss eine Multiple-Choice-Frage beantwortet werden. Es gibt eine Correcte Antwort und beliebig viele Flaschen Antworten."
+      "description": "Hier muss eine Multiple-Choice-Frage beantwortet werden. Es gibt eine korrecte Antwort und beliebig viele falschen Antworten."
     },
     "numberInput": {
       "playView": {

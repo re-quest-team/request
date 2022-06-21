@@ -1,6 +1,7 @@
 import React from 'react'
 import { useYoutubeStore } from './store'
 import { Timestamp } from '@/collections/Media/Youtube/store'
+import { useIntl } from 'react-intl'
 
 const sumToSec = (time: Timestamp) => {
   return (
@@ -12,6 +13,7 @@ const sumToSec = (time: Timestamp) => {
 }
 
 const PlayView = () => {
+  const intl = useIntl()
   const baseLink = useYoutubeStore(state => state.link)
   const start = sumToSec(useYoutubeStore(start => start.start))
   const end = sumToSec(useYoutubeStore(end => end.end))
@@ -29,7 +31,7 @@ const PlayView = () => {
         src={link}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
-        title="Embeded Youtube"
+        title={intl.formatMessage({ id: 'media.youtube.playView.title' })}
       />
     </div>
   )
