@@ -71,7 +71,7 @@
       "title": "Cryptography",
       "description": "A code word must be decrypted here. The word is encrypted with ROT13 / Caesar cipher."
     },
-    "singlechoice": {
+    "singleChoice": {
       "playView": {
         "choices": "Possible answers:",
         "submit": "Submit"

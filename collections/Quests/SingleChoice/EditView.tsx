@@ -19,16 +19,6 @@ const EditView = () => {
 
   const intl = useIntl()
 
-  const label1 = intl.formatMessage({
-    id: 'quests.singlechoice.editView.labelTask',
-  })
-  const label2 = intl.formatMessage({
-    id: 'quests.singlechoice.editView.labelCorrectAnswer',
-  })
-  const label3 = intl.formatMessage({
-    id: 'quests.singlechoice.editView.labelWrongAnswer',
-  })
-
   const replaceAnswer = (
     event: React.ChangeEvent<HTMLInputElement>,
     i: number,
@@ -69,12 +59,16 @@ const EditView = () => {
   return (
     <div>
       <InputField
-        label={label1}
+        label={intl.formatMessage({
+          id: 'quests.singleChoice.editView.labelTask',
+        })}
         defaultValue={question}
         onChange={e => setQuestion(e.target.value)}
       />
       <InputField
-        label={label2}
+        label={intl.formatMessage({
+          id: 'quests.singleChoice.editView.labelCorrectAnswer',
+        })}
         defaultValue={correctAnswer}
         onChange={e => setCorrectAnswer(e.target.value)}
       />
@@ -83,7 +77,9 @@ const EditView = () => {
       {wrongAnswers.map(val => (
         <InputField
           key={val.key}
-          label={label3}
+          label={intl.formatMessage({
+            id: 'quests.singleChoice.editView.labelWrongAnswer',
+          })}
           defaultValue={val.name}
           onChange={e => replaceAnswer(e, val.key)}
         />
@@ -101,7 +97,7 @@ const EditView = () => {
           <PlusCircleIcon className="m-2 h-5 w-5 " />
         </PillButton>
         <PillButton
-          className="hover:fley-row-reverse reverse my-3 mx-auto h-10 w-10 content-center"
+          className="reverse my-3 mx-auto h-10 w-10 content-center hover:flex-row-reverse"
           variant="secondary"
           onClick={() =>
             setWrongAnswers(wrongAnswers.slice(0, wrongAnswers.length - 1))

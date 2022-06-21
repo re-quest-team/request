@@ -71,7 +71,7 @@
       "title": "Kryptographie",
       "description": "Hier muss ein Codewort entschlüsselt werden. Das Wort wird mit ROT13 / Cäsar-Chiffre verschlüsselt."
     },
-    "singlechoice": {
+    "singleChoice": {
       "playView": {
         "choices": "Antwortmöglichkeiten:",
         "submit": "Abgabe"

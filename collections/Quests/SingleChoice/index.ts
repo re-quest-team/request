@@ -15,9 +15,9 @@ type QuestData = {
 const SingleChoiceQuest = (intl: IntlShape): IQuest<QuestData> => {
   return {
     type: 'QUEST_SINGLE_CHOICE',
-    title: intl.formatMessage({ id: 'quests.singlechoice.title' }),
+    title: intl.formatMessage({ id: 'quests.singleChoice.title' }),
     description: intl.formatMessage({
-      id: 'quests.singlechoice.description',
+      id: 'quests.singleChoice.description',
     }),
     icon: ViewListIcon,
     EditView,
