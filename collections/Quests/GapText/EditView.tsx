@@ -2,6 +2,7 @@ import { InputField, TextArea } from '@/components/Elements/FormElements'
 import { mapItem, useQuestStore } from './store'
 import { useIntl } from 'react-intl'
 import React from 'react'
+import randomize from '@/utils/randomize'
 
 const EditView = () => {
   const intl = useIntl()
@@ -20,23 +21,7 @@ const EditView = () => {
   const setShuffled = useQuestStore(state => state.setShuffledAnswers)
 
   function shuffle() {
-    let shuffled = wrong.concat(correct)
-
-    // >>>>>>> Algorithm src: https://stackoverflow.com/a/2450976
-    let currentIndex = shuffled.length,
-      randomIndex
-    // While there remain elements to shuffle.
-    while (currentIndex != 0) {
-      // Pick a remaining element.
-      randomIndex = Math.floor(Math.random() * currentIndex)
-      currentIndex--
-      // And swap it with the current element.
-      ;[shuffled[currentIndex], shuffled[randomIndex]] = [
-        shuffled[randomIndex],
-        shuffled[currentIndex],
-      ]
-    }
-    // <<<<<<<
+    let shuffled = randomize(wrong.concat(correct))
 
     // randomize the IDs to prevent cheating with Browser DevTools
     let obfuscated: mapItem[] = []
