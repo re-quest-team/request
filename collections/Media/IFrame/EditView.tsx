@@ -7,11 +7,9 @@ import { useIntl } from 'react-intl'
 const EditView = () => {
   const intl = useIntl()
   const link = useIframeStore(state => state.link)
-  const width = useIframeStore(state => state.width)
   const height = useIframeStore(state => state.height)
   const setLink = useIframeStore(state => state.setLink)
   const setHeight = useIframeStore(state => state.setLink)
-  const setWidth = useIframeStore(state => state.setLink)
   const frame = document.getElementById('iframeID')
 
   return (
