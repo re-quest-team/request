@@ -71,6 +71,19 @@
       "title": "Cryptography",
       "description": "A code word must be decrypted here. The word is encrypted with ROT13 / Caesar cipher."
     },
+    "singleChoice": {
+      "playView": {
+        "choices": "Possible answers:",
+        "submit": "Submit"
+      },
+      "editView": {
+        "labelTask": "Question",
+        "labelCorrectAnswer": "Correct Answer",
+        "labelWrongAnswer": "Wrong Answer"
+      },
+      "title": "Single Choice Question",
+      "description": "A Single Choice Question must be answered here. You can define one correct Answer and an arbitrary amount of wrong answers."
+    },
     "multipleChoice": {
       "playView": {
         "choices": "Possible answers:",
@@ -82,7 +95,7 @@
         "labelWrongAnswer": "Wrong Answer"
       },
       "title": "Multiple Choice Question",
-      "description": "A Multiple Choice Question must be answered here. You can define one correct Answer and an arbitrary amount of wrong answers."
+      "description": "A Multiple Choice Question must be answered here. You can define an arbitrary amount of correct and wrong answers."
     },
     "gapText": {
       "playView": {

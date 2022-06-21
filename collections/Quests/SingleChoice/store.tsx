@@ -1,31 +1,30 @@
 import create from 'zustand'
-import { compareStringArray } from 'utils/compareStringArray'
 
 interface QuestState {
   question: string
-  correctAnswers: string[]
+  correctAnswer: string
   wrongAnswers: string[]
   shuffledAnswers: string[]
   setQuestion: (question: string) => void
-  setCorrectAnswers: (correctAnswer: string[]) => void
+  setCorrectAnswer: (correctAnswer: string) => void
   setWrongAnswers: (wrongAnswers: string[]) => void
   setShuffledAnswers: (shuffledAnswers: string[]) => void
   correct: boolean
-  onSolve: (input: string[]) => boolean
+  onSolve: (input: string) => boolean
 }
 
 export const useQuestStore = create<QuestState>()((set, get) => ({
   question: '',
-  correctAnswers: ['', '', ''],
+  correctAnswer: '',
   wrongAnswers: ['', '', ''],
   shuffledAnswers: [],
   setQuestion: question => set(() => ({ question })),
-  setCorrectAnswers: correctAnswers => set(() => ({ correctAnswers })),
+  setCorrectAnswer: correctAnswer => set(() => ({ correctAnswer })),
   setWrongAnswers: wrongAnswers => set(() => ({ wrongAnswers })),
   setShuffledAnswers: shuffledAnswers => set(() => ({ shuffledAnswers })),
   correct: false,
   onSolve: input => {
-    const correct = compareStringArray(input, get().correctAnswers)
+    const correct = input === get().correctAnswer
     set(() => ({ correct }))
     return correct
   },

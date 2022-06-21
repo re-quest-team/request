@@ -1,60 +1,49 @@
 import { Button, PillButton } from '@/components/Elements/Button'
 import { InputField } from '@/components/Elements/FormElements'
-import React, { useCallback, useRef } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { useQuestStore } from './store'
 import { MinusCircleIcon, PlusCircleIcon } from '@heroicons/react/outline'
+import randomize from '@/utils/randomize'
 
 const EditView = () => {
   const question = useQuestStore(state => state.question)
   const setQuestion = useQuestStore(state => state.setQuestion)
 
-  const correctAnswer = useQuestStore(state => state.correctAnswer)
-  const setCorrectAnswer = useQuestStore(state => state.setCorrectAnswer)
+  const correctAnswers = useQuestStore(state => state.correctAnswers)
+  const setCorrectAnswers = useQuestStore(state => state.setCorrectAnswers)
 
   const wrongAnswers = useQuestStore(state => state.wrongAnswers)
   const setWrongAnswers = useQuestStore(state => state.setWrongAnswers)
 
-  const shuffledAnswers = useQuestStore(state => state.shuffledAnswers)
   const setShuffledAnswers = useQuestStore(state => state.setShuffledAnswers)
 
   const intl = useIntl()
 
-  const replaceAnswer = (
+  const replaceWrongAnswer = (
     event: React.ChangeEvent<HTMLInputElement>,
     i: number,
   ) => {
     let answers = wrongAnswers
 
-    answers[i - 1] = { key: i, name: event.target.value }
-
+    answers[i] = event.target.value
     setWrongAnswers(answers)
-
-    const pureAnswers = wrongAnswers.filter(
-      (item: { key: number; name: string }) => item.name !== '',
-    )
-
-    const allAnswers = pureAnswers.concat([{ key: 0, name: correctAnswer }])
-    setShuffledAnswers(shuffle(allAnswers))
+    shuffle()
   }
 
-  function shuffle(array: { key: number; name: string }[]) {
-    let currentIndex = array.length,
-      randomIndex
+  const replaceCorrectAnswer = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    i: number,
+  ) => {
+    let answers = correctAnswers
 
-    // While there remain elements to shuffle.
-    while (currentIndex != 0) {
-      // Pick a remaining element.
-      randomIndex = Math.floor(Math.random() * currentIndex)
-      currentIndex--
+    answers[i] = event.target.value
+    setCorrectAnswers(answers.sort())
+    shuffle()
+  }
 
-      // And swap it with the current element.
-      ;[array[currentIndex], array[randomIndex]] = [
-        array[randomIndex],
-        array[currentIndex],
-      ]
-    }
-    return array
+  const shuffle = () => {
+    const allAnswers = randomize(correctAnswers.concat(wrongAnswers))
+    setShuffledAnswers(allAnswers.filter(item => item !== ''))
   }
 
   return (
@@ -66,34 +55,53 @@ const EditView = () => {
         defaultValue={question}
         onChange={e => setQuestion(e.target.value)}
       />
-      <InputField
-        label={intl.formatMessage({
-          id: 'quests.multipleChoice.editView.labelCorrectAnswer',
-        })}
-        defaultValue={correctAnswer}
-        onChange={e => setCorrectAnswer(e.target.value)}
-      />
-      <div id="refWrong" />
-
-      {wrongAnswers.map(val => (
+      {correctAnswers.map((val, index) => (
         <InputField
-          key={val.key}
+          key={index}
+          label={intl.formatMessage({
+            id: 'quests.multipleChoice.editView.labelCorrectAnswer',
+          })}
+          defaultValue={val}
+          onChange={e => replaceCorrectAnswer(e, index)}
+        />
+      ))}
+      <div id="refWrong" />
+      <div className="my-4 flex">
+        <PillButton
+          className=" my-3 mx-auto  h-10 w-10 content-center"
+          variant="tertiary"
+          onClick={() => setCorrectAnswers(correctAnswers.concat(''))}
+        >
+          <PlusCircleIcon className="m-2 h-5 w-5 " />
+        </PillButton>
+        <PillButton
+          className="hover:fley-row-reverse reverse my-3 mx-auto h-10 w-10 content-center"
+          variant="secondary"
+          onClick={() =>
+            setCorrectAnswers(
+              correctAnswers.slice(0, correctAnswers.length - 1),
+            )
+          }
+        >
+          <MinusCircleIcon className="m-2 h-5 w-5 " />
+        </PillButton>
+      </div>
+
+      {wrongAnswers.map((val, index) => (
+        <InputField
+          key={index}
           label={intl.formatMessage({
             id: 'quests.multipleChoice.editView.labelWrongAnswer',
           })}
-          defaultValue={val.name}
-          onChange={e => replaceAnswer(e, val.key)}
+          defaultValue={val}
+          onChange={e => replaceWrongAnswer(e, index)}
         />
       ))}
       <div className="my-4 flex">
         <PillButton
           className=" my-3 mx-auto  h-10 w-10 content-center"
           variant="tertiary"
-          onClick={() =>
-            setWrongAnswers(
-              wrongAnswers.concat({ key: wrongAnswers.length + 1, name: '' }),
-            )
-          }
+          onClick={() => setWrongAnswers(wrongAnswers.concat(''))}
         >
           <PlusCircleIcon className="m-2 h-5 w-5 " />
         </PillButton>

@@ -2,6 +2,9 @@ import toast from 'react-hot-toast'
 import { IntlShape } from 'react-intl'
 
 export const createToast = (promise: Promise<any>, intl: IntlShape) => {
+  const msg1 = intl.formatMessage({ id: 'toasts.create.loading' })
+  const msg2 = intl.formatMessage({ id: 'toasts.create.success' })
+  const msg3 = intl.formatMessage({ id: 'toasts.create.error' })
   return toast.promise(promise, {
     loading: intl.formatMessage({ id: 'toasts.create.loading' }),
     success: intl.formatMessage({ id: 'toasts.create.success' }),
