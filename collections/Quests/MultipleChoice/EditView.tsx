@@ -3,12 +3,12 @@ import { InputField } from '@/components/Elements/FormElements'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { useQuestStore } from './store'
 import { MinusCircleIcon, PlusCircleIcon } from '@heroicons/react/outline'
+import randomize from '@/utils/randomize'
 
 const EditView = () => {
   const question = useQuestStore(state => state.question)
   const setQuestion = useQuestStore(state => state.setQuestion)
 
-  const rightAnswers = useQuestStore(state => state.rightAnswers)
   const setRightAnswers = useQuestStore(state => state.setRightAnswers)
 
   const correctAnswers = useQuestStore(state => state.correctAnswers)
@@ -36,7 +36,7 @@ const EditView = () => {
     )
 
     const allAnswers = pureAnswers.concat(correctAnswers)
-    setShuffledAnswers(shuffle(allAnswers))
+    setShuffledAnswers(randomize(allAnswers))
   }
 
   const replaceCorrectAnswer = (
@@ -54,7 +54,6 @@ const EditView = () => {
     rightAnswersCreator.sort()
 
     setRightAnswers(rightAnswersCreator)
-    console.log(rightAnswers)
 
     setCorrectAnswers(answers)
 
@@ -63,26 +62,7 @@ const EditView = () => {
     )
 
     const allAnswers = pureAnswers.concat(wrongAnswers)
-    setShuffledAnswers(shuffle(allAnswers))
-  }
-
-  function shuffle(array: { key: number; name: string }[]) {
-    let currentIndex = array.length,
-      randomIndex
-
-    // While there remain elements to shuffle.
-    while (currentIndex != 0) {
-      // Pick a remaining element.
-      randomIndex = Math.floor(Math.random() * currentIndex)
-      currentIndex--
-
-      // And swap it with the current element.
-      ;[array[currentIndex], array[randomIndex]] = [
-        array[randomIndex],
-        array[currentIndex],
-      ]
-    }
-    return array
+    setShuffledAnswers(randomize(allAnswers))
   }
 
   return (

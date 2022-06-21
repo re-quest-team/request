@@ -18,13 +18,8 @@ const PlayView = () => {
     if (event.target.checked) {
       setAnswer(answer.concat(event.target.value).sort())
     } else {
-      setAnswer(
-        answer
-          .slice(0, answer.indexOf(event.target.value))
-          .concat(
-            answer.slice(answer.indexOf(event.target.value), answer.length - 1),
-          ),
-      )
+      let index = answer.indexOf(event.target.value)
+      setAnswer(answer.filter((word, i) => i !== index))
     }
   }
 
@@ -42,7 +37,7 @@ const PlayView = () => {
             <div className="m-2 text-base">
               <input
                 type="checkbox"
-                id={val.name}
+                key={val.key}
                 name="answer"
                 value={val.name}
                 onChange={radioHandler}

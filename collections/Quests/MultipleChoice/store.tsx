@@ -38,9 +38,6 @@ export const useQuestStore = create<QuestState>()((set, get) => ({
   correct: false,
   onSolve: input => {
     const correct = compareStringArray(input, get().rightAnswers)
-    console.log(input)
-    console.log(get().rightAnswers)
-    console.log(compareStringArray(input, get().rightAnswers))
     set(() => ({ correct }))
     return correct
   },
