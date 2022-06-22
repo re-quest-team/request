@@ -13,11 +13,6 @@ export type ParagraphElement = {
   children: CustomText[]
 }
 
-export type CodeElement = {
-  type: 'code'
-  children: CustomText[]
-}
-
 export type QuoteElement = {
   type: 'quote'
   children: CustomText[]
@@ -41,7 +36,6 @@ export type HeadingElement = {
 
 export type CustomElement =
   | ParagraphElement
-  | CodeElement
   | QuoteElement
   | HeadingElement
   | ItemizedListElement
@@ -56,6 +50,7 @@ export type FormattedText = {
   bold?: true
   italic?: true
   underscored?: true
+  code?: true
 }
 
 export type CustomText = FormattedText

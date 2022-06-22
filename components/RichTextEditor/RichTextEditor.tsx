@@ -45,7 +45,10 @@ export const RichTextEditor = () => {
       <MarkButton format="bold" icon="Bold" />
       <MarkButton format="italic" icon="Italic" />
       <MarkButton format="underscored" icon="Underscore" />
+      <MarkButton format="code" icon="code" />
       <BlockButton format="quote" icon="Quote" />
+      <BlockButton format="heading-h1" icon="Heading h1" />
+      <BlockButton format="heading-h2" icon="Heading h2" />
       <BlockButton format="numbered-list" icon="List #" />
       <BlockButton format="itemized-list" icon="Item #" />
       <Editable
@@ -62,14 +65,17 @@ export const RichTextEditor = () => {
     Helper functions
 */
 
-type MarkType = 'italic' | 'bold' | 'underscored'
+type MarkType = 'italic' | 'bold' | 'underscored' | 'code'
 type BlockType =
   | 'paragraph'
-  | 'code'
   | 'quote'
   | 'numbered-list'
   | 'itemized-list'
   | 'heading'
+  | 'heading-h1'
+  | 'heading-h2'
+
+const HEADING_TYPES = ['heading-h1', 'heading-h2']
 
 const isMarkActive = (editor: CustomEditor, type: MarkType) => {
   const marks = Editor.marks(editor)
@@ -88,6 +94,10 @@ const toggleMark = (editor: CustomEditor, type: MarkType) => {
 const isBlockActive = (editor: CustomEditor, type: string) => {
   const { selection } = editor
   if (!selection) return false
+
+  if (HEADING_TYPES.includes(type)) {
+    type = 'heading'
+  }
 
   const [match] = Array.from(
     Editor.nodes(editor, {
@@ -114,9 +124,21 @@ const toggleBlock = (editor: CustomEditor, bType: BlockType) => {
   })
 
   let newProperties: Partial<SlateElement>
-  newProperties = {
-    type: isActive ? 'paragraph' : isList ? 'itemized-list' : bType,
+  if (HEADING_TYPES.includes(bType)) {
+    const lvl = bType === 'heading-h1' ? 1 : 2
+    bType = 'heading'
+
+    newProperties = {
+      type: isActive ? 'paragraph' : isList ? 'itemized-list' : bType,
+      level: isActive ? undefined : lvl,
+    }
+  } else {
+    newProperties = {
+      // @ts-ignore
+      type: isActive ? 'paragraph' : isList ? 'itemized-list' : bType,
+    }
   }
+
   Transforms.setNodes<SlateElement>(editor, newProperties)
 
   if (!isActive && isList) {
@@ -131,10 +153,6 @@ const toggleBlock = (editor: CustomEditor, bType: BlockType) => {
 /*
     Renders
 */
-
-const CodeElement = (props: any) => {
-  return <code {...props.attributes}>{props.children}</code>
-}
 
 const ParagraphElement = (props: any) => {
   return <p {...props.attributes}>{props.children}</p>
@@ -169,8 +187,6 @@ const DefaultElement = (props: any) => {
 
 const EditorElement = (props: any) => {
   switch (props.element.type) {
-    case 'code':
-      return <CodeElement {...props} />
     case 'paragraph':
       return <ParagraphElement {...props} />
     case 'quote':
@@ -179,7 +195,11 @@ const EditorElement = (props: any) => {
       return <ItemizedListElement {...props} />
     case 'numbered-list':
       return <NumberedListElement {...props} />
-    case 'heading':
+    case 'heading-h1':
+      props.element.level = 1
+      return <HeadingElement {...props} />
+    case 'heading-h2':
+      props.element.level = 2
       return <HeadingElement {...props} />
     default:
       return <DefaultElement {...props} />
@@ -198,6 +218,9 @@ const EditorLeaf = (props: any) => {
   }
   if (leaf.underscored) {
     children = <u>{children}</u>
+  }
+  if (leaf.code) {
+    children = <code>{children}</code>
   }
 
   return <span {...props.attributes}>{children}</span>
