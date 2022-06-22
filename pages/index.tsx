@@ -71,7 +71,6 @@ const Home: NextPage = () => {
         <meta property="og:url" content="https://request.reedu.de/" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="re:quest" />
-        <link rel="icon" href="/favicon.svg" />
         <meta
           name="keywords"
           content="escape, game, room, digitale, bildung, museum"
