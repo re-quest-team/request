@@ -6,13 +6,29 @@
       "createQuest": "create re:quest",
       "loremIpsum": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.",
       "card1": "Exciting adventures",
+      "card1text": "Experience exciting quests during your adventurous journey through the museum.",
       "card2": "Digital education",
-      "card3": "Modular puzzles",
-      "card4": "Freely configurable",
-      "card5": "No installation",
-      "card6": "Physical elements",
+      "card2text": "A variety of quests, social media integration, programming tasks and much more await you to develop your digital skills.",
+      "card3": "Modular quests",
+      "card3text": "With re:quest Studio, anyone can create digital Escape Games easily and quickly. No previous knowledge is necessary.",
+      "card4": "Young Visitor Engagement",
+      "card4text": "With re:quest, the museum is made attractive as an exciting leisure venue. You can attract a young audience with your own format.",
+      "card5": "Storytelling with quests",
+      "card5text": "re:quest is a simple and handy tool for museum educators. No special infrastructure is necessary. The special thing about it: visitors use their own devices.",
+      "card6": "Embedding museum content in the virtual world",
+      "card6text": "In re:quest, the real world can merge with the virtual world. Thus, you can exploit the full potential from exhibitions.",
       "moreInformation": "More information",
-      "examples": "Examples"
+      "examples": "Examples",
+      "editor": {
+        "title": "Interactive Editor",
+        "content": "With the re:quest studio, museums can create digital escape games thematically oriented to their individual content and locations and make them available to children and young people. Not only virtual puzzles but also real elements such as exhibits or web content from social networks can be included. The digital Escape Games can thus be designed easily freely and interactively. The re:quest studio can be used by exhibition planners, museum educators or content creators of the institution. A content creation and individualization service to integrate one´s own re:quest into the corporate identity of the institution is offered individually."
+      },
+      "studio": {
+        "title": "Individual Content",
+        "content": "Escape games as exciting puzzle games for groups have become more and more popular in recent years. An individual adventure story and tricky tasks create a thrill. Thanks to re:quest it is now possible to develop your own Escape Games with an individual story. The special feature: re:quest is primarily aimed at educational institutions in order to convey their own educational content in a playful way and to promote digital skills at the same time. This is intended to strengthen digital education at extracurricular learning venues such as museums, libraries and student laboratories. Not only educational institutions, but especially children and young people benefit from re:quests. In addition to exciting adventures and tricky puzzles, various tasks such as data analysis, cryptography, data protection and privacy puzzles, programming or media analysis strengthen the so-called 21st Century Skills."
+      },
+      "interested": "Are you interested?",
+      "stayTuned": "Would you like to be kept up to date and possibly be among a few museums with whom we create interesting examples for our re:quests? As a thank you, we offer a free six-month license for 100 visitors."
     },
     "play": {
       "id": {
