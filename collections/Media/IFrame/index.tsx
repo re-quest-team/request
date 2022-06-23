@@ -6,6 +6,7 @@ import { useIframeStore } from '@/collections/Media/IFrame/store'
 import { IntlShape } from 'react-intl'
 
 type Data = {
+  title: string
   link: string
 }
 
@@ -17,9 +18,10 @@ const IframeMedia = (intl: IntlShape): IQuest<Data> => {
     icon: CodeIcon,
     EditView,
     PlayView,
-    onLoad: ({ link }) =>
-      useIframeStore.setState(state => ({ ...state, link })),
+    onLoad: ({ link, title }) =>
+      useIframeStore.setState(state => ({ ...state, link, title })),
     onSave: () => ({
+      title: useIframeStore.getState().title,
       link: useIframeStore.getState().link,
     }),
   }
