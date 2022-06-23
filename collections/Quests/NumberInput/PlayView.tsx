@@ -48,6 +48,7 @@ const PlayView = () => {
       <p>{question}</p>
       <InputField
         label="Antwort"
+        type={'number'}
         name={'answer'}
         className={'form-control'}
         registration={register('answer')}

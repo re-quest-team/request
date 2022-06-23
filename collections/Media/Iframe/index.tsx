@@ -6,6 +6,7 @@ import { useIframeStore } from './store'
 
 type Data = {
   link: string
+  title: string
 }
 
 const IframeMedia: IQuest<Data> = {
@@ -15,9 +16,12 @@ const IframeMedia: IQuest<Data> = {
   icon: CodeIcon,
   EditView,
   PlayView,
-  onLoad: ({ link }) => useIframeStore.setState(state => ({ ...state, link })),
+  onLoad: ({ link, title }) => {
+    useIframeStore.setState(state => ({ ...state, link, title }))
+  },
   onSave: () => ({
     link: useIframeStore.getState().link,
+    title: useIframeStore.getState().title,
   }),
 }
 
