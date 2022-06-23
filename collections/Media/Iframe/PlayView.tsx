@@ -1,7 +1,7 @@
-import { useInstagramStore } from './store'
+import { useIframeStore } from './store'
 
 const PlayView = () => {
-  const link = useInstagramStore(state => state.link) + '/embed'
+  const link = useIframeStore(state => state.link)
   return (
     <div className="text-center">
       <iframe

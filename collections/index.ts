@@ -6,11 +6,13 @@ import InstagramMedia from '@/collections/Media/Instagram'
 import NumberInputQuest from './Quests/NumberInput'
 import { IntlShape } from 'react-intl'
 import { IQuest } from '@/collections/types'
+import IframeMedia from './Media/Iframe'
 
 const media = (intl: IntlShape): IQuest<any>[] => [
   TextMedia(intl),
   InstagramMedia,
   YoutubeMedia(intl),
+  IframeMedia,
 ]
 const quests = (intl: IntlShape): IQuest<any>[] => [
   CryptoQuest(intl),
