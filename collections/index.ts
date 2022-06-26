@@ -5,6 +5,7 @@ import MultipleChoiceQuest from './Quests/MultipleChoice'
 import SingleChoiceQuest from './Quests/SingleChoice'
 import InstagramMedia from '@/collections/Media/Instagram'
 import NumberInputQuest from './Quests/NumberInput'
+import ImageCombinationQuest from './Quests/ImageCombination'
 import { IntlShape } from 'react-intl'
 import { IQuest } from '@/collections/types'
 import ImageMedia from '@/collections/Media/Image'
@@ -21,6 +22,7 @@ const media = (intl: IntlShape): IQuest<any>[] => [
 const quests = (intl: IntlShape): IQuest<any>[] => [
   CryptoQuest(intl),
   NumberInputQuest(intl),
+  ImageCombinationQuest(intl),
   MultipleChoiceQuest(intl),
   SingleChoiceQuest(intl),
   GapTextQuest(intl),

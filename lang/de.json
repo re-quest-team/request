@@ -145,6 +145,23 @@
       },
       "title": "Nummern Eingabe",
       "description": "Hier wird eine Frage mit einer Nummer beantwortet."
+    },
+    "imageCombination": {
+      "playView": {
+        "imageToBeCombined": "Bild, das erzeugt werden soll.",
+        "chose": "Wähle die Richtigen Bilder aus.",
+        "CheckResult": "Überprüfen"
+      },
+      "editView": {
+        "labelTask": "Aufgabenstellung:",
+        "labelImageAim": "Bild, das durch kombinieren erstellt werden soll.",
+        "labelImagePoolRight": "Bilder, die kombiniert werden sollen.",
+        "labelImagePoolWrong": "Bilder, die nicht mit kombiniert werden sollen."
+      },
+      "title": "Bild Kombination",
+      "description": "Hier wird ein Bild vorgegeben, welches durch Kombination von mehreren Teil-Bilden zusammengestellt werden muss.",
+      "uploadOwnImage": "Eigenes Foto hochladen",
+      "useExampleImage": "Beispiel"
     }
   },
   "media": {

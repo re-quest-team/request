@@ -145,6 +145,23 @@
       },
       "title": "Number Input",
       "description": "Here a question is answered with a number."
+    },
+    "imageCombination": {
+      "playView": {
+        "imageToBeCombined": "Image to be combined.",
+        "chose": "Chose to right images to combine.",
+        "CheckResult": "Check Answer"
+      },
+      "editView": {
+        "labelTask": "Task:",
+        "labelImageAim": "Image to be combined.",
+        "labelImagePoolRight": "Images to be combined.",
+        "labelImagePoolWrong": "Images not to be combined."
+      },
+      "title": "Image combination",
+      "description": "An image is specified, which must bo put together by combining the right images.",
+      "uploadOwnImage": "Upload your own photo",
+      "useExampleImage": "Example"
     }
   },
   "media": {
