@@ -64,36 +64,31 @@ const GameForm = ({ id }: GameFormProps) => {
     await mutate(updatedGame)
   })
 
-  const label1 = intl.formatMessage({ id: 'features.game.gameForm.labelName' })
-  const label2 = intl.formatMessage({
-    id: 'features.game.gameForm.labelDescription',
-  })
-  const label3 = intl.formatMessage({ id: 'languages.german' })
-  const label4 = intl.formatMessage({ id: 'features.game.gameForm.labelDraft' })
-
   return (
     <form onSubmit={onSubmit}>
       <InputField
-        label={label1}
+        label={intl.formatMessage({ id: 'features.game.gameForm.labelName' })}
         defaultValue={data?.name ?? ''}
         registration={register('name')}
         error={errors['name']}
       ></InputField>
       <TextArea
-        label={label2}
+        label={intl.formatMessage({
+          id: 'features.game.gameForm.labelDescription',
+        })}
         rows={4}
         defaultValue={data?.description ?? ''}
         registration={register('description')}
         error={errors['description']}
       />
       <Toggle
-        label={label3}
+        label={intl.formatMessage({ id: 'languages.german' })}
         defaultChecked={data?.germanLanguage}
         registration={register('germanLanguage')}
         error={errors['germanLanguage']}
       />
       <Toggle
-        label={label4}
+        label={intl.formatMessage({ id: 'features.game.gameForm.labelDraft' })}
         defaultChecked={data?.draft}
         registration={register('draft')}
         error={errors['draft']}

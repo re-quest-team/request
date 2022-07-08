@@ -87,7 +87,20 @@
       "title": "Cryptography",
       "description": "A code word must be decrypted here. The word is encrypted with ROT13 / Caesar cipher."
     },
-    "multiplechoice": {
+    "singleChoice": {
+      "playView": {
+        "choices": "Possible answers:",
+        "submit": "Submit"
+      },
+      "editView": {
+        "labelTask": "Question",
+        "labelCorrectAnswer": "Correct Answer",
+        "labelWrongAnswer": "Wrong Answer"
+      },
+      "title": "Single Choice Question",
+      "description": "A Single Choice Question must be answered here. You can define one correct Answer and an arbitrary amount of wrong answers."
+    },
+    "multipleChoice": {
       "playView": {
         "choices": "Possible answers:",
         "submit": "Submit"
@@ -98,7 +111,40 @@
         "labelWrongAnswer": "Wrong Answer"
       },
       "title": "Multiple Choice Question",
-      "description": "A Multiple Choice Question must be answered here. You can define one correct Answer and an arbitrary amount of wrong answers."
+      "description": "A Multiple Choice Question must be answered here. You can define an arbitrary amount of correct and wrong answers."
+    },
+    "gapText": {
+      "playView": {
+        "taskPrompt": "Drag words from below to the appropriate place",
+        "submit": "Submit"
+      },
+      "editView": {
+        "correctTitle": "Gap text",
+        "correctPlaceholder": "E.g.: Tom has a [red] car with [racing] [stripes].",
+        "correctTip": "TIP: You add a gap with the corresponding answer by writing: [YourAnswer]",
+        "falseTitle": "False answers",
+        "falsePlaceholder": "E.g.: wrong, cat, dog, yogurt"
+      },
+      "title": "Gap Text",
+      "description": "Solve a gap text. Each gap has one correct and an arbitrary amount of incorrect answers."
+    },
+    "numberInput": {
+      "playView": {
+        "labelAnswer": "Answer",
+        "check": "Check"
+      },
+      "editView": {
+        "labelTask": "Question",
+        "labelAnswer": "Answer",
+        "labelUnit": "Unit"
+      },
+      "validation": {
+        "questionRequired": "Question must be entered!",
+        "nanInvalid": "NaN invalid",
+        "answerRequired": "Answer must be entered!"
+      },
+      "title": "Number Input",
+      "description": "Here a question is answered with a number."
     }
   },
   "media": {
@@ -115,7 +161,34 @@
         "labelStart": "Start time",
         "labelEnd": "End time"
       },
+      "playView": {
+        "title": "Embedded Youtube"
+      },
       "description": "You can add a Youtube video here"
+    },
+    "instagram": {
+      "editView": {
+        "label": "Instagram embed-link"
+      },
+      "description": "You can show a simple Instagram post"
+    },
+    "image": {
+      "playView": {
+        "alt": "Image not found."
+      },
+      "editView": {
+        "title": "Image"
+      },
+      "title": "Image link",
+      "description": "You can add an Image here."
+      },
+    "iframe": {
+      "editView": {
+        "label": "iframe embed-link",
+        "width": "width",
+        "height": "height"
+      },
+      "description": "You can show a simple iframe"
     }
   },
   "features": {
@@ -147,6 +220,7 @@
         "titleAddElement": "Add Element",
         "labelVisibility": "Visibility",
         "labelVisibleAfterQuest": "Visible after quest",
+        "indexOf": "Index of quest",
         "quest": "Quest",
         "media": "Media",
         "save": "Save"

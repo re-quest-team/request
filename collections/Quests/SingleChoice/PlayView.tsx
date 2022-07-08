@@ -12,15 +12,10 @@ const PlayView = () => {
 
   const intl = useIntl()
 
-  const [answer, setAnswer] = useState<string[]>([])
+  const [answer, setAnswer] = useState<string>('')
 
   const radioHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.checked) {
-      setAnswer(answer.concat(event.target.value).sort())
-    } else {
-      let index = answer.indexOf(event.target.value)
-      setAnswer(answer.filter((word, i) => i !== index))
-    }
+    setAnswer(event.target.value)
   }
 
   return (
@@ -30,13 +25,13 @@ const PlayView = () => {
         <div></div>
 
         <h3 className="m-3 text-xl">
-          <FormattedMessage id="quests.multipleChoice.playView.choices" />
+          <FormattedMessage id={'quests.singleChoice.playView.choices'} />
         </h3>
         {shuffledAnswers.map((val, index) => (
           <>
             <div className="m-2 text-base">
               <input
-                type="checkbox"
+                type="radio"
                 key={index}
                 name="answer"
                 value={val}
@@ -57,7 +52,7 @@ const PlayView = () => {
             }
           }}
         >
-          <FormattedMessage id="quests.multipleChoice.playView.submit" />
+          <FormattedMessage id="quests.singleChoice.playView.submit" />
         </Button>
       </div>
     </>

@@ -6,30 +6,25 @@ export const createToast = (promise: Promise<any>, intl: IntlShape) => {
   const msg2 = intl.formatMessage({ id: 'toasts.create.success' })
   const msg3 = intl.formatMessage({ id: 'toasts.create.error' })
   return toast.promise(promise, {
-    loading: msg1,
-    success: msg2,
-    error: msg3,
+    loading: intl.formatMessage({ id: 'toasts.create.loading' }),
+    success: intl.formatMessage({ id: 'toasts.create.success' }),
+    error: intl.formatMessage({ id: 'toasts.create.error' }),
   })
 }
 
 export const updateToast = createToast
 
 export const deleteToast = (promise: Promise<any>, intl: IntlShape) => {
-  const msg1 = intl.formatMessage({ id: 'toasts.delete.loading' })
-  const msg2 = intl.formatMessage({ id: 'toasts.delete.success' })
-  const msg3 = intl.formatMessage({ id: 'toasts.delete.error' })
   return toast.promise(promise, {
-    loading: msg1,
-    success: msg2,
-    error: msg3,
+    loading: intl.formatMessage({ id: 'toasts.delete.loading' }),
+    success: intl.formatMessage({ id: 'toasts.delete.success' }),
+    error: intl.formatMessage({ id: 'toasts.delete.error' }),
   })
 }
 
 export const successToast = (intl: IntlShape) => {
-  const msg = intl.formatMessage({ id: 'toasts.success' })
-  return toast.success(msg)
+  return toast.success(intl.formatMessage({ id: 'toasts.success' }))
 }
 export const incorrectToast = (intl: IntlShape) => {
-  const msg = intl.formatMessage({ id: 'toasts.incorrect' })
-  return toast.error(msg)
+  return toast.error(intl.formatMessage({ id: 'toasts.incorrect' }))
 }

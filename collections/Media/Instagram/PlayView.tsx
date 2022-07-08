@@ -6,9 +6,9 @@ const PlayView = () => {
     <div className="text-center">
       <iframe
         className="relative w-full overflow-hidden pr-12"
-        height="480"
+        width={'400px'}
+        height={'720px'}
         src={link}
-        frameBorder="0"
       >
         <div className="text-center">error 404</div>
       </iframe>

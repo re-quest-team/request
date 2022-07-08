@@ -7,38 +7,38 @@ import { IntlShape } from 'react-intl'
 
 type QuestData = {
   question: string
-  correctAnswers: string[]
+  correctAnswer: string
   wrongAnswers: string[]
   shuffledAnswers: string[]
 }
 
-const MultipleChoiceQuest = (intl: IntlShape): IQuest<QuestData> => {
+const SingleChoiceQuest = (intl: IntlShape): IQuest<QuestData> => {
   return {
-    type: 'QUEST_MULTIPLE_CHOICE',
-    title: intl.formatMessage({ id: 'quests.multipleChoice.title' }),
+    type: 'QUEST_SINGLE_CHOICE',
+    title: intl.formatMessage({ id: 'quests.singleChoice.title' }),
     description: intl.formatMessage({
-      id: 'quests.multipleChoice.description',
+      id: 'quests.singleChoice.description',
     }),
     icon: ViewListIcon,
     EditView,
     PlayView: PlayView,
-    onLoad: ({ question, correctAnswers, wrongAnswers, shuffledAnswers }) =>
+    onLoad: ({ question, correctAnswer, wrongAnswers, shuffledAnswers }) =>
       useQuestStore.setState(state => ({
         ...state,
         question,
-        correctAnswers,
+        correctAnswer,
         wrongAnswers,
         shuffledAnswers,
       })),
 
     onSave: () => {
       const question = useQuestStore.getState().question
-      const correctAnswers = useQuestStore.getState().correctAnswers
+      const correctAnswer = useQuestStore.getState().correctAnswer
       const wrongAnswers = useQuestStore.getState().wrongAnswers
       const shuffledAnswers = useQuestStore.getState().shuffledAnswers
       return {
         question,
-        correctAnswers,
+        correctAnswer,
         wrongAnswers,
         shuffledAnswers,
       }
@@ -54,4 +54,4 @@ const MultipleChoiceQuest = (intl: IntlShape): IQuest<QuestData> => {
   }
 }
 
-export default MultipleChoiceQuest
+export default SingleChoiceQuest
