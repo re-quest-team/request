@@ -7,18 +7,18 @@ export const valNumberInput = (intl: IntlShape) =>
     .shape({
       question: Yup.string().required(
         intl.formatMessage({
-          id: 'quests.numberInput.validation.questionRequired',
+          id: 'validation.questionRequired',
         }),
       ),
       answer: Yup.number()
         .typeError(
           intl.formatMessage({
-            id: 'quests.numberInput.validation.nanInvalid',
+            id: 'validation.nanInvalid',
           }),
         )
         .required(
           intl.formatMessage({
-            id: 'quests.numberInput.validation.answerRequired',
+            id: 'validation.answerRequired',
           }),
         ),
       type: Yup.string().oneOf(Object.values(Units)).notRequired(),

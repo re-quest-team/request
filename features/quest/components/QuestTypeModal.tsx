@@ -30,55 +30,55 @@ const QuestTypeModal = ({
 }: QuestTypeModalProps) => {
   const intl = useIntl()
 
-  const taskVisibilityOptions: SelectOption[] = [
-    {
-      value: intl.formatMessage({
-        id: 'features.quest.questTypeModal.atStart',
-      }),
-    },
-    {
-      value: intl.formatMessage({
-        id: 'features.quest.questTypeModal.afterSolving',
-      }),
-    },
-  ]
+  // const taskVisibilityOptions: SelectOption[] = [
+  //   {
+  //     value: intl.formatMessage({
+  //       id: 'features.quest.questTypeModal.atStart',
+  //     }),
+  //   },
+  //   {
+  //     value: intl.formatMessage({
+  //       id: 'features.quest.questTypeModal.afterSolving',
+  //     }),
+  //   },
+  // ]
 
-  const showAfterOptions: SelectOption[] = allQuest
-    .filter(q => q.id !== quest.id && q.id !== quest.id)
-    .map(q => ({
-      value:
-        intl.formatMessage({ id: 'features.quest.questTypeModal.indexOf' }) +
-        ': ' +
-        allQuest.indexOf(q).toString(),
-    }))
+  // const showAfterOptions: SelectOption[] = allQuest
+  //   .filter(q => q.id !== quest.id && q.id !== quest.id)
+  //   .map(q => ({
+  //     value:
+  //       intl.formatMessage({ id: 'features.quest.questTypeModal.indexOf' }) +
+  //       ': ' +
+  //       allQuest.indexOf(q).toString(),
+  //   }))
 
   const { updateQuest } = useQuests(roomId)
 
   const [questModalOpen, setQuestModalOpen] = useState(false)
   const [currentQuest, setCurrentQuest] = useState<IQuest<any>>()
 
-  const getTaskVisOption = () => {
-    if (quest.id !== null) {
-      return taskVisibilityOptions[1]
-    } else {
-      return taskVisibilityOptions[0]
-    }
-  }
-  const [taskVisibility, setTaskVisibility] = useState(getTaskVisOption)
-  const getShowAfterOption = () => {
-    if (quest.id !== null) {
-      let questsIndexToPick = allQuest
-        .filter(q => q.id !== quest.id && q.id !== quest.id)
-        .map(q => allQuest.indexOf(q))
-      let questShowAfter = allQuest.filter(q => quest.id === q.id)
-      // @ts-ignore
-      let indexShowAfter = allQuest.indexOf(questShowAfter.at(0))
-      return showAfterOptions[questsIndexToPick.indexOf(indexShowAfter)]
-    } else {
-      return showAfterOptions[0]
-    }
-  }
-  const [showAfterSelect, setShowAfterSelect] = useState(getShowAfterOption)
+  // const getTaskVisOption = () => {
+  //   if (quest.id !== null) {
+  //     return taskVisibilityOptions[1]
+  //   } else {
+  //     return taskVisibilityOptions[0]
+  //   }
+  // }
+  // const [taskVisibility, setTaskVisibility] = useState(getTaskVisOption)
+  // const getShowAfterOption = () => {
+  //   if (quest.id !== null) {
+  //     let questsIndexToPick = allQuest
+  //       .filter(q => q.id !== quest.id && q.id !== quest.id)
+  //       .map(q => allQuest.indexOf(q))
+  //     let questShowAfter = allQuest.filter(q => quest.id === q.id)
+  //     // @ts-ignore
+  //     let indexShowAfter = allQuest.indexOf(questShowAfter.at(0))
+  //     return showAfterOptions[questsIndexToPick.indexOf(indexShowAfter)]
+  //   } else {
+  //     return showAfterOptions[0]
+  //   }
+  // }
+  // const [showAfterSelect, setShowAfterSelect] = useState(getShowAfterOption)
 
   const handleClick = async (q: IQuest<any>) => {
     // if quest already has data, load data into component
@@ -86,13 +86,9 @@ const QuestTypeModal = ({
       q.onLoad(quest.data as any)
     }
 
-    updateQuest(
-      quest.id,
-      {
-        type: q.type,
-      },
-      intl,
-    )
+    updateQuest(quest.id, {
+      type: q.type,
+    })
     setCurrentQuest(q)
     setQuestModalOpen(true)
   }
@@ -109,40 +105,36 @@ const QuestTypeModal = ({
   const onSave = async () => {
     const data = currentQuest?.onSave()
 
-    updateQuest(
-      quest.id,
-      {
-        data,
-      },
-      intl,
-    )
-    if (
-      taskVisibility.value ===
-      intl.formatMessage({
-        id: 'features.quest.questTypeModal.afterSolving',
-      })
-    ) {
-      let indexString = showAfterSelect.value.substring(
-        showAfterSelect.value.indexOf(':') + 1,
-      )
-      let index = parseInt(indexString)
-      const showAfter = allQuest.at(index)
-      updateQuest(
-        quest.id,
-        {
-          id: showAfter?.id,
-        },
-        intl,
-      )
-    } else {
-      updateQuest(
-        quest.id,
-        {
-          id: undefined,
-        },
-        intl,
-      )
-    }
+    updateQuest(quest.id, {
+      data,
+    })
+    // if (
+    //   taskVisibility.value ===
+    //   intl.formatMessage({
+    //     id: 'features.quest.questTypeModal.afterSolving',
+    //   })
+    // ) {
+    //   let indexString = showAfterSelect.value.substring(
+    //     showAfterSelect.value.indexOf(':') + 1,
+    //   )
+    //   let index = parseInt(indexString)
+    //   const showAfter = allQuest.at(index)
+    //   updateQuest(
+    //     quest.id,
+    //     {
+    //       id: showAfter?.id,
+    //     },
+    //     intl,
+    //   )
+    // } else {
+    //   updateQuest(
+    //     quest.id,
+    //     {
+    //       id: undefined,
+    //     },
+    //     intl,
+    //   )
+    // }
     if (await validate(data)) {
       setQuestModalOpen(false)
       onClose()
@@ -164,7 +156,7 @@ const QuestTypeModal = ({
         <>
           {!questModalOpen && (
             <>
-              <SelectField
+              {/* <SelectField
                 label={intl.formatMessage({
                   id: 'features.quest.questTypeModal.labelVisibility',
                 })}
@@ -182,7 +174,7 @@ const QuestTypeModal = ({
                   options={showAfterOptions}
                   onSelect={setShowAfterSelect}
                 ></SelectField>
-              )}
+              )} */}
               <PillButton variant="secondary" className="mx-auto">
                 <FormattedMessage id="features.quest.questTypeModal.quest" />
               </PillButton>

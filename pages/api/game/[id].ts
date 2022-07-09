@@ -1,6 +1,6 @@
 import prisma from '@/lib/prisma'
-import { GameDeleteOneSchema } from '@/prisma/generated/schemas/deleteOneGame.schema'
-import { GameUpdateOneSchema } from '@/prisma/generated/schemas/updateOneGame.schema'
+// import { GameDeleteOneSchema } from '@/prisma/generated/schemas/deleteOneGame.schema'
+// import { GameUpdateOneSchema } from '@/prisma/generated/schemas/updateOneGame.schema'
 import { APIError } from '@/types'
 import { Game } from '@prisma/client'
 import type { NextApiRequest, NextApiResponse } from 'next'

@@ -89,7 +89,7 @@ const RoomList = ({ gameId }: RoomListProps) => {
         className="mx-auto"
         onClick={async () => {
           const createRoomRequest = createRoom({ gameId })
-          createToast(createRoomRequest, intl)
+          createToast(createRoomRequest)
           const newRoom = await (await createRoomRequest).data
           setRooms([...rooms, newRoom])
         }}

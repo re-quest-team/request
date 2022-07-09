@@ -28,7 +28,7 @@ const RoomView = ({ id }: RoomViewProps) => {
   const [solvedQuestIDs, setSolvedQuestIDs] = useState<string[]>([])
   const [currentQuest, setCurrentQuest] = useState<IQuest<any>>()
   const showAfterQuests = room?.quests?.filter(q => q.questId !== null)
-  console.log(showAfterQuests)
+  // console.log(showAfterQuests)
 
   return (
     <ScrollContainer className="h-screen overflow-auto">

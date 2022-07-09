@@ -1,5 +1,5 @@
 import prisma from '@/lib/prisma'
-import { GameCreateSchema } from '@/prisma/generated/schemas/createOneGame.schema'
+// import { GameCreateSchema } from '@/prisma/generated/schemas/createOneGame.schema'
 import { APIError } from '@/types'
 import { Game } from '@prisma/client'
 import type { NextApiRequest, NextApiResponse } from 'next'
