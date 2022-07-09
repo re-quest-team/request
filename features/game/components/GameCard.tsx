@@ -33,7 +33,7 @@ const GameCard = ({ game }: GameCardProps) => {
             <p className="mx-auto text-3xl font-semibold">{game.name}</p>
             <div>
               {'(' +
-                (game.germanLanguage
+                (game.language === 'DE'
                   ? intl.formatMessage({ id: 'languages.german' })
                   : intl.formatMessage({ id: 'languages.english' })) +
                 ')'}

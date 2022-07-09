@@ -22,7 +22,7 @@ const qrOptions: SelectOption[] = [
   { value: 'PDF' },
 ]
 
-const GamePanel = ({ id, name, description, germanLanguage }: Game) => {
+const GamePanel = ({ id, name, description, language }: Game) => {
   const intl = useIntl()
 
   const { mutate } = useSWRConfig()
@@ -39,7 +39,7 @@ const GamePanel = ({ id, name, description, germanLanguage }: Game) => {
   const onDelete = async () => {
     const deleteGameRequest = deleteGame(id)
 
-    deleteToast(deleteGameRequest, intl)
+    deleteToast(deleteGameRequest)
 
     await mutate(`/api/game`, (await deleteGameRequest).data, {
       populateCache: false,
@@ -97,7 +97,7 @@ const GamePanel = ({ id, name, description, germanLanguage }: Game) => {
       header={
         (name || '') +
         ' (' +
-        (germanLanguage
+        (language === 'DE'
           ? intl.formatMessage({ id: 'languages.german' })
           : intl.formatMessage({ id: 'languages.english' })) +
         ')'

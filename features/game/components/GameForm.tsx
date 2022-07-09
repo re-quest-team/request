@@ -20,7 +20,7 @@ const schema = yup
   .object({
     name: yup.string().required(),
     description: yup.string().required().min(8),
-    germanLanguage: yup.boolean().required(),
+    language: yup.boolean().required(),
     draft: yup.boolean().required(),
   })
   .required()
@@ -49,13 +49,20 @@ const GameForm = ({ id }: GameFormProps) => {
   })
 
   const onSubmit = handleSubmit(async event => {
-    const postGameRequest = axios.put<Game>(`/api/game/${id}`, event, {
-      headers: {
-        'Content-Type': 'application/json',
+    const postGameRequest = axios.put<Game>(
+      `/api/game/${id}`,
+      {
+        ...event,
+        language: event.language ? 'DE' : 'EN',
       },
-    })
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+    )
 
-    createToast(postGameRequest, intl)
+    createToast(postGameRequest)
 
     const updatedGameRequest = await postGameRequest
 
@@ -83,9 +90,9 @@ const GameForm = ({ id }: GameFormProps) => {
       />
       <Toggle
         label={intl.formatMessage({ id: 'languages.german' })}
-        defaultChecked={data?.germanLanguage}
-        registration={register('germanLanguage')}
-        error={errors['germanLanguage']}
+        defaultChecked={data?.language === 'DE'}
+        registration={register('language')}
+        error={errors['language']}
       />
       <Toggle
         label={intl.formatMessage({ id: 'features.game.gameForm.labelDraft' })}
