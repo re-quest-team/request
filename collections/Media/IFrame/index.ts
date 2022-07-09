@@ -14,7 +14,7 @@ type Data = {
 
 const IframeMedia: IQuest<Data> = {
   type: 'MEDIA_IFRAME',
-  title: 'iframe',
+  title: 'title',
   description: 'description',
   icon: CodeIcon,
   EditView,

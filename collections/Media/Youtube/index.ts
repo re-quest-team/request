@@ -16,7 +16,7 @@ type Data = {
 
 const YoutubeMedia: IQuest<Data> = {
   type: 'MEDIA_YOUTUBE',
-  title: 'Youtube',
+  title: 'title',
   description: 'description',
   icon: Youtube,
   modalSize: 'large',

@@ -17,7 +17,6 @@ const EditView = () => {
     <>
       <InputField
         type={'text'}
-        label={intl.formatMessage({ id: 'editView.title' })}
         defaultValue={title}
         onChange={e => setTitle(e.target.value)}
       />

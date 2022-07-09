@@ -18,6 +18,8 @@ export default function Select({ options, onSelect }: SelectProps) {
     onSelect(selected)
   }, [onSelect, selected])
 
+  if (!selected) return <></>
+
   return (
     <Listbox value={selected} onChange={setSelected}>
       <div className="relative mt-1">

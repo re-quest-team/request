@@ -17,8 +17,8 @@ type QuestData = {
 
 const GapTextQuest: IQuest<QuestData> = {
   type: 'QUEST_GAP_TEXT',
-  title: 'gapText.title',
-  description: 'gapText.description',
+  title: 'title',
+  description: 'description',
   icon: PuzzleIcon,
   EditView,
   PlayView: PlayView,

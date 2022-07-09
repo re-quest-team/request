@@ -10,7 +10,7 @@ import QuestElement from './QuestElement'
 import quests from '@/collections'
 import { IQuest } from '@/collections/types'
 import { valNumberInput } from '@/collections/Quests/NumberInput/validation'
-import { FormattedMessage, IntlProvider, useIntl } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 import QuestIntlProvider from './QuestIntlProvider'
 
 type QuestTypeModalProps = {
@@ -79,7 +79,6 @@ const QuestTypeModal = ({
     }
   }
   const [showAfterSelect, setShowAfterSelect] = useState(getShowAfterOption)
-  console.log(showAfterSelect)
 
   const handleClick = async (q: IQuest<any>) => {
     // if quest already has data, load data into component
@@ -181,8 +180,7 @@ const QuestTypeModal = ({
                     id: 'features.quest.questTypeModal.labelVisibleAfterQuest',
                   })}
                   options={showAfterOptions}
-                  // onSelect={setShowAfterSelect}
-                  onSelect={() => {}}
+                  onSelect={setShowAfterSelect}
                 ></SelectField>
               )}
               <PillButton variant="secondary" className="mx-auto">

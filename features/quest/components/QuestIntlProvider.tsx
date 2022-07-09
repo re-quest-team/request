@@ -20,6 +20,13 @@ const QuestIntlProvider: React.FC<Props> = ({ quest, children }) => {
       locale={locale}
       // @ts-ignore
       messages={flatten(quest.lang[locale])}
+      onError={err => {
+        if (err.code === 'MISSING_TRANSLATION') {
+          console.warn('Missing translation', err.message)
+          return
+        }
+        throw err
+      }}
     >
       {children}
     </IntlProvider>

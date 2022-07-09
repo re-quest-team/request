@@ -13,7 +13,7 @@ type Data = {
 
 const InstagramMedia: IQuest<Data> = {
   type: 'MEDIA_INSTAGRAM',
-  title: 'Instagram',
+  title: 'title',
   description: 'description',
   icon: Instagram,
   EditView,
