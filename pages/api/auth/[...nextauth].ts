@@ -12,6 +12,9 @@ export default NextAuth({
       clientId: process.env.COGNITO_CLIENT_ID || '',
       clientSecret: process.env.COGNITO_CLIENT_SECRET || '',
       issuer: process.env.COGNITO_ISSUER,
+      httpOptions: {
+        timeout: 40000,
+      },
     }),
   ],
   session: {

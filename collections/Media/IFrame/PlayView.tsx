@@ -1,4 +1,4 @@
-import { useIframeStore } from '@/collections/Media/IFrame/store'
+import { useIframeStore } from '@/collections/Media/Iframe/store'
 
 const PlayView = () => {
   const title = useIframeStore(state => state.title)

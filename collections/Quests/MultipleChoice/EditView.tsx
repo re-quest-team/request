@@ -50,7 +50,7 @@ const EditView = () => {
     <div>
       <InputField
         label={intl.formatMessage({
-          id: 'quests.multipleChoice.editView.labelTask',
+          id: 'editView.labelTask',
         })}
         defaultValue={question}
         onChange={e => setQuestion(e.target.value)}
@@ -59,7 +59,7 @@ const EditView = () => {
         <InputField
           key={index}
           label={intl.formatMessage({
-            id: 'quests.multipleChoice.editView.labelCorrectAnswer',
+            id: 'editView.labelCorrectAnswer',
           })}
           defaultValue={val}
           onChange={e => replaceCorrectAnswer(e, index)}
@@ -91,7 +91,7 @@ const EditView = () => {
         <InputField
           key={index}
           label={intl.formatMessage({
-            id: 'quests.multipleChoice.editView.labelWrongAnswer',
+            id: 'editView.labelWrongAnswer',
           })}
           defaultValue={val}
           onChange={e => replaceWrongAnswer(e, index)}

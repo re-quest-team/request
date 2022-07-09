@@ -40,7 +40,7 @@ const EditView = () => {
     <form onInput={handleSubmit(changedData)}>
       <InputField
         label={intl.formatMessage({
-          id: 'quests.numberInput.editView.labelTask',
+          id: 'editView.labelTask',
         })}
         defaultValue={question}
         registration={register('question')}
@@ -51,7 +51,7 @@ const EditView = () => {
       ></InputField>
       <InputField
         label={intl.formatMessage({
-          id: 'quests.numberInput.editView.labelAnswer',
+          id: 'editView.labelAnswer',
         })}
         defaultValue={answer}
         registration={register('answer')}
@@ -62,7 +62,7 @@ const EditView = () => {
       ></InputField>
       <SelectField
         label={intl.formatMessage({
-          id: 'quests.numberInput.editView.labelUnit',
+          id: 'editView.labelUnit',
         })}
         options={unitOptions}
         onSelect={selectedField}

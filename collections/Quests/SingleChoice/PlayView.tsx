@@ -25,7 +25,7 @@ const PlayView = () => {
         <div></div>
 
         <h3 className="m-3 text-xl">
-          <FormattedMessage id={'quests.singleChoice.playView.choices'} />
+          <FormattedMessage id={'playView.choices'} />
         </h3>
         {shuffledAnswers.map((val, index) => (
           <>
@@ -52,7 +52,7 @@ const PlayView = () => {
             }
           }}
         >
-          <FormattedMessage id="quests.singleChoice.playView.submit" />
+          <FormattedMessage id="playView.submit" />
         </Button>
       </div>
     </>

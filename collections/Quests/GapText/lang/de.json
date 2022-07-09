@@ -1,0 +1,15 @@
+{
+  "playView": {
+    "taskPrompt": "Ziehe Wörter von unten zum geeigneten Platz",
+    "submit": "Abgabe"
+  },
+  "editView": {
+    "correctTitle": "Lückentext",
+    "correctPlaceholder": "Bsp.: Tom hat ein [rotes] Auto mit [Rallystreifen].",
+    "correctTip": "TIPP: Einfügen einer Lücke mit der entsprechenden Antwort: [DieAntwort]",
+    "falseTitle": "Falsche Antworten",
+    "falsePlaceholder": "Bsp.: Falsch, Katze, Hund"
+  },
+  "title": "Lückentext",
+  "description": "Hier muss ein Lückentext gelöst werden. Zu jeder Lücke gibt es eine richtige und beliebig viele falsche Antworten."
+}

@@ -15,4 +15,8 @@ export interface IQuest<T> {
   data?: T
   onSolve?: (callback: () => void) => void
   modalSize?: keyof typeof sizes
+  lang?: {
+    de?: any
+    en?: any
+  }
 }

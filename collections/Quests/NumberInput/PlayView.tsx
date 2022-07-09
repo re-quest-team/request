@@ -48,7 +48,7 @@ const PlayView = () => {
       <p>{question}</p>
       <InputField
         label={intl.formatMessage({
-          id: 'quests.numberInput.playView.labelAnswer',
+          id: 'playView.labelAnswer',
         })}
         type={'number'}
         name={'answer'}
@@ -59,7 +59,7 @@ const PlayView = () => {
         onChange={e => setAnswer(e.target.value)}
       ></InputField>
       <Button type="submit" onClick={checkCorrect}>
-        <FormattedMessage id="quests.numberInput.playView.check" />
+        <FormattedMessage id="playView.check" />
       </Button>
     </form>
   )

@@ -8,7 +8,7 @@ const EditView = () => {
   const setLink = useInstagramStore(state => state.setLink)
   return (
     <TextArea
-      label={intl.formatMessage({ id: 'media.instagram.editView.label' })}
+      label={intl.formatMessage({ id: 'editView.label' })}
       defaultValue={link}
       onChange={e => setLink(e.target.value)}
       rows={4}

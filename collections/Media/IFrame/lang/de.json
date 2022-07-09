@@ -1,0 +1,9 @@
+{
+  "editView": {
+    "label": "Iframe Embed Link",
+    "width": "Breite",
+    "height": "Höhe",
+    "title": "Titel"
+  },
+  "description": "Hier kann ein einfacher iframe angezeigt werden"
+}

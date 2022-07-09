@@ -10,7 +10,7 @@ const PlayView = () => {
     <div className="w-full">
       <img
         src={link}
-        alt={intl.formatMessage({ id: 'media.image.PlayView.alt' })}
+        alt={intl.formatMessage({ id: 'PlayView.alt' })}
         className="w-full rounded-xl object-cover"
       />
     </div>

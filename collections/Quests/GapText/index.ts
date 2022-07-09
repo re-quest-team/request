@@ -3,7 +3,9 @@ import { IQuest } from '@/collections/types'
 import EditView from './EditView'
 import PlayView from './PlayView'
 import { mapItem, useQuestStore } from './store'
-import { IntlShape } from 'react-intl'
+
+import de from './lang/de.json'
+import en from './lang/en.json'
 
 type QuestData = {
   text: string
@@ -13,46 +15,40 @@ type QuestData = {
   shuffledAnswers: mapItem[]
 }
 
-const GapTextQuest = (intl: IntlShape): IQuest<QuestData> => {
-  return {
-    type: 'QUEST_GAP_TEXT',
-    title: intl.formatMessage({ id: 'quests.gapText.title' }),
-    description: intl.formatMessage({ id: 'quests.gapText.description' }),
-    icon: PuzzleIcon,
-    EditView,
-    PlayView: PlayView,
-    onLoad: ({
+const GapTextQuest: IQuest<QuestData> = {
+  type: 'QUEST_GAP_TEXT',
+  title: 'gapText.title',
+  description: 'gapText.description',
+  icon: PuzzleIcon,
+  EditView,
+  PlayView: PlayView,
+  onLoad: ({ text, textList, correctAnswers, wrongAnswers, shuffledAnswers }) =>
+    useQuestStore.setState(state => ({
+      ...state,
       text,
       textList,
       correctAnswers,
       wrongAnswers,
       shuffledAnswers,
-    }) =>
-      useQuestStore.setState(state => ({
-        ...state,
-        text,
-        textList,
-        correctAnswers,
-        wrongAnswers,
-        shuffledAnswers,
-      })),
+    })),
 
-    onSave: () => ({
-      text: useQuestStore.getState().text,
-      textList: useQuestStore.getState().textList,
-      correctAnswers: useQuestStore.getState().correctAnswers,
-      wrongAnswers: useQuestStore.getState().wrongAnswers,
-      shuffledAnswers: useQuestStore.getState().shuffledAnswers,
-    }),
+  onSave: () => ({
+    text: useQuestStore.getState().text,
+    textList: useQuestStore.getState().textList,
+    correctAnswers: useQuestStore.getState().correctAnswers,
+    wrongAnswers: useQuestStore.getState().wrongAnswers,
+    shuffledAnswers: useQuestStore.getState().shuffledAnswers,
+  }),
 
-    onSolve: callback => {
-      useQuestStore.subscribe(state => {
-        if (state.correct) {
-          callback()
-        }
-      })
-    },
-  }
+  onSolve: callback => {
+    useQuestStore.subscribe(state => {
+      if (state.correct) {
+        callback()
+      }
+    })
+  },
+
+  lang: { de, en },
 }
 
 export default GapTextQuest

@@ -12,6 +12,8 @@ import useSWR from 'swr'
 import { RoomWithImageAndQuests } from '../types'
 import { Spinner } from '@/components/Elements/Spinner'
 import { useIntl } from 'react-intl'
+import InjectedQuestPlayView from '@/features/quest/components/InjectedQuestPlayView'
+import QuestIntlProvider from '@/features/quest/components/QuestIntlProvider'
 
 type RoomViewProps = {
   id: string
@@ -49,7 +51,7 @@ const RoomView = ({ id }: RoomViewProps) => {
                 key={i}
                 quest={q}
                 onClick={() => {
-                  const qq = quests(intl).filter(e => e.type === q.type)[0]
+                  const qq = quests.filter(e => e.type === q.type)[0]
                   if (qq) {
                     qq.onLoad(q.data as any)
                     if (qq.onSolve) {
@@ -72,7 +74,13 @@ const RoomView = ({ id }: RoomViewProps) => {
         title={''}
         size={currentQuest ? currentQuest.modalSize : 'medium'}
       >
-        <>{currentQuest && <currentQuest.PlayView />}</>
+        <>
+          {currentQuest && (
+            <QuestIntlProvider quest={currentQuest}>
+              <currentQuest.PlayView />
+            </QuestIntlProvider>
+          )}
+        </>
       </Modal>
     </ScrollContainer>
   )

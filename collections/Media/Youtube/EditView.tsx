@@ -20,7 +20,7 @@ const EditView = () => {
   return (
     <div>
       <TextArea
-        label={intl.formatMessage({ id: 'media.youtube.editView.title' })}
+        label={intl.formatMessage({ id: 'editView.title' })}
         defaultValue={link}
         onChange={e => setWatchLink(e.target.value)}
         rows={4}
@@ -28,7 +28,7 @@ const EditView = () => {
       <div className="flex flex-row justify-between">
         <div>
           <p className="-mb-2 text-sm">
-            <FormattedMessage id="media.youtube.editView.labelStart" />
+            <FormattedMessage id="editView.labelStart" />
           </p>
           <div className="flex flex-row justify-between">
             <InputField
@@ -74,7 +74,7 @@ const EditView = () => {
 
         <div>
           <p className="-mb-2 text-sm">
-            <FormattedMessage id="media.youtube.editView.labelEnd" />
+            <FormattedMessage id="editView.labelEnd" />
           </p>
           <div className="flex w-1/2 flex-row justify-between">
             <InputField

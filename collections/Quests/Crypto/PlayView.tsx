@@ -21,7 +21,7 @@ const PlayView = () => {
       <p>{question}</p>
       <InputField
         label={intl.formatMessage({
-          id: 'quests.crypto.playView.encryptedWord',
+          id: 'playView.encryptedWord',
         })}
         disabled
         value={codeword.replace(
@@ -34,7 +34,7 @@ const PlayView = () => {
       ></InputField>
       <h3 className="mt-8 text-lg">Antwort</h3>
       <InputField
-        label={intl.formatMessage({ id: 'quests.crypto.playView.codeWord' })}
+        label={intl.formatMessage({ id: 'playView.codeWord' })}
         onChange={e => setAnswer(e.target.value)}
       ></InputField>
       <Button
@@ -47,7 +47,7 @@ const PlayView = () => {
           }
         }}
       >
-        <FormattedMessage id="quests.crypto.playView.decrypt" />
+        <FormattedMessage id="playView.decrypt" />
       </Button>
     </div>
   )

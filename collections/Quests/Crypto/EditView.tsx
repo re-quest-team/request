@@ -14,20 +14,20 @@ const EditView = () => {
   return (
     <div>
       <InputField
-        label={intl.formatMessage({ id: 'quests.crypto.editView.labelTask' })}
+        label={intl.formatMessage({ id: 'editView.labelTask' })}
         defaultValue={question}
         onChange={e => setQuestion(e.target.value)}
       ></InputField>
       <InputField
         label={intl.formatMessage({
-          id: 'quests.crypto.editView.labelCodeWord',
+          id: 'editView.labelCodeWord',
         })}
         defaultValue={codeword}
         onChange={e => setCordeword(e.target.value)}
       ></InputField>
       <InputField
         label={intl.formatMessage({
-          id: 'quests.crypto.editView.labelEncryptedWord',
+          id: 'editView.labelEncryptedWord',
         })}
         disabled
         value={codeword.replace(

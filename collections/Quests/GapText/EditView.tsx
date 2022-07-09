@@ -56,10 +56,10 @@ const EditView = () => {
       <div className="mt-4">
         <TextArea
           label={intl.formatMessage({
-            id: 'quests.gapText.editView.correctTitle',
+            id: 'editView.correctTitle',
           })}
           placeholder={intl.formatMessage({
-            id: 'quests.gapText.editView.correctPlaceholder',
+            id: 'editView.correctPlaceholder',
           })}
           defaultValue={text}
           onChange={e => handleTextInput(e.target.value)}
@@ -67,7 +67,7 @@ const EditView = () => {
         <InputField
           disabled
           placeholder={intl.formatMessage({
-            id: 'quests.gapText.editView.correctTip',
+            id: 'editView.correctTip',
           })}
         />
         <p></p>
@@ -76,10 +76,10 @@ const EditView = () => {
       <div className="mt-4">
         <TextArea
           label={intl.formatMessage({
-            id: 'quests.gapText.editView.falseTitle',
+            id: 'editView.falseTitle',
           })}
           placeholder={intl.formatMessage({
-            id: 'quests.gapText.editView.falsePlaceholder',
+            id: 'editView.falsePlaceholder',
           })}
           defaultValue={wrong}
           onChange={e => handleWrongInput(e.target.value)}

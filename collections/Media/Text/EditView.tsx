@@ -11,7 +11,7 @@ const EditView = () => {
   return (
     <div>
       <TextArea
-        label={intl.formatMessage({ id: 'media.text.editView.title' })}
+        label={intl.formatMessage({ id: 'editView.title' })}
         defaultValue={text}
         onChange={e => setText(e.target.value)}
         rows={4}

@@ -1,0 +1,13 @@
+{
+  "playView": {
+    "choices": "Antwortmöglichkeiten:",
+    "submit": "Abgabe"
+  },
+  "editView": {
+    "labelTask": "Frage",
+    "labelCorrectAnswer": "Richtige Antwort",
+    "labelWrongAnswer": "Falsche Antwort"
+  },
+  "title": "Single-Choice-Frage",
+  "description": "Hier muss eine Single-Choice-Frage beantwortet werden. Es gibt eine korrekte Antwort und beliebig viele falsche Antworten."
+}

@@ -1,7 +1,6 @@
-import { useIframeStore } from '@/collections/Media/IFrame/store'
+import { useIframeStore } from '@/collections/Media/Iframe/store'
 import { TextArea } from '@/components/Elements/FormElements/TextArea'
 import { InputField } from '@/components/Elements/FormElements'
-import { isArgumentElement } from '@formatjs/icu-messageformat-parser'
 import { useIntl } from 'react-intl'
 
 const EditView = () => {
@@ -18,11 +17,12 @@ const EditView = () => {
     <>
       <InputField
         type={'text'}
+        label={intl.formatMessage({ id: 'editView.title' })}
         defaultValue={title}
         onChange={e => setTitle(e.target.value)}
       />
       <TextArea
-        label={intl.formatMessage({ id: 'media.iframe.editView.label' })}
+        label={intl.formatMessage({ id: 'editView.label' })}
         id="URL"
         defaultValue={link}
         onChange={e => {
@@ -33,7 +33,7 @@ const EditView = () => {
       ></TextArea>
 
       <InputField
-        label={intl.formatMessage({ id: 'media.iframe.editView.height' })}
+        label={intl.formatMessage({ id: 'editView.height' })}
         type={'text'}
         placeholder={'500'}
         defaultValue={height}

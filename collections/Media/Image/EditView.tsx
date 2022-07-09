@@ -1,6 +1,8 @@
 import { TextArea } from '@/components/Elements/FormElements'
 import { useImageStore } from './store'
 import { useIntl } from 'react-intl'
+import S3Upload from '@/pages/api/s3-upload'
+import FileUpload from '@/components/FileUpload'
 
 const EditView = () => {
   const intl = useIntl()
@@ -10,13 +12,13 @@ const EditView = () => {
 
   return (
     <div>
-      <TextArea
-        label={intl.formatMessage({ id: 'media.image.editView.title' })}
-        defaultValue={link}
-        placeholder={'URL'}
-        onChange={e => setLink(e.target.value)}
-        rows={6}
-      ></TextArea>
+      <p>{intl.formatMessage({ id: 'playView.alt' })}</p>
+      {/* <FileUpload
+        onChange={url =>
+          setLink(`${process.env.NEXT_PUBLIC_S3_BASE_URL}/${url}`)
+        }
+        roomId={''}
+      /> */}
     </div>
   )
 }

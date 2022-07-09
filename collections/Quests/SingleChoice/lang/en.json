@@ -1,0 +1,13 @@
+{
+  "playView": {
+    "choices": "Possible answers:",
+    "submit": "Submit"
+  },
+  "editView": {
+    "labelTask": "Question",
+    "labelCorrectAnswer": "Correct Answer",
+    "labelWrongAnswer": "Wrong Answer"
+  },
+  "title": "Single Choice Question",
+  "description": "A Single Choice Question must be answered here. You can define one correct Answer and an arbitrary amount of wrong answers."
+}

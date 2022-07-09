@@ -31,7 +31,7 @@ const PlayView = () => {
         src={link}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
-        title={intl.formatMessage({ id: 'media.youtube.playView.title' })}
+        title={intl.formatMessage({ id: 'playView.title' })}
       />
     </div>
   )

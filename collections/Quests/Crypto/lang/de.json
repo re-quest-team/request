@@ -1,0 +1,14 @@
+{
+  "playView": {
+    "encryptedWord": "Verschlüsseltes Wort",
+    "codeWord": "Code Wort",
+    "decrypt": "Entschlüsseln"
+  },
+  "editView": {
+    "labelTask": "Aufgabenstellung",
+    "labelCodeWord": "Codewort",
+    "labelEncryptedWord": "Verschlüsseltes Wort"
+  },
+  "title": "Kryptographie",
+  "description": "Hier muss ein Codewort entschlüsselt werden. Das Wort wird mit ROT13 / Cäsar-Chiffre verschlüsselt."
+}
