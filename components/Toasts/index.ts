@@ -1,7 +1,8 @@
+import { useIntlStore } from '@/stores/intl'
 import toast from 'react-hot-toast'
-import { IntlShape } from 'react-intl'
 
-export const createToast = (promise: Promise<any>, intl: IntlShape) => {
+export const createToast = (promise: Promise<any>) => {
+  const intl = useIntlStore.getState().intl!
   return toast.promise(promise, {
     loading: intl.formatMessage({ id: 'toasts.create.loading' }),
     success: intl.formatMessage({ id: 'toasts.create.success' }),
@@ -11,7 +12,8 @@ export const createToast = (promise: Promise<any>, intl: IntlShape) => {
 
 export const updateToast = createToast
 
-export const deleteToast = (promise: Promise<any>, intl: IntlShape) => {
+export const deleteToast = (promise: Promise<any>) => {
+  const intl = useIntlStore.getState().intl!
   return toast.promise(promise, {
     loading: intl.formatMessage({ id: 'toasts.delete.loading' }),
     success: intl.formatMessage({ id: 'toasts.delete.success' }),
@@ -19,9 +21,11 @@ export const deleteToast = (promise: Promise<any>, intl: IntlShape) => {
   })
 }
 
-export const successToast = (intl: IntlShape) => {
+export const successToast = () => {
+  const intl = useIntlStore.getState().intl!
   return toast.success(intl.formatMessage({ id: 'toasts.success' }))
 }
-export const incorrectToast = (intl: IntlShape) => {
+export const incorrectToast = () => {
+  const intl = useIntlStore.getState().intl!
   return toast.error(intl.formatMessage({ id: 'toasts.incorrect' }))
 }

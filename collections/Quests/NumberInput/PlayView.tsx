@@ -35,10 +35,10 @@ const PlayView = () => {
   const checkCorrect = async () => {
     if (!errors.answer) {
       if (onSolve(Number(answer))) {
-        successToast(intl)
+        successToast()
         successConfetti()
       } else {
-        incorrectToast(intl)
+        incorrectToast()
       }
     }
   }

@@ -5,7 +5,6 @@ import { mutate } from 'swr'
 import { createQuest } from './createQuest'
 import { deleteQuest } from './deleteQuest'
 import { updateQuest } from './updateQuest'
-import { IntlShape } from 'react-intl'
 
 const useQuests = (roomId: string) => {
   const mutation = async (request: Promise<AxiosResponse<Quest>>) => {
@@ -16,30 +15,26 @@ const useQuests = (roomId: string) => {
     })
   }
 
-  const APICreateQuest = async (quest: Partial<Quest>, intl: IntlShape) => {
+  const APICreateQuest = async (quest: Partial<Quest>) => {
     const createQuestRequest = createQuest({ ...quest, roomId })
-    createToast(createQuestRequest, intl)
+    createToast(createQuestRequest)
     await mutation(createQuestRequest)
     return await (
       await createQuestRequest
     ).data
   }
 
-  const APIUpdateQuest = async (
-    id: string,
-    quest: Partial<Quest>,
-    intl: IntlShape,
-  ) => {
+  const APIUpdateQuest = async (id: string, quest: Partial<Quest>) => {
     const updateQuestRequest = updateQuest(id, {
       ...quest,
     })
-    updateToast(updateQuestRequest, intl)
+    updateToast(updateQuestRequest)
     await mutation(updateQuestRequest)
   }
 
-  const APIDeleteQuest = async (id: string, intl: IntlShape) => {
+  const APIDeleteQuest = async (id: string) => {
     const deleteQuestRequest = deleteQuest(id)
-    deleteToast(deleteQuestRequest, intl)
+    deleteToast(deleteQuestRequest)
     await mutation(deleteQuestRequest)
   }
 

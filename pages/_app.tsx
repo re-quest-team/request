@@ -15,6 +15,7 @@ import flatten from 'flat'
 
 import de from '../lang/de.json'
 import en from '../lang/en.json'
+import ToastIntlProidver from '@/components/Toasts/ToastIntlProvider'
 
 const messages = {
   en,
@@ -45,13 +46,16 @@ export default function MyApp({
               },
             }}
           />
-          {router.pathname.includes('play') ? (
-            <Component {...pageProps} />
-          ) : (
-            <Layout>
+          <>
+            <ToastIntlProidver />
+            {router.pathname.includes('play') ? (
               <Component {...pageProps} />
-            </Layout>
-          )}
+            ) : (
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            )}
+          </>
         </SWRConfig>
       </SessionProvider>
     </IntlProvider>

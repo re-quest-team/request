@@ -40,10 +40,10 @@ const PlayView = () => {
       <Button
         onClick={() => {
           if (onSolve(answer)) {
-            successToast(intl)
+            successToast()
             successConfetti()
           } else {
-            incorrectToast(intl)
+            incorrectToast()
           }
         }}
       >

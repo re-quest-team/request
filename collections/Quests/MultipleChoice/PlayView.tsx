@@ -50,10 +50,10 @@ const PlayView = () => {
           className="m-15 mx-auto"
           onClick={() => {
             if (onSolve(answer)) {
-              successToast(intl)
+              successToast()
               successConfetti()
             } else {
-              incorrectToast(intl)
+              incorrectToast()
             }
           }}
         >

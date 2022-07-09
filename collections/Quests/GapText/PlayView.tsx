@@ -133,13 +133,13 @@ const PlayView = () => {
           if (cards.length == correctLen) {
             const answers = slots.flatMap(item => item.slot[0].value)
             if (onSolve(answers)) {
-              successToast(intl)
+              successToast()
               successConfetti()
             } else {
-              incorrectToast(intl)
+              incorrectToast()
             }
           } else {
-            incorrectToast(intl)
+            incorrectToast()
           }
         }}
       >
