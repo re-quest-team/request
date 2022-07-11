@@ -1,10 +1,13 @@
 import { de, enGB } from 'date-fns/locale'
 
-const locales = { de, enGB }
+export default function formatLocale(locale?: string) {
+  if (locale === 'de') {
+    return de
+  }
 
-// by providing a default string of 'PP' or any of its variants for `formatStr`
-// it will format dates in whichever way is appropriate to the locale
-export default function formatLocale() {
-  // @ts-ignore
-  return locales[global.__localeId__]
+  if (locale === 'en') {
+    return enGB
+  }
+
+  return de
 }
