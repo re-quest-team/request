@@ -18,9 +18,9 @@ export type gapElement = {
 }
 
 const PlayView = () => {
-  const intl = useIntl()
   const text = useQuestStore(state => state.textList)
   const onSolve = useQuestStore(state => state.onSolve)
+
   const [cards, setCards] = useState(
     useQuestStore(state => state.shuffledAnswers),
   )
@@ -130,7 +130,7 @@ const PlayView = () => {
       <Button
         className="mx-auto mt-4"
         onClick={() => {
-          if (cards.length == correctLen) {
+          if (slots.filter(s => s.slot.length > 0).length == correctLen) {
             const answers = slots.flatMap(item => item.slot[0].value)
             if (onSolve(answers)) {
               successToast()
