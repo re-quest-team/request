@@ -2,23 +2,28 @@ import TextMedia from './Media/Text'
 import YoutubeMedia from './Media/Youtube'
 import CryptoQuest from './Quests/Crypto'
 import MultipleChoiceQuest from './Quests/MultipleChoice'
+import SingleChoiceQuest from './Quests/SingleChoice'
 import InstagramMedia from '@/collections/Media/Instagram'
 import NumberInputQuest from './Quests/NumberInput'
-import { IntlShape } from 'react-intl'
 import { IQuest } from '@/collections/types'
-import IframeMedia from './Media/Iframe'
+import ImageMedia from '@/collections/Media/Image'
+import GapTextQuest from '@/collections/Quests/GapText'
+import IframeMedia from '@/collections/Media/Iframe'
 
-const media = (intl: IntlShape): IQuest<any>[] => [
-  TextMedia(intl),
+const media: IQuest<any>[] = [
+  TextMedia,
   InstagramMedia,
-  YoutubeMedia(intl),
+  YoutubeMedia,
+  ImageMedia,
   IframeMedia,
 ]
-const quests = (intl: IntlShape): IQuest<any>[] => [
-  CryptoQuest(intl),
+const quests: IQuest<any>[] = [
+  CryptoQuest,
   NumberInputQuest,
-  MultipleChoiceQuest(intl),
-  ...media(intl),
+  MultipleChoiceQuest,
+  SingleChoiceQuest,
+  GapTextQuest,
+  ...media,
 ]
 
 export default quests

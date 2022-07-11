@@ -55,18 +55,15 @@ const QuestImagePlacer = ({
           src={img}
           onClick={async e => {
             if (editMode && quests.length < maxQuests) {
-              const newQuest = await createQuest(
-                {
-                  x:
-                    (e.clientX - ref.current?.getBoundingClientRect().left!) /
-                    ref.current?.clientWidth!,
-                  // @ts-ignore
-                  y:
-                    (e.clientY - ref.current?.getBoundingClientRect().top!) /
-                    ref.current?.clientHeight!,
-                },
-                intl,
-              )
+              const newQuest = await createQuest({
+                x:
+                  (e.clientX - ref.current?.getBoundingClientRect().left!) /
+                  ref.current?.clientWidth!,
+                // @ts-ignore
+                y:
+                  (e.clientY - ref.current?.getBoundingClientRect().top!) /
+                  ref.current?.clientHeight!,
+              })
               setCurrentQuest(newQuest)
               setQuestModalOpen(true)
             }
@@ -102,10 +99,8 @@ const QuestImagePlacer = ({
               x={q.x}
               y={q.y}
               type={q.type || undefined}
-              onMoveEnd={async movedQuest =>
-                updateQuest(q.id, movedQuest, intl)
-              }
-              onDelete={async () => deleteQuest(q.id, intl)}
+              onMoveEnd={async movedQuest => updateQuest(q.id, movedQuest)}
+              onDelete={async () => deleteQuest(q.id)}
               key={i}
               showDelete={editMode}
               onClick={() => {
@@ -128,6 +123,7 @@ const QuestImagePlacer = ({
           open={questModalOpen}
           roomId={roomId}
           quest={currentQuest}
+          allQuest={quests}
           onClose={() => {
             setCurrentQuest(undefined)
             setQuestModalOpen(false)

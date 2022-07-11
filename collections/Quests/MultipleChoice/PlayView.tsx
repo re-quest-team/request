@@ -7,25 +7,20 @@ import { FormattedMessage, useIntl } from 'react-intl'
 
 const PlayView = () => {
   const question = useQuestStore(state => state.question)
-  const correctAnswer = useQuestStore(state => state.correctAnswer)
-  const wrongAnswers = useQuestStore(state => state.wrongAnswers)
   const onSolve = useQuestStore(state => state.onSolve)
-  const correct = useQuestStore(state => state.correct)
   const shuffledAnswers = useQuestStore(state => state.shuffledAnswers)
 
   const intl = useIntl()
 
-  const label = intl.formatMessage({
-    id: 'quests.multiplechoice.playView.choices',
-  })
-
-  const [answer, setAnswer] = useState('')
-
-  const [selectedAnswer, setSelectedAnswer] = useState<String>()
+  const [answer, setAnswer] = useState<string[]>([])
 
   const radioHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedAnswer(event.target.value)
-    setAnswer(event.target.value)
+    if (event.target.checked) {
+      setAnswer(answer.concat(event.target.value).sort())
+    } else {
+      let index = answer.indexOf(event.target.value)
+      setAnswer(answer.filter((word, i) => i !== index))
+    }
   }
 
   return (
@@ -34,18 +29,20 @@ const PlayView = () => {
         <p className="my-2 text-center text-3xl">{question}</p>
         <div></div>
 
-        <h3 className="m-3 text-xl">{label}</h3>
-        {shuffledAnswers.map(val => (
+        <h3 className="m-3 text-xl">
+          <FormattedMessage id="playView.choices" />
+        </h3>
+        {shuffledAnswers.map((val, index) => (
           <>
             <div className="m-2 text-base">
               <input
-                type="radio"
-                id={val.name}
+                type="checkbox"
+                key={index}
                 name="answer"
-                value={val.name}
+                value={val}
                 onChange={radioHandler}
               ></input>
-              <label htmlFor={val.name}>{val.name}</label>
+              <label htmlFor={val}>{val}</label>
             </div>
           </>
         ))}
@@ -53,14 +50,14 @@ const PlayView = () => {
           className="m-15 mx-auto"
           onClick={() => {
             if (onSolve(answer)) {
-              successToast(intl)
+              successToast()
               successConfetti()
             } else {
-              incorrectToast(intl)
+              incorrectToast()
             }
           }}
         >
-          <FormattedMessage id="quests.multiplechoice.playView.submit" />
+          <FormattedMessage id="playView.submit" />
         </Button>
       </div>
     </>

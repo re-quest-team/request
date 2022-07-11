@@ -1,34 +1,31 @@
 import create from 'zustand'
+import { compareStringArray } from 'utils/compareStringArray'
 
 interface QuestState {
   question: string
-  correctAnswer: string
-  wrongAnswers: { key: number; name: string }[]
-  shuffledAnswers: { key: number; name: string }[]
+  correctAnswers: string[]
+  wrongAnswers: string[]
+  shuffledAnswers: string[]
   setQuestion: (question: string) => void
-  setCorrectAnswer: (correctAnswer: string) => void
-  setWrongAnswers: (wrongAnswers: { key: number; name: string }[]) => void
-  setShuffledAnswers: (shuffledAnswers: { key: number; name: string }[]) => void
+  setCorrectAnswers: (correctAnswer: string[]) => void
+  setWrongAnswers: (wrongAnswers: string[]) => void
+  setShuffledAnswers: (shuffledAnswers: string[]) => void
   correct: boolean
-  onSolve: (input: string) => boolean
+  onSolve: (input: string[]) => boolean
 }
 
 export const useQuestStore = create<QuestState>()((set, get) => ({
   question: '',
-  correctAnswer: '',
-  wrongAnswers: [
-    { key: 1, name: '' },
-    { key: 2, name: '' },
-    { key: 3, name: '' },
-  ],
-  shuffledAnswers: [{ key: 1, name: '' }],
+  correctAnswers: ['', '', ''],
+  wrongAnswers: ['', '', ''],
+  shuffledAnswers: [],
   setQuestion: question => set(() => ({ question })),
-  setCorrectAnswer: correctAnswer => set(() => ({ correctAnswer })),
+  setCorrectAnswers: correctAnswers => set(() => ({ correctAnswers })),
   setWrongAnswers: wrongAnswers => set(() => ({ wrongAnswers })),
   setShuffledAnswers: shuffledAnswers => set(() => ({ shuffledAnswers })),
   correct: false,
   onSolve: input => {
-    const correct = input === get().correctAnswer
+    const correct = compareStringArray(input, get().correctAnswers)
     set(() => ({ correct }))
     return correct
   },

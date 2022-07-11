@@ -7,6 +7,7 @@ import {
   MenuAlt1Icon,
   PhotographIcon,
   PlusIcon,
+  PuzzleIcon,
   QrcodeIcon,
   TrashIcon,
   ViewListIcon,
@@ -39,6 +40,8 @@ const renderIcon = (type?: QuestType) => {
       return <LockClosedIcon className="h-10 w-10" />
     case 'QUEST_MULTIPLE_CHOICE':
       return <ViewListIcon className="h-10 w-10" />
+    case 'QUEST_SINGLE_CHOICE':
+      return <ViewListIcon className="h-10 w-10" />
     case 'QUEST_CODING':
       return <CodeIcon className="h-10 w-10" />
     case 'QUEST_QR_SCAN':
@@ -47,6 +50,8 @@ const renderIcon = (type?: QuestType) => {
       return <ChartSquareBarIcon className="h-10 w-10" />
     case 'QUEST_NUMBER_INPUT':
       return <CalculatorIcon className="h-10 w-10" />
+    case 'QUEST_GAP_TEXT':
+      return <PuzzleIcon className="h-10 w-10" />
     case 'MEDIA_TEXT':
       return <MenuAlt1Icon className="h-10 w-10" />
     case 'MEDIA_IMAGE':

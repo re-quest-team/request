@@ -6,12 +6,15 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { SelectField } from '@/components/Elements/Select/SelectField'
 import { Units } from '@/collections/Quests/NumberInput/units'
 import { SelectOption } from '@/components/Elements/Select'
+import { useIntl } from 'react-intl'
 
 const unitOptions: SelectOption[] = Object.values(Units).map(unit => ({
   value: unit,
 }))
 
 const EditView = () => {
+  const intl = useIntl()
+
   const question = useQuestStore(state => state.question)
   const setQuestion = useQuestStore(state => state.setQuestion)
   const answer = useQuestStore(state => state.answer)
@@ -23,7 +26,7 @@ const EditView = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(valNumberInput),
+    resolver: yupResolver(valNumberInput(intl)),
     mode: 'all',
     criteriaMode: 'all',
   })
@@ -36,7 +39,9 @@ const EditView = () => {
   return (
     <form onInput={handleSubmit(changedData)}>
       <InputField
-        label="Aufgabenstellung"
+        label={intl.formatMessage({
+          id: 'editView.labelTask',
+        })}
         defaultValue={question}
         registration={register('question')}
         error={errors['question']}
@@ -45,7 +50,9 @@ const EditView = () => {
         }}
       ></InputField>
       <InputField
-        label="Antwort"
+        label={intl.formatMessage({
+          id: 'editView.labelAnswer',
+        })}
         defaultValue={answer}
         registration={register('answer')}
         error={errors['answer']}
@@ -54,7 +61,9 @@ const EditView = () => {
         }}
       ></InputField>
       <SelectField
-        label="Einheit"
+        label={intl.formatMessage({
+          id: 'editView.labelUnit',
+        })}
         options={unitOptions}
         onSelect={selectedField}
       ></SelectField>

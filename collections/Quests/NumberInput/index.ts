@@ -4,6 +4,9 @@ import EditView from './EditView'
 import PlayView from './PlayView'
 import { useQuestStore } from './store'
 
+import de from './lang/de.json'
+import en from './lang/en.json'
+
 export type NumberInputQuestData = {
   question: string
   answer: number
@@ -12,8 +15,8 @@ export type NumberInputQuestData = {
 
 const NumberInputQuest: IQuest<NumberInputQuestData> = {
   type: 'QUEST_NUMBER_INPUT',
-  title: 'Nummern Eingabe',
-  description: 'Hier ein Frage mit einer Nummer beantwortet werden.',
+  title: 'title',
+  description: 'description',
   icon: CalculatorIcon,
   EditView,
   PlayView: PlayView,
@@ -36,6 +39,7 @@ const NumberInputQuest: IQuest<NumberInputQuestData> = {
       }
     })
   },
+  lang: { de, en },
 }
 
 export default NumberInputQuest

@@ -67,7 +67,7 @@ const RoomPanel = ({ provided, snapshot, index, roomId }: Props) => {
   const onDelete = async () => {
     const deleteRoomRequest = deleteRoom(room!.id)
 
-    deleteToast(deleteRoomRequest, intl)
+    deleteToast(deleteRoomRequest)
 
     await mutate(`/api/game/${room!.gameId}`, (await deleteRoomRequest).data, {
       populateCache: false,

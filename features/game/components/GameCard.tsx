@@ -13,8 +13,6 @@ type GameCardProps = {
 
 const GameCard = ({ game }: GameCardProps) => {
   const intl = useIntl()
-  const english = intl.formatMessage({ id: 'languages.english' })
-  const german = intl.formatMessage({ id: 'languages.german' })
   return (
     <div className="px-8 py-4 md:basis-1/2 lg:basis-1/3 xl:px-16 xl:py-8">
       <Link href={`/play/${game.id}`} passHref>
@@ -33,7 +31,13 @@ const GameCard = ({ game }: GameCardProps) => {
           )}
           <div className="absolute top-0 left-0 mb-4 flex h-full w-full flex-col items-center justify-center">
             <p className="mx-auto text-3xl font-semibold">{game.name}</p>
-            <div>{'(' + (game.germanLanguage ? german : english) + ')'}</div>
+            <div>
+              {'(' +
+                (game.language === 'DE'
+                  ? intl.formatMessage({ id: 'languages.german' })
+                  : intl.formatMessage({ id: 'languages.english' })) +
+                ')'}
+            </div>
           </div>
         </div>
       </Link>

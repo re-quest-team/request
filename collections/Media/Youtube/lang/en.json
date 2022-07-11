@@ -1,0 +1,12 @@
+{
+  "editView": {
+    "title": "Youtube link",
+    "labelStart": "Start time",
+    "labelEnd": "End time"
+  },
+  "playView": {
+    "title": "Embedded Youtube"
+  },
+  "title": "Youtube",
+  "description": "You can add a Youtube video here"
+}

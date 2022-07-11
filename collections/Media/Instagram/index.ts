@@ -1,10 +1,11 @@
-import { MenuAlt1Icon } from '@heroicons/react/outline'
 import { IQuest } from '@/collections/types'
 import EditView from './EditView'
 import PlayView from './PlayView'
 import { useInstagramStore } from './store'
 import { Instagram } from 'react-feather'
-import { CameraIcon } from '@heroicons/react/solid'
+
+import de from './lang/de.json'
+import en from './lang/en.json'
 
 type Data = {
   link: string
@@ -12,8 +13,8 @@ type Data = {
 
 const InstagramMedia: IQuest<Data> = {
   type: 'MEDIA_INSTAGRAM',
-  title: 'Instagram',
-  description: 'Hier kann ein einfacher Instagram Post angezeigt werden',
+  title: 'title',
+  description: 'description',
   icon: Instagram,
   EditView,
   PlayView,
@@ -22,6 +23,10 @@ const InstagramMedia: IQuest<Data> = {
   onSave: () => ({
     link: useInstagramStore.getState().link,
   }),
+  lang: {
+    de,
+    en,
+  },
 }
 
 export default InstagramMedia

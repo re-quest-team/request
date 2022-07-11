@@ -72,52 +72,6 @@
   "fileUpload": {
     "imageUpload": "Bild hochladen"
   },
-  "quests": {
-    "crypto": {
-      "playView": {
-        "encryptedWord": "Verschlüsseltes Wort",
-        "codeWord": "Code Wort",
-        "decrypt": "Entschlüsseln"
-      },
-      "editView": {
-        "labelTask": "Aufgabenstellung",
-        "labelCodeWord": "Codewort",
-        "labelEncryptedWord": "Verschlüsseltes Wort"
-      },
-      "title": "Kryptographie",
-      "description": "Hier muss ein Codewort entschlüsselt werden. Das Wort wird mit ROT13 / Cäsar-Chiffre verschlüsselt."
-    },
-    "multiplechoice": {
-      "playView": {
-        "choices": "Antwortmöglichkeiten:",
-        "submit": "Abgabe"
-      },
-      "editView": {
-        "labelTask": "Frage",
-        "labelCorrectAnswer": "Richtige Antwort",
-        "labelWrongAnswer": "Falsche Antwort"
-      },
-      "title": "Multiple-Choice-Frage",
-      "description": "Hier muss eine Multiple-Choice-Frage beantwortet werden. Es gibt eine Correcte Antwort und beliebig viele Flaschen Antworten."
-    }
-  },
-  "media": {
-    "text": {
-      "editView": {
-        "title": "Text"
-      },
-      "title": "Text",
-      "description": "Hier kann ein einfacher Text angezeigt werden"
-    },
-    "youtube": {
-      "editView": {
-        "title": "Youtube Link",
-        "labelStart": "Startzeit",
-        "labelEnd": "Endzeit"
-      },
-      "description": "Hier kann ein Youtube Video eingebunden werden"
-    }
-  },
   "features": {
     "game": {
       "gameForm": {
@@ -147,6 +101,7 @@
         "titleAddElement": "Element hinzufügen",
         "labelVisibility": "Sichtbarkeit",
         "labelVisibleAfterQuest": "Sichtbar nach Quest",
+        "indexOf": "Index des Quests",
         "quest": "Rätsel",
         "media": "Medien",
         "save": "Speichern"

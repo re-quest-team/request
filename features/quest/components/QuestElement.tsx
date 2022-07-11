@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import { Icon } from 'react-feather'
+import { useIntl } from 'react-intl'
 
 const variants = {
   primary: 'border-dodger-blue bg-dodger-blue text-dodger-blue',
@@ -22,7 +23,10 @@ const QuestElement = ({
   variant = 'primary',
   onClick,
 }: QuestElementProps) => {
+  const intl = useIntl()
+
   const ElementIcon = icon
+
   return (
     <div
       className="my-4 flex cursor-pointer content-center items-center rounded-xl bg-zinc-800 p-2 shadow hover:bg-zinc-700 hover:shadow-xl"
@@ -37,8 +41,10 @@ const QuestElement = ({
         <ElementIcon className="h-8 w-8" />
       </div>
       <div className="flex-1">
-        <p className="font-semibold">{title}</p>
-        <p className="text-zinc-300">{description}</p>
+        <p className="font-semibold">{intl.formatMessage({ id: title })}</p>
+        <p className="text-zinc-300">
+          {intl.formatMessage({ id: description })}
+        </p>
       </div>
     </div>
   )

@@ -5,14 +5,6 @@ import { useIntl } from 'react-intl'
 const EditView = () => {
   const intl = useIntl()
 
-  const label1 = intl.formatMessage({ id: 'quests.crypto.editView.labelTask' })
-  const label2 = intl.formatMessage({
-    id: 'quests.crypto.editView.labelCodeWord',
-  })
-  const label3 = intl.formatMessage({
-    id: 'quests.crypto.editView.labelEncryptedWord',
-  })
-
   const question = useQuestStore(state => state.question)
   const setQuestion = useQuestStore(state => state.setQuestion)
 
@@ -22,17 +14,21 @@ const EditView = () => {
   return (
     <div>
       <InputField
-        label={label1}
+        label={intl.formatMessage({ id: 'editView.labelTask' })}
         defaultValue={question}
         onChange={e => setQuestion(e.target.value)}
       ></InputField>
       <InputField
-        label={label2}
+        label={intl.formatMessage({
+          id: 'editView.labelCodeWord',
+        })}
         defaultValue={codeword}
         onChange={e => setCordeword(e.target.value)}
       ></InputField>
       <InputField
-        label={label3}
+        label={intl.formatMessage({
+          id: 'editView.labelEncryptedWord',
+        })}
         disabled
         value={codeword.replace(
           /[A-Z]/gi,

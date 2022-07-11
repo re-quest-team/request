@@ -72,52 +72,6 @@
   "fileUpload": {
     "imageUpload": "Upload Image"
   },
-  "quests": {
-    "crypto": {
-      "playView": {
-        "encryptedWord": "Encrypted word",
-        "codeWord": "Code word",
-        "decrypt": "Encrypt"
-      },
-      "editView": {
-        "labelTask": "Task",
-        "labelCodeWord": "Codeword",
-        "labelEncryptedWord": "Encrypted word"
-      },
-      "title": "Cryptography",
-      "description": "A code word must be decrypted here. The word is encrypted with ROT13 / Caesar cipher."
-    },
-    "multiplechoice": {
-      "playView": {
-        "choices": "Possible answers:",
-        "submit": "Submit"
-      },
-      "editView": {
-        "labelTask": "Question",
-        "labelCorrectAnswer": "Correct Answer",
-        "labelWrongAnswer": "Wrong Answer"
-      },
-      "title": "Multiple Choice Question",
-      "description": "A Multiple Choice Question must be answered here. You can define one correct Answer and an arbitrary amount of wrong answers."
-    }
-  },
-  "media": {
-    "text": {
-      "editView": {
-        "title": "Text"
-      },
-      "title": "Text",
-      "description": "A simple text can be shown here"
-    },
-    "youtube": {
-      "editView": {
-        "title": "Youtube link",
-        "labelStart": "Start time",
-        "labelEnd": "End time"
-      },
-      "description": "You can add a Youtube video here"
-    }
-  },
   "features": {
     "game": {
       "gameForm": {
@@ -147,6 +101,7 @@
         "titleAddElement": "Add Element",
         "labelVisibility": "Visibility",
         "labelVisibleAfterQuest": "Visible after quest",
+        "indexOf": "Index of quest",
         "quest": "Quest",
         "media": "Media",
         "save": "Save"

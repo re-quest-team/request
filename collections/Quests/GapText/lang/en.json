@@ -1,0 +1,15 @@
+{
+  "playView": {
+    "taskPrompt": "Drag words from below to the appropriate place",
+    "submit": "Submit"
+  },
+  "editView": {
+    "correctTitle": "Gap text",
+    "correctPlaceholder": "E.g.: Tom has a [red] car with [racing] [stripes].",
+    "correctTip": "TIP: You add a gap with the corresponding answer by writing: [YourAnswer]",
+    "falseTitle": "False answers",
+    "falsePlaceholder": "E.g.: wrong, cat, dog, yogurt"
+  },
+  "title": "Gap Text",
+  "description": "Solve a gap text. Each gap has one correct and an arbitrary amount of incorrect answers."
+}

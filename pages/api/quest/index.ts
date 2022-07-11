@@ -1,5 +1,5 @@
 import prisma from '@/lib/prisma'
-import { QuestCreateSchema } from '@/prisma/generated/schemas/createOneQuest.schema'
+// import { QuestCreateSchema } from '@/prisma/generated/schemas/createOneQuest.schema'
 import { APIError } from '@/types'
 import { Quest } from '@prisma/client'
 import type { NextApiRequest, NextApiResponse } from 'next'

@@ -1,0 +1,14 @@
+{
+  "playView": {
+    "encryptedWord": "Encrypted word",
+    "codeWord": "Code word",
+    "decrypt": "Encrypt"
+  },
+  "editView": {
+    "labelTask": "Task",
+    "labelCodeWord": "Codeword",
+    "labelEncryptedWord": "Encrypted word"
+  },
+  "title": "Cryptography",
+  "description": "A code word must be decrypted here. The word is encrypted with ROT13 / Caesar cipher."
+}

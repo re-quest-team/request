@@ -1,12 +1,17 @@
-import { useIframeStore } from './store'
+import { useIframeStore } from '@/collections/Media/Iframe/store'
 import { TextArea } from '@/components/Elements/FormElements/TextArea'
 import { InputField } from '@/components/Elements/FormElements'
+import { useIntl } from 'react-intl'
 
 const EditView = () => {
-  const link = useIframeStore(state => state.link)
-  const setLink = useIframeStore(state => state.setLink)
+  const intl = useIntl()
   const title = useIframeStore(state => state.title)
+  const link = useIframeStore(state => state.link)
+  const height = useIframeStore(state => state.height)
   const setTitle = useIframeStore(state => state.setTitle)
+  const setLink = useIframeStore(state => state.setLink)
+  const setHeight = useIframeStore(state => state.setLink)
+  const frame = document.getElementById('iframeID')
 
   return (
     <>
@@ -16,11 +21,32 @@ const EditView = () => {
         onChange={e => setTitle(e.target.value)}
       />
       <TextArea
-        label="Website URL"
+        label={intl.formatMessage({ id: 'editView.label' })}
+        id="URL"
         defaultValue={link}
-        onChange={e => setLink(e.target.value)}
+        onChange={e => {
+          frame && frame.setAttribute('src', e.currentTarget.value)
+          setLink(e.currentTarget.value)
+        }}
         rows={4}
       ></TextArea>
+
+      <InputField
+        label={intl.formatMessage({ id: 'editView.height' })}
+        type={'text'}
+        placeholder={'500'}
+        defaultValue={height}
+        onChange={e => {
+          frame && frame.setAttribute('height', e.currentTarget.value)
+          setHeight(e.currentTarget.value)
+        }}
+      />
+      <iframe
+        id="iframeID"
+        className="relative w-full overflow-hidden pr-12"
+        width={'100%'}
+        height={'500'}
+      ></iframe>
     </>
   )
 }

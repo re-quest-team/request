@@ -4,19 +4,21 @@ import { useGameplayStore } from '@/stores/gameplay'
 import { formatDuration } from 'date-fns'
 import Link from 'next/link'
 import Particles from 'react-tsparticles'
-import { Engine } from 'tsparticles-engine'
+import type { Engine } from 'tsparticles-engine'
 import { loadSeaAnemonePreset } from 'tsparticles-preset-sea-anemone'
 
 import { FormattedMessage, useIntl } from 'react-intl'
 import formatLocale from 'lib/formatLocale'
+import { useRouter } from 'next/router'
 
 const Success = () => {
   const intl = useIntl()
+  const { locale } = useRouter()
 
   const { getDuration } = useGameplayStore()
 
-  const particlesInit = async (main: Engine) => {
-    await loadSeaAnemonePreset(main)
+  const particlesInit = async (engine: Engine) => {
+    await loadSeaAnemonePreset(engine)
   }
 
   return (
@@ -25,6 +27,7 @@ const Success = () => {
         options={{
           preset: 'seaAnemone',
         }}
+        // @ts-ignore
         init={particlesInit}
       />
       <Modal
@@ -40,7 +43,7 @@ const Success = () => {
             </b>
             :{' '}
             {formatDuration(getDuration(), {
-              locale: formatLocale(),
+              locale: formatLocale(locale),
             })}
           </div>
           <Link href="/">

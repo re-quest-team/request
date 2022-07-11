@@ -1,0 +1,18 @@
+{
+  "playView": {
+    "labelAnswer": "Antwort",
+    "check": "Überprüfen"
+  },
+  "editView": {
+    "labelTask": "Aufgabenstellung",
+    "labelAnswer": "Antwort",
+    "labelUnit": "Einheit"
+  },
+  "validation": {
+    "questionRequired": "Frage muss gestellt werden!",
+    "nanInvalid": "NaN ungültig",
+    "answerRequired": "Antwort muss angegeben werden!"
+  },
+  "title": "Nummern Eingabe",
+  "description": "Hier wird eine Frage mit einer Nummer beantwortet."
+}

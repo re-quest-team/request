@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import Modal from '@/components/Modal'
 import PlayQuestButton from '@/features/quest/components/PlayQuestButton'
 import quests from '@/collections'
@@ -10,19 +12,21 @@ import useSWR from 'swr'
 import { RoomWithImageAndQuests } from '../types'
 import { Spinner } from '@/components/Elements/Spinner'
 import { useIntl } from 'react-intl'
+import QuestIntlProvider from '@/features/quest/components/QuestIntlProvider'
 
 type RoomViewProps = {
   id: string
 }
 
 const RoomView = ({ id }: RoomViewProps) => {
-  const intl = useIntl()
   const { data: room } = useSWR<RoomWithImageAndQuests, AxiosError>(
     `/api/room/${id}`,
   )
 
   const [solvedQuestIDs, setSolvedQuestIDs] = useState<string[]>([])
   const [currentQuest, setCurrentQuest] = useState<IQuest<any>>()
+  // const showAfterQuests = room?.quests?.filter(q => q.questId !== null)
+  // console.log(showAfterQuests)
 
   return (
     <ScrollContainer className="h-screen overflow-auto">
@@ -42,7 +46,7 @@ const RoomView = ({ id }: RoomViewProps) => {
             key={i}
             quest={q}
             onClick={() => {
-              const qq = quests(intl).filter(e => e.type === q.type)[0]
+              const qq = quests.filter(e => e.type === q.type)[0]
               if (qq) {
                 qq.onLoad(q.data as any)
                 if (qq.onSolve) {
@@ -64,7 +68,13 @@ const RoomView = ({ id }: RoomViewProps) => {
         title={''}
         size={currentQuest ? currentQuest.modalSize : 'medium'}
       >
-        <>{currentQuest && <currentQuest.PlayView />}</>
+        <>
+          {currentQuest && (
+            <QuestIntlProvider quest={currentQuest}>
+              <currentQuest.PlayView />
+            </QuestIntlProvider>
+          )}
+        </>
       </Modal>
     </ScrollContainer>
   )

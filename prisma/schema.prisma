@@ -23,8 +23,7 @@ model Account {
   scope             String?
   id_token          String? @db.Text
   session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
@@ -57,17 +56,22 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
+enum GameLanguage {
+  DE
+  EN
+}
+
 model Game {
-  id             String   @id @default(uuid())
-  name           String?
-  description    String?
-  germanLanguage Boolean  @default(true)
-  draft          Boolean  @default(true)
-  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId         String
-  rooms          Room[]
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @default(now())
+  id          String       @id @default(uuid())
+  name        String?
+  description String?
+  language    GameLanguage @default(DE)
+  draft       Boolean      @default(true)
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String
+  rooms       Room[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @default(now())
 }
 
 model Room {
@@ -101,11 +105,15 @@ model Quest {
   y         Float
   type      QuestType?
   data      Json?      @default(dbgenerated())
+  // showAfter  Quest?     @relation("orderRel", fields: [questId], references: [id])
+  // showBefore Quest?     @relation("orderRel")
+  // questId    String?
 }
 
 enum QuestType {
   QUEST_CRYPTO
   QUEST_MULTIPLE_CHOICE
+  QUEST_SINGLE_CHOICE
   QUEST_CODING
   QUEST_QR_SCAN
   QUEST_STATISTICS
@@ -116,8 +124,9 @@ enum QuestType {
   MEDIA_INSTAGRAM
   MEDIA_YOUTUBE
   MEDIA_IFRAME
+  QUEST_GAP_TEXT
 }
 
-generator yup {
-  provider = "prisma-yup-generator"
-}
+// generator yup {
+//   provider = "prisma-yup-generator"
+// }
