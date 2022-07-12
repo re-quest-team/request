@@ -28,18 +28,16 @@ const PlayView = () => {
           <FormattedMessage id={'playView.choices'} />
         </h3>
         {shuffledAnswers.map((val, index) => (
-          <>
-            <div className="m-2 text-base">
-              <input
-                type="radio"
-                key={index}
-                name="answer"
-                value={val}
-                onChange={radioHandler}
-              ></input>
-              <label htmlFor={val}>{val}</label>
-            </div>
-          </>
+          <div className="m-2 text-base" key={index}>
+            <input
+              type="radio"
+              key={index}
+              name="answer"
+              value={val}
+              onChange={radioHandler}
+            ></input>
+            <label htmlFor={val}>{val}</label>
+          </div>
         ))}
         <Button
           className="m-15 mx-auto"
