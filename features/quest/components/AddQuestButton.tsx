@@ -1,17 +1,18 @@
 import { Transition } from '@headlessui/react'
 import {
+  Bars3CenterLeftIcon,
   CalculatorIcon,
-  ChartSquareBarIcon,
-  CodeIcon,
+  ChartBarSquareIcon,
+  CodeBracketIcon,
+  ListBulletIcon,
   LockClosedIcon,
-  MenuAlt1Icon,
-  PhotographIcon,
+  PhotoIcon,
   PlusIcon,
-  PuzzleIcon,
-  QrcodeIcon,
+  PuzzlePieceIcon,
+  QrCodeIcon,
   TrashIcon,
-  ViewListIcon,
-} from '@heroicons/react/outline'
+} from '@heroicons/react/24/outline'
+
 import { QuestType } from '@prisma/client'
 import clsx from 'clsx'
 import { Fragment, RefObject } from 'react'
@@ -39,29 +40,29 @@ const renderIcon = (type?: QuestType) => {
     case 'QUEST_CRYPTO':
       return <LockClosedIcon className="h-10 w-10" />
     case 'QUEST_MULTIPLE_CHOICE':
-      return <ViewListIcon className="h-10 w-10" />
+      return <ListBulletIcon className="h-10 w-10" />
     case 'QUEST_SINGLE_CHOICE':
-      return <ViewListIcon className="h-10 w-10" />
+      return <ListBulletIcon className="h-10 w-10" />
     case 'QUEST_CODING':
-      return <CodeIcon className="h-10 w-10" />
+      return <CodeBracketIcon className="h-10 w-10" />
     case 'QUEST_QR_SCAN':
-      return <QrcodeIcon className="h-10 w-10" />
+      return <QrCodeIcon className="h-10 w-10" />
     case 'QUEST_STATISTICS':
-      return <ChartSquareBarIcon className="h-10 w-10" />
+      return <ChartBarSquareIcon className="h-10 w-10" />
     case 'QUEST_NUMBER_INPUT':
       return <CalculatorIcon className="h-10 w-10" />
     case 'QUEST_GAP_TEXT':
-      return <PuzzleIcon className="h-10 w-10" />
+      return <PuzzlePieceIcon className="h-10 w-10" />
     case 'MEDIA_TEXT':
-      return <MenuAlt1Icon className="h-10 w-10" />
+      return <Bars3CenterLeftIcon className="h-10 w-10" />
     case 'MEDIA_IMAGE':
-      return <PhotographIcon className="h-10 w-10" />
+      return <PhotoIcon className="h-10 w-10" />
     case 'MEDIA_INSTAGRAM':
       return <Instagram className="h-10 w-10" />
     case 'MEDIA_YOUTUBE':
       return <Youtube className="h-10 w-10" />
     case 'MEDIA_IFRAME':
-      return <CodeIcon className="h-10 w-10" />
+      return <CodeBracketIcon className="h-10 w-10" />
     default:
       return <PlusIcon className="h-10 w-10" />
   }

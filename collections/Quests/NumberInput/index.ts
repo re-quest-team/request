@@ -1,4 +1,4 @@
-import { CalculatorIcon } from '@heroicons/react/outline'
+import { CalculatorIcon } from '@heroicons/react/24/outline'
 import { IQuest } from '@/collections/types'
 import EditView from './EditView'
 import PlayView from './PlayView'

@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { Button, PillButton } from '@/components/Elements/Button'
 import { Spacer } from '@/components/Elements/Spacer'
-import { PlusCircleIcon } from '@heroicons/react/outline'
+import { PlusCircleIcon } from '@heroicons/react/24/outline'
 import { Quest } from '@prisma/client'
 import { useRef, useState } from 'react'
 import { ArrowUpRight } from 'react-feather'

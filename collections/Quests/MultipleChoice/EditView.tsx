@@ -2,7 +2,7 @@ import { Button, PillButton } from '@/components/Elements/Button'
 import { InputField } from '@/components/Elements/FormElements'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { useQuestStore } from './store'
-import { MinusCircleIcon, PlusCircleIcon } from '@heroicons/react/outline'
+import { MinusCircleIcon, PlusCircleIcon } from '@heroicons/react/24/outline'
 import randomize from '@/utils/randomize'
 
 const EditView = () => {

@@ -1,4 +1,4 @@
-import { PhotographIcon } from '@heroicons/react/outline'
+import { PhotoIcon } from '@heroicons/react/24/outline'
 import { IQuest } from '@/collections/types'
 import EditView from './EditView'
 import PlayView from './PlayView'
@@ -15,7 +15,7 @@ const ImageMedia: IQuest<Data> = {
   type: 'MEDIA_IMAGE',
   title: 'title',
   description: 'description',
-  icon: PhotographIcon,
+  icon: PhotoIcon,
   EditView,
   PlayView,
   onLoad: ({ link }) => useImageStore.setState(state => ({ ...state, link })),

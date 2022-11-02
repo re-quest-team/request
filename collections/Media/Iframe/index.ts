@@ -1,4 +1,4 @@
-import { CodeIcon, MenuAlt1Icon } from '@heroicons/react/outline'
+import { CodeBracketIcon } from '@heroicons/react/24/outline'
 import { IQuest } from '@/collections/types'
 import EditView from '@/collections/Media/Iframe/EditView'
 import PlayView from '@/collections/Media/Iframe/PlayView'
@@ -16,7 +16,7 @@ const IframeMedia: IQuest<Data> = {
   type: 'MEDIA_IFRAME',
   title: 'title',
   description: 'description',
-  icon: CodeIcon,
+  icon: CodeBracketIcon,
   EditView,
   PlayView,
   onLoad: ({ link, title }) =>

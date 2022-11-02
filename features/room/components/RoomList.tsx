@@ -1,6 +1,6 @@
 import { PillButton } from '@/components/Elements/Button'
 import reorder from '@/utils/reorder'
-import { PlusIcon } from '@heroicons/react/outline'
+import { PlusIcon } from '@heroicons/react/24/outline'
 import { Game, Room, S3Image } from '@prisma/client'
 import { AxiosError } from 'axios'
 import { useEffect, useState } from 'react'

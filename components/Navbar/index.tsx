@@ -1,5 +1,5 @@
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { MenuIcon, XIcon } from '@heroicons/react/outline'
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
@@ -32,38 +32,36 @@ const Navbar = () => {
                     <FormattedMessage id="navbar.openMenu" />
                   </span>
                   {open ? (
-                    <XIcon className="block h-6 w-6" aria-hidden="true" />
+                    <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
                   ) : (
-                    <MenuIcon className="block h-6 w-6" aria-hidden="true" />
+                    <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
                   )}
                 </Disclosure.Button>
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
                   <Link href={'/'} passHref>
-                    <a>
-                      <div className="relative block h-8 w-20 lg:hidden">
-                        <Image
-                          src={require('assets/logos/request-logo-single.svg')}
-                          alt="Logo simple"
-                          layout="fill"
-                        />
-                      </div>
-                      <div className="relative hidden h-8 w-28 lg:block">
-                        <Image
-                          src={require('assets/logos/request-logo.svg')}
-                          alt="Logo"
-                          layout="fill"
-                        />
-                      </div>
-                    </a>
+                    <div className="relative block h-8 w-20 lg:hidden">
+                      <Image
+                        src={require('assets/logos/request-logo-single.svg')}
+                        alt="Logo simple"
+                        layout="fill"
+                      />
+                    </div>
+                    <div className="relative hidden h-8 w-28 lg:block">
+                      <Image
+                        src={require('assets/logos/request-logo.svg')}
+                        alt="Logo"
+                        layout="fill"
+                      />
+                    </div>
                   </Link>
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     {navigation.map(item => (
                       <Link key={item.key} href={item.href}>
-                        <a
+                        <p
                           className={clsx(
                             router.pathname.includes(item.href)
                               ? 'bg-slate-800 text-white'
@@ -77,7 +75,7 @@ const Navbar = () => {
                           }
                         >
                           <FormattedMessage id={'navbar.' + item.key} />
-                        </a>
+                        </p>
                       </Link>
                     ))}
                   </div>

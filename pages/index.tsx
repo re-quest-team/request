@@ -1,16 +1,8 @@
 import { Button } from '@/components/Elements/Button'
 import { Spacer } from '@/components/Elements/Spacer'
 import type { NextPage } from 'next'
-import { ArrowRightIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
-import {
-  AcademicCapIcon,
-  AdjustmentsIcon,
-  CollectionIcon,
-  DeviceMobileIcon,
-  PuzzleIcon,
-  SearchIcon,
-} from '@heroicons/react/outline'
+
 import FeatureCard from '@/components/Card'
 import { Game } from '@prisma/client'
 import useSWR from 'swr'
@@ -22,6 +14,15 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import JotformEmbed from 'react-jotform-embed'
+import {
+  AcademicCapIcon,
+  AdjustmentsHorizontalIcon,
+  ArrowRightIcon,
+  DevicePhoneMobileIcon,
+  MagnifyingGlassIcon,
+  PuzzlePieceIcon,
+  Squares2X2Icon,
+} from '@heroicons/react/24/outline'
 
 const Home: NextPage = () => {
   const { data: games } = useSWR<
@@ -93,7 +94,7 @@ const Home: NextPage = () => {
         <FeatureCard
           title={intl.formatMessage({ id: 'page.home.card1' })}
           color="bg-red-400"
-          icon={SearchIcon}
+          icon={MagnifyingGlassIcon}
         >
           <FormattedMessage id="page.home.card1text" />
         </FeatureCard>
@@ -107,28 +108,28 @@ const Home: NextPage = () => {
         <FeatureCard
           title={intl.formatMessage({ id: 'page.home.card3' })}
           color="bg-purple-400"
-          icon={CollectionIcon}
+          icon={Squares2X2Icon}
         >
           <FormattedMessage id="page.home.card3text" />
         </FeatureCard>
         <FeatureCard
           title={intl.formatMessage({ id: 'page.home.card4' })}
           color="bg-pink-400"
-          icon={AdjustmentsIcon}
+          icon={AdjustmentsHorizontalIcon}
         >
           <FormattedMessage id="page.home.card4text" />
         </FeatureCard>
         <FeatureCard
           title={intl.formatMessage({ id: 'page.home.card5' })}
           color="bg-orange-400"
-          icon={DeviceMobileIcon}
+          icon={DevicePhoneMobileIcon}
         >
           <FormattedMessage id="page.home.card5text" />
         </FeatureCard>
         <FeatureCard
           title={intl.formatMessage({ id: 'page.home.card6' })}
           color="bg-green-400"
-          icon={PuzzleIcon}
+          icon={PuzzlePieceIcon}
         >
           <FormattedMessage id="page.home.card6text" />
         </FeatureCard>

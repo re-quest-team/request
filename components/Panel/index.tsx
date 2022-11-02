@@ -1,5 +1,9 @@
 import { Disclosure, Transition } from '@headlessui/react'
-import { ChevronUpIcon, MenuIcon, TrashIcon } from '@heroicons/react/outline'
+import {
+  Bars3Icon,
+  ChevronUpIcon,
+  TrashIcon,
+} from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import {
   Draggable,
@@ -74,7 +78,7 @@ const PanelWithOptionalDragHandle = ({
               <span className="flex-1 font-semibold">{header}</span>
               {provided && (
                 <div {...provided.dragHandleProps}>
-                  <MenuIcon className="mx-2 h-5 w-5" />
+                  <Bars3Icon className="mx-2 h-5 w-5" />
                 </div>
               )}
               {onDelete && (

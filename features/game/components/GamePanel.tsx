@@ -8,7 +8,7 @@ import { useSWRConfig } from 'swr'
 import { deleteGame } from '../api/deleteGame'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { deleteToast } from '@/components/Toasts'
-import { DocumentDownloadIcon } from '@heroicons/react/solid'
+import { ArrowDownOnSquareIcon } from '@heroicons/react/24/outline'
 import 'node-self'
 import QRCodeStyling, { FileExtension } from 'qr-code-styling'
 import QrCodeConfig from '@/features/game/components/QrCode/QrCodeConfig'
@@ -123,7 +123,7 @@ const GamePanel = ({ id, name, description, language }: Game) => {
                 </div>
                 <Button
                   onClick={onDownload}
-                  endIcon={<DocumentDownloadIcon className="h-4" />}
+                  endIcon={<ArrowDownOnSquareIcon className="h-4" />}
                 >
                   <FormattedMessage id="features.game.gamePanel.download" />
                 </Button>
