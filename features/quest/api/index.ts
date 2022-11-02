@@ -1,12 +1,28 @@
 import { createToast, deleteToast, updateToast } from '@/components/Toasts'
-import { Quest } from '@prisma/client'
+import useEditGameStore from '@/stores/edit'
+import { Quest, Room, S3Image } from '@prisma/client'
 import { AxiosResponse } from 'axios'
-import { mutate } from 'swr'
+import { useEffect } from 'react'
+import useSWR, { mutate } from 'swr'
 import { createQuest } from './createQuest'
 import { deleteQuest } from './deleteQuest'
 import { updateQuest } from './updateQuest'
 
 const useQuests = (roomId: string) => {
+  const sharedQuests = useEditGameStore(state => state.quests)
+  const setSharedQuests = useEditGameStore(state => state.setQuests)
+
+  const { data: room } = useSWR<
+    Room & {
+      quests: Quest[]
+      image: S3Image | null
+    }
+  >(`/api/room/${roomId}`)
+
+  useEffect(() => {
+    if (room) setSharedQuests(room?.quests)
+  }, [room, setSharedQuests])
+
   const mutation = async (request: Promise<AxiosResponse<Quest>>) => {
     const { data: quest } = await request
     mutate(`/api/room/${roomId}`, quest, {
@@ -39,6 +55,7 @@ const useQuests = (roomId: string) => {
   }
 
   return {
+    quests: sharedQuests,
     createQuest: APICreateQuest,
     updateQuest: APIUpdateQuest,
     deleteQuest: APIDeleteQuest,

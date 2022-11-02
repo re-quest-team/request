@@ -20,15 +20,21 @@ import {
   CursorArrowRippleIcon,
 } from '@heroicons/react/24/outline'
 import RoomSettings from './RoomSettings'
+import { AxiosError } from 'axios'
 
 type Props = {
-  room: Room & {
-    image: S3Image | null
-    quests: Quest[]
-  }
+  roomId: string
 }
 
-const RoomPanel = ({ room }: Props) => {
+const RoomPanel = ({ roomId }: Props) => {
+  const { data: room } = useSWR<
+    Room & {
+      image: S3Image | null
+      quests: Quest[]
+    },
+    AxiosError
+  >(`/api/room/${roomId}`)
+
   const [imageUrl, setImageUrl] = useState(room?.image?.url)
 
   const setGameRoom = useEditGameStore(state => state.setGameRoom)
@@ -36,11 +42,11 @@ const RoomPanel = ({ room }: Props) => {
   const setCursor = useEditGameStore(state => state.setCursor)
   const others = useEditGameStore(state => state.liveblocks.others)
   const othersCursors = others
-    .filter(user => user.presence.gameRoom === room.id)
+    .filter(user => user.presence.gameRoom === room?.id)
     .map(user => user.presence.cursor)
 
   useEffect(() => {
-    setGameRoom(room.id)
+    if (room) setGameRoom(room.id)
   })
 
   useEffect(() => {
@@ -50,9 +56,14 @@ const RoomPanel = ({ room }: Props) => {
 
   const ref = useRef<HTMLDivElement>(null)
 
+  if (!room) return <></>
+
   return (
     <>
-      <RoomSettings roomId={room.id} />
+      <RoomSettings
+        roomId={room.id}
+        onDelete={() => mutate(`/api/game/${room.gameId}`)}
+      />
       {imageUrl && (
         <div
           ref={ref}

@@ -20,7 +20,7 @@ type QuestImagePlacerProps = {
 
 const QuestImagePlacer = ({
   img,
-  quests,
+  quests: abc,
   roomId,
   maxQuests = 3,
 }: QuestImagePlacerProps) => {
@@ -32,16 +32,7 @@ const QuestImagePlacer = ({
   const [questModalOpen, setQuestModalOpen] = useState(false)
   const [currentQuest, setCurrentQuest] = useState<Quest>()
 
-  const { createQuest, updateQuest, deleteQuest } = useQuests(roomId)
-
-  const sharedQuests = useEditGameStore(state => state.quests)
-  const setSharedQuests = useEditGameStore(state => state.setQuests)
-
-  useEffect(() => {
-    setSharedQuests(quests)
-
-    return () => setSharedQuests([])
-  }, [quests, setSharedQuests])
+  const { quests, createQuest, updateQuest, deleteQuest } = useQuests(roomId)
 
   return (
     <div>
@@ -56,7 +47,7 @@ const QuestImagePlacer = ({
       <Spacer size="xs" />
       <div
         className={`relative mx-auto w-full max-w-6xl overflow-visible ${
-          editMode && sharedQuests.length < maxQuests && 'cursor-crosshair'
+          editMode && quests.length < maxQuests && 'cursor-crosshair'
         }`}
         ref={ref}
       >
@@ -64,7 +55,7 @@ const QuestImagePlacer = ({
           className="select-none rounded shadow"
           src={img}
           onClick={async e => {
-            if (editMode && sharedQuests.length < maxQuests) {
+            if (editMode && quests.length < maxQuests) {
               const newQuest = await createQuest({
                 x:
                   (e.clientX - ref.current?.getBoundingClientRect().left!) /
@@ -87,7 +78,7 @@ const QuestImagePlacer = ({
             editMode && 'bg-black bg-opacity-40'
           }`}
         >
-          {editMode && sharedQuests.length === 0 && (
+          {editMode && quests.length === 0 && (
             <>
               <div className="relative m-auto flex flex-col items-center">
                 <PlusCircleIcon className="mb-4 h-10 w-10" />
@@ -103,7 +94,7 @@ const QuestImagePlacer = ({
               </div>
             </>
           )}
-          {sharedQuests?.map((q, i) => (
+          {quests?.map((q, i) => (
             <AddQuestButton
               dragRef={ref}
               x={q.x}
@@ -111,13 +102,6 @@ const QuestImagePlacer = ({
               type={q.type || undefined}
               onMoveEnd={async movedQuest => {
                 updateQuest(q.id, movedQuest)
-                setSharedQuests([
-                  ...quests.filter(e => e.id !== q.id),
-                  {
-                    ...q,
-                    ...movedQuest,
-                  },
-                ])
               }}
               onDelete={async () => deleteQuest(q.id)}
               key={i}
@@ -132,7 +116,7 @@ const QuestImagePlacer = ({
       </div>
       <Spacer />
       <PillButton variant="secondary" className="mx-auto">
-        {sharedQuests.length}{' '}
+        {quests.length}{' '}
         <FormattedMessage id="features.quest.questImagePlacer.of" /> {maxQuests}{' '}
         <FormattedMessage id="features.quest.questImagePlacer.quests" />
       </PillButton>

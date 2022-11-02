@@ -12,16 +12,6 @@ export default async function RoomStudio({
 }) {
   const [gameId, roomId] = params.id
 
-  const room = await prisma.room.findFirst({
-    where: {
-      id: roomId,
-    },
-    include: {
-      quests: true,
-      image: true,
-    },
-  })
-
   if (!roomId) {
     const game = await prisma.game.findFirst({
       where: {
@@ -35,5 +25,5 @@ export default async function RoomStudio({
     return <RoomRedirect gameId={gameId} roomId={game?.rooms[0].id!} />
   }
 
-  if (room) return <RoomPanel room={room} />
+  if (roomId) return <RoomPanel roomId={roomId} />
 }

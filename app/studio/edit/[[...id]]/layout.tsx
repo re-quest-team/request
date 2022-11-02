@@ -12,27 +12,12 @@ export default async function Layout({
 }) {
   const [gameId, roomId] = params.id
 
-  const game = await prisma.game.findFirst({
-    where: {
-      id: gameId,
-    },
-    include: {
-      rooms: {
-        include: {
-          image: true,
-        },
-      },
-    },
-  })
-
-  if (!game) throw new Error('not found')
-
   return (
     <>
-      <GameForm id={game.id} />
+      <GameForm id={gameId} />
       <div className="flex space-x-4">
-        <div className="w-28">
-          <RoomSidebar game={game} current={roomId} />
+        <div className="w-20 sm:w-32 md:w-40">
+          <RoomSidebar gameId={gameId} current={roomId} />
         </div>
         <div className="flex-1">{children}</div>
       </div>
