@@ -1,6 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 export default function RoomRedirect({
   gameId,
@@ -11,9 +12,9 @@ export default function RoomRedirect({
 }) {
   const router = useRouter()
 
-  router.replace(`/studio/edit/${gameId}/${roomId}`, {
-    forceOptimisticNavigation: true,
-  })
+  useEffect(() => {
+    router.replace(`/studio/edit/${gameId}/${roomId}`)
+  }, [gameId, roomId, router])
 
   return <p>Redirecting...</p>
 }
