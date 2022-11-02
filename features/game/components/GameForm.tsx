@@ -1,3 +1,5 @@
+'use client'
+
 import { Button } from '@/components/Elements/Button'
 import { InputField, TextArea } from '@/components/Elements/FormElements'
 import Toggle from '@/components/Elements/Toggle'
@@ -11,6 +13,7 @@ import useSWR from 'swr'
 import * as yup from 'yup'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { createToast } from '@/components/Toasts'
+import { useState } from 'react'
 
 type GameFormProps = {
   id: string
@@ -69,41 +72,61 @@ const GameForm = ({ id }: GameFormProps) => {
     const updatedGame = updatedGameRequest.data
 
     await mutate(updatedGame)
+
+    setIsTitleEditMode(false)
   })
+
+  const [isTitleEditMode, setIsTitleEditMode] = useState(false)
 
   return (
     <form onSubmit={onSubmit}>
-      <InputField
-        label={intl.formatMessage({ id: 'features.game.gameForm.labelName' })}
-        defaultValue={data?.name ?? ''}
-        registration={register('name')}
-        error={errors['name']}
-      ></InputField>
-      <TextArea
-        label={intl.formatMessage({
-          id: 'features.game.gameForm.labelDescription',
-        })}
-        rows={4}
-        defaultValue={data?.description ?? ''}
-        registration={register('description')}
-        error={errors['description']}
-      />
-      <Toggle
-        label={intl.formatMessage({ id: 'languages.german' })}
-        defaultChecked={data?.language === 'DE'}
-        registration={register('language')}
-        error={errors['language']}
-      />
-      <Toggle
-        label={intl.formatMessage({ id: 'features.game.gameForm.labelDraft' })}
-        defaultChecked={data?.draft}
-        registration={register('draft')}
-        error={errors['draft']}
-      />
+      {!isTitleEditMode && (
+        <p onClick={() => setIsTitleEditMode(true)}>{data?.name}</p>
+      )}
+      {isTitleEditMode && (
+        <>
+          <InputField
+            label={intl.formatMessage({
+              id: 'features.game.gameForm.labelName',
+            })}
+            defaultValue={data?.name ?? ''}
+            registration={register('name')}
+            error={errors['name']}
+          ></InputField>
 
-      <Button type="submit" disabled={isValidating} isLoading={isValidating}>
-        <FormattedMessage id="features.game.gameForm.submit" />
-      </Button>
+          <TextArea
+            label={intl.formatMessage({
+              id: 'features.game.gameForm.labelDescription',
+            })}
+            rows={4}
+            defaultValue={data?.description ?? ''}
+            registration={register('description')}
+            error={errors['description']}
+          />
+          <Toggle
+            label={intl.formatMessage({ id: 'languages.german' })}
+            defaultChecked={data?.language === 'DE'}
+            registration={register('language')}
+            error={errors['language']}
+          />
+          <Toggle
+            label={intl.formatMessage({
+              id: 'features.game.gameForm.labelDraft',
+            })}
+            defaultChecked={data?.draft}
+            registration={register('draft')}
+            error={errors['draft']}
+          />
+          <Button
+            type="submit"
+            size="sm"
+            disabled={isValidating}
+            isLoading={isValidating}
+          >
+            <FormattedMessage id="features.game.gameForm.submit" />
+          </Button>
+        </>
+      )}
     </form>
   )
 }

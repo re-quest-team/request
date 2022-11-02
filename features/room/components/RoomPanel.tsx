@@ -19,6 +19,7 @@ import {
   CursorArrowRaysIcon,
   CursorArrowRippleIcon,
 } from '@heroicons/react/24/outline'
+import RoomSettings from './RoomSettings'
 
 type Props = {
   room: Room & {
@@ -28,9 +29,7 @@ type Props = {
 }
 
 const RoomPanel = ({ room }: Props) => {
-  const intl = useIntl()
-
-  const [imageUrl, setImageUrl] = useState('')
+  const [imageUrl, setImageUrl] = useState(room?.image?.url)
 
   const setGameRoom = useEditGameStore(state => state.setGameRoom)
 
@@ -53,47 +52,49 @@ const RoomPanel = ({ room }: Props) => {
 
   return (
     <>
-      <div className="relative my-4 w-full rounded">
-        <FileUpload
-          onChange={url =>
-            setImageUrl(`${process.env.NEXT_PUBLIC_S3_BASE_URL}/${url}`)
-          }
-          roomId={room.id}
-        />
-
-        {imageUrl && (
-          <div
-            ref={ref}
-            className="relative"
-            onPointerMove={e => {
-              setCursor({
-                x:
-                  (e.clientX - ref.current?.getBoundingClientRect().left!) /
-                  ref.current?.clientWidth!,
-                y:
-                  (e.clientY - ref.current?.getBoundingClientRect().top!) /
-                  ref.current?.clientHeight!,
-              })
-            }}
-          >
-            {othersCursors.map((c, i) => (
-              <div
-                className="absolute z-20"
-                key={i}
-                // @ts-ignore
-                style={{ top: `${c.y * 100}%`, left: `${c.x * 100}%` }}
-              >
-                <CursorArrowRippleIcon className="h-6 w-6 text-orange-500" />
-              </div>
-            ))}
-            <QuestImagePlacer
-              img={imageUrl}
-              quests={room?.quests || []}
-              roomId={room!.id}
-            />
-          </div>
-        )}
-      </div>
+      <RoomSettings roomId={room.id} />
+      {imageUrl && (
+        <div
+          ref={ref}
+          className="relative w-full rounded"
+          onPointerMove={e => {
+            setCursor({
+              x:
+                (e.clientX - ref.current?.getBoundingClientRect().left!) /
+                ref.current?.clientWidth!,
+              y:
+                (e.clientY - ref.current?.getBoundingClientRect().top!) /
+                ref.current?.clientHeight!,
+            })
+          }}
+        >
+          {othersCursors.map((c, i) => (
+            <div
+              className="absolute z-20"
+              key={i}
+              // @ts-ignore
+              style={{ top: `${c.y * 100}%`, left: `${c.x * 100}%` }}
+            >
+              <CursorArrowRippleIcon className="h-6 w-6 text-orange-500" />
+            </div>
+          ))}
+          <QuestImagePlacer
+            img={imageUrl}
+            quests={room?.quests || []}
+            roomId={room!.id}
+          />
+        </div>
+      )}
+      {!imageUrl && (
+        <div className="flex h-60 items-center justify-center rounded bg-zinc-800 p-4">
+          <FileUpload
+            onChange={url =>
+              setImageUrl(`${process.env.NEXT_PUBLIC_S3_BASE_URL}/${url}`)
+            }
+            roomId={room.id}
+          />
+        </div>
+      )}
     </>
   )
 }

@@ -32,7 +32,6 @@ const bgVariant = {
 }
 
 const renderIcon = (type?: QuestType) => {
-  console.log(type)
   switch (type) {
     case 'QUEST_CRYPTO':
       return <LockClosedIcon className="h-10 w-10" />

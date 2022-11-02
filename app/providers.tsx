@@ -1,9 +1,7 @@
 'use client'
 
 import '../styles/globals.css'
-import type { AppProps } from 'next/app'
-import Layout from '@/components/Layout'
-import { SessionProvider, SessionProviderProps } from 'next-auth/react'
+import { SessionProvider } from 'next-auth/react'
 
 import '@fontsource/inter'
 import '@fontsource/inter/600.css'

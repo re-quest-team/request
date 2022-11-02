@@ -1,5 +1,6 @@
 import { Spacer } from '@/components/Elements/Spacer'
-import RoomSidebar from '@/features/room/components/GameRoomSidebar'
+import GameForm from '@/features/game/components/GameForm'
+import RoomSidebar from '@/features/room/components/RoomSidebar'
 import prisma from '@/lib/prisma'
 
 export default async function Layout({
@@ -11,7 +12,7 @@ export default async function Layout({
 }) {
   const [gameId, roomId] = params.id
 
-  const data = await prisma.game.findFirst({
+  const game = await prisma.game.findFirst({
     where: {
       id: gameId,
     },
@@ -24,13 +25,14 @@ export default async function Layout({
     },
   })
 
-  if (!data) throw new Error('not found')
+  if (!game) throw new Error('not found')
 
   return (
     <>
+      <GameForm id={game.id} />
       <div className="flex space-x-4">
         <div className="w-28">
-          <RoomSidebar game={data} current={roomId} />
+          <RoomSidebar game={game} current={roomId} />
         </div>
         <div className="flex-1">{children}</div>
       </div>

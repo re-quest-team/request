@@ -1,7 +1,9 @@
 import { Spacer } from '@/components/Elements/Spacer'
-import RoomSidebar from '@/features/room/components/GameRoomSidebar'
+import RoomSidebar from '@/features/room/components/RoomSidebar'
 import RoomPanel from '@/features/room/components/RoomPanel'
 import prisma from '@/lib/prisma'
+import { useRouter } from 'next/navigation'
+import RoomRedirect from '@/features/room/components/RoomRedirect'
 
 export default async function RoomStudio({
   params,
@@ -10,7 +12,7 @@ export default async function RoomStudio({
 }) {
   const [gameId, roomId] = params.id
 
-  const data = await prisma.room.findFirst({
+  const room = await prisma.room.findFirst({
     where: {
       id: roomId,
     },
@@ -20,7 +22,18 @@ export default async function RoomStudio({
     },
   })
 
-  if (!data) throw new Error('not found')
+  if (!roomId) {
+    const game = await prisma.game.findFirst({
+      where: {
+        id: gameId,
+      },
+      include: {
+        rooms: true,
+      },
+    })
 
-  return <RoomPanel room={data} />
+    return <RoomRedirect gameId={gameId} roomId={game?.rooms[0].id!} />
+  }
+
+  if (room) return <RoomPanel room={room} />
 }

@@ -6,7 +6,7 @@ import { Spinner } from '@/components/Elements/Spinner'
 const variants = {
   primary: 'bg-white text-zinc-900 hover:bg-zinc-200',
   inverse: 'bg-white text-blue-600 hover:bg-blue-600:text-white',
-  danger: 'bg-red-600 text-white hover:bg-red-50:text-red-600',
+  danger: 'bg-red-600 text-red-200 hover:bg-red-50:text-red-600 border-red-500',
 }
 
 const sizes = {

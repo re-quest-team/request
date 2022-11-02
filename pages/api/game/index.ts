@@ -44,6 +44,12 @@ const handler = async (
 
       const game = await prisma.game.create({ data: { ...body, userId } })
 
+      const room = await prisma.room.create({
+        data: {
+          gameId: game.id,
+        },
+      })
+
       res.status(200).json(game)
     } catch (e) {
       console.error(e)
