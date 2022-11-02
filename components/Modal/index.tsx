@@ -1,5 +1,5 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { ArrowLeftIcon } from '@heroicons/react/outline'
+import { ArrowLeftIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import { Fragment, useState } from 'react'
 

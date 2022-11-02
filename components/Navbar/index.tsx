@@ -20,8 +20,6 @@ const navigation = [
 const Navbar = () => {
   const pathname = usePathname()
 
-  console.log(pathname)
-
   const { data: session } = useSession()
 
   // if (!pathname) return <></>

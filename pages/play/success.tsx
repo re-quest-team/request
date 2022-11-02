@@ -10,10 +10,11 @@ import { loadSeaAnemonePreset } from 'tsparticles-preset-sea-anemone'
 import { FormattedMessage, useIntl } from 'react-intl'
 import formatLocale from 'lib/formatLocale'
 import { useRouter } from 'next/router'
+import { useIntlStore } from '@/stores/intl'
 
 const Success = () => {
   const intl = useIntl()
-  const { locale } = useRouter()
+  const locale = useIntlStore(store => store.locale)
 
   const { getDuration } = useGameplayStore()
 

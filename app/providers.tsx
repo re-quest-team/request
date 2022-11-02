@@ -18,6 +18,7 @@ import flatten from 'flat'
 import de from '../lang/de.json'
 import en from '../lang/en.json'
 import ToastIntlProidver from '@/components/Toasts/ToastIntlProvider'
+import { useIntlStore } from '@/stores/intl'
 
 const messages = {
   en,
@@ -25,8 +26,10 @@ const messages = {
 }
 
 export default function Providers({ children }: { children: React.ReactNode }) {
+  const locale = useIntlStore(state => state.locale)
+
   return (
-    <IntlProvider locale={'de'} messages={flatten(messages['de'])}>
+    <IntlProvider locale={locale} messages={flatten(messages[locale])}>
       <SessionProvider>
         <SWRConfig
           value={{

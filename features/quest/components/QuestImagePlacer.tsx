@@ -3,12 +3,13 @@ import { Button, PillButton } from '@/components/Elements/Button'
 import { Spacer } from '@/components/Elements/Spacer'
 import { PlusCircleIcon } from '@heroicons/react/24/outline'
 import { Quest } from '@prisma/client'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ArrowUpRight } from 'react-feather'
 import useQuests from '../api'
 import AddQuestButton from './AddQuestButton'
 import QuestTypeModal from './QuestTypeModal'
 import { FormattedMessage, useIntl } from 'react-intl'
+import useEditGameStore from '@/stores/edit'
 
 type QuestImagePlacerProps = {
   img: string
@@ -33,6 +34,15 @@ const QuestImagePlacer = ({
 
   const { createQuest, updateQuest, deleteQuest } = useQuests(roomId)
 
+  const sharedQuests = useEditGameStore(state => state.quests)
+  const setSharedQuests = useEditGameStore(state => state.setQuests)
+
+  useEffect(() => {
+    setSharedQuests(quests)
+
+    return () => setSharedQuests([])
+  }, [quests, setSharedQuests])
+
   return (
     <div>
       <Button
@@ -46,7 +56,7 @@ const QuestImagePlacer = ({
       <Spacer size="xs" />
       <div
         className={`relative mx-auto w-full max-w-6xl overflow-visible ${
-          editMode && quests.length < maxQuests && 'cursor-crosshair'
+          editMode && sharedQuests.length < maxQuests && 'cursor-crosshair'
         }`}
         ref={ref}
       >
@@ -54,7 +64,7 @@ const QuestImagePlacer = ({
           className="select-none rounded shadow"
           src={img}
           onClick={async e => {
-            if (editMode && quests.length < maxQuests) {
+            if (editMode && sharedQuests.length < maxQuests) {
               const newQuest = await createQuest({
                 x:
                   (e.clientX - ref.current?.getBoundingClientRect().left!) /
@@ -77,7 +87,7 @@ const QuestImagePlacer = ({
             editMode && 'bg-black bg-opacity-40'
           }`}
         >
-          {editMode && quests.length === 0 && (
+          {editMode && sharedQuests.length === 0 && (
             <>
               <div className="relative m-auto flex flex-col items-center">
                 <PlusCircleIcon className="mb-4 h-10 w-10" />
@@ -93,7 +103,7 @@ const QuestImagePlacer = ({
               </div>
             </>
           )}
-          {quests?.map((q, i) => (
+          {sharedQuests?.map((q, i) => (
             <AddQuestButton
               dragRef={ref}
               x={q.x}
@@ -113,7 +123,7 @@ const QuestImagePlacer = ({
       </div>
       <Spacer />
       <PillButton variant="secondary" className="mx-auto">
-        {quests.length}{' '}
+        {sharedQuests.length}{' '}
         <FormattedMessage id="features.quest.questImagePlacer.of" /> {maxQuests}{' '}
         <FormattedMessage id="features.quest.questImagePlacer.quests" />
       </PillButton>

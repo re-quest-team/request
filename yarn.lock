@@ -1055,6 +1055,26 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
+"@liveblocks/client@0.19.0", "@liveblocks/client@^0.19.0":
+  version "0.19.0"
+  resolved "https://registry.yarnpkg.com/@liveblocks/client/-/client-0.19.0.tgz#7837ca21bd9b720f8b1c156d943609beea6e4e1e"
+  integrity sha512-ANL0hD6si3SAyyK2vwOD//RK2PaSMvyrtR6NZNswV5xMMPinF63q639m8XfmpzU5ZZSQo/VNU1reFPsaH9x59w==
+  dependencies:
+    "@liveblocks/core" "0.19.0"
+
+"@liveblocks/core@0.19.0":
+  version "0.19.0"
+  resolved "https://registry.yarnpkg.com/@liveblocks/core/-/core-0.19.0.tgz#27722a507d215b6a9c0920e474d72550ca88b698"
+  integrity sha512-fiG6zx+0w1pcceIZvChK/v2Z4AtP0SPyxPeVcnWkDZoEV7Q4RaeVJRZf5yqhhCuekSC87sAoppXU2petxViNIA==
+
+"@liveblocks/zustand@^0.19.0":
+  version "0.19.0"
+  resolved "https://registry.yarnpkg.com/@liveblocks/zustand/-/zustand-0.19.0.tgz#3437647b4511513c70f29e4d4ca15c487411670b"
+  integrity sha512-o8KxQQE44/UiqIgJBlscBSMduje/CMr1do5MJ6IZ7Bu0ZO/J8N0aV0d4tEkpzUo/SEdnKYK3JWwaDd6X3SJ3yg==
+  dependencies:
+    "@liveblocks/client" "0.19.0"
+    "@liveblocks/core" "0.19.0"
+
 "@next-auth/prisma-adapter@^1.0.5":
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/@next-auth/prisma-adapter/-/prisma-adapter-1.0.5.tgz#41a2fc7b44907054b81d456b426164e58becf4ed"

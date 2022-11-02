@@ -11,7 +11,7 @@ export default function Layout({ children }: LayoutProps) {
     <div className="h-full bg-zinc-900 text-white">
       <Navbar />
       <Spacer />
-      <main className="container mx-auto p-4">{children}</main>
+      <main className="container mx-auto h-full p-4">{children}</main>
     </div>
   )
 }

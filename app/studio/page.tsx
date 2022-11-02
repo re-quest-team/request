@@ -24,18 +24,21 @@ export default async function Studio() {
   return (
     <div>
       <Link href={'/studio/new'} passHref>
-        <Button>
-          {/* <FormattedMessage id="page.studio.index.createNewQuest" /> */}
-        </Button>
+        <Button>New Quest</Button>
       </Link>
 
       <Spacer />
 
-      <h1 className="text-xl">
-        {/* <FormattedMessage id="page.studio.index.myQuests" /> */}
-      </h1>
-      {JSON.stringify(games)}
-      {/* {data && data?.map(g => <GamePanel key={g.id} {...g} />)} */}
+      {games &&
+        games?.map(g => (
+          <div className="flex w-full flex-col" key={g.id}>
+            <div className="mt-4 flex flex-row">
+              <Link href={`/studio/edit/${g.id}`} passHref>
+                <Button>Edit</Button>
+              </Link>
+            </div>
+          </div>
+        ))}
     </div>
   )
 }
