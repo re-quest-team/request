@@ -32,6 +32,9 @@ const useEditGameStore = create<WithLiveblocks<State>>()(
     }),
     {
       client,
+      storageMapping: {
+        quests: true,
+      },
       presenceMapping: {
         gameRoom: true,
         cursor: true,

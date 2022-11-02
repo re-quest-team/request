@@ -109,7 +109,16 @@ const QuestImagePlacer = ({
               x={q.x}
               y={q.y}
               type={q.type || undefined}
-              onMoveEnd={async movedQuest => updateQuest(q.id, movedQuest)}
+              onMoveEnd={async movedQuest => {
+                updateQuest(q.id, movedQuest)
+                setSharedQuests([
+                  ...quests.filter(e => e.id !== q.id),
+                  {
+                    ...q,
+                    ...movedQuest,
+                  },
+                ])
+              }}
               onDelete={async () => deleteQuest(q.id)}
               key={i}
               showDelete={editMode}
