@@ -27,7 +27,7 @@ import {
 } from '@heroicons/react/24/outline'
 import { useIntlStore } from '@/stores/intl'
 
-const Home: NextPage = () => {
+const Home = () => {
   const { data: games } = useSWR<
     (Game & {
       rooms: RoomWithImageAndQuests[]
