@@ -57,9 +57,7 @@ const GameView = () => {
     return (
       <div className="relative">
         <div className="absolute z-10 m-4 rounded-xl bg-zinc-900 p-4 text-white">
-          <Button onClick={() => setIndex(index + 1)}>
-            <FormattedMessage id="page.play.id.nextRoom" />
-          </Button>
+          <Button onClick={() => setIndex(index + 1)}>Nächster Raum</Button>
         </div>
         <RoomView id={roomId} />
       </div>

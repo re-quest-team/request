@@ -13,7 +13,6 @@ import { useRouter } from 'next/router'
 import { useIntlStore } from '@/stores/intl'
 
 const Success = () => {
-  const intl = useIntl()
   const locale = useIntlStore(store => store.locale)
 
   const { getDuration } = useGameplayStore()
@@ -31,26 +30,16 @@ const Success = () => {
         // @ts-ignore
         init={particlesInit}
       />
-      <Modal
-        open={true}
-        onClose={() => {}}
-        title={intl.formatMessage({ id: 'page.play.questSolved' })}
-        backdrop="hidden"
-      >
+      <Modal open={true} onClose={() => {}} title={''} backdrop="hidden">
         <div className="text-center">
           <div>
-            <b>
-              <FormattedMessage id="page.play.duration" />
-            </b>
-            :{' '}
+            <b>Dauer</b>:{' '}
             {formatDuration(getDuration(), {
               locale: formatLocale(locale),
             })}
           </div>
           <Link href="/">
-            <Button className="mx-auto mt-4">
-              <FormattedMessage id="page.play.toHome" />
-            </Button>
+            <Button className="mx-auto mt-4">Zur Startseite</Button>
           </Link>
         </div>
       </Modal>
