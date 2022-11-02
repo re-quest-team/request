@@ -1,3 +1,5 @@
+'use client'
+
 import { Button } from '@/components/Elements/Button'
 import { Spacer } from '@/components/Elements/Spacer'
 import type { NextPage } from 'next'

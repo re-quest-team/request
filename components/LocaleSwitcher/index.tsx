@@ -1,11 +1,19 @@
+'use client'
+
 /* eslint-disable @next/next/no-img-element */
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useRouter } from 'next/router'
 import { Fragment } from 'react'
+import { useSearchParams } from 'next/navigation'
 
 export default function LocaleSwitcher() {
   const router = useRouter()
-  const { locales, locale: activeLocale } = router
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+
+  const locales = ['de', 'en']
+  const activeLocale = 'de'
 
   return (
     <Fragment>
@@ -13,14 +21,8 @@ export default function LocaleSwitcher() {
         locales
           .filter(locale => locale !== activeLocale)
           .map(locale => {
-            const { pathname, query, asPath } = router
             return (
-              <Link
-                key={locale}
-                href={{ pathname, query }}
-                as={asPath}
-                locale={locale}
-              >
+              <Link key={locale} href={{ pathname }} locale={locale}>
                 <div className="relative h-8 w-8 overflow-hidden rounded-full ring-1 ring-slate-200 ring-offset-2 ring-offset-slate-800">
                   <img
                     src={require('assets/flags/' + locale + '.svg').default.src}

@@ -1,8 +1,10 @@
+'use client'
+
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import Image from 'next/image'
-import { useRouter } from 'next/router'
+import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { signOut, useSession } from 'next-auth/react'
 import { PillButton } from '../Elements/Button'
@@ -16,8 +18,13 @@ const navigation = [
 ]
 
 const Navbar = () => {
-  const router = useRouter()
+  const pathname = usePathname()
+
+  console.log(pathname)
+
   const { data: session } = useSession()
+
+  // if (!pathname) return <></>
 
   return (
     <Disclosure as="nav" className="border-b-2 border-zinc-800 bg-zinc-900">
@@ -63,15 +70,13 @@ const Navbar = () => {
                       <Link key={item.key} href={item.href}>
                         <p
                           className={clsx(
-                            router.pathname.includes(item.href)
+                            pathname.includes(item.href)
                               ? 'bg-slate-800 text-white'
                               : 'text-slate-300 hover:bg-slate-700 hover:text-white',
                             'rounded-md px-3 py-2 text-sm font-medium',
                           )}
                           aria-current={
-                            router.pathname.includes(item.href)
-                              ? 'page'
-                              : undefined
+                            pathname.includes(item.href) ? 'page' : undefined
                           }
                         >
                           <FormattedMessage id={'navbar.' + item.key} />
@@ -168,13 +173,13 @@ const Navbar = () => {
                   as="a"
                   href={item.href}
                   className={clsx(
-                    router.pathname.includes(item.href)
+                    pathname.includes(item.href)
                       ? 'bg-slate-900 text-white'
                       : 'text-slate-300 hover:bg-slate-700 hover:text-white',
                     'block rounded-md px-3 py-2 text-base font-medium',
                   )}
                   aria-current={
-                    router.pathname.includes(item.href) ? 'page' : undefined
+                    pathname.includes(item.href) ? 'page' : undefined
                   }
                 >
                   <FormattedMessage id={'navbar.' + item.key} />

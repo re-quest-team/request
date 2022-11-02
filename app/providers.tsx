@@ -1,3 +1,5 @@
+'use client'
+
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import Layout from '@/components/Layout'
@@ -22,16 +24,10 @@ const messages = {
   de,
 }
 
-export default function MyApp({
-  Component,
-  pageProps: { session, ...pageProps },
-}: AppProps<SessionProviderProps>) {
-  const router = useRouter()
-  const { locale } = useRouter()
+export default function Providers({ children }: { children: React.ReactNode }) {
   return (
-    // @ts-ignore
-    <IntlProvider locale={locale} messages={flatten(messages[locale])}>
-      <SessionProvider session={session}>
+    <IntlProvider locale={'de'} messages={flatten(messages['de'])}>
+      <SessionProvider>
         <SWRConfig
           value={{
             fetcher: url => axios.get(url).then(res => res.data),
@@ -48,13 +44,7 @@ export default function MyApp({
           />
           <>
             <ToastIntlProidver />
-            {router.pathname.includes('play') ? (
-              <Component {...pageProps} />
-            ) : (
-              <Layout>
-                <Component {...pageProps} />
-              </Layout>
-            )}
+            {children}
           </>
         </SWRConfig>
       </SessionProvider>

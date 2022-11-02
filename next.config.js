@@ -11,4 +11,5 @@ module.exports = {
     defaultLocale: 'de',
   },
   output: 'standalone',
+  experimental: { appDir: true },
 }
