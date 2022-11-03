@@ -12,6 +12,9 @@ const handler = async (
 ) => {
   const gameId = req.query.id as string
   const token = await getToken({ req })
+
+  if (!token) return res.status(403).json({ error: 'Unauthorized' })
+
   const userId = token?.sub
 
   if (req.method === 'GET') {
@@ -24,6 +27,10 @@ const handler = async (
           rooms: {
             include: {
               image: true,
+              quests: true,
+            },
+            orderBy: {
+              index: 'asc',
             },
           },
         },

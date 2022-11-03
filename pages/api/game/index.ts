@@ -26,6 +26,9 @@ const handler = async (
               image: true,
               quests: true,
             },
+            orderBy: {
+              index: 'asc',
+            },
           },
         },
       })
@@ -47,6 +50,9 @@ const handler = async (
               image: true,
               quests: true,
             },
+            orderBy: {
+              index: 'asc',
+            },
           },
         },
       })
@@ -55,6 +61,7 @@ const handler = async (
       await prisma.room.create({
         data: {
           gameId: game.id,
+          index: game.rooms.length,
         },
       })
 

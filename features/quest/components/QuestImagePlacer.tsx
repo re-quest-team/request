@@ -34,6 +34,8 @@ const QuestImagePlacer = ({
 
   const { quests, createQuest, updateQuest, deleteQuest } = useQuests(roomId)
 
+  if (!quests) return <></>
+
   return (
     <div>
       <Button

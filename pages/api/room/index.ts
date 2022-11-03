@@ -20,8 +20,19 @@ const handler = async (
     try {
       // await RoomCreateSchema.validate(body)
 
+      const game = await prisma.game.findFirst({
+        where: {
+          id: body.gameId,
+        },
+        include: {
+          rooms: true,
+        },
+      })
+
+      if (!game) throw new Error('Game not found')
+
       const room = await prisma.room.create({
-        data: body,
+        data: { ...body, index: game?.rooms.length },
         include: {
           image: true,
           quests: true,

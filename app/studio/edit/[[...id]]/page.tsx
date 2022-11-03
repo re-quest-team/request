@@ -27,6 +27,7 @@ export default async function RoomStudio({
       await prisma.room.create({
         data: {
           gameId: game.id,
+          index: game.rooms.length,
         },
       })
     }

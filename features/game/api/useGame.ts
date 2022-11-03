@@ -6,6 +6,7 @@ import useSWR from 'swr'
 import { createGame } from './createGame'
 import { deleteGame } from './deleteGame'
 import { updateGame } from './updateGame'
+import { updateRoomOrder } from './updateRoomOrder'
 
 const useGame = (gameId: string) => {
   const { data: game, mutate } = useSWR<RequestGame>(`/api/game/${gameId}`)
@@ -41,12 +42,19 @@ const useGame = (gameId: string) => {
     await mutation(deleteGameRequest)
   }
 
+  const APIUpdateGameRooms = async (rooms: RequestRoom[]) => {
+    const updateGameRoomsRequest = updateRoomOrder(gameId, rooms)
+    updateToast(updateGameRoomsRequest)
+    await mutation(updateGameRoomsRequest)
+  }
+
   return {
     game,
     mutate,
     createGame: APICreateGame,
     updateGame: APIUpdateGame,
     deleteGame: APIDeleteGame,
+    updateGameRooms: APIUpdateGameRooms,
   }
 }
 

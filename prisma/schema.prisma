@@ -78,10 +78,13 @@ model Room {
   id        String   @id @default(uuid())
   game      Game     @relation(fields: [gameId], references: [id], onDelete: Cascade)
   gameId    String
+  index     Int
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
   image     S3Image?
   quests    Quest[]
+
+  // @@unique([gameId, index])
 }
 
 model S3Image {

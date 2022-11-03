@@ -75,6 +75,8 @@ const handler = async (
         },
       })
 
+      if (!game) throw new Error('Game not found')
+
       if (game?.rooms.length === 1) {
         return res
           .status(403)
@@ -88,6 +90,22 @@ const handler = async (
           quests: true,
         },
       })
+
+      // update index for remaining rooms
+      const newRooms: Room[] = game?.rooms
+        .filter(r => r.id !== roomId)
+        .sort((a, b) => a.index - b.index)
+        .map((r, i) => ({ ...r, index: i }))
+      await prisma.$transaction(
+        newRooms.map(r =>
+          prisma.room.update({
+            where: {
+              id: r.id,
+            },
+            data: r,
+          }),
+        ),
+      )
 
       res.status(200).json(room)
     } catch (e) {

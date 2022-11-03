@@ -4,7 +4,7 @@
 import { Button } from '@/components/Elements/Button'
 import reorder from '@/utils/reorder'
 import { PhotoIcon, PlusIcon } from '@heroicons/react/24/outline'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import { createRoom } from '../api/createRoom'
 import { createToast } from '@/components/Toasts'
@@ -12,6 +12,7 @@ import useEditGameStore from '@/stores/edit'
 import clsx from 'clsx'
 import { useRouter } from 'next/navigation'
 import useGame from '@/features/game/api/useGame'
+import { RequestRoom } from '@/types'
 
 type RoomListProps = {
   gameId: string
@@ -19,13 +20,16 @@ type RoomListProps = {
 }
 
 const RoomSidebar = ({ gameId, current }: RoomListProps) => {
-  const { game, mutate } = useGame(gameId)
-
   const router = useRouter()
+
+  const { game, mutate, updateGameRooms } = useGame(gameId)
+  const [rooms, setRooms] = useState<RequestRoom[] | undefined>(game?.rooms)
 
   const {
     liveblocks: { enterRoom, leaveRoom },
   } = useEditGameStore()
+
+  useEffect(() => setRooms(game?.rooms), [game])
 
   useEffect(() => {
     if (!game) return
@@ -53,19 +57,18 @@ const RoomSidebar = ({ gameId, current }: RoomListProps) => {
   return (
     <>
       <DragDropContext
-        onDragEnd={result => {
+        onDragEnd={async result => {
           // dropped outside the list
           if (!result.destination) {
             return
           }
-
           const roomItems = reorder(
             game.rooms,
             result.source.index,
             result.destination.index,
           )
-
-          // setRooms(roomItems)
+          updateGameRooms(roomItems)
+          setRooms(roomItems)
         }}
       >
         <Droppable droppableId="droppable" direction="vertical">
@@ -76,8 +79,8 @@ const RoomSidebar = ({ gameId, current }: RoomListProps) => {
               className="relative"
             >
               <div className="relative flex h-full flex-col">
-                {game.rooms &&
-                  game.rooms.map((r, i) => (
+                {rooms &&
+                  rooms.map((r, i) => (
                     <Draggable key={r.id} draggableId={r.id} index={i}>
                       {(provided, snapshot) => (
                         <div
