@@ -26,13 +26,10 @@ import {
   Squares2X2Icon,
 } from '@heroicons/react/24/outline'
 import { useIntlStore } from '@/stores/intl'
+import { RequestGame } from '@/types'
 
 const Home = () => {
-  const { data: games } = useSWR<
-    (Game & {
-      rooms: RoomWithImageAndQuests[]
-    })[]
-  >('/api/game')
+  const { data: games } = useSWR<RequestGame[]>('/api/public/game')
 
   const intl = useIntl()
 
@@ -163,34 +160,38 @@ const Home = () => {
         </div>
       </div>
 
+      {games && games?.length > 0 && (
+        <>
+          <Spacer size="lg" />
+          <h2 className="p-2 text-center text-2xl">
+            <FormattedMessage id="page.home.examples" />
+          </h2>
+          <div className="flex flex-col flex-wrap md:flex-row">
+            {games?.map(g => (
+              <GameCard key={g.id} game={g} />
+            ))}
+          </div>
+          <Link href={'/studio'} passHref>
+            <Button
+              endIcon={<ArrowRightIcon className="h-4" />}
+              className="mx-auto"
+            >
+              <FormattedMessage id="page.home.createQuest" />
+            </Button>
+          </Link>
+        </>
+      )}
       <Spacer size="lg" />
-      <h2 className="p-2 text-center text-2xl">
-        <FormattedMessage id="page.home.examples" />
-      </h2>
-      <div className="flex flex-col flex-wrap md:flex-row">
-        {games?.map(g => (
-          <GameCard key={g.id} game={g} />
-        ))}
-      </div>
-      <Link href={'/studio'} passHref>
-        <Button
-          endIcon={<ArrowRightIcon className="h-4" />}
-          className="mx-auto"
-        >
-          <FormattedMessage id="page.home.createQuest" />
-        </Button>
-      </Link>
-      <Spacer size="lg" />
-      <h2 className="p-2 text-center text-4xl font-bold">
+      {/* <h2 className="p-2 text-center text-4xl font-bold">
         {intl.formatMessage({ id: 'page.home.interested' })}
       </h2>
       <Spacer size="lg" />
-      <p>{intl.formatMessage({ id: 'page.home.stayTuned' })}</p>
+       <p>{intl.formatMessage({ id: 'page.home.stayTuned' })}</p>
       {lang === 'de' ? (
         <JotformEmbed src="https://form.jotformeu.com/221502755387054" />
       ) : (
         <JotformEmbed src="https://form.jotform.com/221522956013348" />
-      )}
+      )} */}
       <Spacer size="lg" />
       <div className="text-center">
         <h2 className="p-2 text-center  font-bold">Powered by</h2>

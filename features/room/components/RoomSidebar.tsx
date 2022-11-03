@@ -88,7 +88,7 @@ const RoomSidebar = ({ gameId, current }: RoomListProps) => {
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
                           className={clsx(
-                            `relative mx-auto my-2  flex aspect-video w-full max-w-6xl select-none items-center justify-center overflow-visible rounded bg-zinc-800 p-2 shadow`,
+                            `relative mx-auto mb-6 flex aspect-video w-full select-none items-center justify-center overflow-hidden rounded bg-zinc-800 p-2 shadow`,
                             current === r.id && 'border-2 border-blue-500',
                             othersPresence.includes(r.id) &&
                               'outline outline-2 outline-offset-4 outline-orange-500',
@@ -99,7 +99,7 @@ const RoomSidebar = ({ gameId, current }: RoomListProps) => {
                         >
                           {r.image && (
                             <img
-                              className="rounded"
+                              className="h-full w-auto rounded"
                               src={`${process.env.NEXT_PUBLIC_S3_BASE_URL}/${r?.image?.url}`}
                               alt="Room Image"
                               onDrop={e => e.preventDefault()}
@@ -137,7 +137,7 @@ const RoomSidebar = ({ gameId, current }: RoomListProps) => {
       </DragDropContext>
       <Button
         startIcon={<PlusIcon className="h-4 w-4" />}
-        className="mx-auto"
+        className="mx-auto my-4"
         size="sm"
         onClick={onCreateRoom}
       >

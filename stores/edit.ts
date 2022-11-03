@@ -1,10 +1,8 @@
 import create from 'zustand'
-import { createClient } from '@liveblocks/client'
 import { liveblocks } from '@liveblocks/zustand'
 import type { WithLiveblocks } from '@liveblocks/zustand'
 import { client } from '@/lib/liveblocks'
 import { Quest } from '@prisma/client'
-import { number } from 'yup'
 
 type GameRoom = string
 type Cursor = { x: number; y: number }

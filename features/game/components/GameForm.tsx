@@ -1,7 +1,11 @@
 'use client'
 
 import { Button } from '@/components/Elements/Button'
-import { InputField, TextArea } from '@/components/Elements/FormElements'
+import {
+  InputField,
+  SubtleInputField,
+  TextArea,
+} from '@/components/Elements/FormElements'
 import Toggle from '@/components/Elements/Toggle'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Game } from '@prisma/client'
@@ -13,88 +17,69 @@ import useSWR from 'swr'
 import * as yup from 'yup'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { createToast } from '@/components/Toasts'
-import { useState } from 'react'
+import { Fragment, memo, useMemo, useState } from 'react'
+import { Save } from 'react-feather'
+import useGame from '../api/useGame'
+import { Transition } from '@headlessui/react'
 
 type GameFormProps = {
-  id: string
+  gameId: string
 }
 
 const schema = yup
   .object({
-    name: yup.string().required(),
+    name: yup.string().required().min(1),
     description: yup.string().required().min(8),
     language: yup.boolean().required(),
     public: yup.boolean().required(),
   })
   .required()
 
-const GameForm = ({ id }: GameFormProps) => {
+const GameForm = ({ gameId }: GameFormProps) => {
   const intl = useIntl()
 
-  const { data, mutate, isValidating, error } = useSWR<Game, AxiosError>(
-    `/api/game/${id}`,
-  )
-  const router = useRouter()
-
-  if (error && error.response?.status === 404) {
-    toast.error(
-      intl.formatMessage({ id: 'features.game.gameForm.toastNotFound' }),
-    )
-    router.replace('/studio')
-  }
+  const { game, updateGame } = useGame(gameId)
 
   const {
     register,
+    getValues,
+    watch,
     handleSubmit,
     formState: { errors },
   } = useForm<yup.InferType<typeof schema>>({
     resolver: yupResolver(schema),
   })
 
-  const onSubmit = handleSubmit(async event => {
-    const postGameRequest = axios.put<Game>(
-      `/api/game/${id}`,
-      {
-        ...event,
-        language: event.language ? 'DE' : 'EN',
-      },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      },
-    )
-
-    createToast(postGameRequest)
-
-    const updatedGameRequest = await postGameRequest
-
-    const updatedGame = updatedGameRequest.data
-
-    await mutate(updatedGame)
-
-    setIsTitleEditMode(false)
-  })
-
-  const [isTitleEditMode, setIsTitleEditMode] = useState(false)
+  const onSubmit = () => {
+    updateGame(gameId, {
+      name: getValues().name,
+    })
+  }
 
   return (
-    <form onSubmit={onSubmit}>
-      {!isTitleEditMode && (
-        <p onClick={() => setIsTitleEditMode(true)}>{data?.name}</p>
-      )}
-      {isTitleEditMode && (
-        <>
-          <InputField
-            label={intl.formatMessage({
-              id: 'features.game.gameForm.labelName',
-            })}
-            defaultValue={data?.name ?? ''}
-            registration={register('name')}
-            error={errors['name']}
-          ></InputField>
-
-          <TextArea
+    <form onSubmit={onSubmit} className="flex items-center space-x-4">
+      <SubtleInputField
+        className="w-96 text-xl"
+        defaultValue={game?.name ?? ''}
+        registration={register('name')}
+        error={errors['name']}
+      ></SubtleInputField>
+      <Transition appear show={watch().name !== game?.name}>
+        <Transition.Child
+          as={Fragment}
+          enter="ease-out duration-300"
+          enterFrom="opacity-0"
+          enterTo="opacity-100"
+          leave="ease-in duration-200"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
+        >
+          <div onClick={handleSubmit(onSubmit)}>
+            <Save />
+          </div>
+        </Transition.Child>
+      </Transition>
+      {/* <TextArea
             label={intl.formatMessage({
               id: 'features.game.gameForm.labelDescription',
             })}
@@ -124,9 +109,7 @@ const GameForm = ({ id }: GameFormProps) => {
             isLoading={isValidating}
           >
             <FormattedMessage id="features.game.gameForm.submit" />
-          </Button>
-        </>
-      )}
+          </Button> */}
     </form>
   )
 }

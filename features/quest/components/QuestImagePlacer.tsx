@@ -13,14 +13,12 @@ import useEditGameStore from '@/stores/edit'
 
 type QuestImagePlacerProps = {
   img: string
-  quests: Quest[]
   roomId: string
   maxQuests?: number
 }
 
 const QuestImagePlacer = ({
   img,
-  quests: abc,
   roomId,
   maxQuests = 3,
 }: QuestImagePlacerProps) => {
@@ -38,7 +36,7 @@ const QuestImagePlacer = ({
 
   return (
     <div>
-      <Button
+      {/* <Button
         size="xs"
         className="ml-auto"
         onMouseDown={() => setEditMode(false)}
@@ -46,7 +44,7 @@ const QuestImagePlacer = ({
       >
         <FormattedMessage id="features.quest.questImagePlacer.preview" />
       </Button>
-      <Spacer size="xs" />
+      <Spacer size="xs" /> */}
       <div
         className={`relative mx-auto w-full max-w-6xl overflow-visible ${
           editMode && quests.length < maxQuests && 'cursor-crosshair'

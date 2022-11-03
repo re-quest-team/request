@@ -4,11 +4,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useIntl } from 'react-intl'
 import clsx from 'clsx'
+import { RequestGame } from '@/types'
 
 type GameCardProps = {
-  game: Game & {
-    rooms: RoomWithImageAndQuests[]
-  }
+  game: RequestGame
 }
 
 const GameCard = ({ game }: GameCardProps) => {

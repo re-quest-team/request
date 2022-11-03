@@ -1,4 +1,7 @@
+'use client'
+
 import { Button } from '@/components/Elements/Button'
+import GameForm from '@/features/game/components/GameForm'
 import useEditGameStore from '@/stores/edit'
 import {
   ArrowUturnLeftIcon,
@@ -7,13 +10,7 @@ import {
 } from '@heroicons/react/24/outline'
 import { deleteRoom } from '../api/deleteRoom'
 
-export default function RoomSettings({
-  roomId,
-  onDelete,
-}: {
-  roomId: string
-  onDelete: () => void
-}) {
+export default function RoomSettings({ roomId }: { roomId: string }) {
   const undo = useEditGameStore(state => state.liveblocks.room?.history.undo)
   const redo = useEditGameStore(state => state.liveblocks.room?.history.redo)
   const canUndo = useEditGameStore(
@@ -24,7 +21,7 @@ export default function RoomSettings({
   )
 
   return (
-    <div className="mb-4 flex w-full justify-end space-x-4">
+    <div className="flex space-x-2">
       <Button
         onClick={undo}
         className="group cursor-pointer"
@@ -46,7 +43,7 @@ export default function RoomSettings({
         size="xs"
         variant="danger"
         startIcon={<TrashIcon className="h-4 w-4" />}
-        onClick={onDelete}
+        onClick={() => {}}
       >
         Raum löschen
       </Button>

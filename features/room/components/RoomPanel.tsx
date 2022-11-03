@@ -54,7 +54,6 @@ const RoomPanel = ({ gameId, roomId }: Props) => {
 
   return (
     <>
-      <RoomSettings roomId={room.id} onDelete={onDelete} />
       {imageUrl && (
         <div
           ref={ref}
@@ -80,11 +79,7 @@ const RoomPanel = ({ gameId, roomId }: Props) => {
               <CursorArrowRippleIcon className="h-6 w-6 text-orange-500" />
             </div>
           ))}
-          <QuestImagePlacer
-            img={imageUrl}
-            quests={room?.quests || []}
-            roomId={room!.id}
-          />
+          <QuestImagePlacer img={imageUrl} roomId={room!.id} />
         </div>
       )}
       {!imageUrl && (
