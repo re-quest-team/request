@@ -9,13 +9,14 @@ import { CursorArrowRippleIcon } from '@heroicons/react/24/outline'
 import RoomSettings from './RoomSettings'
 import { AxiosError } from 'axios'
 import { RequestRoom } from '@/types'
+import useRoom from '../api/useRoom'
 
 type Props = {
   roomId: string
 }
 
 const RoomPanel = ({ roomId }: Props) => {
-  const { data: room } = useSWR<RequestRoom, AxiosError>(`/api/room/${roomId}`)
+  const { room, deleteRoom } = useRoom(roomId)
 
   const [imageUrl, setImageUrl] = useState(room?.image?.url)
 
@@ -32,14 +33,15 @@ const RoomPanel = ({ roomId }: Props) => {
 
   const ref = useRef<HTMLDivElement>(null)
 
+  const onDelete = async () => {
+    await deleteRoom(roomId)
+  }
+
   if (!room) return <></>
 
   return (
     <>
-      <RoomSettings
-        roomId={room.id}
-        onDelete={() => mutate(`/api/game/${room.gameId}`)}
-      />
+      <RoomSettings roomId={room.id} onDelete={onDelete} />
       {imageUrl && (
         <div
           ref={ref}

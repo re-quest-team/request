@@ -46,10 +46,7 @@ export default function RoomSettings({
         size="xs"
         variant="danger"
         startIcon={<TrashIcon className="h-4 w-4" />}
-        onClick={async () => {
-          await deleteRoom(roomId)
-          onDelete()
-        }}
+        onClick={onDelete}
       >
         Raum löschen
       </Button>

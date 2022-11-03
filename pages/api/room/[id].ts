@@ -62,6 +62,25 @@ const handler = async (
 
   if (req.method === 'DELETE') {
     try {
+      const game = await prisma.game.findFirst({
+        where: {
+          rooms: {
+            some: {
+              id: roomId,
+            },
+          },
+        },
+        include: {
+          rooms: true,
+        },
+      })
+
+      if (game?.rooms.length === 1) {
+        return res
+          .status(403)
+          .json({ error: 'Game must have at least one room' })
+      }
+
       const room = await prisma.room.delete({
         where: { id: roomId },
         include: {
@@ -70,13 +89,7 @@ const handler = async (
         },
       })
 
-      await prisma.s3Image.delete({
-        where: {
-          roomId: room.id,
-        },
-      })
-
-      res.status(200).json(room)
+      return res.status(200).json(room)
     } catch (e) {
       console.error(e)
       res.status(400).json({ error: e })
