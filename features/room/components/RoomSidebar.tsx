@@ -1,21 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
 
-import { Button, PillButton } from '@/components/Elements/Button'
+import { Button } from '@/components/Elements/Button'
 import reorder from '@/utils/reorder'
 import { PhotoIcon, PlusIcon } from '@heroicons/react/24/outline'
-import { Game } from '@prisma/client'
-import { AxiosError } from 'axios'
 import { useEffect } from 'react'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
-import useSWR from 'swr'
 import { createRoom } from '../api/createRoom'
-import { RoomWithImage } from '../types'
 import { createToast } from '@/components/Toasts'
 import useEditGameStore from '@/stores/edit'
 import clsx from 'clsx'
 import { useRouter } from 'next/navigation'
-import { updateGame } from '@/features/game/api/updateGame'
+import useGame from '@/features/game/api/useGame'
 
 type RoomListProps = {
   gameId: string
@@ -23,12 +19,7 @@ type RoomListProps = {
 }
 
 const RoomSidebar = ({ gameId, current }: RoomListProps) => {
-  const { data: game, mutate } = useSWR<
-    Game & {
-      rooms: RoomWithImage[]
-    },
-    AxiosError
-  >(`/api/game/${gameId}`)
+  const { game, mutate } = useGame(gameId)
 
   const router = useRouter()
 
@@ -47,6 +38,15 @@ const RoomSidebar = ({ gameId, current }: RoomListProps) => {
 
   const others = useEditGameStore(state => state.liveblocks.others)
   const othersPresence = others.map(user => user.presence.gameRoom)
+
+  const onCreateRoom = async () => {
+    if (!game) return
+    const createRoomRequest = createRoom({ gameId: game.id })
+    createToast(createRoomRequest)
+    const newRoom = (await createRoomRequest).data
+    mutate()
+    router.replace(`/studio/edit/${gameId}/${newRoom.id}`)
+  }
 
   if (!game) return <div></div>
 
@@ -136,15 +136,7 @@ const RoomSidebar = ({ gameId, current }: RoomListProps) => {
         startIcon={<PlusIcon className="h-4 w-4" />}
         className="mx-auto"
         size="sm"
-        onClick={async () => {
-          const createRoomRequest = createRoom({ gameId: game.id })
-          createToast(createRoomRequest)
-          const newRoom = (await createRoomRequest).data
-          mutate({
-            ...game,
-            rooms: [...game.rooms, newRoom],
-          })
-        }}
+        onClick={onCreateRoom}
       >
         Raum
       </Button>

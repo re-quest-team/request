@@ -89,7 +89,7 @@ const handler = async (
         },
       })
 
-      return res.status(200).json(room)
+      res.status(200).json(room)
     } catch (e) {
       console.error(e)
       res.status(400).json({ error: e })

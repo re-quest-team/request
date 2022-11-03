@@ -34,5 +34,5 @@ export default async function RoomStudio({
     return <RoomRedirect gameId={gameId} roomId={game?.rooms[0].id!} />
   }
 
-  if (roomId) return <RoomPanel roomId={roomId} />
+  if (roomId) return <RoomPanel gameId={gameId} roomId={roomId} />
 }

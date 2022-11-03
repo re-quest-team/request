@@ -3,20 +3,22 @@
 import FileUpload from '@/components/FileUpload'
 import QuestImagePlacer from '@/features/quest/components/QuestImagePlacer'
 import { useEffect, useRef, useState } from 'react'
-import useSWR, { mutate } from 'swr'
 import useEditGameStore from '@/stores/edit'
 import { CursorArrowRippleIcon } from '@heroicons/react/24/outline'
 import RoomSettings from './RoomSettings'
-import { AxiosError } from 'axios'
-import { RequestRoom } from '@/types'
 import useRoom from '../api/useRoom'
+import useGame from '@/features/game/api/useGame'
+import { useRouter } from 'next/navigation'
 
 type Props = {
+  gameId: string
   roomId: string
 }
 
-const RoomPanel = ({ roomId }: Props) => {
+const RoomPanel = ({ gameId, roomId }: Props) => {
   const { room, deleteRoom } = useRoom(roomId)
+  const { game, mutate } = useGame(gameId)
+  const router = useRouter()
 
   const [imageUrl, setImageUrl] = useState(room?.image?.url)
 
@@ -34,7 +36,18 @@ const RoomPanel = ({ roomId }: Props) => {
   const ref = useRef<HTMLDivElement>(null)
 
   const onDelete = async () => {
+    // get current position of room in game
+    const roomIndex = game?.rooms.findIndex(r => r.id === roomId)
     await deleteRoom(roomId)
+
+    if (roomIndex && roomIndex > 0) {
+      // select the prev room
+      router.replace(`/studio/edit/${gameId}/${game?.rooms[roomIndex - 1].id}`)
+    } else {
+      // if first one is deleted, select the new first one
+      router.replace(`/studio/edit/${gameId}/${game?.rooms[1].id}`)
+    }
+    mutate()
   }
 
   if (!room) return <></>

@@ -1,20 +1,20 @@
 import { createToast, deleteToast, updateToast } from '@/components/Toasts'
-import { APIError, RequestGame } from '@/types'
+import { APIError, RequestGame, RequestRoom } from '@/types'
 import { Game } from '@prisma/client'
-import { AxiosResponse } from 'axios'
-import useSWR, { mutate } from 'swr'
+import axios, { AxiosResponse } from 'axios'
+import useSWR from 'swr'
 import { createGame } from './createGame'
 import { deleteGame } from './deleteGame'
 import { updateGame } from './updateGame'
 
 const useGame = (gameId: string) => {
-  const { data: game } = useSWR<RequestGame>(`/api/game/${gameId}`)
+  const { data: game, mutate } = useSWR<RequestGame>(`/api/game/${gameId}`)
 
   const mutation = async (
     request: Promise<AxiosResponse<RequestGame, APIError>>,
   ) => {
     const { data: game } = await request
-    mutate(`/api/game/${gameId}`, game, {
+    mutate(game, {
       populateCache: false,
       revalidate: true,
     })
@@ -43,6 +43,7 @@ const useGame = (gameId: string) => {
 
   return {
     game,
+    mutate,
     createGame: APICreateGame,
     updateGame: APIUpdateGame,
     deleteGame: APIDeleteGame,
