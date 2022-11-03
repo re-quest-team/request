@@ -1,6 +1,7 @@
 import axios from '@/lib/axios'
-import { Game } from '@prisma/client'
+import { APIError, RequestGame } from '@/types'
+import { AxiosResponse } from 'axios'
 
 export const createGame = () => {
-  return axios.post<Game>(`/api/game`)
+  return axios.post<{}, AxiosResponse<RequestGame, APIError>>(`/api/game`)
 }

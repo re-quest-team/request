@@ -10,7 +10,6 @@ export default function CreateGameButton() {
     <Button
       onClick={async () => {
         const newGame = await createGame()
-        console.log(newGame)
         router.push(`/studio/edit/${newGame.data.id}`)
       }}
     >
