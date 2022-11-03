@@ -4,13 +4,16 @@ import { RoomWithImageAndQuests } from '@/features/room/types'
 import { useGameplayStore } from '@/stores/gameplay'
 import { Game } from '@prisma/client'
 import { AxiosError } from 'axios'
-import { useRouter } from 'next/router'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import useSWR from 'swr'
 import { FormattedMessage } from 'react-intl'
+import { RequestGame } from '@/types'
 
 const GameView = () => {
   const router = useRouter()
+  const pathname = usePathname()
+
   const [gameId, setGameId] = useState('')
   const [roomId, setRoomId] = useState('')
 
@@ -22,15 +25,12 @@ const GameView = () => {
     startGame()
   }, [startGame])
 
-  const { data: game } = useSWR<
-    Game & {
-      rooms: RoomWithImageAndQuests[]
-    },
-    AxiosError
-  >(`/api/game/${gameId}`)
+  const { data: game } = useSWR<RequestGame, AxiosError>(
+    `/api/public/game/${gameId}`,
+  )
 
   useEffect(() => {
-    if (router.query.id && Array.isArray(router.query.id)) {
+    if (pathname.id && Array.isArray(router.query.id)) {
       if (router.query.id.length > 1) {
         setRoomId(router.query.id[1])
       }

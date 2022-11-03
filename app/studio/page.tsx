@@ -42,6 +42,9 @@ export default async function Studio() {
             <Link href={`/studio/edit/${g.id}`} passHref>
               <Button>Edit</Button>
             </Link>
+            <Link href={`/play/${g.id}`} passHref>
+              <Button>Spielen</Button>
+            </Link>
           </div>
         </div>
       ))}
