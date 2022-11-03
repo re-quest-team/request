@@ -1,8 +1,5 @@
 import { RoomWithImage } from '@/features/room/types'
 import prisma from '@/lib/prisma'
-// import { GameDeleteOneSchema } from '@/prisma/generated/schemas/deleteOneGame.schema'
-// import { GameUpdateOneSchema } from '@/prisma/generated/schemas/updateOneGame.schema'
-// import { RoomUpdateOneSchema } from '@/prisma/generated/schemas/updateOneRoom.schema'
 import { APIError } from '@/types'
 import { Game, Quest, Room } from '@prisma/client'
 import type { NextApiRequest, NextApiResponse } from 'next'
@@ -14,7 +11,8 @@ const handler = async (
 ) => {
   const questId = req.query.id as string
   const token = await getToken({ req })
-  const userId = token?.sub
+
+  if (!token) return res.status(403).json({ error: 'Unauthorized' })
 
   if (req.method === 'GET') {
     try {
@@ -37,10 +35,6 @@ const handler = async (
 
   if (req.method === 'PUT') {
     try {
-      // await RoomUpdateOneSchema.validate({
-      //   data: req.body,
-      // })
-
       const quest = await prisma.quest.update({
         where: { id: questId },
         data: { ...req.body, updatedAt: new Date() },

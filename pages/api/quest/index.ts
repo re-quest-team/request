@@ -11,12 +11,11 @@ const handler = async (
 ) => {
   const { body } = req
   const token = await getToken({ req })
-  const userId = token?.sub
+
+  if (!token) return res.status(403).json({ error: 'Unauthorized' })
 
   if (req.method === 'POST') {
     try {
-      //   await QuestCreateSchema.validate(body)
-
       const quest = await prisma.quest.create({ data: body })
 
       res.status(200).json(quest)

@@ -3,17 +3,20 @@ import prisma from '@/lib/prisma'
 // import { GameDeleteOneSchema } from '@/prisma/generated/schemas/deleteOneGame.schema'
 // import { GameUpdateOneSchema } from '@/prisma/generated/schemas/updateOneGame.schema'
 // import { RoomUpdateOneSchema } from '@/prisma/generated/schemas/updateOneRoom.schema'
-import { APIError } from '@/types'
+import { APIError, RequestRoom } from '@/types'
 import { Game, Room } from '@prisma/client'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getToken } from 'next-auth/jwt'
 
 const handler = async (
   req: NextApiRequest,
-  res: NextApiResponse<Room | RoomWithImage | APIError>,
+  res: NextApiResponse<RequestRoom | APIError>,
 ) => {
   const roomId = req.query.id as string
   const token = await getToken({ req })
+
+  if (!token) return res.status(403).json({ error: 'Unauthorized' })
+
   const userId = token?.sub
 
   if (req.method === 'GET') {
@@ -41,13 +44,13 @@ const handler = async (
 
   if (req.method === 'PUT') {
     try {
-      // await RoomUpdateOneSchema.validate({
-      //   data: req.body,
-      // })
-
       const room = await prisma.room.update({
         where: { id: roomId },
         data: { ...req.body, updatedAt: new Date() },
+        include: {
+          image: true,
+          quests: true,
+        },
       })
 
       res.status(200).json(room)
@@ -61,6 +64,16 @@ const handler = async (
     try {
       const room = await prisma.room.delete({
         where: { id: roomId },
+        include: {
+          image: true,
+          quests: true,
+        },
+      })
+
+      await prisma.s3Image.delete({
+        where: {
+          roomId: room.id,
+        },
       })
 
       res.status(200).json(room)

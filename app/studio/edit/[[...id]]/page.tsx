@@ -22,6 +22,15 @@ export default async function RoomStudio({
       },
     })
 
+    // create first room if not exists
+    if (game?.rooms.length === 0) {
+      await prisma.room.create({
+        data: {
+          gameId: game.id,
+        },
+      })
+    }
+
     return <RoomRedirect gameId={gameId} roomId={game?.rooms[0].id!} />
   }
 

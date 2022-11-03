@@ -24,7 +24,7 @@ const schema = yup
     name: yup.string().required(),
     description: yup.string().required().min(8),
     language: yup.boolean().required(),
-    draft: yup.boolean().required(),
+    public: yup.boolean().required(),
   })
   .required()
 
@@ -111,11 +111,11 @@ const GameForm = ({ id }: GameFormProps) => {
           />
           <Toggle
             label={intl.formatMessage({
-              id: 'features.game.gameForm.labelDraft',
+              id: 'features.game.gameForm.labelPublic',
             })}
-            defaultChecked={data?.draft}
-            registration={register('draft')}
-            error={errors['draft']}
+            defaultChecked={data?.public}
+            registration={register('public')}
+            error={errors['public']}
           />
           <Button
             type="submit"
