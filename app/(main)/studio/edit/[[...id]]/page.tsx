@@ -1,6 +1,8 @@
 import RoomPanel from '@/features/room/components/RoomPanel'
 import prisma from '@/lib/prisma'
-import Redirect from '@/components/Redirect'
+import { getSession } from '@/lib/session'
+import { headers } from 'next/headers'
+import { redirect } from 'next/navigation'
 
 export default async function RoomStudio({
   params,
@@ -9,16 +11,22 @@ export default async function RoomStudio({
 }) {
   const [gameId, roomId] = params.id
 
-  if (!roomId) {
-    const game = await prisma.game.findFirst({
-      where: {
-        id: gameId,
-      },
-      include: {
-        rooms: true,
-      },
-    })
+  const session = await getSession(headers().get('cookie') ?? '')
 
+  const game = await prisma.game.findFirst({
+    where: {
+      id: gameId,
+    },
+    include: {
+      rooms: true,
+    },
+  })
+
+  if (game?.userId !== session?.user.id) {
+    return redirect('/')
+  }
+
+  if (!roomId) {
     // create first room if not exists
     if (game?.rooms.length === 0) {
       await prisma.room.create({
@@ -29,7 +37,7 @@ export default async function RoomStudio({
       })
     }
 
-    return <Redirect to={`/studio/edit/${gameId}/${game?.rooms[0].id!}`} />
+    return redirect(`/studio/edit/${gameId}/${game?.rooms[0].id!}`)
   }
 
   if (roomId) return <RoomPanel gameId={gameId} roomId={roomId} />

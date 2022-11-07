@@ -22,7 +22,7 @@ const Navbar = () => {
 
   const { data: session } = useSession()
 
-  // if (!pathname) return <></>
+  if (!pathname) return <></>
 
   return (
     <Disclosure as="nav" className="border-b-2 border-zinc-800 bg-zinc-900">

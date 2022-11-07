@@ -6,9 +6,14 @@ import { headers } from 'next/headers'
 import prisma from '@/lib/prisma'
 import { getSession } from '@/lib/session'
 import CreateGameButton from '@/features/game/components/CreateGameButton'
+import { redirect } from 'next/navigation'
 
 export default async function Studio() {
   const session = await getSession(headers().get('cookie') ?? '')
+
+  if (!session) {
+    return redirect(`/api/auth/signin`)
+  }
 
   const games = await prisma.game.findMany({
     include: {
