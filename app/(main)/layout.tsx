@@ -1,6 +1,6 @@
 import React from 'react'
-import { Spacer } from './Elements/Spacer'
-import Navbar from './Navbar'
+import { Spacer } from '@/components/Elements/Spacer'
+import Navbar from '@/components/Navbar'
 
 export default function NonPlayLayout({
   children,
