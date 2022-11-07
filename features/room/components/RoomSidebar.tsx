@@ -34,9 +34,9 @@ const RoomSidebar = ({ gameId, current }: RoomListProps) => {
   useEffect(() => {
     if (!game) return
 
-    enterRoom(game.id)
+    enterRoom(gameId)
     return () => {
-      leaveRoom(game.id)
+      leaveRoom(gameId)
     }
   }, [enterRoom, leaveRoom])
 

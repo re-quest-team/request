@@ -4,10 +4,10 @@ import FileUpload from '@/components/FileUpload'
 import QuestImagePlacer from '@/features/quest/components/QuestImagePlacer'
 import { useEffect, useRef, useState } from 'react'
 import useEditGameStore from '@/stores/edit'
-import { CursorArrowRippleIcon } from '@heroicons/react/24/outline'
 import useRoom from '../api/useRoom'
 import useGame from '@/features/game/api/useGame'
 import { useRouter } from 'next/navigation'
+import Cursor from '@/components/Cursor'
 
 type Props = {
   gameId: string
@@ -20,6 +20,12 @@ const RoomPanel = ({ gameId, roomId }: Props) => {
   const router = useRouter()
 
   const [imageUrl, setImageUrl] = useState(room?.image?.url)
+
+  const setGameRoom = useEditGameStore(store => store.setGameRoom)
+
+  useEffect(() => {
+    setGameRoom(roomId)
+  }, [roomId])
 
   const setCursor = useEditGameStore(state => state.setCursor)
   const others = useEditGameStore(state => state.liveblocks.others)
@@ -68,15 +74,8 @@ const RoomPanel = ({ gameId, roomId }: Props) => {
             })
           }}
         >
-          {othersCursors.map((c, i) => (
-            <div
-              className="absolute z-20"
-              key={i}
-              // @ts-ignore
-              style={{ top: `${c.y * 100}%`, left: `${c.x * 100}%` }}
-            >
-              <CursorArrowRippleIcon className="h-6 w-6 text-orange-500" />
-            </div>
+          {othersCursors.map((c: any, i) => (
+            <Cursor key={i} color={'orange'} x={c.x} y={c.y} />
           ))}
           <QuestImagePlacer img={imageUrl} roomId={room!.id} />
         </div>

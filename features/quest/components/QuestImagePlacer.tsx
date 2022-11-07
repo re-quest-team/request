@@ -1,15 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
-import { Button, PillButton } from '@/components/Elements/Button'
+import { PillButton } from '@/components/Elements/Button'
 import { Spacer } from '@/components/Elements/Spacer'
 import { PlusCircleIcon } from '@heroicons/react/24/outline'
 import { Quest } from '@prisma/client'
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { ArrowUpRight } from 'react-feather'
 import useQuests from '../api'
 import AddQuestButton from './AddQuestButton'
 import QuestTypeModal from './QuestTypeModal'
 import { FormattedMessage, useIntl } from 'react-intl'
-import useEditGameStore from '@/stores/edit'
 
 type QuestImagePlacerProps = {
   img: string

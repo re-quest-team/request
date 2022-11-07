@@ -1,8 +1,5 @@
-import { Spacer } from '@/components/Elements/Spacer'
-import RoomSidebar from '@/features/room/components/RoomSidebar'
 import RoomPanel from '@/features/room/components/RoomPanel'
 import prisma from '@/lib/prisma'
-import { useRouter } from 'next/navigation'
 import RoomRedirect from '@/features/room/components/RoomRedirect'
 
 export default async function RoomStudio({

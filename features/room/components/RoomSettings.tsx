@@ -1,14 +1,12 @@
 'use client'
 
 import { Button } from '@/components/Elements/Button'
-import GameForm from '@/features/game/components/GameForm'
 import useEditGameStore from '@/stores/edit'
 import {
   ArrowUturnLeftIcon,
   ArrowUturnRightIcon,
   TrashIcon,
 } from '@heroicons/react/24/outline'
-import { deleteRoom } from '../api/deleteRoom'
 
 export default function RoomSettings({ roomId }: { roomId: string }) {
   const undo = useEditGameStore(state => state.liveblocks.room?.history.undo)
