@@ -6,12 +6,13 @@ import { AxiosResponse } from 'axios'
 import useSWR from 'swr'
 import { createRoom } from './createRoom'
 import { deleteRoom } from './deleteRoom'
+import { deleteRoomImage } from './deleteRoomImage'
 import { updateRoom } from './updateRoom'
 
 const useRoom = (roomId: string) => {
   const { data: room, mutate } = useSWR<RequestRoom>(`/api/room/${roomId}`)
 
-  const { mutate: mutateGame } = useGame(room?.gameId || '')
+  const { game, mutate: mutateGame } = useGame(room?.gameId || '')
 
   const mutation = async (
     request: Promise<AxiosResponse<RequestRoom, APIError>>,
@@ -34,16 +35,29 @@ const useRoom = (roomId: string) => {
     ).data
   }
 
-  const APIUpdateRoom = async (id: string, room: Partial<Room>) => {
-    const updateRoomRequest = updateRoom(id, room)
+  const APIUpdateRoom = async (room: Partial<Room>) => {
+    const updateRoomRequest = updateRoom(roomId, room)
     updateToast(updateRoomRequest)
     await mutation(updateRoomRequest)
   }
 
-  const APIDeleteRoom = async (id: string) => {
-    const deleteRoomRequest = deleteRoom(id)
+  const APIDeleteRoom = async () => {
+    const roomIndex = game?.rooms.findIndex(r => r.id === roomId)!
+
+    const deleteRoomRequest = deleteRoom(roomId)
     deleteToast(deleteRoomRequest)
     await mutation(deleteRoomRequest)
+
+    return {
+      gameId: game?.id,
+      nextRoomId: game?.rooms[roomIndex > 0 ? roomIndex - 1 : 1].id,
+    }
+  }
+
+  const APIDeleteRoomImage = async () => {
+    const deleteRoomImageRequest = deleteRoomImage(roomId)
+    deleteToast(deleteRoomImageRequest)
+    await mutation(deleteRoomImageRequest)
   }
 
   const onImageChange = async () => {
@@ -57,6 +71,7 @@ const useRoom = (roomId: string) => {
     createRoom: APICreateRoom,
     updateRoom: APIUpdateRoom,
     deleteRoom: APIDeleteRoom,
+    deleteRoomImage: APIDeleteRoomImage,
   }
 }
 

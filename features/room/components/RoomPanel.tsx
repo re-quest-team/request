@@ -40,21 +40,6 @@ const RoomPanel = ({ gameId, roomId }: Props) => {
 
   const ref = useRef<HTMLDivElement>(null)
 
-  const _onDelete = async () => {
-    // get current position of room in game
-    const roomIndex = game?.rooms.findIndex(r => r.id === roomId)
-    await deleteRoom(roomId)
-
-    if (roomIndex && roomIndex > 0) {
-      // select the prev room
-      router.replace(`/studio/edit/${gameId}/${game?.rooms[roomIndex - 1].id}`)
-    } else {
-      // if first one is deleted, select the new first one
-      router.replace(`/studio/edit/${gameId}/${game?.rooms[1].id}`)
-    }
-    mutate()
-  }
-
   if (!room) return <></>
 
   return (

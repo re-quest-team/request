@@ -4,7 +4,6 @@ import { Spacer } from '@/components/Elements/Spacer'
 import { PlusCircleIcon } from '@heroicons/react/24/outline'
 import { Quest } from '@prisma/client'
 import { useRef, useState } from 'react'
-import { ArrowUpRight } from 'react-feather'
 import useQuests from '../api'
 import AddQuestButton from './AddQuestButton'
 import QuestTypeModal from './QuestTypeModal'
@@ -35,15 +34,6 @@ const QuestImagePlacer = ({
 
   return (
     <div>
-      {/* <Button
-        size="xs"
-        className="ml-auto"
-        onMouseDown={() => setEditMode(false)}
-        onMouseUp={() => setEditMode(true)}
-      >
-        <FormattedMessage id="features.quest.questImagePlacer.preview" />
-      </Button>
-      <Spacer size="xs" /> */}
       <div
         className={`relative mx-auto w-full max-w-6xl overflow-visible ${
           editMode && quests.length < maxQuests && 'cursor-crosshair'
@@ -84,12 +74,6 @@ const QuestImagePlacer = ({
                 <p className="font-semibold">
                   <FormattedMessage id="features.quest.questImagePlacer.clickToAdd" />
                 </p>
-              </div>
-              <div className="absolute top-0 right-0 flex max-w-sm content-end items-end p-4">
-                <p className="mr-2 text-sm">
-                  <FormattedMessage id="features.quest.questImagePlacer.holdToPreview" />
-                </p>
-                <ArrowUpRight className="h-10 w-12" />
               </div>
             </>
           )}

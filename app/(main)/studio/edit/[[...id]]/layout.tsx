@@ -1,9 +1,6 @@
 import { Spacer } from '@/components/Elements/Spacer'
-import GameForm from '@/features/game/components/GameForm'
 import GameSettings from '@/features/room/components/GameSettings'
-import RoomSettings from '@/features/room/components/RoomSettings'
 import RoomSidebar from '@/features/room/components/RoomSidebar'
-import prisma from '@/lib/prisma'
 
 export default async function Layout({
   params,
