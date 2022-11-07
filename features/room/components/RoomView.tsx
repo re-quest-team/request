@@ -1,17 +1,12 @@
-// @ts-nocheck
 'use client'
+
 import Modal from '@/components/Modal'
 import PlayQuestButton from '@/features/quest/components/PlayQuestButton'
 import quests from '@/collections'
 import { IQuest } from '@/collections/types'
-import { AxiosError } from 'axios'
-import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import ScrollContainer from 'react-indiana-drag-scroll'
-import useSWR from 'swr'
-import { RoomWithImageAndQuests } from '../types'
 import { Spinner } from '@/components/Elements/Spinner'
-import { useIntl } from 'react-intl'
 import QuestIntlProvider from '@/features/quest/components/QuestIntlProvider'
 import useRoom from '../api/useRoom'
 

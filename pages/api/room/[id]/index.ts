@@ -14,7 +14,21 @@ const handler = async (
   const roomId = req.query.id as string
   const token = await getToken({ req })
 
-  if (!token) return res.status(403).json({ error: 'Unauthorized' })
+  const game = await prisma.game.findFirst({
+    where: {
+      rooms: {
+        some: {
+          id: roomId,
+        },
+      },
+    },
+    include: {
+      rooms: true,
+    },
+  })
+
+  if (!token && !game?.public && req.method !== 'GET')
+    return res.status(403).json({ error: 'Unauthorized' })
 
   const userId = token?.sub
 
@@ -61,19 +75,6 @@ const handler = async (
 
   if (req.method === 'DELETE') {
     try {
-      const game = await prisma.game.findFirst({
-        where: {
-          rooms: {
-            some: {
-              id: roomId,
-            },
-          },
-        },
-        include: {
-          rooms: true,
-        },
-      })
-
       if (!game) throw new Error('Game not found')
 
       if (game?.rooms.length === 1) {

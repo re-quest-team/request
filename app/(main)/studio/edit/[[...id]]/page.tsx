@@ -1,6 +1,6 @@
 import RoomPanel from '@/features/room/components/RoomPanel'
 import prisma from '@/lib/prisma'
-import RoomRedirect from '@/features/room/components/RoomRedirect'
+import Redirect from '@/components/Redirect'
 
 export default async function RoomStudio({
   params,
@@ -29,7 +29,7 @@ export default async function RoomStudio({
       })
     }
 
-    return <RoomRedirect gameId={gameId} roomId={game?.rooms[0].id!} />
+    return <Redirect to={`/studio/edit/${gameId}/${game?.rooms[0].id!}`} />
   }
 
   if (roomId) return <RoomPanel gameId={gameId} roomId={roomId} />
