@@ -1,7 +1,6 @@
 import prisma from '@/lib/prisma'
 // import { RoomCreateSchema } from '@/prisma/generated/schemas/createOneRoom.schema'
 import { APIError, RequestRoom } from '@/types'
-import { Room } from '@prisma/client'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getToken } from 'next-auth/jwt'
 

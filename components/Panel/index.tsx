@@ -5,11 +5,7 @@ import {
   TrashIcon,
 } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
-import {
-  Draggable,
-  DraggableProvided,
-  DraggableStateSnapshot,
-} from 'react-beautiful-dnd'
+import { DraggableProvided, DraggableStateSnapshot } from 'react-beautiful-dnd'
 import { resetServerContext } from 'react-beautiful-dnd'
 
 resetServerContext()

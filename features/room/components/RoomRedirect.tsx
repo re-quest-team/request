@@ -1,5 +1,6 @@
 'use client'
 
+import { Spinner } from '@/components/Elements/Spinner'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 
@@ -16,5 +17,5 @@ export default function RoomRedirect({
     router.replace(`/studio/edit/${gameId}/${roomId}`)
   }, [gameId, roomId, router])
 
-  return <p>Redirecting...</p>
+  return <Spinner />
 }

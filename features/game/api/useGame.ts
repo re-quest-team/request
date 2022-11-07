@@ -1,7 +1,7 @@
 import { createToast, deleteToast, updateToast } from '@/components/Toasts'
 import { APIError, RequestGame, RequestRoom } from '@/types'
 import { Game } from '@prisma/client'
-import axios, { AxiosResponse } from 'axios'
+import { AxiosResponse } from 'axios'
 import useSWR from 'swr'
 import { createGame } from './createGame'
 import { deleteGame } from './deleteGame'
@@ -21,7 +21,7 @@ const useGame = (gameId: string) => {
     })
   }
 
-  const APICreateGame = async (game: Partial<Game>) => {
+  const APICreateGame = async () => {
     const createGameRequest = createGame()
     createToast(createGameRequest)
     await mutation(createGameRequest)
@@ -30,14 +30,14 @@ const useGame = (gameId: string) => {
     ).data
   }
 
-  const APIUpdateGame = async (id: string, game: Partial<Game>) => {
-    const updateGameRequest = updateGame(id, game)
+  const APIUpdateGame = async (game: Partial<Game>) => {
+    const updateGameRequest = updateGame(gameId, game)
     updateToast(updateGameRequest)
     await mutation(updateGameRequest)
   }
 
-  const APIDeleteGame = async (id: string) => {
-    const deleteGameRequest = deleteGame(id)
+  const APIDeleteGame = async () => {
+    const deleteGameRequest = deleteGame(gameId)
     deleteToast(deleteGameRequest)
     await mutation(deleteGameRequest)
   }

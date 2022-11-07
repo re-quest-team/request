@@ -1,7 +1,6 @@
-import { RoomWithImage } from '@/features/room/types'
 import prisma from '@/lib/prisma'
 import { APIError } from '@/types'
-import { Game, Quest, Room } from '@prisma/client'
+import { Quest } from '@prisma/client'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getToken } from 'next-auth/jwt'
 

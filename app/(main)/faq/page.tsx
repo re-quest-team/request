@@ -32,7 +32,7 @@ Gewisse Module können nur mit mehrere\*n Spieler\*innen gelöst werden, um Team
 
 **Wer entwickelt re:quest?**
 
-re:quest wird von re:edu aus Münster entwickelt. re:edu ist ein Start-Up, das Lösungen für Bildung, Forschung, Nachhaltigkeit und Beteiligung - digital und offen - anbietet. 
+re:quest wird von re:edu aus Münster entwickelt. re:edu ist ein Start-Up, das Lösungen für Bildung, Forschung, Nachhaltigkeit und Beteiligung - digital und offen - anbietet.
 
 
 ## Für Bildungseinrichtungen
@@ -47,7 +47,7 @@ Grundsätzlich soll jede Person, unabhängig vom Alter, re:quests nutzen können
 
 **Was kostet re:quest?**
 
-Für das Erstellen von re:quests sind 5 Basismodule kostenlos nutzbar. Um weitere Module nutzen zu können, muss eine Pro Lizenz erworben werden (Preismodell TBD...). 
+Für das Erstellen von re:quests sind 5 Basismodule kostenlos nutzbar. Um weitere Module nutzen zu können, muss eine Pro Lizenz erworben werden (Preismodell TBD...).
 
 **Wie kann ich mein re:quest individualisieren?**
 
@@ -55,7 +55,7 @@ Für die verschiedenen Module können eigene Texte eingetragen werden. Weiterhin
 
 **Sitzen die Spieler\*innen dann nicht nur vor ihren Smartphones?**
 
-Verschiedene Module bieten auch "offline" Rätsel an. Dabei müssen Spieler\*innen in ihrer Umgebung Dinge entdecken, Gemälde erkennen oder Informationen aus Postern oder Landkarten lesen. Damit verschmilzt im Abenteuer die echte Welt mit der virtuellen Welt. 
+Verschiedene Module bieten auch "offline" Rätsel an. Dabei müssen Spieler\*innen in ihrer Umgebung Dinge entdecken, Gemälde erkennen oder Informationen aus Postern oder Landkarten lesen. Damit verschmilzt im Abenteuer die echte Welt mit der virtuellen Welt.
 
 
 ## Für Nutzer\*innen
@@ -80,10 +80,10 @@ Hast du ein re:quest erfolgreich abgeschlossen, kannst du dir ein Badge von [myB
       <ReactMarkdown
         children={md}
         components={{
-          h2: ({ node, ...props }) => (
+          h2: ({ node: _node, ...props }) => (
             <h2 className="my-8 text-2xl font-semibold" {...props} />
           ),
-          p: ({ node, ...props }) => <h2 className="my-4" {...props} />,
+          p: ({ node: _node, ...props }) => <h2 className="my-4" {...props} />,
         }}
       ></ReactMarkdown>
     </div>

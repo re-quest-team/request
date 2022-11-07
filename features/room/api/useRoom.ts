@@ -1,6 +1,7 @@
 import { createToast, deleteToast, updateToast } from '@/components/Toasts'
-import { APIError, RequestGame, RequestRoom } from '@/types'
-import { Game, Room } from '@prisma/client'
+import useGame from '@/features/game/api/useGame'
+import { APIError, RequestRoom } from '@/types'
+import { Room } from '@prisma/client'
 import { AxiosResponse } from 'axios'
 import useSWR from 'swr'
 import { createRoom } from './createRoom'
@@ -10,6 +11,8 @@ import { updateRoom } from './updateRoom'
 const useRoom = (roomId: string) => {
   const { data: room, mutate } = useSWR<RequestRoom>(`/api/room/${roomId}`)
 
+  const { mutate: mutateGame } = useGame(room?.gameId || '')
+
   const mutation = async (
     request: Promise<AxiosResponse<RequestRoom, APIError>>,
   ) => {
@@ -18,6 +21,8 @@ const useRoom = (roomId: string) => {
       populateCache: false,
       revalidate: true,
     })
+
+    mutateGame()
   }
 
   const APICreateRoom = async (room: Partial<Room>) => {
@@ -41,8 +46,14 @@ const useRoom = (roomId: string) => {
     await mutation(deleteRoomRequest)
   }
 
+  const onImageChange = async () => {
+    mutateGame()
+  }
+
   return {
     room,
+    mutate,
+    onImageChange,
     createRoom: APICreateRoom,
     updateRoom: APIUpdateRoom,
     deleteRoom: APIDeleteRoom,

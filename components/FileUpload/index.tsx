@@ -2,14 +2,17 @@ import { useS3Upload } from 'next-s3-upload'
 import { useState } from 'react'
 import { Button } from '../Elements/Button'
 import { FormattedMessage } from 'react-intl'
+import useRoom from '@/features/room/api/useRoom'
 
 type FileUploadProps = {
-  onChange: (url: string) => any
+  onChange: (_url: string) => void
   roomId: string
 }
 
 export default function FileUpload({ onChange, roomId }: FileUploadProps) {
   let { FileInput, openFileDialog, uploadToS3 } = useS3Upload()
+
+  const { onImageChange } = useRoom(roomId)
 
   const [loading, setLoading] = useState(false)
 
@@ -27,6 +30,7 @@ export default function FileUpload({ onChange, roomId }: FileUploadProps) {
     })
 
     onChange(url.replace(`${process.env.NEXT_PUBLIC_S3_BASE_URL!}/`, ''))
+    onImageChange()
     setLoading(false)
   }
 

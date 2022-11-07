@@ -7,9 +7,7 @@ import Particles from 'react-tsparticles'
 import type { Engine } from 'tsparticles-engine'
 import { loadSeaAnemonePreset } from 'tsparticles-preset-sea-anemone'
 
-import { FormattedMessage, useIntl } from 'react-intl'
 import formatLocale from 'lib/formatLocale'
-import { useRouter } from 'next/router'
 import { useIntlStore } from '@/stores/intl'
 
 const Success = () => {

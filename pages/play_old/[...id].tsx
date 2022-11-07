@@ -1,13 +1,10 @@
 import { Button } from '@/components/Elements/Button'
 import RoomView from '@/features/room/components/RoomView'
-import { RoomWithImageAndQuests } from '@/features/room/types'
 import { useGameplayStore } from '@/stores/gameplay'
-import { Game } from '@prisma/client'
 import { AxiosError } from 'axios'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import useSWR from 'swr'
-import { FormattedMessage } from 'react-intl'
 import { RequestGame } from '@/types'
 
 const GameView = () => {

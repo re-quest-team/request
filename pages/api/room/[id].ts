@@ -1,10 +1,9 @@
-import { RoomWithImage } from '@/features/room/types'
 import prisma from '@/lib/prisma'
 // import { GameDeleteOneSchema } from '@/prisma/generated/schemas/deleteOneGame.schema'
 // import { GameUpdateOneSchema } from '@/prisma/generated/schemas/updateOneGame.schema'
 // import { RoomUpdateOneSchema } from '@/prisma/generated/schemas/updateOneRoom.schema'
 import { APIError, RequestRoom } from '@/types'
-import { Game, Room } from '@prisma/client'
+import { Room } from '@prisma/client'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getToken } from 'next-auth/jwt'
 

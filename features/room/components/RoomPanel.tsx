@@ -5,7 +5,6 @@ import QuestImagePlacer from '@/features/quest/components/QuestImagePlacer'
 import { useEffect, useRef, useState } from 'react'
 import useEditGameStore from '@/stores/edit'
 import { CursorArrowRippleIcon } from '@heroicons/react/24/outline'
-import RoomSettings from './RoomSettings'
 import useRoom from '../api/useRoom'
 import useGame from '@/features/game/api/useGame'
 import { useRouter } from 'next/navigation'
@@ -35,7 +34,7 @@ const RoomPanel = ({ gameId, roomId }: Props) => {
 
   const ref = useRef<HTMLDivElement>(null)
 
-  const onDelete = async () => {
+  const _onDelete = async () => {
     // get current position of room in game
     const roomIndex = game?.rooms.findIndex(r => r.id === roomId)
     await deleteRoom(roomId)

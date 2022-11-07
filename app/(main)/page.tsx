@@ -1,21 +1,15 @@
+/* eslint-disable @next/next/no-img-element */
 'use client'
 
 import { Button } from '@/components/Elements/Button'
 import { Spacer } from '@/components/Elements/Spacer'
-import type { NextPage } from 'next'
 import Link from 'next/link'
 
 import FeatureCard from '@/components/Card'
-import { Game } from '@prisma/client'
 import useSWR from 'swr'
 import GameCard from '@/features/game/components/GameCard'
-import { RoomWithImageAndQuests } from '@/features/room/types'
 import { FormattedMessage, useIntl } from 'react-intl'
 import Image from 'next/image'
-import Head from 'next/head'
-import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
-import JotformEmbed from 'react-jotform-embed'
 import {
   AcademicCapIcon,
   AdjustmentsHorizontalIcon,
@@ -25,16 +19,12 @@ import {
   PuzzlePieceIcon,
   Squares2X2Icon,
 } from '@heroicons/react/24/outline'
-import { useIntlStore } from '@/stores/intl'
 import { RequestGame } from '@/types'
-import NonPlayLayout from '@/app/(main)/layout'
 
 const Home = () => {
   const { data: games } = useSWR<RequestGame[]>('/api/public/game')
 
   const intl = useIntl()
-
-  const lang = useIntlStore(state => state.locale)
 
   return (
     <>
@@ -131,6 +121,7 @@ const Home = () => {
               </p>
             </div>
             <img
+              alt="studio img"
               className="px-8"
               src={require('@/assets/studio.png').default.src}
             />
@@ -152,6 +143,7 @@ const Home = () => {
             </div>
             <img
               // className="px-8"
+              alt="quest img"
               src={require('@/assets/quest-2.png').default.src}
             />
           </div>
@@ -182,17 +174,6 @@ const Home = () => {
           </Link>
         </>
       )}
-      <Spacer size="lg" />
-      {/* <h2 className="p-2 text-center text-4xl font-bold">
-        {intl.formatMessage({ id: 'page.home.interested' })}
-      </h2>
-      <Spacer size="lg" />
-       <p>{intl.formatMessage({ id: 'page.home.stayTuned' })}</p>
-      {lang === 'de' ? (
-        <JotformEmbed src="https://form.jotformeu.com/221502755387054" />
-      ) : (
-        <JotformEmbed src="https://form.jotform.com/221522956013348" />
-      )} */}
       <Spacer size="lg" />
       <div className="text-center">
         <h2 className="p-2 text-center  font-bold">Powered by</h2>

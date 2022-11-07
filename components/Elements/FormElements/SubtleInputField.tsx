@@ -3,7 +3,6 @@ import { InputHTMLAttributes } from 'react'
 import { UseFormRegisterReturn } from 'react-hook-form'
 
 import { FieldWrapper, FieldWrapperPassThroughProps } from './FieldWrapper'
-import { Units } from '@/collections/Quests/NumberInput/units'
 
 type InputFieldProps = InputHTMLAttributes<HTMLInputElement> &
   FieldWrapperPassThroughProps & {
