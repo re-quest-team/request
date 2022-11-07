@@ -72,7 +72,7 @@ const RoomSidebar = ({ gameId, current }: RoomListProps) => {
         }}
       >
         <Droppable droppableId="droppable" direction="vertical">
-          {(provided, snapshot) => (
+          {(provided, _snapshot) => (
             <div
               ref={provided.innerRef}
               {...provided.droppableProps}
@@ -82,7 +82,7 @@ const RoomSidebar = ({ gameId, current }: RoomListProps) => {
                 {rooms &&
                   rooms.map((r, i) => (
                     <Draggable key={r.id} draggableId={r.id} index={i}>
-                      {(provided, snapshot) => (
+                      {(provided, _snapshot) => (
                         <div
                           ref={provided.innerRef}
                           {...provided.draggableProps}

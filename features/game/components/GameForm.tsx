@@ -1,23 +1,11 @@
 'use client'
 
-import { Button } from '@/components/Elements/Button'
-import {
-  InputField,
-  SubtleInputField,
-  TextArea,
-} from '@/components/Elements/FormElements'
-import Toggle from '@/components/Elements/Toggle'
+import { SubtleInputField } from '@/components/Elements/FormElements'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Game } from '@prisma/client'
-import axios, { AxiosError } from 'axios'
-import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
-import toast from 'react-hot-toast'
-import useSWR from 'swr'
 import * as yup from 'yup'
-import { FormattedMessage, useIntl } from 'react-intl'
-import { createToast } from '@/components/Toasts'
-import { Fragment, memo, useMemo, useState } from 'react'
+import { useIntl } from 'react-intl'
+import { Fragment } from 'react'
 import { Save } from 'react-feather'
 import useGame from '../api/useGame'
 import { Transition } from '@headlessui/react'
@@ -51,7 +39,7 @@ const GameForm = ({ gameId }: GameFormProps) => {
   })
 
   const onSubmit = () => {
-    updateGame(gameId, {
+    updateGame({
       name: getValues().name,
     })
   }
