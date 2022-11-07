@@ -1,8 +1,6 @@
-/* eslint-disable react/no-children-prop */
-import type { NextPage } from 'next'
 import ReactMarkdown from 'react-markdown'
 
-const FAQ: NextPage = () => {
+const FAQ = () => {
   const md = `
 ## Allgemein
 
@@ -78,14 +76,15 @@ Hast du ein re:quest erfolgreich abgeschlossen, kannst du dir ein Badge von [myB
       <h1 className="p-2 text-center text-6xl font-bold">FAQs</h1>
 
       <ReactMarkdown
-        children={md}
         components={{
           h2: ({ node: _node, ...props }) => (
             <h2 className="my-8 text-2xl font-semibold" {...props} />
           ),
           p: ({ node: _node, ...props }) => <h2 className="my-4" {...props} />,
         }}
-      ></ReactMarkdown>
+      >
+        {md}
+      </ReactMarkdown>
     </div>
   )
 }
