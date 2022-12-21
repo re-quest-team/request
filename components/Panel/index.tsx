@@ -1,11 +1,11 @@
 import { Disclosure, Transition } from '@headlessui/react'
-import { ChevronUpIcon, MenuIcon, TrashIcon } from '@heroicons/react/outline'
-import clsx from 'clsx'
 import {
-  Draggable,
-  DraggableProvided,
-  DraggableStateSnapshot,
-} from 'react-beautiful-dnd'
+  Bars3Icon,
+  ChevronUpIcon,
+  TrashIcon,
+} from '@heroicons/react/24/outline'
+import clsx from 'clsx'
+import { DraggableProvided, DraggableStateSnapshot } from 'react-beautiful-dnd'
 import { resetServerContext } from 'react-beautiful-dnd'
 
 resetServerContext()
@@ -74,7 +74,7 @@ const PanelWithOptionalDragHandle = ({
               <span className="flex-1 font-semibold">{header}</span>
               {provided && (
                 <div {...provided.dragHandleProps}>
-                  <MenuIcon className="mx-2 h-5 w-5" />
+                  <Bars3Icon className="mx-2 h-5 w-5" />
                 </div>
               )}
               {onDelete && (

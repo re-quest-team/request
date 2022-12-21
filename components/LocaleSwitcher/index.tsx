@@ -1,34 +1,33 @@
+'use client'
+
 /* eslint-disable @next/next/no-img-element */
-import Link from 'next/link'
-import { useRouter } from 'next/router'
 import { Fragment } from 'react'
+import { useIntlStore } from '@/stores/intl'
 
 export default function LocaleSwitcher() {
-  const router = useRouter()
-  const { locales, locale: activeLocale } = router
+  const locales = ['de', 'en']
+
+  const locale = useIntlStore(store => store.locale)
+  const setLocale = useIntlStore(store => store.setLocale)
 
   return (
     <Fragment>
       {locales &&
         locales
-          .filter(locale => locale !== activeLocale)
+          .filter(l => l !== locale)
           .map(locale => {
-            const { pathname, query, asPath } = router
             return (
-              <Link
+              <div
                 key={locale}
-                href={{ pathname, query }}
-                as={asPath}
-                locale={locale}
+                onClick={() => setLocale(locale as 'de' | 'en')}
+                className="relative h-8 w-8 overflow-hidden rounded-full ring-1 ring-slate-200 ring-offset-2 ring-offset-slate-800"
               >
-                <div className="relative h-8 w-8 overflow-hidden rounded-full ring-1 ring-slate-200 ring-offset-2 ring-offset-slate-800">
-                  <img
-                    src={require('assets/flags/' + locale + '.svg').default.src}
-                    alt={locale}
-                    className="h-full object-cover"
-                  />
-                </div>
-              </Link>
+                <img
+                  src={require('assets/flags/' + locale + '.svg').default.src}
+                  alt={locale}
+                  className="h-full object-cover"
+                />
+              </div>
             )
           })}
     </Fragment>

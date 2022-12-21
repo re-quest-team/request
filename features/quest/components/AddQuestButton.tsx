@@ -1,17 +1,18 @@
 import { Transition } from '@headlessui/react'
 import {
+  Bars3CenterLeftIcon,
   CalculatorIcon,
-  ChartSquareBarIcon,
-  CodeIcon,
+  ChartBarSquareIcon,
+  CodeBracketIcon,
+  ListBulletIcon,
   LockClosedIcon,
-  MenuAlt1Icon,
-  PhotographIcon,
+  PhotoIcon,
   PlusIcon,
-  PuzzleIcon,
-  QrcodeIcon,
+  PuzzlePieceIcon,
+  QrCodeIcon,
   TrashIcon,
-  ViewListIcon,
-} from '@heroicons/react/outline'
+} from '@heroicons/react/24/outline'
+
 import { QuestType } from '@prisma/client'
 import clsx from 'clsx'
 import { Fragment, RefObject } from 'react'
@@ -37,33 +38,33 @@ const bgVariant = {
 const renderIcon = (type?: QuestType) => {
   switch (type) {
     case 'QUEST_CRYPTO':
-      return <LockClosedIcon className="h-10 w-10" />
+      return <LockClosedIcon className="h-8 w-8" />
     case 'QUEST_MULTIPLE_CHOICE':
-      return <ViewListIcon className="h-10 w-10" />
+      return <ListBulletIcon className="h-8 w-8" />
     case 'QUEST_SINGLE_CHOICE':
-      return <ViewListIcon className="h-10 w-10" />
+      return <ListBulletIcon className="h-8 w-8" />
     case 'QUEST_CODING':
-      return <CodeIcon className="h-10 w-10" />
+      return <CodeBracketIcon className="h-8 w-8" />
     case 'QUEST_QR_SCAN':
-      return <QrcodeIcon className="h-10 w-10" />
+      return <QrCodeIcon className="h-8 w-8" />
     case 'QUEST_STATISTICS':
-      return <ChartSquareBarIcon className="h-10 w-10" />
+      return <ChartBarSquareIcon className="h-8 w-8" />
     case 'QUEST_NUMBER_INPUT':
-      return <CalculatorIcon className="h-10 w-10" />
+      return <CalculatorIcon className="h-8 w-8" />
     case 'QUEST_GAP_TEXT':
-      return <PuzzleIcon className="h-10 w-10" />
+      return <PuzzlePieceIcon className="h-8 w-8" />
     case 'MEDIA_TEXT':
-      return <MenuAlt1Icon className="h-10 w-10" />
+      return <Bars3CenterLeftIcon className="h-8 w-8" />
     case 'MEDIA_IMAGE':
-      return <PhotographIcon className="h-10 w-10" />
+      return <PhotoIcon className="h-8 w-8" />
     case 'MEDIA_INSTAGRAM':
-      return <Instagram className="h-10 w-10" />
+      return <Instagram className="h-8 w-8" />
     case 'MEDIA_YOUTUBE':
-      return <Youtube className="h-10 w-10" />
+      return <Youtube className="h-8 w-8" />
     case 'MEDIA_IFRAME':
-      return <CodeIcon className="h-10 w-10" />
+      return <CodeBracketIcon className="h-8 w-8" />
     default:
-      return <PlusIcon className="h-10 w-10" />
+      return <PlusIcon className="h-8 w-8" />
   }
 }
 
@@ -78,6 +79,7 @@ const AddQuestButton = ({
   type,
 }: AddQuestButtonProps) => (
   <Transition
+    show={true}
     as={Fragment}
     appear={true}
     enter="transition-all duration-100"
@@ -89,7 +91,7 @@ const AddQuestButton = ({
   >
     <div
       className={clsx(
-        `pointer-events-auto absolute flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center justify-center rounded-2xl border-4 bg-opacity-50 shadow backdrop-blur`,
+        `pointer-events-auto absolute flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center justify-center rounded-2xl border-4 bg-opacity-50 shadow backdrop-blur`,
         type?.includes('QUEST')
           ? bgVariant.quest
           : type?.includes('MEDIA')

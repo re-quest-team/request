@@ -1,4 +1,3 @@
-import { LockClosedIcon } from '@heroicons/react/outline'
 import { IQuest } from '@/collections/types'
 import EditView from './EditView'
 import PlayView from './PlayView'
@@ -6,6 +5,7 @@ import { useQuestStore } from './store'
 
 import de from './lang/de.json'
 import en from './lang/en.json'
+import { LockOpenIcon } from '@heroicons/react/24/outline'
 
 type QuestData = {
   question: string
@@ -16,7 +16,7 @@ const CryptoQuest: IQuest<QuestData> = {
   type: 'QUEST_CRYPTO',
   title: 'title',
   description: 'description',
-  icon: LockClosedIcon,
+  icon: LockOpenIcon,
   EditView,
   PlayView: PlayView,
   onLoad: ({ question, codeword }) =>

@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { IntlProvider } from 'react-intl'
 
 import flatten from 'flat'
+import { useIntlStore } from '@/stores/intl'
 
 type Props = {
   quest: IQuest<any>
@@ -10,15 +11,13 @@ type Props = {
 }
 
 const QuestIntlProvider: React.FC<Props> = ({ quest, children }) => {
-  const { locale } = useRouter()
+  const locale = useIntlStore(store => store.locale)
 
   if (!quest.lang) return <>{children}</>
 
   return (
     <IntlProvider
-      // @ts-ignore
       locale={locale}
-      // @ts-ignore
       messages={flatten(quest.lang[locale])}
       onError={err => {
         if (err.code === 'MISSING_TRANSLATION') {

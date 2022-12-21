@@ -1,10 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
-import { Button, PillButton } from '@/components/Elements/Button'
+import { PillButton } from '@/components/Elements/Button'
 import { Spacer } from '@/components/Elements/Spacer'
-import { PlusCircleIcon } from '@heroicons/react/outline'
+import { PlusCircleIcon } from '@heroicons/react/24/outline'
 import { Quest } from '@prisma/client'
 import { useRef, useState } from 'react'
-import { ArrowUpRight } from 'react-feather'
 import useQuests from '../api'
 import AddQuestButton from './AddQuestButton'
 import QuestTypeModal from './QuestTypeModal'
@@ -12,14 +11,12 @@ import { FormattedMessage, useIntl } from 'react-intl'
 
 type QuestImagePlacerProps = {
   img: string
-  quests: Quest[]
   roomId: string
   maxQuests?: number
 }
 
 const QuestImagePlacer = ({
   img,
-  quests,
   roomId,
   maxQuests = 3,
 }: QuestImagePlacerProps) => {
@@ -31,19 +28,12 @@ const QuestImagePlacer = ({
   const [questModalOpen, setQuestModalOpen] = useState(false)
   const [currentQuest, setCurrentQuest] = useState<Quest>()
 
-  const { createQuest, updateQuest, deleteQuest } = useQuests(roomId)
+  const { quests, createQuest, updateQuest, deleteQuest } = useQuests(roomId)
+
+  if (!quests) return <></>
 
   return (
     <div>
-      <Button
-        size="xs"
-        className="ml-auto"
-        onMouseDown={() => setEditMode(false)}
-        onMouseUp={() => setEditMode(true)}
-      >
-        <FormattedMessage id="features.quest.questImagePlacer.preview" />
-      </Button>
-      <Spacer size="xs" />
       <div
         className={`relative mx-auto w-full max-w-6xl overflow-visible ${
           editMode && quests.length < maxQuests && 'cursor-crosshair'
@@ -85,12 +75,6 @@ const QuestImagePlacer = ({
                   <FormattedMessage id="features.quest.questImagePlacer.clickToAdd" />
                 </p>
               </div>
-              <div className="absolute top-0 right-0 flex max-w-sm content-end items-end p-4">
-                <p className="mr-2 text-sm">
-                  <FormattedMessage id="features.quest.questImagePlacer.holdToPreview" />
-                </p>
-                <ArrowUpRight className="h-10 w-12" />
-              </div>
             </>
           )}
           {quests?.map((q, i) => (
@@ -99,7 +83,9 @@ const QuestImagePlacer = ({
               x={q.x}
               y={q.y}
               type={q.type || undefined}
-              onMoveEnd={async movedQuest => updateQuest(q.id, movedQuest)}
+              onMoveEnd={async movedQuest => {
+                updateQuest(q.id, movedQuest)
+              }}
               onDelete={async () => deleteQuest(q.id)}
               key={i}
               showDelete={editMode}

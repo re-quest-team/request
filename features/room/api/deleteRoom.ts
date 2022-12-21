@@ -1,6 +1,6 @@
 import axios from '@/lib/axios'
-import { Room } from '@prisma/client'
+import { RequestRoom } from '@/types'
 
 export const deleteRoom = (roomId: string) => {
-  return axios.delete<Room>(`/api/room/${roomId}`)
+  return axios.delete<RequestRoom>(`/api/room/${roomId}`)
 }

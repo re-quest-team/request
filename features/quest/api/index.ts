@@ -1,12 +1,15 @@
 import { createToast, deleteToast, updateToast } from '@/components/Toasts'
+import { RequestRoom } from '@/types'
 import { Quest } from '@prisma/client'
 import { AxiosResponse } from 'axios'
-import { mutate } from 'swr'
+import useSWR, { mutate } from 'swr'
 import { createQuest } from './createQuest'
 import { deleteQuest } from './deleteQuest'
 import { updateQuest } from './updateQuest'
 
 const useQuests = (roomId: string) => {
+  const { data: room } = useSWR<RequestRoom>(`/api/room/${roomId}`)
+
   const mutation = async (request: Promise<AxiosResponse<Quest>>) => {
     const { data: quest } = await request
     mutate(`/api/room/${roomId}`, quest, {
@@ -39,6 +42,7 @@ const useQuests = (roomId: string) => {
   }
 
   return {
+    quests: room?.quests,
     createQuest: APICreateQuest,
     updateQuest: APIUpdateQuest,
     deleteQuest: APIDeleteQuest,

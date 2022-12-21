@@ -78,7 +78,7 @@
         "toastNotFound": "re:quest not found",
         "labelName": "Name",
         "labelDescription": "Description",
-        "labelDraft": "Draft",
+        "labelPublic": "Public",
         "submit": "Save"
       },
       "gamePanel": {

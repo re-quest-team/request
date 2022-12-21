@@ -1,122 +1,81 @@
-import { SelectOption } from '@/components/Elements/Select'
-import { SelectField } from '@/components/Elements/Select/SelectField'
+'use client'
+
 import FileUpload from '@/components/FileUpload'
-import Panel from '@/components/Panel'
 import QuestImagePlacer from '@/features/quest/components/QuestImagePlacer'
-import { useEffect, useState } from 'react'
-import { DraggableProvided, DraggableStateSnapshot } from 'react-beautiful-dnd'
-import toast from 'react-hot-toast'
-import useSWR, { mutate } from 'swr'
-import { deleteRoom } from '../api/deleteRoom'
-import { RoomWithImage, RoomWithImageAndQuests } from '../types'
-import { useIntl } from 'react-intl'
-import { deleteToast } from '@/components/Toasts'
+import { useEffect, useRef, useState } from 'react'
+import useEditGameStore from '@/stores/edit'
+import useRoom from '../api/useRoom'
+import useGame from '@/features/game/api/useGame'
+import { useRouter } from 'next/navigation'
+import Cursor from '@/components/Cursor'
 
 type Props = {
-  provided: DraggableProvided
-  snapshot: DraggableStateSnapshot
-  index: number
+  gameId: string
   roomId: string
 }
 
-const RoomPanel = ({ provided, snapshot, index, roomId }: Props) => {
-  const intl = useIntl()
-  const roomImages: SelectOption[] = [
-    {
-      value: intl.formatMessage({
-        id: 'features.room.roomPanel.uploadOwnImage',
-      }),
-    },
-    {
-      value: intl.formatMessage({
-        id: 'features.room.roomPanel.magicalClassroom',
-      }),
-    },
-    { value: intl.formatMessage({ id: 'features.room.roomPanel.darkMuseum' }) },
-    { value: intl.formatMessage({ id: 'features.room.roomPanel.noRom' }) },
-  ]
-  const [roomImage, setRoomImage] = useState(roomImages[0])
-  const [imageUrl, setImageUrl] = useState('')
-  const { data: room } = useSWR<RoomWithImageAndQuests>(`/api/room/${roomId}`)
+const RoomPanel = ({ gameId, roomId }: Props) => {
+  const { room, deleteRoom } = useRoom(roomId)
+  const { game, mutate } = useGame(gameId)
+  const router = useRouter()
 
-  if (roomImages.map(option => option.value).indexOf(roomImage.value) < 0) {
-    setRoomImage(roomImages[0])
-  }
+  const [imageUrl, setImageUrl] = useState(room?.image?.url)
+
+  const setGameRoom = useEditGameStore(store => store.setGameRoom)
+
+  useEffect(() => {
+    setGameRoom(roomId)
+  }, [roomId])
+
+  const setCursor = useEditGameStore(state => state.setCursor)
+  const others = useEditGameStore(state => state.liveblocks.others)
+  const othersCursors = others
+    .filter(user => user.presence.gameRoom === room?.id)
+    .map(user => user.presence.cursor)
 
   useEffect(() => {
     if (room?.image?.url)
       setImageUrl(`${process.env.NEXT_PUBLIC_S3_BASE_URL}/${room?.image?.url}`)
   }, [room?.image?.url])
 
-  useEffect(() => {
-    if (
-      roomImage.value ===
-      intl.formatMessage({ id: 'features.room.roomPanel.magicalClassroom' })
-    ) {
-      setImageUrl(
-        require('@/assets/rooms/abandoned-magic-classroom.jpg').default.src,
-      )
-    } else if (
-      roomImage.value ===
-      intl.formatMessage({ id: 'features.room.roomPanel.darkMuseum' })
-    ) {
-      setImageUrl(require('@/assets/rooms/dark-museum.jpg').default.src)
-    }
-  }, [roomImage.value, intl])
+  const ref = useRef<HTMLDivElement>(null)
 
-  const onDelete = async () => {
-    const deleteRoomRequest = deleteRoom(room!.id)
-
-    deleteToast(deleteRoomRequest)
-
-    await mutate(`/api/game/${room!.gameId}`, (await deleteRoomRequest).data, {
-      populateCache: false,
-      revalidate: true,
-    })
-  }
+  if (!room) return <></>
 
   return (
-    <Panel
-      type="room"
-      provided={provided}
-      snapshot={snapshot}
-      header={
-        intl.formatMessage({ id: 'features.room.roomPanel.headerRoom' }) +
-        ' ' +
-        index
-      }
-      onDelete={onDelete}
-    >
-      <>
-        <SelectField
-          label={intl.formatMessage({
-            id: 'features.room.roomPanel.labelTheme',
-          })}
-          options={roomImages}
-          onSelect={setRoomImage}
-        ></SelectField>
-        <div className="relative my-4 w-full rounded">
-          {roomImage.value ===
-            intl.formatMessage({
-              id: 'features.room.roomPanel.uploadOwnImage',
-            }) && (
-            <FileUpload
-              onChange={url =>
-                setImageUrl(`${process.env.NEXT_PUBLIC_S3_BASE_URL}/${url}`)
-              }
-              roomId={roomId}
-            />
-          )}
-          {imageUrl && (
-            <QuestImagePlacer
-              img={imageUrl}
-              quests={room?.quests || []}
-              roomId={room!.id}
-            />
-          )}
+    <>
+      {imageUrl && (
+        <div
+          ref={ref}
+          className="relative w-full rounded"
+          onPointerMove={e => {
+            setCursor({
+              x:
+                (e.clientX - ref.current?.getBoundingClientRect().left!) /
+                ref.current?.clientWidth!,
+              y:
+                (e.clientY - ref.current?.getBoundingClientRect().top!) /
+                ref.current?.clientHeight!,
+            })
+          }}
+        >
+          {othersCursors.map((c: any, i) => (
+            <Cursor key={i} color={'orange'} x={c.x} y={c.y} />
+          ))}
+          <QuestImagePlacer img={imageUrl} roomId={room!.id} />
         </div>
-      </>
-    </Panel>
+      )}
+      {!imageUrl && (
+        <div className="flex h-60 items-center justify-center rounded bg-zinc-800 p-4">
+          <FileUpload
+            onChange={url =>
+              setImageUrl(`${process.env.NEXT_PUBLIC_S3_BASE_URL}/${url}`)
+            }
+            roomId={room.id}
+          />
+        </div>
+      )}
+    </>
   )
 }
 

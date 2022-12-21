@@ -4,9 +4,10 @@ import * as React from 'react'
 import { Spinner } from '@/components/Elements/Spinner'
 
 const variants = {
-  primary: 'bg-white text-zinc-900 hover:bg-zinc-200',
-  inverse: 'bg-white text-blue-600 hover:bg-blue-600:text-white',
-  danger: 'bg-red-600 text-white hover:bg-red-50:text-red-600',
+  primary: 'bg-white text-zinc-900 hover:bg-zinc-200 border-zinc-300',
+  inverse:
+    'bg-white text-blue-600 hover:bg-blue-600:text-white border-zinc-300',
+  danger: 'bg-red-900 text-red-200 hover:bg-red-600 border-red-500',
 }
 
 const sizes = {
@@ -46,7 +47,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         type={type}
         className={clsx(
-          'flex items-center justify-center rounded-md border border-zinc-300 font-medium shadow-sm focus:outline-none disabled:cursor-not-allowed disabled:opacity-70',
+          'flex items-center justify-center rounded-md border font-medium shadow-sm focus:outline-none disabled:cursor-not-allowed disabled:opacity-70',
           variants[variant],
           sizes[size],
           className,

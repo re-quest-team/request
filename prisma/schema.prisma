@@ -6,8 +6,9 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
 model Account {
@@ -66,7 +67,7 @@ model Game {
   name        String?
   description String?
   language    GameLanguage @default(DE)
-  draft       Boolean      @default(true)
+  public      Boolean      @default(false)
   user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId      String
   rooms       Room[]
@@ -78,10 +79,13 @@ model Room {
   id        String   @id @default(uuid())
   game      Game     @relation(fields: [gameId], references: [id], onDelete: Cascade)
   gameId    String
+  index     Int
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
   image     S3Image?
   quests    Quest[]
+
+  // @@unique([gameId, index])
 }
 
 model S3Image {

@@ -1,16 +1,17 @@
 import prisma from '@/lib/prisma'
-// import { GameCreateSchema } from '@/prisma/generated/schemas/createOneGame.schema'
-import { APIError } from '@/types'
-import { Game } from '@prisma/client'
+import { APIError, RequestGame } from '@/types'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getToken } from 'next-auth/jwt'
 
 const handler = async (
   req: NextApiRequest,
-  res: NextApiResponse<Game | Game[] | APIError>,
+  res: NextApiResponse<RequestGame | RequestGame[] | APIError>,
 ) => {
   const { body } = req
   const token = await getToken({ req })
+
+  if (!token) return res.status(403).json({ error: 'Unauthorized' })
+
   const userId = token?.sub
 
   if (req.method === 'GET') {
@@ -23,6 +24,10 @@ const handler = async (
           rooms: {
             include: {
               image: true,
+              quests: true,
+            },
+            orderBy: {
+              index: 'asc',
             },
           },
         },
@@ -37,12 +42,28 @@ const handler = async (
 
   if (req.method === 'POST') {
     try {
-      // await GameCreateSchema.validate({
-      //   ...body,
-      //   userId,
-      // })
+      const game = await prisma.game.create({
+        data: { ...body, userId },
+        include: {
+          rooms: {
+            include: {
+              image: true,
+              quests: true,
+            },
+            orderBy: {
+              index: 'asc',
+            },
+          },
+        },
+      })
 
-      const game = await prisma.game.create({ data: { ...body, userId } })
+      // create empty room
+      await prisma.room.create({
+        data: {
+          gameId: game.id,
+          index: game.rooms.length,
+        },
+      })
 
       res.status(200).json(game)
     } catch (e) {

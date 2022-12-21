@@ -1,6 +1,6 @@
 import axios from '@/lib/axios'
-import { Game } from '@prisma/client'
+import { RequestGame } from '@/types'
 
 export const deleteGame = (gameId: string) => {
-  return axios.delete<Game>(`/api/game/${gameId}`)
+  return axios.delete<RequestGame>(`/api/game/${gameId}`)
 }

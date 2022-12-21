@@ -1,4 +1,3 @@
-import { PuzzleIcon } from '@heroicons/react/outline'
 import { IQuest } from '@/collections/types'
 import EditView from './EditView'
 import PlayView from './PlayView'
@@ -6,6 +5,7 @@ import { mapItem, useQuestStore } from './store'
 
 import de from './lang/de.json'
 import en from './lang/en.json'
+import { PuzzlePieceIcon } from '@heroicons/react/24/outline'
 
 type QuestData = {
   text: string
@@ -19,7 +19,7 @@ const GapTextQuest: IQuest<QuestData> = {
   type: 'QUEST_GAP_TEXT',
   title: 'title',
   description: 'description',
-  icon: PuzzleIcon,
+  icon: PuzzlePieceIcon,
   EditView,
   PlayView: PlayView,
   onLoad: ({ text, textList, correctAnswers, wrongAnswers, shuffledAnswers }) =>
